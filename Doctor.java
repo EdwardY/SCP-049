@@ -25,9 +25,9 @@ public class Doctor extends Human{
      * @param hunger The hunger level of the doctor.
      * @param maxHunger The maximum hunger level of the doctor.
      */
-    public Doctor(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger, int cost, int healingAmount){
+    public Doctor(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger, int healingAmount){
         super(health, maxHealth, x, y, sprite, age, priority, hunger, maxHunger);
-        this.healingAmount = healing Amount;
+        this.healingAmount = healingAmount;
     }//end of constructor
 
     //start of getters

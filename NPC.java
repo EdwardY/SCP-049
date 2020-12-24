@@ -30,7 +30,7 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
      * @param y The y-value of the NPC's location on the grid.
      * @param sprite The image that the NPC will have.
      */
-    public NPC (int health, int maxHealth, int x, int y, Image sprite){
+    protected NPC (int health, int maxHealth, int x, int y, Image sprite){
         this.health = health;
         this.maxHealth = maxHealth;
         this.x = x;
@@ -84,14 +84,64 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
 
     /**
      * Method moves the NPC's position.
-     * @param x The amount of units the NPC will move horizontally.
-     * @param y The amount of units the NPC will move vertically.
+     * @param xDistance The amount of units the NPC will move horizontally.
+     * @param yDistance The amount of units the NPC will move vertically.
      */
-    public void move(int x, int y){
-        this.x += x;
-        this.y += y;
+    public void translate(int xDistance, int yDistance){
+        this.x += xDistance;
+        this.y += yDistance;
     }//end of method
 
-    
+    //start of getters
+
+    /**
+     * Returns the health of the NPC.
+     * @return The health of the NPC.
+     */
+    public int getHealth(){
+        return this.health;        
+    }
+
+    /**
+     * Returns the maximum health of the NPC.
+     * @return The maximum health of the NPC.
+     */
+    public int getMaxHealth(){
+        return this.maxHealth;
+    }
+
+    /**
+     * Returns the x-value of the NPC's location.
+     * @return The x-value of the NPC's location.
+     */
+    public int getX(){
+        return this.x;
+    }
+
+    /**
+     * Returns the y-value of the NPC's location.
+     * @return the y-value of the NPC's location.
+     */
+    public int getY(){
+        return this.y;
+    }
+
+    //end of getters
+
+
+
+
+
+    //start of setters
+
+    /**
+     * Updates the maximum health of the NPC if they level up.
+     * @param newMaxHealth The new Maximum health of the NPC.
+     */
+    public void setMaxHealth(int newMaxHealth){
+        this.maxHealth = newMaxHealth;
+    }
+
+    //end of setters
 
 }//end of class

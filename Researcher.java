@@ -29,4 +29,4 @@ public class Researcher extends Human{
    }//end of constructor
 
 
-}
+}//end of class

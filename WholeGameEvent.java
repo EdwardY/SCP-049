@@ -16,8 +16,4 @@ abstract class WholeGameEvent extends Event{
         super(duration, timeLeft, effectAmount);
     }
 
-    /**
-     * Does the effect
-     */
-    public abstract void effect();
 }

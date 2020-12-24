@@ -49,7 +49,7 @@ abstract class Event {
     }
 
     /**
-     * Decreases the time left by one
+     * Decreases the time left by one turn
      */
     public void decreaseTimeLeft(){
         this.timeLeft -= 1;

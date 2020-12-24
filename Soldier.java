@@ -36,4 +36,33 @@ public class Soldier extends Human implements Troop{
         npc.takeDamage(this.attackDamage);     
     }//end of method
 
+    //start of getters
+
+
+    /**
+     * Returns the amount of damage that the soldier currently deals.
+     * @return The damage that the soldier currently deals.
+     */
+    public int getAttackDamage(){
+        return this.attackDamage;        
+    }//end of method
+
+    //end of getters
+
+
+    //start of setters
+
+
+    /**
+     * Set the amount of damage that the soldier will deal.
+     * @param newDamage The new amount of damage that the soldier will deal.
+     */
+    public void setAttackDamage(int newDamage){
+        this.attackDamage = newDamage;        
+    }//end of method
+
+    //end of setters
+
+
+
 }//end of class

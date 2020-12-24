@@ -27,7 +27,7 @@ public class Doctor extends Human{
      */
     public Doctor(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger, int cost, int healingAmount){
         super(health, maxHealth, x, y, sprite, age, priority, hunger, maxHunger);
-        this.healingAmount = healing Amount;
+        this.healingAmount = healingAmount;
     }//end of constructor
 
     //start of getters

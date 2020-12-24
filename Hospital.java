@@ -49,12 +49,14 @@ class Hospital extends Building{
      */
     public void addInjured(Human human){
 
-        injured.add(human);
+        if(injured.size() < maxCapacity){
+            injured.add(human);
+        }
     }
 
     public void setDoctors(){
 
-        //determine how this functions
+        //TODO: determine how to figure out and sort doctors
     }
 
     //Inherited methods
@@ -64,7 +66,7 @@ class Hospital extends Building{
      */
     public void repair(int repair){
 
-        //determine how the repair mechanic is going to work
+        //TODO: determine how the repair mechanic is going to work
     }
 
     
@@ -73,7 +75,7 @@ class Hospital extends Building{
      */
     public void draw(Graphics g){
 
-        //figure our how thingy is going to draw
+        //TODO: figure our how thingy is going to draw
     }
 
     
@@ -85,7 +87,7 @@ class Hospital extends Building{
         String stringToReturn = "";
 
         return stringToReturn;
-        //figure out what type of stuff to return
+        //TODO: Figure out how to string format it
     }
 
     
@@ -93,7 +95,7 @@ class Hospital extends Building{
      * @param price
      */
     public void build(int price){
-
+        //TODO: remove or find a function for "build"
     }
 
     

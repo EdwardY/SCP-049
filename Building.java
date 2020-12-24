@@ -9,7 +9,7 @@
 import java.awt.*;
 
 
-abstract class Building implements Buildable, Drawable, DestroyableAndRepairable {
+abstract class Building implements Drawable, DestroyableAndRepairable {
     
     /**initial price of the building */
     private int initialPrice;

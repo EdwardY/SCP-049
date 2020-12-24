@@ -15,7 +15,6 @@ abstract class Event {
 
     /**
      * Constructor for the {@code Event} class
-     * @param duration the number of turns the {@code Event} will last for
      * @param timeLeft the number of turns the {@code Event} has left
      * @param effectAmount the magnitude of the {@code Event}
      */
@@ -55,4 +54,10 @@ abstract class Event {
     public void decreaseTimeLeft(){
         this.timeLeft -= 1;
     }
+
+    /**
+     * Does the effect
+     * @param game the {@code Game} that gets affected
+     */
+    public abstract void affect(Game game);
 }

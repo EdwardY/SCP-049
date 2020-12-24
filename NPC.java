@@ -19,7 +19,8 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
     private int y;
     /**The image of the NPC that will be shown to the user. */
     private Image sprite;
-
+    /**The type of NPC */
+    private String type;
 
 
     /**
@@ -30,13 +31,13 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
      * @param y The y-value of the NPC's location on the grid.
      * @param sprite The image that the NPC will have.
      */
-    protected NPC (int health, int maxHealth, int x, int y, Image sprite){
+    protected NPC (int health, int maxHealth, int x, int y, Image sprite, String type){
         this.health = health;
         this.maxHealth = maxHealth;
         this.x = x;
         this.y = y;
         this.sprite = sprite;
-
+        this.type = type;
     }//end of constructor
 
 
@@ -124,6 +125,15 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
      */
     public int getY(){
         return this.y;
+    }
+
+
+    /**
+     * Returns the NPC's type.
+     * @return the NPC's typen.
+     */
+    public String getType(){
+        return this.type;
     }
 
     //end of getters

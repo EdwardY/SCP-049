@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 /**
  * [Human.java]
  * An abstract class for a human type object.
@@ -6,7 +8,7 @@
  */
 
 
-public abstract class Human{
+public abstract class Human extends NPC{
     /**The age of the human */
     private int age;
     /**The priority or importance of the human over all other humans. */
@@ -15,8 +17,6 @@ public abstract class Human{
     private int hunger;    
     /**The maximum fullness a human can have. */
     private int maxHunger;
-
-
     /**
      * Constructor for a new Human object.
      * @param age The age of the human.
@@ -24,7 +24,8 @@ public abstract class Human{
      * @param hunger The hunger of the human.
      * @param maxHunger The maximum hunger of the human.
      */
-    public Human(int age, int priority, int hunger, int maxHunger){
+    protected Human(int health, int maxHealth, int x, int y, Image sprite, String type, int age, int priority, int hunger, int maxHunger){
+        super(health, maxHealth, x, y, sprite, type);
         this.age = age;
         this.priority = priority;
         this.hunger = hunger;

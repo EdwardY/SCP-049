@@ -9,25 +9,30 @@ import java.awt.Rectangle;
 
 abstract class AoeEvent extends Event{
     /** The {@code Rectangle} defining the boundaries of the {@code AoeEvent} */
-    private Rectangle currentSize;
+    private Rectangle aoe;
 
     /**
      * Constructor for the {@code AoeEvent} class
      * @param duration the total duration of the {@code AoeEvent}
      * @param timeLeft time left for the {@code AoeEvent}
      * @param effectAmount the amount of effect the {@code AoeEvent} has
-     * @param currentSize the area the {@code AoeEvent} can affect
+     * @param aoe the area the {@code AoeEvent} can affect
      */
-    public AoeEvent(int duration, int timeLeft, int effectAmount, Rectangle currentSize){
+    public AoeEvent(int duration, int timeLeft, int effectAmount, Rectangle aoe){
         super(duration, timeLeft, effectAmount);
-        this.currentSize = currentSize;
+        this.aoe = aoe;
     }
 
     /**
-     * Increases the size of the {@code AoeEvent} by 1 unit both horizontally and vertically
+     * <p>
+     * Increases the size of the {@code AoeEvent} by xIncrease units horizontally and yIncrease units vertically. The 
+     * {@code Rectangle} class also handles centering 
+     * </p>
+     * @param xIncrease the amount to 
+     * @param yIncrease
      */
-    public void upgradeSize(){
-        this.currentSize.grow(1, 1);
+    public void upgradeSize(int xIncrease, int yIncrease){
+        this.aoe.grow(xIncrease, yIncrease);
     }
 
 }

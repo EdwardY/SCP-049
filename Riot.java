@@ -16,7 +16,7 @@ class Riot extends WholeGameEvent{
 
     /**
      * {@code Citizens} will become agitated and do damage to nearby {@code Buildings}
-     * @param game
+     * @param game the {@code Game class to pass in}
      */
     @Override
     public void affect(Game game){

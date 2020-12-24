@@ -28,8 +28,8 @@ abstract class AoeEvent extends Event{
      * Increases the size of the {@code AoeEvent} by xIncrease units horizontally and yIncrease units vertically. The 
      * {@code Rectangle} class also handles centering 
      * </p>
-     * @param xIncrease the amount to 
-     * @param yIncrease
+     * @param xIncrease the amount to increase the horizontal size by
+     * @param yIncrease the amount to increase the vertical size by
      */
     public void upgradeSize(int xIncrease, int yIncrease){
         this.aoe.grow(xIncrease, yIncrease);

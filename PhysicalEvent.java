@@ -13,11 +13,11 @@ abstract class PhysicalEvent extends AoeEvent{
     private Image sprite;
 
     /**
-     * 
-     * @param duration
-     * @param timeLeft
-     * @param effectAmount
-     * @param aoe
+     * Constructor for the {@code PhysicalEvent} class, passes all paramters into the superclass's constructor
+     * @param duration how long the {@code PhysicalEvent} will last for
+     * @param timeLeft how much time is left for the {@code PhysicalEvent}
+     * @param effectAmount the amount the {@code PhysicalEvent} can affect
+     * @param aoe the area that the {@code PhysicalEvent} can affect
      */
     public PhysicalEvent(int duration, int timeLeft, int effectAmount, Rectangle aoe){
         super(duration, timeLeft, effectAmount, aoe);

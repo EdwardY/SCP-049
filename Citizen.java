@@ -24,7 +24,7 @@ public class Citizen extends Human{
      */
     public Citizen(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger){
         super(health, maxHealth, x, y, sprite, age, priority, hunger, maxHunger);
-    }
+    }//end of constructor
 
 
-}
+}//end of class

@@ -8,7 +8,7 @@ import java.awt.Rectangle;
  * @version 1.0 on December 24, 2020
  */
 
-abstract class PhysicalEvent extends AoeEvent{
+abstract class PhysicalEvent extends AoeEvent implements Drawable{
     /** The {@code Image} that will be displayed when drawing the {@code PhysicalEvent} */
     private Image sprite;
 
@@ -18,9 +18,11 @@ abstract class PhysicalEvent extends AoeEvent{
      * @param timeLeft how much time is left for the {@code PhysicalEvent}
      * @param effectAmount the amount the {@code PhysicalEvent} can affect
      * @param aoe the area that the {@code PhysicalEvent} can affect
+     * @param sprite the {@code Image} to display when drawing {@code PhysicalEvents}
      */
-    public PhysicalEvent(int duration, int timeLeft, int effectAmount, Rectangle aoe){
+    public PhysicalEvent(int duration, int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
         super(duration, timeLeft, effectAmount, aoe);
+        this.sprite = sprite;
     }
 
     /**

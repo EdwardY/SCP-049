@@ -7,7 +7,7 @@
 
 public interface Moveable {
     /**
-     * Translates xDistance horizontally and yDistance vertically
+     * Translates xDistance horizontally and yDistance verticalls
      * @param xDistance the horizontal distance to translate
      * @param yDistance the vertical distance to translate
      */

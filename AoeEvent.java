@@ -24,13 +24,6 @@ abstract class AoeEvent extends Event{
     }
 
     /**
-     * Gets the area of effect of the {@code AoeEvent}
-     * @return aoe, the {@code AoeEvent's} area of effect
-     */
-    public Rectangle getAoe(){
-        return this.aoe;
-    }
-    /**
      * <p>
      * Increases the size of the {@code AoeEvent} by xIncrease units horizontally and yIncrease units vertically. The 
      * {@code Rectangle} class also handles centering 

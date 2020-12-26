@@ -9,14 +9,14 @@ class Stonks extends WholeGameEvent{
     /**
      * Constructor for the {@code Stonks} class<br>
      * Passes in default values into the superclass's constructor
-     * @param effectAmount the amount to increase town economic production by 
+     * @param effectAmount the percentage to increase town economic production by 
      */
     public Stonks(int effectAmount){
         super(5, 5, effectAmount);
     }
 
     /**
-     * Increases the money earned for the turn in the game by a its effectAmount
+     * Increases the money earned for the turn in the game by a factor of effectAmount
      * @param game the {@code Game} being affected
      */
     @Override

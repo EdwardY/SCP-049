@@ -125,6 +125,14 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
         return this.y;
     }
 
+    /**
+     * Returns the sprite of this NPC.
+     * @return the NPC's sprite.
+     */
+    public Image getSprite(){
+        return this.sprite;
+    }
+
 
     //end of getters
 

@@ -1,46 +1,38 @@
 /**
- * [MilitaryBase.java]
- * A MilitaryBase building that can train store and move soldiers
+ * [Bank.java]
+ * A building extending ProductionFacilities that can be used to produce money
  * @author Edward Yang
- * @version 0.1 Decemeber 26th 2020
+ * @version 0.1 December 26th 2020
  */
 
-import java.awt.Image;
-import java.awt.Graphics;
-import java.util.ArrayList;
+ import java.awt.Graphics;
+ import java.awt.Image;
 
-class MilitaryBase extends Military{
-
-    private ArrayList<Human> soldiers = new ArrayList<>();
-
+class Bank extends ProductionFacility{
+    
     /**
-     * Military base constructor
-     * Creates a new MilitaryBase building
-     * @param initialPrice
-     * @param pricesPerLevel
-     * @param health
-     * @param sprite
-     * @param x
-     * @param y
+     * A building that's serves to produce money
+     * @param initialPrice The initial price to build the building
+     * @param pricesPerLevel the price per level of upgrade
+     * @param health The initial health of the building
+     * @param sprite The image of the building
+     * @param x the x coordinate of the building on the game map
+     * @param y The y coordinate of teh building on the game map
      */
-    MilitaryBase(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
-
+    Bank(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
         super(initialPrice, pricesPerLevel, health, sprite, x, y);
-    }
 
-    
-    //class methods
-
-    /** 
-     * @param number The number of troops to train 
-     * @param type The type of troop to train 
-     */
-    public void trainTroops(int number, String type){
-        //TODO: figure out trainTroops mechanic
+        //TODO: that's a lot of things to figure out how the bank will work
     }
 
 
-    
+    public int earnResource(){
+        int resource = 0; 
+        //TODO: figure out how bank makes money
+        return resource;
+    }
+
+
     /** 
      * @param repair the amount to repair 
      */

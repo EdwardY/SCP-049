@@ -5,8 +5,7 @@
  * @Version 0.1 December 24th 2020
  */
 
-import java.util.*;
-import java.awt.*;
+import java.awt.Image;
 
 abstract class Military extends Building{
     
@@ -25,5 +24,6 @@ abstract class Military extends Building{
     Military(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
         super(initialPrice, pricesPerLevel, health, sprite, x, y);
 
+        //TODO: figure out all these thingies
     }
 }

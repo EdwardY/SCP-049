@@ -6,7 +6,9 @@
  */
 
 
-import java.awt.*;
+ //imports 
+import java.awt.Image;
+import java.awt.Graphics;
 
 
 abstract class Building implements Drawable, DestroyableAndRepairable {

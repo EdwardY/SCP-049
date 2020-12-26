@@ -5,7 +5,8 @@
  * @version 0.1 December 2020
  */
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Graphics;
 
 public class ResearchLab extends Military{
     
@@ -27,6 +28,7 @@ public class ResearchLab extends Military{
         super(initialPrice, pricesPerLevel, health, sprite, x, y);
 
         //TODO: determine constructors of the private class variables
+        //TODO: figure out Research mechanic
     }
 
     //Class methods
@@ -54,7 +56,7 @@ public class ResearchLab extends Military{
 
     public String toString(){
 
-        String stringToReturn = "";
+        String stringToReturn = "toMyString";
 
         return stringToReturn;
 
@@ -68,5 +70,16 @@ public class ResearchLab extends Military{
     public void draw(Graphics g){
 
         //TODO: figure out how to draw this
+    }
+
+    //Setters
+    public void setProgress(double newProgress){
+
+        this.progress = newProgress;
+    }
+
+    public void setSuccessRate(double newRate){
+
+        this.successRate = newRate;
     }
 }

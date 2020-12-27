@@ -12,7 +12,7 @@ class Stonks extends WholeGameEvent{
      * @param effectAmount the percentage to increase town economic production by 
      */
     public Stonks(int effectAmount){
-        super(5, 5, effectAmount);
+        super(5, effectAmount);
     }
 
     /**

@@ -11,7 +11,7 @@ class Riot extends WholeGameEvent{
      * @param effectAmount how much effect the {@code Riot} has, based on citizen count in the area
      */
     public Riot(int effectAmount){
-        super(5, 5, effectAmount);
+        super(5, effectAmount);
     }
 
     /**

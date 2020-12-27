@@ -13,7 +13,7 @@ import java.awt.Rectangle;
      * @param aoe the area which can be infected
      */
     public Infect(Rectangle aoe){
-        super(1, 1, -1, aoe);
+        super(1, -1, aoe);
     }
 
     /**

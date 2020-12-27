@@ -13,13 +13,12 @@ abstract class AoeEvent extends Event{
 
     /**
      * Constructor for the {@code AoeEvent} class
-     * @param duration the total duration of the {@code AoeEvent}
      * @param timeLeft time left for the {@code AoeEvent}
      * @param effectAmount the amount of effect the {@code AoeEvent} has
      * @param aoe the area the {@code AoeEvent} can affect
      */
-    public AoeEvent(int duration, int timeLeft, int effectAmount, Rectangle aoe){
-        super(duration, timeLeft, effectAmount);
+    public AoeEvent(int timeLeft, int effectAmount, Rectangle aoe){
+        super(timeLeft, effectAmount);
         this.aoe = aoe;
     }
 
@@ -30,16 +29,4 @@ abstract class AoeEvent extends Event{
     public Rectangle getAoe(){
         return this.aoe;
     }
-    /**
-     * <p>
-     * Increases the size of the {@code AoeEvent} by xIncrease units horizontally and yIncrease units vertically. The 
-     * {@code Rectangle} class also handles centering 
-     * </p>
-     * @param xIncrease the amount to increase the horizontal size by
-     * @param yIncrease the amount to increase the vertical size by
-     */
-    public void upgradeSize(int xIncrease, int yIncrease){
-        this.aoe.grow(xIncrease, yIncrease);
-    }
-
 }

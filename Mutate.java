@@ -12,7 +12,7 @@ class Mutate extends WholeGameEvent{
      * </p>
      */
     public Mutate(){
-        super(1, 1, 1);
+        super(1, 1);
     }
 
     /**

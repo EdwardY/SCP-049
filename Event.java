@@ -6,8 +6,6 @@
  */
 
 abstract class Event {
-    /** How long the {@code Event} will last for */
-    private int duration;
     /** How much longer the {@code Event} has left */
     private int timeLeft;
     /** The amount of effect the {@code Event} has */
@@ -18,18 +16,9 @@ abstract class Event {
      * @param timeLeft the number of turns the {@code Event} has left
      * @param effectAmount the magnitude of the {@code Event}
      */
-    public Event(int duration, int timeLeft, int effectAmount){
-        this.duration = duration;
+    public Event(int timeLeft, int effectAmount){
         this.timeLeft = timeLeft;
         this.effectAmount = effectAmount;
-    }
-
-    /**
-     * Gets the total duration of the {@code Event}
-     * @return duration, the total duration of the {@code Event}
-     */
-    public int getDuration(){
-        return this.duration;
     }
 
     /**

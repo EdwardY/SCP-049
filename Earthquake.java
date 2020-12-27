@@ -17,7 +17,7 @@ class Earthquake extends PhysicalEvent{
      * @param sprite the {@code Image} to use for the {@code Earthquake}
      */
     public Earthquake(int duration, int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
-        super(1, 1, effectAmount, aoe, sprite);
+        super(1, effectAmount, aoe, sprite);
     }
 
     /**

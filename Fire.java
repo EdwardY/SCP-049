@@ -12,14 +12,13 @@ import java.awt.Rectangle;
 class Fire extends PhysicalEvent{
     /**
      * Constructor for the {@code Fire} class
-     * @param duration how long the {@code Fire} will last
      * @param timeLeft how much longer the {@code Fire} has to burn
      * @param effectAmount damage done per turn
      * @param aoe the area which the {@code Fire} can affect
      * @param sprite the {@code Image} to draw for the {@code Fire}
      */
-    public Fire(int duration, int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
-        super(duration, timeLeft, effectAmount, aoe, sprite);
+    public Fire(int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
+        super(timeLeft, effectAmount, aoe, sprite);
     }
 
     /**

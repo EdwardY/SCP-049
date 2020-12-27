@@ -10,7 +10,7 @@ class WarpReality extends WholeGameEvent{
      * @param humePointsPerTurn the number of hume points the SCPs will get per turn
      */
     WarpReality(int humePointsPerTurn){
-        super(5, 5, humePointsPerTurn);
+        super(5, humePointsPerTurn);
     }
     
     /**

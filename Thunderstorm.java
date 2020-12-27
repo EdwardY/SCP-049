@@ -26,7 +26,7 @@ class Thunderstorm extends PhysicalEvent{
      * @param strikes the number of strikes the {@code Thunderstom} has
      */
     public Thunderstorm(Rectangle aoe, Image sprite, int strikes){
-        super(Integer.MAX_VALUE, Integer.MAX_VALUE, 1, aoe, sprite);
+        super(Integer.MAX_VALUE, 1, aoe, sprite);
         this.strikesLeft = strikes;
         this.xStrikePos = aoe.x;
         this.yStrikePos = aoe.y;

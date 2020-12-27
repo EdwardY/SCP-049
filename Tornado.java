@@ -12,14 +12,13 @@ import java.awt.Rectangle;
 class Tornado extends PhysicalEvent implements Moveable{
     /**
      * The constructor for the {@code Tornado} class
-     * @param duration the total time the {@code Tornado} will last for
      * @param timeLeft the amount of time the {@code Tornado} has left
      * @param effectAmount the original amount of damage the {@code Tornado} starts with
      * @param aoe the area which the {@code Tornado} can affect
      * @param sprite the {@code Image} to draw when displaying the {@code Tornado}
      */
-    public Tornado(int duration, int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
-        super(duration, timeLeft, effectAmount, aoe, sprite);
+    public Tornado(int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
+        super(timeLeft, effectAmount, aoe, sprite);
     }
 
     /**

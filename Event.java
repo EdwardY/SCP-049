@@ -10,15 +10,19 @@ abstract class Event {
     private int timeLeft;
     /** The amount of effect the {@code Event} has */
     private int effectAmount;
+    /** The level of the {@code Event} */
+    private int level;
 
     /**
      * Constructor for the {@code Event} class
      * @param timeLeft the number of turns the {@code Event} has left
      * @param effectAmount the magnitude of the {@code Event}
+     * @param level the level of the {@code Event}
      */
-    public Event(int timeLeft, int effectAmount){
+    public Event(int timeLeft, int effectAmount, int level){
         this.timeLeft = timeLeft;
         this.effectAmount = effectAmount;
+        this.level = level;
     }
 
     /**

@@ -10,7 +10,7 @@ import java.awt.Image;
 
 
 
-public class Spy extends Soldier{
+public class Spy extends Cadet{
     /**The chance of the spy gaining enemy intel */
     private double successRate;
     /**The chance of the spy being caught by the enemy */
@@ -30,8 +30,8 @@ public class Spy extends Soldier{
      * @param successRate The chance of the spy gaining enemy intel.
      * @param sus The chance that the spy will be caught by the enemy.
      */
-    public Spy(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger, int attackDamage, double successRate, double sus){
-        super(health, maxHealth, x, y, sprite, age, priority, hunger, maxHunger, attackDamage);
+    public Spy(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger, double successRate, double sus){
+        super(health, maxHealth, x, y, sprite, age, priority, hunger, maxHunger);
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor

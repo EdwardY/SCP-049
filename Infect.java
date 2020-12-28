@@ -10,10 +10,11 @@ import java.awt.Rectangle;
  class Infect extends AoeEvent{
     /**
      * Passes values into the superclass's constructor, it only takes one turn to infect citizens and effectAmount is not relevant
+     * @param level the level of the {@code Infect}
      * @param aoe the area which can be infected
      */
-    public Infect(Rectangle aoe){
-        super(1, -1, aoe);
+    public Infect(int level, Rectangle aoe){
+        super(1, -1, level, aoe);
     }
 
     /**

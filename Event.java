@@ -42,6 +42,14 @@ abstract class Event {
     }
 
     /**
+     * Gets the level of the {@code Event}
+     * @return level, the level of the {@code Event}
+     */
+    public int getLevel(){
+        return this.level;
+    }
+
+    /**
      * Decreases the time left by one turn
      */
     public void decreaseTimeLeft(){

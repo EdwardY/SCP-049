@@ -9,9 +9,10 @@ class Riot extends WholeGameEvent{
     /**
      * Constructor for the {@code Riot} class, passes values into the superclass
      * @param effectAmount how much effect the {@code Riot} has, based on citizen count in the area
+     * @param level the level of the {@code Riot}
      */
-    public Riot(int effectAmount){
-        super(5, effectAmount);
+    public Riot(int effectAmount, int level){
+        super(5, effectAmount, level);
     }
 
     /**

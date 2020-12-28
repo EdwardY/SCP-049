@@ -8,9 +8,10 @@ class WarpReality extends WholeGameEvent{
     /**
      * Passes values into the superclass's constructor
      * @param humePointsPerTurn the number of hume points the SCPs will get per turn
+     * @param level the level of the {@code WarpReality} {@code Event}
      */
-    WarpReality(int humePointsPerTurn){
-        super(5, humePointsPerTurn);
+    WarpReality(int humePointsPerTurn, int level){
+        super(5, humePointsPerTurn, level);
     }
     
     /**

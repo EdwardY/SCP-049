@@ -14,11 +14,12 @@ class Snow extends PhysicalEvent{
      * Constructor for the {@code Snow} class
      * @param timeLeft how much longer the {@code Snow} will last for
      * @param effectAmount the factor which things will be slowed down by
+     * @param level the level of the {@code Snow}
      * @param aoe the area of effect
      * @param sprite the {@code Image} to draw for the {@code Snow}
      */ 
-    public Snow(int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
-        super(timeLeft, effectAmount, aoe, sprite);
+    public Snow(int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
+        super(timeLeft, effectAmount, level, aoe, sprite);
     }
 
     /**

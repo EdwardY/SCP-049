@@ -13,11 +13,12 @@ class Earthquake extends PhysicalEvent{
     /**
      * The constructor for the {@code Earthquake} class, passes parameters into the superclass, only lasts 1 turn
      * @param effectAmount the amount the {@code Earthquake} will affect {@code Buildings} (it will affect {@code NPCs} less)
+     * @param level the leve of the {@code Earthquake}
      * @param aoe the range {@code Earthquake} can affect
      * @param sprite the {@code Image} to use for the {@code Earthquake}
      */
-    public Earthquake(int duration, int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
-        super(1, effectAmount, aoe, sprite);
+    public Earthquake(int duration, int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
+        super(1, effectAmount, level, aoe, sprite);
     }
 
     /**

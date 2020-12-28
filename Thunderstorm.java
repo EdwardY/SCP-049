@@ -21,12 +21,13 @@ class Thunderstorm extends PhysicalEvent{
      * isn't getting used. The strike from the {@code Thunderstorm} will level down a {@code Building} by 1 level. The next strike 
      * positions are set by the position of aoe.
      * </p>
+     * @param level the level of the {@code Thunderstorm}
      * @param aoe the area which the {@code Thunderstorm} can affect
      * @param sprite the {@code Image} to draw when drawing a {@code Thunderstorm}
      * @param strikes the number of strikes the {@code Thunderstom} has
      */
-    public Thunderstorm(Rectangle aoe, Image sprite, int strikes){
-        super(Integer.MAX_VALUE, 1, aoe, sprite);
+    public Thunderstorm(int level, Rectangle aoe, Image sprite, int strikes){
+        super(Integer.MAX_VALUE, 1, level, aoe, sprite);
         this.strikesLeft = strikes;
         this.xStrikePos = aoe.x;
         this.yStrikePos = aoe.y;

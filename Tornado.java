@@ -14,11 +14,12 @@ class Tornado extends PhysicalEvent implements Moveable{
      * The constructor for the {@code Tornado} class
      * @param timeLeft the amount of time the {@code Tornado} has left
      * @param effectAmount the original amount of damage the {@code Tornado} starts with
+     * @param level the level of the {@code Tonado}
      * @param aoe the area which the {@code Tornado} can affect
      * @param sprite the {@code Image} to draw when displaying the {@code Tornado}
      */
-    public Tornado(int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
-        super(timeLeft, effectAmount, aoe, sprite);
+    public Tornado(int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
+        super(timeLeft, effectAmount, level, aoe, sprite);
     }
 
     /**

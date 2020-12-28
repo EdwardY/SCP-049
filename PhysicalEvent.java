@@ -16,11 +16,12 @@ abstract class PhysicalEvent extends AoeEvent implements Drawable{
      * Constructor for the {@code PhysicalEvent} class, passes all paramters into the superclass's constructor
      * @param timeLeft how much time is left for the {@code PhysicalEvent}
      * @param effectAmount the amount the {@code PhysicalEvent} can affect
+     * @param level the level of the {@code PhysicalEvent}
      * @param aoe the area that the {@code PhysicalEvent} can affect
      * @param sprite the {@code Image} to display when drawing {@code PhysicalEvents}
      */
-    public PhysicalEvent(int timeLeft, int effectAmount, Rectangle aoe, Image sprite){
-        super(timeLeft, effectAmount, aoe);
+    public PhysicalEvent(int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
+        super(timeLeft, effectAmount, level, aoe);
         this.sprite = sprite;
     }
 

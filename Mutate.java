@@ -10,9 +10,10 @@ class Mutate extends WholeGameEvent{
      * Constructor for the {@code Mutate} {@code Event}. Passes in ones for all parameters since it only takes one turn to accomplish 
      * and it increases the level of {@code SCP0492s} by 1.
      * </p>
+     * @param level the level of the {@code Mutate}
      */
-    public Mutate(){
-        super(1, 1);
+    public Mutate(int level){
+        super(1, 1, level);
     }
 
     /**

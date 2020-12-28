@@ -15,10 +15,11 @@ abstract class AoeEvent extends Event{
      * Constructor for the {@code AoeEvent} class
      * @param timeLeft time left for the {@code AoeEvent}
      * @param effectAmount the amount of effect the {@code AoeEvent} has
+     * @param level the level of the {@code AoeEvent}
      * @param aoe the area the {@code AoeEvent} can affect
      */
-    public AoeEvent(int timeLeft, int effectAmount, Rectangle aoe){
-        super(timeLeft, effectAmount);
+    public AoeEvent(int timeLeft, int effectAmount, int level, Rectangle aoe){
+        super(timeLeft, effectAmount, level);
         this.aoe = aoe;
     }
 

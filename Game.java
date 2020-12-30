@@ -93,7 +93,7 @@ class Game {
     }
 
     /**
-     * Gest how many hume points the SCPs have
+     * Gets how many hume points the SCPs have
      * @return hume, the amount of hume points the SCPs have
      */
     public int getHume(){

@@ -14,15 +14,13 @@ public class Researcher extends Human{
 
     /**
     * Constructor for a new Researcher object.
-    * @param health The health of the Researcher.
-    * @param maxHealth The maximum health of the Researcher.
     * @param x The horizontal location of the Researcher.
     * @param y The vertical location of the Researcher.
     * @param sprite The image of the Researcher that is displayed to the players.
     * @param priority The priority of the Researcher compared to others.
     */
-   public Researcher(int health, int maxHealth, int x, int y, Image sprite, int priority){
-       super(health, maxHealth, x, y, sprite, priority); 
+   public Researcher(int x, int y, Image sprite, int priority){
+       super(100, 100, x, y, sprite, priority); 
    }//end of constructor
 
 

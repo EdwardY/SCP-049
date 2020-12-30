@@ -10,13 +10,13 @@ import java.awt.Image;
 
 public abstract class Human extends NPC{
     /**The age of the human */
-    private int age;
+    private int age = 0;
     /**The priority or importance of the human over all other humans. */
     private int priority;
     /**The hunger of the human, with 0 meaning they are starving to death. */
-    private int hunger;    
+    private int hunger = 100;    
     /**The maximum fullness a human can have. */
-    private int maxHunger;
+    private int maxHunger = 100;
     /**
      * Constructor for a new Human object.
      * @param health The health of the human.
@@ -24,18 +24,14 @@ public abstract class Human extends NPC{
      * @param x The horizontal location of the human.
      * @param y The vertical location of the human.
      * @param sprite The image of the human that is displayed to the players.
-     * @param age The age of the human.
      * @param priority The priority of the human compared to others.
      * @param hunger The hunger of the human.
      * @param maxHunger The maximum hunger of the human.
 
      */
-    public Human(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger){
+    public Human(int health, int maxHealth, int x, int y, Image sprite, int priority){
         super(health, maxHealth, x, y, sprite);
-        this.age = age;
-        this.priority = priority;
-        this.hunger = hunger;
-        this.maxHunger = maxHunger;      
+        this.priority = priority;    
     }//end of constructor
 
 

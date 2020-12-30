@@ -14,19 +14,14 @@ public class Doctor extends Human{
     private int healingAmount;
 
       /**
-     * Constructor to make a new doctor object.
-     * @param health The health of the Doctor.
-     * @param maxHealth The maximum health of the Doctor. 
+     * Constructor to make a new doctor object. 
      * @param x The horizontal position of the Doctor.
      * @param y The vertical position of the Doctor.
      * @param sprite The sprite of the Doctor.
-     * @param age The age of the Doctor.
      * @param priority The priority of the doctor over all other humans.
-     * @param hunger The hunger level of the doctor.
-     * @param maxHunger The maximum hunger level of the doctor.
      */
-    public Doctor(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger, int healingAmount){
-        super(health, maxHealth, x, y, sprite, age, priority, hunger, maxHunger);
+    public Doctor(int x, int y, Image sprite, int priority, int healingAmount){
+        super(100, 100, x, y, sprite, priority);
         this.healingAmount = healingAmount;
     }//end of constructor
 

@@ -37,7 +37,6 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
     }//end of constructor
 
 
-    //TODO: Make a convert method to change the NPC to another type
 
     /**
      * Method checks if the NPC has died or not
@@ -46,9 +45,8 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
     public boolean isDead(){
         if (health <= 0){
             return true;           
-        }else{
-            return false;
-        } //end of if statements
+        }
+        return false; //if the NPC is not dead
     }//end of method
 
     /**

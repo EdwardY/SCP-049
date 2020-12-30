@@ -18,13 +18,12 @@ public class Soldier extends Cadet implements Troop{
      * @param x The soldier's horizontal location.
      * @param y The soldier's vertical position.
      * @param sprite The image of the soldier that will appear to the players.
-     * @param age The age of the soldier.
      * @param priority The priority of the soldier over all other humans in the game.
      * @param hunger The hunger level of the soldier.
      * @param maxHunger The maximum hunger level of the soldier.
      */
-    public Soldier(int health, int maxHealth, int x, int y, Image sprite, int age, int priority, int hunger, int maxHunger, int attackDamage){
-        super(health, maxHealth, x, y, sprite, age, priority, hunger, maxHunger);
+    public Soldier(int health, int maxHealth, int x, int y, Image sprite, int priority, int attackDamage){
+        super(health, maxHealth, x, y, sprite,  priority);
         this.attackDamage = attackDamage;
     }//end of constructor
 

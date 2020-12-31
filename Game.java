@@ -108,7 +108,84 @@ class Game {
         return this.turn;
     }
 
-    //TOOD: literally all the not getter methods
+    /**
+     * Adds building to the list of {@code Buildings}
+     * @param building the {@code Building} to add
+     */
+    public void addBuilding(Building building){
+        this.buildings.add(building);
+    }
+
+    /**
+     * Checks what kind of NPC ({@code SCP0492} or {@code Human}) is being added then adds to the appropriate list
+     * @param npc the {@code NPC} to be added
+     */
+    public void addNpc(NPC npc){
+        if(npc instanceof SCP0492){
+            scps.add((SCP0492)npc);
+        }else{
+            humans.add((Human)npc);
+        }
+    }
+
+    /**
+     * Adds the event to the list of events and starts its affect
+     * @param event the {@code Event} started
+     */
+    public void startEvent(Event event){
+        this.events.add(event);
+        event.affect(this);
+    }
+
+    /**
+     * Changes the amount of money by change amount
+     * @param change the change in money to be made
+     */
+    public void changeMoney(int change){
+        this.money += change;
+    }
+
+    /**
+     * Changes the amount of food by change amount
+     * @param change the change in food
+     */
+    public void changeFood(int change){
+        this.food += change;
+    }
+
+    /**
+     * Changes the amount of hume points by change amount
+     * @param change the amount of change in hume points
+     */
+    public void changeHume(int change){
+        this.hume += change;
+    }
+
+    /**
+     * Changes the moneyPerTurn by change amount
+     * @param change the change in the money per turn
+     */
+    public void changeMoneyPerTurn(int change){
+        this.moneyPerTurn += change;
+    }
+
+    /**
+     * Changes the foodPerTurn by change amount
+     * @param change the change in food per turn
+     */
+    public void changeFoodPerTurn(int change){
+        this.foodPerTurn += change;
+    }
+
+    /**
+     * Changes the humePerTurn by change
+     * @param change the change in hume points per turn
+     */
+    public void changeHumePerTurn(int change){
+        this.humePerTurn += change;
+    }
+
+    //TODO: convert method
 
     /**
      * Increases turn number by one then lets the {@code Game} handle all other passive stuff

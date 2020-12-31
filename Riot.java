@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * [Riot.java]
  * The class for {@code Riot} {@code Events}
@@ -17,10 +19,13 @@ class Riot extends WholeGameEvent{
 
     /**
      * {@code Citizens} will become agitated and do damage to nearby {@code Buildings}
-     * @param game the {@code Game class to pass in}
+     * @param game the {@code Game} class to pass in 
      */
     @Override
     public void affect(Game game){
-        //TODO: make riot after game class is created
+        ArrayList<Building> buildings = game.getBuildings();
+        for(int i = 0;i < buildings.size();i++){
+            buildings.get(i).takeDamage(this.getEffectAmount());
+        }
     }
 }

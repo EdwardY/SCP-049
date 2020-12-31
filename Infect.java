@@ -1,4 +1,5 @@
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 /**
  * [Infect.java]
@@ -23,6 +24,12 @@ import java.awt.Rectangle;
      */
     @Override
     public void affect(Game game){
-        //TODO: write the infect's affect after game class is made
+        ArrayList<Human> humans = game.getHumans();
+        for(int i = 0;i < humans.size();i++){
+            Human human = humans.get(i);
+            if(this.getAoe().contains(human.getX(), human.getY())){
+                //TODO: convert the human from a human to a scp-049-2 after convert method is written
+            }
+        }
     }
 }

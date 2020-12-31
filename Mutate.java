@@ -22,6 +22,7 @@ class Mutate extends WholeGameEvent{
      */
     @Override
     public void affect(Game game){
+        SCP0492.level++;
         //TODO: implement mutate after game class is created
     }
 }

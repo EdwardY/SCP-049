@@ -20,6 +20,6 @@ class WarpReality extends WholeGameEvent{
      */
     @Override
     public void affect(Game game){
-        //TODO: increase hume points in the game
+        game.changeHume(this.getEffectAmount());
     }
 }

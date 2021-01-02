@@ -28,7 +28,7 @@ import java.util.ArrayList;
         for(int i = 0;i < humans.size();i++){
             Human human = humans.get(i);
             if(this.getAoe().contains(human.getX(), human.getY())){
-                //TODO: convert the human from a human to a scp-049-2 after convert method is written
+                game.convert(human, "scp0492");//TODO: depends on how convert gets written
             }
         }
     }

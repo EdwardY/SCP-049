@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+import java.util.ArrayList;
+
 /**
  * [Fire.java]
  * The {@code Fire} is a type of {@code PhysicalEvent} that lasts several turns and can spread
@@ -23,12 +25,23 @@ class Fire extends PhysicalEvent{
     }
 
     /**
-     * Does damage effectAmount damage to everything inside the aoe
+     * Does damage effectAmount damage to all {@code Buildings} and {@code Humans} inside the area of effect
      * @param game the {@code Game} that gets affected by this {@code Fire}
      */
     @Override
     public void affect(Game game){
-        //TODO: implement fire effect after game object is made
+        ArrayList<Building> buildings = game.getBuildings();
+        ArrayList<Human> humans = game.getHumans();
+        for(int i = 0;i < buildings.size();i++){
+            if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY())){
+                buildings.get(i).takeDamage(this.getEffectAmount());
+            }
+        }
+        for(int i = 0;i < humans.size();i++){
+            if(this.getAoe().contains(humans.get(i).getX(), humans.get(i).getY())){
+                humans.get(i).takeDamage(this.getEffectAmount());
+            }
+        }
     }
     /**
      * Draws the {@code Fire} sprite in some random places in the area of effect

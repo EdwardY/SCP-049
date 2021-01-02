@@ -22,6 +22,7 @@ class Stonks extends WholeGameEvent{
      */
     @Override
     public void affect(Game game){
-        //TODO: implement stonks effect after the game class is defined
+        double percent = (this.getEffectAmount()/100);
+        game.changeMoney((int)(game.getMoneyPerTurn()*percent));
     }
 }

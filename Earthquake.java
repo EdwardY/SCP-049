@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+import java.util.ArrayList;
+
 /**
  * [Earthquake.java]
  * The {@code Earthquake} {@code Event} lasts one turn and mostly targets building damage
@@ -27,7 +29,18 @@ class Earthquake extends PhysicalEvent{
      */
     @Override
     public void affect(Game game){
-        //TODO: implement earthquake after game is made
+        ArrayList<Building> buildings = game.getBuildings();
+        ArrayList<Human> humans = game.getHumans();
+        for(int i = 0;i < buildings.size();i++){
+            if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY())){
+                buildings.get(i).takeDamage(this.getEffectAmount());
+            }
+        }
+        for(int i = 0;i < humans.size();i++){
+            if(this.getAoe().contains(humans.get(i).getX(), humans.get(i).getY())){
+                humans.get(i).takeDamage((int)Math.ceil(this.getEffectAmount()/10));
+            }
+        }
     }
 
     /**

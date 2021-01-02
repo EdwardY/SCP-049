@@ -101,6 +101,14 @@ class Game {
     }
 
     /**
+     * Gets the amount of money made per turn
+     * @return moneyPerTurn, the money made per turn
+     */
+    public int getMoneyPerTurn(){
+        return this.moneyPerTurn;
+    }
+
+    /**
      * Gets the current turn
      * @return turn, the number of turns that have passed so far
      */
@@ -185,7 +193,18 @@ class Game {
         this.humePerTurn += change;
     }
 
-    //TODO: convert method
+    public void convert(NPC npc, String type){
+        for(int i = 0;i < this.humans.size();i++){
+            if(this.humans.get(i) == npc){
+                //TODO: convert human to whatever and maybe find a better comparison method
+            }
+        }
+        for(int i = 0;i < this.scps.size();i++){
+            if(this.scps.get(i) == npc){
+                //not sure if scps will ever need to be convered into anything
+            }
+        }
+    }
 
     /**
      * Increases turn number by one then lets the {@code Game} handle all other passive stuff

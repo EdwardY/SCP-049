@@ -28,7 +28,7 @@ import java.util.ArrayList;
         for(int i = 0;i < humans.size();i++){
             Human human = humans.get(i);
             if(this.getAoe().contains(human.getX(), human.getY())){
-                game.convert(human, "SCP0492", 100, 100, 10, 0, 0.0, 0.0, 0);//TODO: depends on how convert gets written, temp values added
+                game.convert(human, "SCP0492", 100, 100, 10, 0, 0.0, 0.0, 0);//temp values added
                 // Parameters for convert: NPC npc, String type, int health, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount
             }
         }

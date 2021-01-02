@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-
+import java.awt.Image;
+import java.awt.Toolkit;
 /**
  * [Game.java]
  * A class for storing all game parts which the server can access
@@ -193,17 +194,50 @@ class Game {
         this.humePerTurn += change;
     }
 
-    public void convert(NPC npc, String type){
+
+    /**
+     * Converts an NPC to another type.
+     * @param npc The NPC being converted.
+     * @param type The type of NPC that the NPC will be converted to.
+     * @param health The health of the NPC.
+     * @param maxHealth The maximum health of the NPC.
+     * @param attackDamage The damage of the NPC (if applicable).
+     * @param priority The priority of the NPC.
+     * @param successRate The success rate of the NPC getting enemy intel (if applicable).
+     * @param sus The chance of the NPC getting caught by the enemy (if applicable).
+     * @param healingAmount The amount of healing the NPC will be able to heal (if applicable).
+     */
+    public void convert(NPC npc, String type, int health, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
+        //temporary for now
+        String imageURL = "";
+        Image tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
+
+
         for(int i = 0;i < this.humans.size();i++){
-            if(this.humans.get(i) == npc){
-                //TODO: convert human to whatever and maybe find a better comparison method
+            if(this.humans.get(i).equals(npc)){
+                int currentXPosition = this.humans.get(i).getX();
+                int currentYPosition = this.humans.get(i).getY();
+                if(type.equals("Citizen")){
+                    humans.add(new Citizen(currentXPosition,currentYPosition,tempImage, priority));
+                }else if(type.equals("Cadet")){
+                    humans.add(new Cadet(health, maxHealth, currentXPosition, currentYPosition, tempImage, priority));
+                }else if(type.equals("Doctor")){
+                    humans.add(new Doctor(currentXPosition, currentYPosition, tempImage, priority, healingAmount));
+                }else if(type.equals("Researcher")){
+                    humans.add(new Researcher(currentXPosition, currentYPosition, tempImage, priority));
+                }else if(type.equals("Soldier")){
+                    humans.add(new Soldier(health, maxHealth, currentXPosition, currentYPosition, tempImage, priority, attackDamage));
+                }else if(type.equals("Spy")){
+                    humans.add(new Spy(currentXPosition, currentYPosition, tempImage, priority, successRate, sus));
+                }else if (type.equals("SCP0492")){
+                    scps.add(new SCP0492(health, maxHealth, currentXPosition, currentYPosition, tempImage, attackDamage));
+                }
+                humans.remove(i);
+                return;
             }
         }
-        for(int i = 0;i < this.scps.size();i++){
-            if(this.scps.get(i) == npc){
-                //not sure if scps will ever need to be convered into anything
-            }
-        }
+
+        //TODO: no images for NPC's yet, may need to draw things
     }
 
     /**

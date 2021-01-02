@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+import java.util.ArrayList;
+
 /**
  * [Tornado.java]
  * A moving disaster
@@ -10,6 +12,8 @@ import java.awt.Rectangle;
  */
 
 class Tornado extends PhysicalEvent implements Moveable{
+    /** The total time for how long the {@code Tornado} lasts */
+    private int totalTime;
     /**
      * The constructor for the {@code Tornado} class
      * @param timeLeft the amount of time the {@code Tornado} has left
@@ -20,6 +24,7 @@ class Tornado extends PhysicalEvent implements Moveable{
      */
     public Tornado(int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
         super(timeLeft, effectAmount, level, aoe, sprite);
+        this.totalTime = timeLeft;
     }
 
     /**
@@ -31,7 +36,19 @@ class Tornado extends PhysicalEvent implements Moveable{
      */
     @Override
     public void affect(Game game){
-        //TODO: implement tornado effect after creating the game
+        int damage = (int)((this.getTimeLeft()/this.totalTime)*this.getEffectAmount());
+        ArrayList<Building> buildings = game.getBuildings();
+        ArrayList<Human> humans = game.getHumans();
+        for(int i = 0;i < buildings.size();i++){
+            if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY())){
+                buildings.get(i).takeDamage(damage);
+            }
+        }
+        for(int i = 0;i < humans.size();i++){
+            if(this.getAoe().contains(humans.get(i).getX(), humans.get(i).getY())){
+                humans.get(i).takeDamage(damage);
+            }
+        }
     }
 
     /**

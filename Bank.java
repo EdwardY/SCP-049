@@ -7,6 +7,7 @@
 
  import java.awt.Graphics;
  import java.awt.Image;
+ import java.awt.Color;
 
 class Bank extends ProductionFacility{
     
@@ -70,7 +71,8 @@ class Bank extends ProductionFacility{
      */
     public void draw(Graphics g){
 
-        //TODO: figure out how to draw the actual thingy
+        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.GREEN, null);
+        //Bank bg color is green of course
     }
 
 

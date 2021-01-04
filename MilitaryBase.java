@@ -8,6 +8,7 @@
 import java.awt.Image;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.awt.Color;
 
 class MilitaryBase extends Military{
 
@@ -78,7 +79,8 @@ class MilitaryBase extends Military{
      */
     public void draw(Graphics g){
 
-        //TODO: figure out how to draw the actual thingy
+        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.BLACK, null);
+        //Military base has a black background 
     }
 
 

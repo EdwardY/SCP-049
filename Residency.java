@@ -6,6 +6,7 @@
  */
 
  import java.awt.Image;
+ import java.awt.Color;
  import java.awt.Graphics;
  import java.util.ArrayList; 
 
@@ -47,7 +48,8 @@ class Residency extends Building{
      */
     public void draw(Graphics g){
 
-        //TODO: draw smthin
+        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.BLUE, null);
+        //Residency has background color blue
     }
 
     

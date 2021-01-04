@@ -9,6 +9,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.awt.Graphics;
+import java.awt.Color;
 
 class Hospital extends Building{
     
@@ -77,7 +78,8 @@ class Hospital extends Building{
      */
     public void draw(Graphics g){
 
-        //TODO: figure our how thingy is going to draw
+        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.RED, null);
+        //hospital has red background
     }
 
     

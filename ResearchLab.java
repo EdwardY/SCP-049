@@ -7,6 +7,7 @@
 
 import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Color;
 
 public class ResearchLab extends Military{
     
@@ -69,7 +70,8 @@ public class ResearchLab extends Military{
 
     public void draw(Graphics g){
 
-        //TODO: figure out how to draw this
+        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.MAGENTA, null);
+        //Research lab has a background color of magenta
     }
 
     //Setters

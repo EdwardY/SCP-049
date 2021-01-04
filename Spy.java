@@ -26,7 +26,7 @@ public class Spy extends Cadet{
      * @param sus The chance that the spy will be caught by the enemy.
      */
     public Spy(int x, int y, Image sprite, int priority, double successRate, double sus){
-        super(100, 100, x, y, sprite, priority);
+        super(100, x, y, sprite, priority);
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor

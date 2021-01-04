@@ -21,7 +21,7 @@ public class Doctor extends Human{
      * @param priority The priority of the doctor over all other humans.
      */
     public Doctor(int x, int y, Image sprite, int priority, int healingAmount){
-        super(100, 100, x, y, sprite, priority);
+        super(100, x, y, sprite, priority);
         this.healingAmount = healingAmount;
     }//end of constructor
 

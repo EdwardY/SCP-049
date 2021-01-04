@@ -28,8 +28,8 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
      * @param y The y-value of the NPC's location on the grid.
      * @param sprite The image that the NPC will have.
      */
-    public NPC (int health, int maxHealth, int x, int y, Image sprite){
-        this.health = health;
+    public NPC (int maxHealth, int x, int y, Image sprite){
+        this.health = maxHealth;
         this.maxHealth = maxHealth;
         this.x = x;
         this.y = y;

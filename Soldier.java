@@ -22,8 +22,8 @@ public class Soldier extends Cadet implements Troop{
      * @param hunger The hunger level of the soldier.
      * @param maxHunger The maximum hunger level of the soldier.
      */
-    public Soldier(int health, int maxHealth, int x, int y, Image sprite, int priority, int attackDamage){
-        super(health, maxHealth, x, y, sprite,  priority);
+    public Soldier(int maxHealth, int x, int y, Image sprite, int priority, int attackDamage){
+        super(maxHealth, x, y, sprite,  priority);
         this.attackDamage = attackDamage;
     }//end of constructor
 

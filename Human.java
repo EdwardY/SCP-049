@@ -29,8 +29,8 @@ public abstract class Human extends NPC{
      * @param maxHunger The maximum hunger of the human.
 
      */
-    public Human(int health, int maxHealth, int x, int y, Image sprite, int priority){
-        super(health, maxHealth, x, y, sprite);
+    public Human(int maxHealth, int x, int y, Image sprite, int priority){
+        super(maxHealth, x, y, sprite);
         this.priority = priority;    
     }//end of constructor
 

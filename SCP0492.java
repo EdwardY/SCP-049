@@ -25,8 +25,8 @@ public class SCP0492 extends NPC implements Troop{
      * @param sprite The image that the unit will have.
      * @param attackDamage The amount of damage that this unit will deal when attacking.
      */
-    public SCP0492 (int health, int maxHealth, int x, int y, Image sprite, int attackDamage){
-        super(health, maxHealth, x, y, sprite);
+    public SCP0492 (int maxHealth, int x, int y, Image sprite, int attackDamage){
+        super(maxHealth, x, y, sprite);
         this.attackDamage = attackDamage;
     }//end of constructor
 

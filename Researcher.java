@@ -20,7 +20,7 @@ public class Researcher extends Human{
     * @param priority The priority of the Researcher compared to others.
     */
    public Researcher(int x, int y, Image sprite, int priority){
-       super(100, 100, x, y, sprite, priority); 
+       super(100, x, y, sprite, priority); 
    }//end of constructor
 
 

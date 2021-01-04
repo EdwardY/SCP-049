@@ -16,10 +16,9 @@ public class Citizen extends Human{
      * @param y The vertical position of the citizen.
      * @param sprite The sprite of the citizen.
      * @param age The age of the citizen.
-     * @param priority The priority of the citizen over all other humans.
      */
-    public Citizen(int x, int y, Image sprite, int priority){
-        super(100, x, y, sprite, priority);
+    public Citizen(int x, int y, Image sprite){
+        super(100, x, y, sprite, 6);
     }//end of constructor
 
 

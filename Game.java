@@ -218,17 +218,17 @@ class Game {
                 int currentXPosition = this.humans.get(i).getX();
                 int currentYPosition = this.humans.get(i).getY();
                 if(type.equals("Citizen")){
-                    humans.add(new Citizen(currentXPosition,currentYPosition,tempImage, priority));
+                    humans.add(new Citizen(currentXPosition,currentYPosition,tempImage));
                 }else if(type.equals("Cadet")){
-                    humans.add(new Cadet(currentXPosition, currentYPosition, tempImage, priority));
+                    humans.add(new Cadet(currentXPosition, currentYPosition, tempImage));
                 }else if(type.equals("Doctor")){
-                    humans.add(new Doctor(currentXPosition, currentYPosition, tempImage, priority, healingAmount));
+                    humans.add(new Doctor(currentXPosition, currentYPosition, tempImage, healingAmount));
                 }else if(type.equals("Researcher")){
-                    humans.add(new Researcher(currentXPosition, currentYPosition, tempImage, priority));
+                    humans.add(new Researcher(currentXPosition, currentYPosition, tempImage));
                 }else if(type.equals("Soldier")){
-                    humans.add(new Soldier(maxHealth, currentXPosition, currentYPosition, tempImage, priority, attackDamage));
+                    humans.add(new Soldier(maxHealth, currentXPosition, currentYPosition, tempImage, attackDamage));
                 }else if(type.equals("Spy")){
-                    humans.add(new Spy(currentXPosition, currentYPosition, tempImage, priority, successRate, sus));
+                    humans.add(new Spy(currentXPosition, currentYPosition, tempImage, successRate, sus));
                 }else if (type.equals("SCP0492")){
                     scps.add(new SCP0492(maxHealth, currentXPosition, currentYPosition, tempImage, attackDamage));
                 }

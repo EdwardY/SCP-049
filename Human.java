@@ -11,8 +11,9 @@ import java.awt.Image;
 public abstract class Human extends NPC{
     /**The age of the human */
     private int age = 0;
-    /**The priority or importance of the human over all other humans. */
+    /**The priority or importance of the human over all other humans in a hospital. */
     private int priority;
+    //The ranking in priority is: Soldier, Doctor, Spy, Researcher, Cadet, Citizen
     /**The hunger of the human, with 0 meaning they are starving to death. */
     private int hunger = 100;    
     /**The maximum fullness a human can have. */

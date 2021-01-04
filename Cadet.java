@@ -13,11 +13,11 @@ import java.awt.Image;
 
 public class Cadet extends Human{
      /**
-     * Constructor for a new cadet object.
-     * @param x The horizontal location of the cadet.
-     * @param y The vertical location of the cadet.
-     * @param sprite The image of the cadet that is displayed to the players.
-     * @param priority The priority of the cadet compared to others.
+     * Constructor for a new cadet object that is also a spy.
+     * @param x The horizontal location of the cadet/spy.
+     * @param y The vertical location of the cadet/spy.
+     * @param sprite The image of the cadet/spy that is displayed to the players.
+     * @param priority The priority of healing in a hospital.
      */
     public Cadet(int x, int y, Image sprite, int priority){
         super(100, x, y, sprite, priority);
@@ -30,10 +30,20 @@ public class Cadet extends Human{
      * @param x The horizontal location of the cadet/soldier.
      * @param y The vertical location of the cadet/soldier.
      * @param sprite The image of the cadet/soldier that is displayed to the player.
-     * @param priority The priority of the soldier/cadet over all others.
+     * @param priority The priority of the healing in a hospital.
      */
     public Cadet(int maxHealth, int x, int y, Image sprite, int priority){
         super(maxHealth, x, y, sprite, priority);
+    }
+
+    /**
+     * Constructor for a new cadet object.
+     * @param x The horizontal location of the cadet.
+     * @param y The vertical location of the cadet.
+     * @param sprite The image of the cadet displayed to the players
+     */
+    public Cadet(int x, int y, Image sprite){
+        super(100, x, y, sprite, 5);
     }
 
     

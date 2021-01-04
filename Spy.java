@@ -21,12 +21,11 @@ public class Spy extends Cadet{
      * @param x The spy's horizontal location.
      * @param y The spy's vertical position.
      * @param sprite The image of the spy that will appear to the players.
-     * @param priority The priority of the spy over all other humans in the game.
      * @param successRate The chance of the spy gaining enemy intel.
      * @param sus The chance that the spy will be caught by the enemy.
      */
-    public Spy(int x, int y, Image sprite, int priority, double successRate, double sus){
-        super(100, x, y, sprite, priority);
+    public Spy(int x, int y, Image sprite, double successRate, double sus){
+        super(100, x, y, sprite, 3);
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor

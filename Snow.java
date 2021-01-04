@@ -23,6 +23,15 @@ class Snow extends PhysicalEvent{
     }
 
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+    
+    /**
      * Slows down production, building, and upgrading in the area of effect by a factor of effectAmount
      * @param game the {@code Game} the {@code Snow} is affecting
      */

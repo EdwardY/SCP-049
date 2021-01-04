@@ -20,6 +20,15 @@ class Mutate extends WholeGameEvent{
     }
 
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+
+    /**
      * The level of {@code SCP0492s} will increase by 1, the attack damage and max health will increase by effectAmount
      * @param game the {@code Game} to affect
      */

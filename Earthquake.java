@@ -24,6 +24,15 @@ class Earthquake extends PhysicalEvent{
     }
 
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+
+    /**
      * {@code Buildings} get damaged by effectAmount while {@code Humans} get damaged by a tenth of effectAmount rounded up
      * @param game the {@code Game} that the {@code Earthquake} affects
      */

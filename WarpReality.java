@@ -15,6 +15,15 @@ class WarpReality extends WholeGameEvent{
     }
     
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+    
+    /**
      * Increases hume points in the {@code Game} by its effectAmount for the duration of the Effect
      * @param game the {@code Game} that gets affected
      */

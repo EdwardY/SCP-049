@@ -23,6 +23,15 @@ class Fire extends PhysicalEvent{
     public Fire(int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
         super(timeLeft, effectAmount, level, aoe, sprite);
     }
+    
+    /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
 
     /**
      * Does damage effectAmount damage to all {@code Buildings} and {@code Humans} inside the area of effect

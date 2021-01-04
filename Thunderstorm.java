@@ -52,6 +52,15 @@ class Thunderstorm extends PhysicalEvent{
             this.yStrikePos = yPos;
         }
     }
+    
+    /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
 
     /**
      * Levels down the {@code Building} that contains the point made by xStrikePos and yStrikePos

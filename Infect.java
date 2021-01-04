@@ -19,6 +19,15 @@ import java.util.ArrayList;
     }
 
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+    
+    /**
      * Turns {@code Humans} within the area of effect into {@code SCP0492s}
      * @param game the {@code Game} to affect
      */

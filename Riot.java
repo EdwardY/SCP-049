@@ -18,6 +18,15 @@ class Riot extends WholeGameEvent{
     }
 
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+
+    /**
      * {@code Citizens} will become agitated and do damage to nearby {@code Buildings}
      * @param game the {@code Game} class to pass in 
      */

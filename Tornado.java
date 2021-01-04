@@ -28,6 +28,15 @@ class Tornado extends PhysicalEvent implements Moveable{
     }
 
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+
+    /**
      * <p>
      * Does math based what portion of the lifetime of the {@code Tornado} has passed and the effectAmount (inital damage) to find 
      * amount of damage the {@code Tornado} should do in this turn.

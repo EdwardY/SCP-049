@@ -54,7 +54,7 @@ public class Client {
      * The login process for the client.
      */
     public void login(){
-        System.out.println("Hello");
+        new LoginWindow().run();
     }
 
 
@@ -114,17 +114,17 @@ public class Client {
     
         //Prompt player for a username
         usernameLabel =  new JLabel("Select your username:");
-        usernameLabel.setBounds(10, 65, 200, 25);
+        usernameLabel.setBounds(10, 65, 210, 25);
         panel.add(usernameLabel);
     
         //Prompt player for  IP Address
         addressLabel =  new JLabel("Enter IP Address:");
-        addressLabel.setBounds(10, 95, 200, 25); 
+        addressLabel.setBounds(10, 95, 210, 25); 
         panel.add(addressLabel); 
     
         //Prompt player for port
         portLabel =  new JLabel("Enter Port #:");
-        portLabel.setBounds(10, 125, 200, 25);
+        portLabel.setBounds(10, 125, 210, 25);
         panel.add(portLabel); 
     
         //Label Will only appear if there is an error when attempting to connect
@@ -135,24 +135,24 @@ public class Client {
 
         //Receives the selected username from the player.
         usernameEntry = new JTextField(20);
-        usernameEntry.setBounds(130,65, 165, 25); 
+        usernameEntry.setBounds(140,65, 165, 25); 
         panel.add(usernameEntry); 
 
         //get IP address from the player.
         addressEntry = new JTextField(20); 
-        addressEntry.setBounds(130, 95, 165,25); 
+        addressEntry.setBounds(140, 95, 165,25); 
         panel.add(addressEntry);
 
         //Receive port from user
         portEntry = new JTextField(20);
-        portEntry.setBounds(130,125, 165, 25);
+        portEntry.setBounds(140,125, 165, 25);
         panel.add(portEntry);
     
 
     
         //Submit button
         enterButton = new JButton("Connect");
-        enterButton.setBounds(160,165, 80, 25); 
+        enterButton.setBounds(150,165, 100, 25); 
         panel.add(enterButton); 
         enterButton.addActionListener(new EnterButtonListener());
     

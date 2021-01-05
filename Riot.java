@@ -10,11 +10,10 @@ import java.util.ArrayList;
 class Riot extends WholeGameEvent{
     /**
      * Constructor for the {@code Riot} class, passes values into the superclass
-     * @param effectAmount how much effect the {@code Riot} has, based on citizen count in the area
      * @param level the level of the {@code Riot}
      */
-    public Riot(int effectAmount, int level){
-        super(5, effectAmount, level);
+    public Riot(int level){
+        super(level*2, level*3, level);
     }
 
     /**

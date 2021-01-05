@@ -16,7 +16,7 @@ class Mutate extends WholeGameEvent{
      * @param level the level of the {@code Mutate}
      */
     public Mutate(int level){
-        super(1, 5, level);
+        super(1, 1, level);
     }
 
     /**

@@ -25,7 +25,7 @@ class Mutate extends WholeGameEvent{
      * @return the final cost
      */
     public static int getCostByLevel(int level){
-        return level*5;
+        return 5;
     }
 
     /**

@@ -8,25 +8,26 @@
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.lang.Math;
 
 public class ResearchLab extends Military{
     
     private int PRICE;
     private int NUMBER_OF_TURNS;
-    private double progress;
-    private double successRate;
+    private double progress = 0;
+    private double successRate = 5;
 
     /**
      * ResearchLab constructor
      * @param initialPrice the initial price to build the building 
-     * @param pricesPerLevel the price per level to upgrade the building
+     * @param maxHealth max health of the building
      * @param health the initial health of the building
      * @param sprite the image of the building on the game board
      * @param x the x coordinate of the building on the game map
      * @param y the y coordinate of the building on the game map
      */
-    ResearchLab(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
-        super(initialPrice, pricesPerLevel, health, sprite, x, y);
+    ResearchLab(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
+        super(initialPrice, maxHealth, health, sprite, x, y);
 
         //TODO: determine constructors of the private class variables
         //TODO: figure out Research mechanic
@@ -35,6 +36,13 @@ public class ResearchLab extends Military{
     //Class methods
     public void developCure(){
 
+        double randomInt = Math.random() * 100;
+
+        if (randomInt < successRate){
+
+            progress = progress + 10;
+        }
+        
         //TODO: figure out the developCure mechanic
     }
 
@@ -52,7 +60,7 @@ public class ResearchLab extends Military{
     //Inherited methods
 
     public void repair(int repair){
-
+        
     }
 
     public String toString(){

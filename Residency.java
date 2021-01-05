@@ -18,16 +18,16 @@ class Residency extends Building{
     /**
      * Constructs a residency building that humans need to live in
      * @param initialPrice initial price of the building
-     * @param pricesPerLevel the price per level of upgrade
+     * @param maxHealth max health of the building
      * @param health the initial health of the building
      * @param sprite the image of the building
      * @param x the x coordinate on the game map of building
      * @param y the y coordinate on the game map of the building
      * @param maxCap the maximum capacity of human residents
      */
-    Residency(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y, int maxCap){
+    Residency(int initialPrice, int maxHealth, int health, Image sprite, int x, int y, int maxCap){
 
-        super(initialPrice, pricesPerLevel, health, sprite, x, y);
+        super(initialPrice, maxHealth, health, sprite, x, y);
         this.maxCapacity = maxCap;
     }
     
@@ -58,7 +58,7 @@ class Residency extends Building{
      */
     public void repair(int repair){
 
-        //TODO: repair mechanic
+        
     }
 
     

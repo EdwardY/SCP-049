@@ -14,14 +14,14 @@ class FoodBuilding extends ProductionFacility{
    /**
     * A building that's serves to produce food
     * @param initialPrice The initial price to build the building
-    * @param pricesPerLevel the price per level of upgrade
+    * @param maxHealth max health of the buildinge
     * @param health The initial health of the building
     * @param sprite The image of the building
     * @param x the x coordinate of the building on the game map
     * @param y The y coordinate of teh building on the game map
     */
-   FoodBuilding(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
-       super(initialPrice, pricesPerLevel, health, sprite, x, y);
+   FoodBuilding(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
+       super(initialPrice, maxHealth, health, sprite, x, y);
 
        //TODO: that's a lot of things to figure out how the bank will work
    }

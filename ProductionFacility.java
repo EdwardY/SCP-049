@@ -18,14 +18,14 @@ abstract class ProductionFacility extends Building{
      * Constructor of ProductionFacility
      * buildings that can produce resources
      * @param initialPrice the intial price to build the building
-     * @param pricesPerLevel the price per level of upgrade
+     * @param maxHealth The max health of a building
      * @param health the health of the inital building
      * @param sprite the image of the building
      * @param x the x coordinate on the game map of the building's lcoation
      * @param y the y coordinate on the gmae map of the building's location
      */
-    ProductionFacility(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
-        super(initialPrice, pricesPerLevel, health, sprite, x, y);
+    ProductionFacility(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
+        super(initialPrice, maxHealth, health, sprite, x, y);
     };
 
     abstract public int earnResource();

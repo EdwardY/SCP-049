@@ -17,16 +17,16 @@ class MilitaryBase extends Military{
     /**
      * Military base constructor
      * Creates a new MilitaryBase building
-     * @param initialPrice
-     * @param pricesPerLevel
-     * @param health
-     * @param sprite
-     * @param x
-     * @param y
+     * @param initialPrice initial price of building
+     * @param maxHealth max health of the building
+     * @param health current health of building
+     * @param sprite image of building
+     * @param x x coordinate of building
+     * @param y y coordinate of building
      */
-    MilitaryBase(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
+    MilitaryBase(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
 
-        super(initialPrice, pricesPerLevel, health, sprite, x, y);
+        super(initialPrice, maxHealth, health, sprite, x, y);
     }
 
     

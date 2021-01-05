@@ -20,16 +20,16 @@ class Hospital extends Building{
     /**
      * Hospital Constructor
      * @param initialPrice the initial price of the building
-     * @param pricesPerLevel the price per level to upgrade the building
+     * @param maxHealth max health of the building
      * @param health the health of the building to begin with
      * @param sprite the image of the building
      * @param x the x coordinate of the building
      * @param y the y coordinate of the building
      * @param maxCapacity the max capacity of the building
      */
-    Hospital(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y, int maxCapacity){
+    Hospital(int initialPrice, int maxHealth, int health, Image sprite, int x, int y, int maxCapacity){
         
-        super(initialPrice, pricesPerLevel, health, sprite, x, y);
+        super(initialPrice, maxHealth, health, sprite, x, y);
         this.maxCapacity = maxCapacity;
         doctors = new ArrayList<>();
         injured = new PriorityQueue<>();

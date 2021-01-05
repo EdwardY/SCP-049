@@ -17,12 +17,11 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
     private int initialPrice;
     /**current level of the building */
     private int level;
-    /**the width and height of the building? not sure if we need it right now */
-    private int width, height;
+
     /**The x and y coordinate of the building on the game map */
     private int x,y;
     /** the price per level of upgrade for the building */
-    private int[] pricesPerLevel;
+    private int maxHealth;
     /**The health of the building */
     private int health;
     /**THe image of the building */
@@ -31,16 +30,16 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
     /**
      * Constructs the object building including all the variable necessary
      * @param initialPrice initial price of the building
-     * @param pricesPerLevel The price per level of upgrade for the building
+     * @param maxHealth max health of the building
      * @param health The health of the building
      * @param sprite The image of the building
      * @param x The x coordinate of the building
      * @param y The y Coordinate of the building
      */
-    Building(int initialPrice, int [] pricesPerLevel, int health, Image sprite, int x, int y){
+    Building(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
 
         this.initialPrice = initialPrice;
-        this.pricesPerLevel = pricesPerLevel;
+        this.maxHealth = maxHealth;
         this.health = health;
         this.x = x;
         this.y = y;
@@ -62,7 +61,13 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
     abstract public String toString();
 
     public void upgrade(){
-        //figure out how to upgrade
+        
+        this.setLevel(this.level + 1);
+    }
+
+    public void downgrade(){
+
+        this.setLevel(this.level - 1);
     }
 
     /**SETTERS */
@@ -113,9 +118,9 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
      * getPricesPerLevel
      * @return an int array of the prices it take to upgrade per level, index 0 is to upgrade from the first level to second
      */
-    public int[] getPricesPerLevel(){
+    public int getMaxHealth(){
 
-        return this.pricesPerLevel;
+        return this.maxHealth;
     }
 
     /**

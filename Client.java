@@ -1,6 +1,14 @@
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
 
 /**
  * [Client.java]

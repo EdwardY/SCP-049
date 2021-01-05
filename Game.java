@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 /**
  * [Game.java]
@@ -49,8 +50,72 @@ class Game {
         this.humePerTurn = 0;
     }
 
-    private void handlePassives(){
-        //TODO: deal with passives (moving NPCs, handling events, getting income from buildings, etc.)
+    /**
+     * <p>
+     * First loops through buildings and checks if it has more than 0 health. If it has 0 or less health, delete all {@code NPCs} 
+     * inside the {@code Building} then delete it from the list of buildings. Loops through the humans and the scps as well to 
+     * check for if they should still be alive.
+     * </p>
+     */
+    private void killDeadStuff(){
+        for(Building currentBuilding: this.buildings){
+            if(currentBuilding.getHealth() <= 0){
+                Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), 10, 10);
+                //TODO: adjust width and height based on building size and npc size
+                for(Human currentHuman: this.humans){
+                    if(buildingArea.contains(currentHuman.getX(), currentHuman.getY())){
+                        this.humans.remove(currentHuman);
+                    }
+                }
+                for(SCP0492 currentScp: this.scps){
+                    if(buildingArea.contains(currentScp.getX(), currentScp.getY())){
+                        this.scps.remove(currentScp);
+                    }
+                }
+                this.buildings.remove(currentBuilding);
+            }
+        }
+    }
+
+    /**
+     * <p>
+     * Sets the amount of moneyPerTurn to zero temporarily to recount how much money the {@code Banks} earned this turn. Sets the 
+     * foodPerTurn to zero as well to recount. Loops through all {@code Banks} and adds that much to the moneyPerTurn. Loops through 
+     * the {@code FoodBuildings} and adds the food earned by it to foodPerTurn. Adds moneyPerTurn to money and foodPerTurn to food.
+     * </p>
+     */
+    private void getResourcesFromBuildings(){
+        this.moneyPerTurn = 0;
+        this.foodPerTurn = 0;
+        for(int i = 0;i < this.buildings.size();i++){
+            if(this.buildings.get(i) instanceof Bank){
+                this.moneyPerTurn += ((Bank)this.buildings.get(i)).earnResource();
+            }else if(this.buildings.get(i) instanceof FoodBuilding){
+                this.foodPerTurn += ((FoodBuilding)this.buildings.get(i)).earnResource();
+            }
+        }
+        this.money += this.moneyPerTurn;
+        this.food += this.foodPerTurn;
+    }
+
+    /**
+     * <p>
+     * Loops through the list of events and allows the {@code Event} to affect this {@code Game}. Decreases how much time is left in 
+     * the {@code Event}. Check if the currentEvent should still be alive, if not delete it.
+     * </p>
+     */
+    private void dealWithEvents(){
+        for(Event currentEvent:this.events){
+            currentEvent.affect(this);
+            currentEvent.decreaseTimeLeft();
+            if(currentEvent.getTimeLeft() <= 0){
+                this.events.remove(currentEvent);
+            }
+        }
+    }
+
+    private void moveNpcs(){
+        //TODO: move npcs that need to be moved
     }
 
     /**
@@ -241,10 +306,17 @@ class Game {
     }
 
     /**
-     * Increases turn number by one then lets the {@code Game} handle all other passive stuff
+     * <p>
+     * Increases turn number by one. Calls on killDeadStuff to kill off anything that should be dead. Calls getResourcesFromBuildings 
+     * to collect resources. Calls dealWithEvents to handle the {@code Events}. 
+     * </p>
      */
     public void doTurn(){
         this.turn++;
-        this.handlePassives();
+        killDeadStuff();
+        getResourcesFromBuildings();
+        dealWithEvents();
+        moveNpcs();
+        //TODO: deal with passives (moving NPCs)
     }
 }

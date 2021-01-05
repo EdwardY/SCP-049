@@ -2,6 +2,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+import java.util.ArrayList;
+
 /**
  * [Thunderstorm.java]
  * {@code Thunderstorm} class, can hit {@code Buildings} with lightning
@@ -34,6 +36,15 @@ class Thunderstorm extends PhysicalEvent{
     }
 
     /**
+     * Calculates the cost based on the level
+     * @param level the intended level
+     * @return the final cost
+     */
+    public static int getCostByLevel(int level){
+        return level*5;
+    }
+
+    /**
      * Gets how many strikes the {@code Thunderstorm} has left
      * @return strikesLeft, the number of strikes left
      */
@@ -52,15 +63,6 @@ class Thunderstorm extends PhysicalEvent{
             this.yStrikePos = yPos;
         }
     }
-    
-    /**
-     * Calculates the cost based on the level
-     * @param level the intended level
-     * @return the final cost
-     */
-    public static int getCostByLevel(int level){
-        return level*5;
-    }
 
     /**
      * Levels down the {@code Building} that contains the point made by xStrikePos and yStrikePos
@@ -68,7 +70,14 @@ class Thunderstorm extends PhysicalEvent{
      */
     @Override
     public void affect(Game game){
-        //TODO: write in the thunderstorm effect after creating game class
+        ArrayList<Building> buildings = game.getBuildings();
+        for(int i = 0;i < buildings.size();i++){
+            Rectangle buildingArea = new Rectangle(buildings.get(i).getX(), buildings.get(i).getX(), 10, 10);
+            //TODO: change when building size is known
+            if(buildingArea.contains(this.xStrikePos, this.yStrikePos)){
+                buildings.get(i).downgrade();
+            }
+        }
     }
 
     /**

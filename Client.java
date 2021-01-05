@@ -100,7 +100,7 @@ public class Client {
         //set JFrame
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
-        //window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //?????????
+        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE); //?????????
 
         //set JPanel
         panel = new JPanel();

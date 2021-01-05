@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 import java.util.ArrayList;
 
@@ -21,18 +22,18 @@ class Thunderstorm extends PhysicalEvent{
      * <p>
      * The constructor for the {@code Thunderstorm} class. The {@code Thunderstorm} can go on infinitely long as long as the strike 
      * isn't getting used. The strike from the {@code Thunderstorm} will level down a {@code Building} by 1 level. The next strike 
-     * positions are set by the position of aoe.
+     * positions are set by the x and y parameters.
      * </p>
      * @param level the level of the {@code Thunderstorm}
-     * @param aoe the area which the {@code Thunderstorm} can affect
-     * @param sprite the {@code Image} to draw when drawing a {@code Thunderstorm}
-     * @param strikes the number of strikes the {@code Thunderstom} has
+     * @param x the middle of the x of where the {@code Thunderstorm} will be
+     * @param y the middle of the y of where the {@code Thunderstorm} will be
      */
-    public Thunderstorm(int level, Rectangle aoe, Image sprite, int strikes){
-        super(Integer.MAX_VALUE, 1, level, aoe, sprite);
-        this.strikesLeft = strikes;
-        this.xStrikePos = aoe.x;
-        this.yStrikePos = aoe.y;
+    public Thunderstorm(int level, int x, int y){
+        //TODO: thunderstomrm, adjust things later
+        super(Integer.MAX_VALUE, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
+        this.strikesLeft = level;
+        this.xStrikePos = x;
+        this.yStrikePos = y;
     }
 
     /**

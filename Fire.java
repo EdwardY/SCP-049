@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 import java.util.ArrayList;
 
@@ -13,15 +14,14 @@ import java.util.ArrayList;
 
 class Fire extends PhysicalEvent{
     /**
-     * Constructor for the {@code Fire} class
-     * @param timeLeft how much longer the {@code Fire} has to burn
-     * @param effectAmount damage done per turn
+     * Constructor for the {@code Fire} class, passes parameters into the super constructor based on level
      * @param level the level of the {@code Fire}
-     * @param aoe the area which the {@code Fire} can affect
-     * @param sprite the {@code Image} to draw for the {@code Fire}
+     * @param x the center x position of the {@code Fire}
+     * @param y the center y position of the {@code Fire}
      */
-    public Fire(int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
-        super(timeLeft, effectAmount, level, aoe, sprite);
+    public Fire(int level, int x, int y){
+        //TOOD: fire, adjust values later when known
+        super(level*2, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
     }
     
     /**

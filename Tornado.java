@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 import java.util.ArrayList;
 
@@ -15,16 +16,15 @@ class Tornado extends PhysicalEvent implements Moveable{
     /** The total time for how long the {@code Tornado} lasts */
     private int totalTime;
     /**
-     * The constructor for the {@code Tornado} class
-     * @param timeLeft the amount of time the {@code Tornado} has left
-     * @param effectAmount the original amount of damage the {@code Tornado} starts with
+     * The constructor for the {@code Tornado} class, gives values based on level
      * @param level the level of the {@code Tonado}
-     * @param aoe the area which the {@code Tornado} can affect
-     * @param sprite the {@code Image} to draw when displaying the {@code Tornado}
+     * @param x the center x position which the {@code Tornado} starts at
+     * @param y the center y position which the {@code Tornado} starts at
      */
-    public Tornado(int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
-        super(timeLeft, effectAmount, level, aoe, sprite);
-        this.totalTime = timeLeft;
+    public Tornado(int level, int x, int y){
+        //TODO: tornado adjut values later when known
+        super(level*2, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
+        this.totalTime = level*2;
     }
 
     /**

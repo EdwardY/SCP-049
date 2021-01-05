@@ -12,10 +12,11 @@ import java.util.ArrayList;
     /**
      * Passes values into the superclass's constructor, it only takes one turn to infect citizens and effectAmount is not relevant
      * @param level the level of the {@code Infect}
-     * @param aoe the area which can be infected
+     * @param x the middle x position of where the {@code Infect} will affect
+     * @param y the middle y position of where the {@code Infect} will affect
      */
-    public Infect(int level, Rectangle aoe){
-        super(1, -1, level, aoe);
+    public Infect(int level, int x, int y){
+        super(1, -1, level, new Rectangle(x - level, y - level, level*2, level*2));
     }
 
     /**

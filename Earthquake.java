@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 import java.util.ArrayList;
 
@@ -13,14 +14,14 @@ import java.util.ArrayList;
 
 class Earthquake extends PhysicalEvent{
     /**
-     * The constructor for the {@code Earthquake} class, passes parameters into the superclass, only lasts 1 turn
+     * The constructor for the {@code Earthquake} class, passes values into the superclass based on level, only lasts 1 turn
      * @param effectAmount the amount the {@code Earthquake} will affect {@code Buildings} (it will affect {@code NPCs} less)
-     * @param level the leve of the {@code Earthquake}
-     * @param aoe the range {@code Earthquake} can affect
-     * @param sprite the {@code Image} to use for the {@code Earthquake}
+     * @param x the x center location of the {@code Earthquake}
+     * @param y the y center location of the {@code Earthquake}
      */
-    public Earthquake(int duration, int timeLeft, int effectAmount, int level, Rectangle aoe, Image sprite){
-        super(1, effectAmount, level, aoe, sprite);
+    public Earthquake(int level, int x, int y){
+        //TODO: earthquake, image, adjust rect size later 
+        super(1, level*10, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
     }
 
     /**

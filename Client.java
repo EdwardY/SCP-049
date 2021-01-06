@@ -91,6 +91,12 @@ public class Client {
         private JTextField portEntry;
         /**The JButton used to submit entered information*/
         private JButton enterButton;
+        /**The username of the player. */
+        private String username;
+        /**The IP address of the connected server. */
+        private String address;
+        /**The port that client is connecting to. */
+        private int port;
 
 
         /**
@@ -172,7 +178,27 @@ public class Client {
             * Attempts to login when the button is pressed.
             */
             public void actionPerformed(ActionEvent event)  {
-                System.out.println("Nothing here for now"); 
+
+                //set the username the client selected
+                    username = usernameEntry.getText();
+      
+      
+                //attempt to get the port 
+                try { 
+                    port = Integer.parseInt(portEntry.getText()); //set the port the user selected
+                } catch(NumberFormatException e) { //if the input was not an integer tyoe
+                    connectionErrorLabel.setText("Error: Invalid port entered."); //tell user that they didn't give the right information
+                    return; //end method
+                }
+      
+                //store the IP Address the user entered
+                address = addressEntry.getText();
+                /*
+                //attempt to connect to the server
+                connect(address, port);
+                running = true; //main program will start now
+                Thread t = new Thread(new MessageHander()); //start the server communication in a new thread
+                t.start(); //start thread*/
             }     //end of method
 
         }//end of inner class for submit button

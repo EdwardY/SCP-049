@@ -106,6 +106,11 @@ class Server {
         private BufferedReader input;
         /** {@code Socket} which the client uses */
         private Socket client;
+
+        /**
+         * Constructor for the {@code ClientHandler}
+         * @param s the {@code Socket} the client is connecting to
+         */
         private ClientHandler(Socket s){
             this.client = s;
             try {

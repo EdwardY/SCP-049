@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 class Server {
     /** The {@code ServerSocket} for where all the networking will be run */
-    ServerSocket serverSock;
+    private ServerSocket serverSock;
     /** The port to connect to */
     private int port;
     /** Handles town player actions */

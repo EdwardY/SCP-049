@@ -41,7 +41,9 @@ public class Client {
     private String ipAddress;
     /**The client socket. */
     private Socket socket;
-
+    /**The username of the player. */
+    private String username;
+  
 
 
     /**
@@ -61,47 +63,7 @@ public class Client {
 
 
 
-    /**
-     * Method connects the player's client program to the server.
-     * @param address The IP address of the server.
-     * @param port The port.
-     */
-    public void connect(String username, String address, int port){
-        System.out.println("Work in progress");/*
-        try {
-      
-            socket = new Socket(address, port); //attempt socket connection
-            
-            //input to server
-            InputStreamReader stream1= new InputStreamReader(socket.getInputStream()); 
-            input = new BufferedReader(stream1);
-            //output to server
-            output = new PrintWriter(socket.getOutputStream()); //assign printwriter to network stream
-            
-            //get messages from server
-            try{
-              
-              //if there is input
-              while(!input.ready()){}
-              String prefix = this.input.readLine(); //used to read what kind of information is being received
-              String msg = this.input.readLine(); //gets the specific commands from the message
-              
-            }catch(IOException e){
-              connectionErrorLabel.setText("A communications error has occured.");
-            }
-            
-            //close the login window since there's no need for it anymore
-            this.player = new Player(username);
-            loginFrame.dispose();
-            
-          } catch (IOException e) {  //connection error occured
-            errorLabel.setText("Error: Could not connect to server.");
-          }
-
-          return socket;        
-          */
-
-    }
+   
 
 
 
@@ -194,8 +156,6 @@ public class Client {
         portEntry.setBounds(140,125, 165, 25);
         panel.add(portEntry);
     
-
-    
         //Submit button
         enterButton = new JButton("Connect");
         enterButton.setBounds(150,165, 100, 25); 
@@ -206,13 +166,46 @@ public class Client {
 
         }//end of method
 
-        /**
-         * Allows the program to set error messages in the login window.
-         * @param error The error that will be displayed to the player.
-         */
-        public void setErrorLabel(String error){
-            connectionErrorLabel.setText(error);
-        }
+         /**
+        * Method connects the player's client program to the server.
+        * @param address The IP address of the server.
+        * @param port The port.
+        */
+        public void connect(String username, String address, int port){
+            System.out.println("Work in progress");
+            try {
+      
+                socket = new Socket(address, port); //attempt socket connection
+            
+                //input to server
+                InputStreamReader stream1= new InputStreamReader(socket.getInputStream()); 
+                input = new BufferedReader(stream1);
+                //output to server
+                output = new PrintWriter(socket.getOutputStream()); //assign printwriter to network stream
+            
+                //get messages from server
+                try{
+              
+                //if there is input
+                while(!input.ready()){}
+                String prefix = input.readLine(); //used to read what kind of information is being received
+                String msg = input.readLine(); //gets the specific commands from the message
+              
+                }catch(IOException e){
+                    connectionErrorLabel.setText("A communications error has occured.");
+                }
+            
+                //close the login window since there's no need for it anymore
+                window.dispose();
+            
+            } catch (IOException e) {  //connection error occured
+                connectionErrorLabel.setText("Error: Could not connect to server.");
+            }          
+
+        }//end of method
+
+
+        
 
 
         /**
@@ -226,7 +219,7 @@ public class Client {
             public void actionPerformed(ActionEvent event)  {
 
                 //set the username the client selected
-                    String username = usernameEntry.getText();
+                    username = usernameEntry.getText();
       
       
                 //attempt to get the port 

@@ -171,7 +171,7 @@ public class Client {
         * @param address The IP address of the server.
         * @param port The port.
         */
-        public void connect(String username, String address, int port){
+        public void connect(String address, int port){
             System.out.println("Work in progress");
             try {
       
@@ -234,7 +234,7 @@ public class Client {
                 ipAddress = addressEntry.getText();
                 
                 //attempt to connect to the server
-                connect(username, ipAddress, port);
+                connect(ipAddress, port);
                 /*running = true; //main program will start now
                 Thread t = new Thread(new MessageHander()); //start the server communication in a new thread
                 t.start(); //start thread*/

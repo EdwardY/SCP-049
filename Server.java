@@ -19,6 +19,8 @@ import java.util.ArrayList;
  */
 
 class Server {
+    /** A boolean for if the server is still running or not */
+    private boolean running;
     /** The {@code ServerSocket} for where all the networking will be run */
     private ServerSocket serverSock;
     /** The port to connect to */
@@ -43,6 +45,7 @@ class Server {
      * @param port the port to use
      */
     public Server(int port){
+        running = true;
         this.port = port;
         this.game = new Game();
         this.scp = null;
@@ -121,8 +124,24 @@ class Server {
                 e.printStackTrace();        
             }
         }
+        /**
+         * <p>
+         * Accepts messages from the clients and deals with them properly while the server is still running. Once the server is 
+         * no longer running, the socket will attempt to close itself
+         * </p>
+         */
         public void run(){
-            //TODO: actually handle clients
+            while(running){
+                //TODO: accept messages and deal with
+            }
+            try{
+                input.close();
+                output.close();
+                client.close();
+            }catch(Exception e){
+                System.out.println("Error closing socket");
+                e.printStackTrace();
+            }
         }
     }
 }

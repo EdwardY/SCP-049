@@ -42,12 +42,12 @@ class Fire extends PhysicalEvent{
         ArrayList<Building> buildings = game.getBuildings();
         ArrayList<Human> humans = game.getHumans();
         for(int i = 0;i < buildings.size();i++){
-            if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY())){
+            if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY(), Building.SIZE, Building.SIZE)){
                 buildings.get(i).takeDamage(this.getEffectAmount());
             }
         }
         for(int i = 0;i < humans.size();i++){
-            if(this.getAoe().contains(humans.get(i).getX(), humans.get(i).getY())){
+            if(this.getAoe().contains(humans.get(i).getX(), humans.get(i).getY(), NPC.SIZE, NPC.SIZE)){
                 humans.get(i).takeDamage(this.getEffectAmount());
             }
         }

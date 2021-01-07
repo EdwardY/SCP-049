@@ -37,7 +37,7 @@ import java.util.ArrayList;
         ArrayList<Human> humans = game.getHumans();
         for(int i = 0;i < humans.size();i++){
             Human human = humans.get(i);
-            if(this.getAoe().contains(human.getX(), human.getY())){
+            if(this.getAoe().contains(human.getX(), human.getY(), NPC.SIZE, NPC.SIZE)){
                 game.convert(human, "SCP0492", 100, 10, 0, 0.0, 0.0, 0);//temp values added
                 // Parameters for convert: NPC npc, String type, int health, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount
             }

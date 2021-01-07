@@ -9,6 +9,8 @@ import java.awt.Graphics;
 
 
 public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairable{
+    /**The size of each NPC */
+    public static final int SIZE = 10;
     /**The current health of the NPC. */
     private int health;
     /**The maximum amount of health the NPC can have. */

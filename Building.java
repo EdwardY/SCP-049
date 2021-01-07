@@ -12,6 +12,8 @@ import java.awt.Graphics;
 
 
 abstract class Building implements Drawable, DestroyableAndRepairable {
+    /**The size of each building */
+    public static final int SIZE = 100;
     
     /**initial price of the building */
     private int initialPrice;

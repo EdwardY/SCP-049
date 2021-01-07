@@ -71,26 +71,36 @@ class Server {
                     if(rand > 0.5){
                         this.scp = new ClientHandler(client);
                         this.scpThread = new Thread(this.scp);
+                        this.scp.sendMessage("<w>");
                     }else{
                         this.town = new ClientHandler(client);
                         this.townThread = new Thread(this.scp);
+                        this.town.sendMessage("<w>");
                     }
                 }else if(this.scp == null){
                     //assigns scp
                     this.scp = new ClientHandler(client);
                     this.scpThread = new Thread(this.scp);
+                    this.scp.sendMessage("<c>");
+                    this.scp.sendMessage("s " + this.town.getUsername());
+                    this.town.sendMessage("<c>");
+                    this.town.sendMessage("t "+ this.scp.getUsername());
                 }else{
                     //assigns town
                     this.town = new ClientHandler(client);
                     this.townThread = new Thread(this.scp);
+                    this.town.sendMessage("<c>");
+                    this.town.sendMessage("t " + this.scp.getUsername());
+                    this.scp.sendMessage("<c>");
+                    this.scp.sendMessage("s " + this.town.getUsername());
                 }
             }
-        }catch(Exception e) { 
+        }catch(Exception e){ 
             System.out.println("Error accepting connection");
         }
-        try {
+        try{
           client.close();
-        }catch (Exception e1) { 
+        }catch (Exception e){ 
             System.out.println("Failed to close socket");
         }
         System.exit(-1);
@@ -109,6 +119,8 @@ class Server {
         private BufferedReader input;
         /** {@code Socket} which the client uses */
         private Socket client;
+        /** The username of the player connected */
+        private String username;
 
         /**
          * Constructor for the {@code ClientHandler}
@@ -126,6 +138,14 @@ class Server {
         }
 
         /**
+         * Gets the player's username
+         * @return the username of the player
+         */
+        public String getUsername(){
+            return this.username;
+        }
+
+        /**
          * <p>
          * Accepts messages from the clients and deals with them properly while the server is still running. Once the server is 
          * no longer running, the socket will attempt to close itself
@@ -133,7 +153,18 @@ class Server {
          */
         public void run(){
             while(running){
-                //TODO: accept messages and deal with
+                String prefix = "";
+                try{
+                    if(input.ready()){
+                        prefix = input.readLine();
+                        if(prefix.equals("<c>")){
+                            this.username = input.readLine();
+                        }
+                    }
+                }catch(IOException e){
+                    System.out.println("Something broke, server maintenance time");
+                    e.printStackTrace();
+                }
             }
             try{
                 input.close();

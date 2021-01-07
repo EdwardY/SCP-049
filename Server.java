@@ -124,6 +124,7 @@ class Server {
                 e.printStackTrace();        
             }
         }
+
         /**
          * <p>
          * Accepts messages from the clients and deals with them properly while the server is still running. Once the server is 
@@ -142,6 +143,15 @@ class Server {
                 System.out.println("Error closing socket");
                 e.printStackTrace();
             }
+        }
+
+        /**
+         * Sends a message through a {@code PrintWriter}, in this case it gets sent over the network
+         * @param msg the message to send
+         */
+        private void sendMessage(String msg){
+            this.output.println(msg);
+            this.output.flush();
         }
     }
 }

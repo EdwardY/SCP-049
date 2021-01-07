@@ -36,11 +36,9 @@ public class Client {
     /**Used to receive messages from the server.*/
     private BufferedReader input;
     /**Holds relevant information about the player's game objects and stats.*/
-    //private Player player;
-    //no player class yet
-    private String username;
+    private Player player;
     /**The IP address of the connected server. */
-    private String address;
+    private String ipAddress;
     /**The client socket. */
     private Socket socket;
 
@@ -68,7 +66,7 @@ public class Client {
      * @param address The IP address of the server.
      * @param port The port.
      */
-    public void connect(String address, int port){
+    public void connect(String username, String address, int port){
         System.out.println("Work in progress");/*
         try {
       
@@ -93,6 +91,7 @@ public class Client {
             }
             
             //close the login window since there's no need for it anymore
+            this.player = new Player(username);
             loginFrame.dispose();
             
           } catch (IOException e) {  //connection error occured
@@ -227,7 +226,7 @@ public class Client {
             public void actionPerformed(ActionEvent event)  {
 
                 //set the username the client selected
-                    username = usernameEntry.getText();
+                    String username = usernameEntry.getText();
       
       
                 //attempt to get the port 
@@ -239,10 +238,10 @@ public class Client {
                 }
       
                 //store the IP Address the user entered
-                address = addressEntry.getText();
+                ipAddress = addressEntry.getText();
                 
                 //attempt to connect to the server
-                connect(address, port);
+                connect(username, ipAddress, port);
                 /*running = true; //main program will start now
                 Thread t = new Thread(new MessageHander()); //start the server communication in a new thread
                 t.start(); //start thread*/

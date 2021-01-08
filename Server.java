@@ -37,7 +37,7 @@ class Server {
     private Game game;
 
     public static void main(String[] args){
-        new Server(5000);
+        new Server(5000).go();
     }
 
     /**
@@ -63,6 +63,7 @@ class Server {
         Socket client = null;
         try{
             serverSock = new ServerSocket(this.port);
+            //serverSock.setSoTimeout(1000);
             while((this.scp == null) || (this.town == null)){
                 client = serverSock.accept();
                 if((this.scp == null) && (this.town == null)){
@@ -82,19 +83,19 @@ class Server {
                     this.scp = new ClientHandler(client);
                     this.scpThread = new Thread(this.scp);
                     this.scp.sendMessage("<c>");
-                    this.scp.sendMessage("s " + this.town.getUsername());
-                    this.town.sendMessage("<c>");
-                    this.town.sendMessage("t "+ this.scp.getUsername());
                 }else{
                     //assigns town
                     this.town = new ClientHandler(client);
                     this.townThread = new Thread(this.scp);
                     this.town.sendMessage("<c>");
-                    this.town.sendMessage("t " + this.scp.getUsername());
-                    this.scp.sendMessage("<c>");
-                    this.scp.sendMessage("s " + this.town.getUsername());
                 }
             }
+            this.town.sendMessage("<s>");
+            this.town.sendMessage("t");
+            this.town.sendMessage(this.scp.getUsername());
+            this.scp.sendMessage("<s>");
+            this.scp.sendMessage("s");
+            this.scp.sendMessage(this.town.getUsername());
         }catch(Exception e){ 
             System.out.println("Error accepting connection");
         }

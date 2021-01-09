@@ -33,6 +33,8 @@ class Server {
     private Thread townThread;
     /** Thread for the SCP player */
     private Thread scpThread;
+    /** Thread for the game */
+    private Thread gameThread;
     /** Game info storage */
     private Game game;
 
@@ -184,6 +186,18 @@ class Server {
         private void sendMessage(String msg){
             this.output.println(msg);
             this.output.flush();
+        }
+    }
+
+    /**
+     * [GameHandler.java]
+     * Will update turns for the game
+     * @author Damon Ma, Edward Yang, Vivian Dai
+     * @version 1.0 on January 9, 2021
+     */
+    private class GameHandler implements Runnable{
+        public void run(){
+            //TODO: turn updates when a certain amount of time has passed while game is still ongoing
         }
     }
 }

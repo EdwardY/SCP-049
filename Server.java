@@ -58,7 +58,8 @@ class Server {
      * <p>
      * Starts looking for connections. Will keep looking for connections as long as there isn't the requirement of two players. 
      * If there are no players in the game, SCP or town role will be assigned randomly. If there already is a player then the 
-     * newly joined player gets the not taken role. 
+     * newly joined player gets the not taken role. After both players have connected, the game thread will start running and a 
+     * message will be sent to both players indicating which role they have and their opponent's username
      * </p>
      */
     public void go(){
@@ -92,6 +93,7 @@ class Server {
                     this.town.sendMessage("<c>");
                 }
             }
+            this.gameThread = new Thread(new GameHandler());
             this.town.sendMessage("<s>");
             this.town.sendMessage("t");
             this.town.sendMessage(this.scp.getUsername());
@@ -196,8 +198,14 @@ class Server {
      * @version 1.0 on January 9, 2021
      */
     private class GameHandler implements Runnable{
+        /**
+         * 
+         */
+        //TODO: javadocs
         public void run(){
-            //TODO: turn updates when a certain amount of time has passed while game is still ongoing
+            while(running){
+                game.doTurn();
+            }//TODO: thread.sleep, send info to both sides
         }
     }
 }

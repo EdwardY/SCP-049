@@ -98,10 +98,13 @@ class Server {
             this.gameThread = new Thread(new GameHandler());
             this.town.sendMessage("<s>");
             this.town.sendMessage("t");
+            this.town.sendMessage("" + game.getMoney());
+            this.town.sendMessage("" + game.getFood());
             this.town.sendMessage(this.scp.getUsername());
             this.scp.sendMessage("<s>");
             this.scp.sendMessage("s");
             this.scp.sendMessage(this.town.getUsername());
+            this.scp.sendMessage("" + game.getHume());
         }catch(Exception e){ 
             System.out.println("Error accepting connection");
         }

@@ -401,30 +401,57 @@ class Server {
      * @version 1.0 on January 9, 2021
      */
     private class GameHandler implements Runnable{
-        private long lastTime;
-        private long curTime;
+        /** one minute but in milliseconds */
         private static final int ONE_MINUTE = 60000;
-        /**
-         * 
+        /** last update time */
+        private long lastTime;
+        /** current system time */
+        private long curTime;
+        /** boolean for if a turn is ongoing or waiting for next turn */
+        private boolean turnGoing;
+
+        /** 
+         * Constructor for the {@code GameHandler} class
          */
-        //TODO: javadocs
+        GameHandler(){
+            this.turnGoing = false;
+        }
+
+        /**
+         * <p>
+         * Loop while still running. If there is currently a turn going on and it's time to update (end turn), the game will 
+         * handle the end of turn events. A message will then be sent to the scp side and the town side on new updates for both 
+         * sides. The boolean for turn will then flip. If the turn is not going and it's time to update (start turn) a message 
+         * will be sent to both sides to start a new turn.
+         * </p>
+         */
         public void run(){
             while(running){
                 curTime = System.currentTimeMillis();
-                if(curTime - lastTime >= ONE_MINUTE){
-                    game.doTurn();
-                    scp.sendMessage("<te>");
-                    scp.sendMessage("" + game.getScps().size());
-                    for(int i = 0;i < game.getScps().size();i++){
-                        SCP0492 curScp = game.getScps().get(i);
-                        scp.sendMessage(curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
+                if(turnGoing){
+                    if(curTime - lastTime >= ONE_MINUTE){
+                        lastTime = curTime;
+                        game.doTurn();
+                        scp.sendMessage("<te>");
+                        scp.sendMessage("" + game.getScps().size());
+                        for(int i = 0;i < game.getScps().size();i++){
+                            SCP0492 curScp = game.getScps().get(i);
+                            scp.sendMessage(curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
+                        }
+
+                        town.sendMessage("<te>");
+
+                        turnGoing = !turnGoing;
                     }
-                    
-                    town.sendMessage("<te>");
-                    scp.sendMessage("<ts>");
-                    town.sendMessage("<ts>");
+                }else{
+                    if(curTime - lastTime >= ONE_MINUTE/2){
+                        lastTime = curTime;
+                        town.sendMessage("<ts>");
+                        scp.sendMessage("<ts>");
+                        turnGoing = !turnGoing;
+                    }
                 }
-            }//TODO: thread.sleep, send info to both sides
+            }
         }
     }
 }

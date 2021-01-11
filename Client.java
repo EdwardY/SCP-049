@@ -75,6 +75,12 @@ public class Client {
         output.flush();
     }
 
+    /**
+     * Opens the window telling the player that the game is waiting for the second player to join.
+     */
+    public void startStandby(){
+        new StandbyWindow().run();
+    }
 
 
 
@@ -87,10 +93,21 @@ public class Client {
                 while(running){
                     try{
                         String prefix;
-                        int id;
-                        String message;
                         if(input.ready()){
                             prefix = input.readLine();
+                            if(prefix.equals("<w>")){  //waiting for another player to join
+                                startStandby();
+                            }else if(prefix.equals("<s>")){  //styart game
+                                String side = input.readLine();
+                                String startingCurrency;
+                                if(side.equals("s")){ //this player is on the SCP side
+                                    startingCurrency = input.readLine();
+                                }else if(side.equals("t")){ //this player is on the town side
+                                    startingCurrency = input.readLine();
+                                    String food = input.readLine();
+                                }
+                            }
+
                         }
                     }catch(IOException e){
                         System.out.println("Error receiving message from server");
@@ -274,4 +291,49 @@ public class Client {
     }//end of inner class
 
 
-}
+    /**
+     * An inner class for a window that displays when a player is waiting for another player to join the game.
+     */
+    public class StandbyWindow{
+        /**Window that is opened to tell player to wait while another player connects. */
+        private JFrame window;
+        /**The JPanel for the window. */
+        private JPanel panel;
+        /**The JLabel to tell user to wait. */
+        private JLabel standbyLabel;
+
+
+        /**
+         * Opens the window to tell user to standby while the next player joins.
+         */
+        public void run(){
+        //set JFrame
+        window = new JFrame("Welcome to Code-049!");
+        window.setSize(400,300);
+        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
+
+        //set JPanel
+        panel = new JPanel();
+        panel.setLayout(null);
+        window.add(panel);
+        
+        //Label to show players where to login
+        standbyLabel = new JLabel("Waiting for player 2 to join...");
+        standbyLabel.setBounds(20,30,200,25); 
+        panel.add(standbyLabel);
+        }//end of method
+
+
+
+        /**
+         * Closes the standby window if the other user has joined.
+         */
+        public void close(){
+            window.dispose();
+        }
+
+    }//end of inner class
+
+    //end of inner classes
+
+}//end of class

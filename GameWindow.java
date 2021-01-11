@@ -71,7 +71,7 @@ public abstract class GameWindow{
          * When the mouse exited.
          * @param MouseEvent The action performed by the mouse.
          */
-        public void mouseEntered(MouseEvent e){
+        public void mouseExited(MouseEvent e){
             System.out.println("exited");
         }
 
@@ -80,7 +80,7 @@ public abstract class GameWindow{
          * When the mouse is left-clicked.
          * @param MouseEvent The action performed by the mouse.
          */
-        public void mouseEntered(MouseEvent e){
+        public void mouseClicked(MouseEvent e){
             System.out.println("clicked");
         }
 
@@ -88,10 +88,17 @@ public abstract class GameWindow{
          * When the mouse Moved.
          * @param MouseEvent The action performed by the mouse.
          */
-        public void mouseEntered(MouseEvent e){
+        public void mouseMoved(MouseEvent e){
             System.out.println("moved");
         }
 
+        /**
+         * When the mouse is dragged.
+         * @param MouseEvent The action performed by the mouse.
+         */
+        public void mouseMoved(MouseEvent e){
+            System.out.println("dragged");
+        }
 
 
         /**

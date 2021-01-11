@@ -43,6 +43,8 @@ public class Client {
     private Socket socket;
     /**The username of the player. */
     private String username;
+    /** Used to send and receivemessages to the server*/
+    private MessageHandler messageHandler;
     /**Used to check if the program should still run or not. */
     private boolean running;
   
@@ -64,22 +66,19 @@ public class Client {
     }
 
 
-
-   
-    /**
-     * Sends a message to the server.
-     * @param message The message to be sent to the server.
-     */
-    public void sendMessage(String message){
-        output.println(message);
-        output.flush();
-    }
-
     /**
      * Opens the window telling the player that the game is waiting for the second player to join.
      */
     public void startStandby(){
         new StandbyWindow().run();
+    }
+
+      /**
+     * Sends a message to the server.
+     * @param message The message being sent to the server.
+     */
+    public void sendMessage(String message){
+        messageHandler.sendMessage(message);
     }
 
 
@@ -88,7 +87,7 @@ public class Client {
         /**
          * An inner class used to receives messages from the server.
          */
-        private class MessageHander implements Runnable{
+        private class MessageHandler implements Runnable{
             public void run(){
                 while(running){
                     try{
@@ -142,6 +141,18 @@ public class Client {
                 }//end of while loop
             }//end of method
 
+            /**
+             * Sends a message to the server
+             * @param message The message being sent to the server.
+             */
+            public void sendMessage(String message){
+                output.println(message);
+                output.flush();
+            }//end of method
+
+            
+
+
         }//end of inner class
 
 
@@ -171,7 +182,6 @@ public class Client {
         private JTextField portEntry;
         /**The JButton used to submit entered information*/
         private JButton enterButton;
-        /**The username of the player. */
 
         /**
          * Runs the window so that players can login.
@@ -304,7 +314,8 @@ public class Client {
                 //attempt to connect to the server
                 connect(username, ipAddress, port);
                 running = true; 
-                Thread t = new Thread(new MessageHander()); //start the server communication in a new thread
+                messageHandler = new MessageHandler();
+                Thread t = new Thread(messageHandler); //start the server communication in a new thread
                 t.start(); //start thread*/
             }
 

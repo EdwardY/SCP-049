@@ -99,14 +99,31 @@ public class Client {
                                 startStandby();
                             }else if(prefix.equals("<s>")){  //start game
                                 String side = input.readLine();
-                                int startingCurrency;
-                                if(side.equals("s")){ //this player is on the SCP side
-                                    startingCurrency = Integer.parseInt(input.readLine());
-                                }else if(side.equals("t")){ //this player is on the town side
-                                    startingCurrency = Integer.parseInt(input.readLine());
-                                    int startingFood = Integer.parseInt(input.readLine());
-                                }
-                            }
+                                int startingCurrency = Integer.parseInt(input.readLine());
+                                startGame(side, startingCurrency);
+                            }else if(prefix.equals("<ts>")){ //server says to start the next turn
+
+                                System.out.println("start turn here");
+
+                            }else if(prefix.equals("<ts>")){ //server says to end the current turn
+
+                                System.out.println("end turn here");
+
+                            }else if(prefix.equals("<f>")){ //requested transaction could not be completed
+
+                                String reasonOfFailure = input.readLine(); 
+                                System.out.println("something something transaction didn't go through");
+
+                            }else if(prefix.equals("<st>")){ //transaction is successful
+
+                                System.out.println("something something congrats purchase successful");
+
+                            }else if(prefix.equals("<r>")){ //change in resources
+                                String resourceType = input.readLine();
+                                int resourceChange = Integer.parseInt(input.readLine());
+                                changeResources(resourceType, resourceChange);
+                                
+                            }//end of if statements
 
                         }
                     }catch(IOException e){
@@ -114,6 +131,41 @@ public class Client {
                     }//end of try catch statement
                 }//end of while loop
             }//end of method
+
+
+            /**
+             * Starts either the SCP or Town version of the game based on server specificiation.
+             * @param side The side that the player will play as.
+             * @param startingCurrency The starting currency that player will receive.
+             */
+            public void startGame(String side, int startingCurrency){
+                if(side.equals("s")){ //this player is on the SCP side
+                    System.out.println("start scp game");
+                }else if(side.equals("t")){ //this player is on the town side
+                    try{
+                        int startingFood = Integer.parseInt(input.readLine());
+                    }catch(IOException e){
+                        System.out.println("Error receiving message from server");
+                    }
+                    System.out.println("start town game");
+                }
+            }
+
+            /**
+             * Changes the amount of a resource that the player has.
+             * @param resourceType The type of resource that will be changed.
+             * @param resourceChange The change in the value of the resource.
+             */
+            public void changeResources(String resourceType, int resourceChange){
+                if(resourceType.equals("DuberCoin")){
+                    System.out.println("change in DuberCoins");
+                }else if(resourceType.equals("food")){
+                    System.out.println("change in food");
+                }else if(resourceType.equals("hume")){
+                    System.out.println("change in hume points");
+                }
+            }
+
 
         }//end of inner class
 

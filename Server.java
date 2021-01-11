@@ -1,3 +1,7 @@
+//graphics imports
+import java.awt.Image;
+import java.awt.Toolkit;
+
 //io imports
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -85,12 +89,10 @@ class Server {
                     //assigns scp
                     this.scp = new ClientHandler(client);
                     this.scpThread = new Thread(this.scp);
-                    this.scp.sendMessage("<c>");
                 }else{
                     //assigns town
                     this.town = new ClientHandler(client);
                     this.townThread = new Thread(this.scp);
-                    this.town.sendMessage("<c>");
                 }
             }
             this.gameThread = new Thread(new GameHandler());
@@ -164,6 +166,22 @@ class Server {
                         prefix = input.readLine();
                         if(prefix.equals("<c>")){
                             this.username = input.readLine();
+                        }else if(prefix.equals("<b>")){
+                            String buildingType = input.readLine();
+                            String coords = input.readLine();
+                            int x = Integer.parseInt(coords.split(" ")[0]);
+                            int y = Integer.parseInt(coords.split(" ")[1]);
+                            buildBuilding(buildingType, x, y);
+                        }else if(prefix.equals("<e>")){
+                            String eventType = input.readLine();
+                            int level = Integer.parseInt(input.readLine());
+                            if(!isWholeGameEvent(eventType)){
+                                String coords = input.readLine();
+                                int x = Integer.parseInt(coords.split(" ")[0]);
+                                int y = Integer.parseInt(coords.split(" ")[1]);
+                            }else{
+
+                            }
                         }
                     }
                 }catch(IOException e){
@@ -189,6 +207,63 @@ class Server {
             this.output.println(msg);
             this.output.flush();
         }
+
+        /**
+         * Checks for if the type of event is a whole game event
+         * @param eventType the string for the type of event
+         * @return true if it's a whole game event, false otherwise
+         */
+        private boolean isWholeGameEvent(String eventType){
+            return eventType.equals("stonks") || eventType.equals("riot") || eventType.equals("mutate") || eventType.equals("warpreality");
+        }
+
+        /**
+         * Creates the {@code Building} then adds it to the game
+         * @param type the type of {@code Building}
+         * @param x top left x coordinate 
+         * @param y top left y coordinate
+         */
+        private void buildBuilding(String type, int x, int y){
+            Image sprite = Toolkit.getDefaultToolkit().getImage("./assets/" + type + ".png");
+            int price = Integer.MAX_VALUE;
+            Building building = null;
+            if(type.equals("bank")){
+                building = new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, sprite, x, y);
+                price = Bank.INITIAL_PRICE;
+            }else if(type.equals("foodbuilding")){
+                building = new FoodBuilding(FoodBuilding.INITIAL_PRICE, FoodBuilding.INITIAL_HEALTH, FoodBuilding.INITIAL_HEALTH, sprite, x, y);
+                price = FoodBuilding.INITIAL_PRICE;
+            }else if(type.equals("hospital")){
+                building = new Hospital(Hospital.INITIAL_PRICE, Hospital.INITIAL_HEALTH, Hospital.INITIAL_HEALTH, sprite, x, y, Hospital.INITIAL_MAX_CAP);
+                price = Hospital.INITIAL_PRICE;
+            }else if(type.equals("militarybase")){
+                building = new MilitaryBase(MilitaryBase.INITIAL_PRICE, MilitaryBase.INITIAL_HEALTH, MilitaryBase.INITIAL_HEALTH, sprite, x, y);
+                price = MilitaryBase.INITIAL_PRICE;
+            }else if(type.equals("researchlab")){
+                building = new ResearchLab(ResearchLab.INITIAL_PRICE, ResearchLab.INITIAL_HEALTH, ResearchLab.INITIAL_HEALTH, sprite, x, y);
+                price = ResearchLab.INITIAL_PRICE;
+            }else if(type.equals("residency")){
+                building = new Residency(Residency.INITIAL_PRICE, Residency.INITIAL_HEALTH, Residency.INITIAL_HEALTH, sprite, x, y, Residency.INITIAL_MAX_CAP);
+                price = Residency.INITIAL_PRICE;
+            }
+            if(building != null){
+                if(game.getMoney() >= price){
+                    game.addBuilding(building);
+                }
+            }
+        }
+
+        /**
+         * Creates an {@code Event}
+         * @param type the type of event to create
+         */
+        private boolean createEvent(String type, int level){
+            //TODO: finish this up
+            if(type.equals("stonks")){
+                game.startEvent(new Stonks(level));
+            }
+            return false;
+        }
     }
 
     /**
@@ -198,13 +273,19 @@ class Server {
      * @version 1.0 on January 9, 2021
      */
     private class GameHandler implements Runnable{
+        private long lastTime;
+        private long curTime;
+        private static final int ONE_MINUTE = 60000;
         /**
          * 
          */
         //TODO: javadocs
         public void run(){
             while(running){
-                game.doTurn();
+                curTime = System.currentTimeMillis();
+                if(curTime - lastTime >= ONE_MINUTE){
+                    game.doTurn();
+                }
             }//TODO: thread.sleep, send info to both sides
         }
     }

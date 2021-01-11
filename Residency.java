@@ -11,6 +11,12 @@
  import java.util.ArrayList; 
 
 class Residency extends Building{
+    /** Initial health of the residency */
+    public static final int INITIAL_HEALTH = 100;
+    /** Initial price of the residency */
+    public static final int INITIAL_PRICE = 100;
+    /** Initial maximum capacity of the residency */
+    public static final int INITIAL_MAX_CAP = 100;
 
     private int maxCapacity;
     private ArrayList<Human> residents = new ArrayList<>();

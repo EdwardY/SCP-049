@@ -10,6 +10,11 @@ import java.awt.Image;
 import java.awt.Color;
 
 class FoodBuilding extends ProductionFacility{
+    
+    /** Initial health of the food building */
+    public static final int INITIAL_HEALTH = 100;
+    /** Initial price of the food building */
+    public static final int INITIAL_PRICE = 100;
    
    /**
     * A building that's serves to produce food

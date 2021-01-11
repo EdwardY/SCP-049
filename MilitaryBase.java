@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 class MilitaryBase extends Military{
+    /** Initial health of the military base */
+    public static final int INITIAL_HEALTH = 100;
+    /** Initial price of the military base */
+    public static final int INITIAL_PRICE = 100;
 
     private ArrayList<Human> soldiers = new ArrayList<>();
 

@@ -13,6 +13,13 @@ import java.awt.Color;
 
 class Hospital extends Building{
     
+    /** Initial health of the hospital */
+    public static final int INITIAL_HEALTH = 100;
+    /** Initial price of the hospital */
+    public static final int INITIAL_PRICE = 100;
+    /** Initial max capacity of the hospital */
+    public static final int INITIAL_MAX_CAP = 100;
+
     private int maxCapacity;
     private PriorityQueue<Human> injured;
     ArrayList<Doctor> doctors;

@@ -11,6 +11,10 @@ import java.awt.Color;
 import java.lang.Math;
 
 public class ResearchLab extends Military{
+    /** Initial health of the research lab */
+    public static final int INITIAL_HEALTH = 100;
+    /** Initial price of the research lab */
+    public static final int INITIAL_PRICE = 100;
     
     private int PRICE;
     private int NUMBER_OF_TURNS;

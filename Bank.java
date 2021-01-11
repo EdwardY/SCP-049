@@ -10,6 +10,10 @@
  import java.awt.Color;
 
 class Bank extends ProductionFacility{
+    /** Initial health of the bank */
+    public static final int INITIAL_HEALTH = 100;
+    /** Initial price of the bank */
+    public static final int INITIAL_PRICE = 100;
     
     /**
      * A building that's serves to produce money

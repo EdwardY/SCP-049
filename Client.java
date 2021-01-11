@@ -111,7 +111,6 @@ public class Client {
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
 
-                                String reasonOfFailure = input.readLine(); 
                                 System.out.println("something something transaction didn't go through");
 
                             }else if(prefix.equals("<st>")){ //transaction is successful

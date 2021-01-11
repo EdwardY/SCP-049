@@ -410,6 +410,16 @@ class Server {
                 curTime = System.currentTimeMillis();
                 if(curTime - lastTime >= ONE_MINUTE){
                     game.doTurn();
+                    scp.sendMessage("<te>");
+                    scp.sendMessage("" + game.getScps().size());
+                    for(int i = 0;i < game.getScps().size();i++){
+                        SCP0492 curScp = game.getScps().get(i);
+                        scp.sendMessage(curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
+                    }
+                    
+                    town.sendMessage("<te>");
+                    scp.sendMessage("<ts>");
+                    town.sendMessage("<ts>");
                 }
             }//TODO: thread.sleep, send info to both sides
         }

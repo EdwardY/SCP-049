@@ -109,6 +109,11 @@ class Game {
         for(Event currentEvent:this.events){
             currentEvent.affect(this);
             currentEvent.decreaseTimeLeft();
+            if(currentEvent instanceof Tornado){
+                int dx = (int)Math.round((Math.random()*2) - 1);
+                int dy = (int)Math.round((Math.random()*2) - 1);
+                ((Tornado)currentEvent).translate(dx, dy);
+            }
             if(currentEvent.getTimeLeft() <= 0){
                 this.events.remove(currentEvent);
             }

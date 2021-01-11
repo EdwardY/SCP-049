@@ -97,14 +97,14 @@ public class Client {
                             prefix = input.readLine();
                             if(prefix.equals("<w>")){  //waiting for another player to join
                                 startStandby();
-                            }else if(prefix.equals("<s>")){  //styart game
+                            }else if(prefix.equals("<s>")){  //start game
                                 String side = input.readLine();
-                                String startingCurrency;
+                                int startingCurrency;
                                 if(side.equals("s")){ //this player is on the SCP side
-                                    startingCurrency = input.readLine();
+                                    startingCurrency = Integer.parseInt(input.readLine());
                                 }else if(side.equals("t")){ //this player is on the town side
-                                    startingCurrency = input.readLine();
-                                    String food = input.readLine();
+                                    startingCurrency = Integer.parseInt(input.readLine());
+                                    int startingFood = Integer.parseInt(input.readLine());
                                 }
                             }
 

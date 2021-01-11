@@ -99,8 +99,9 @@ public class Client {
                                 startStandby();
                             }else if(prefix.equals("<s>")){  //start game
                                 String side = input.readLine();
+                                String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
-                                startGame(side, startingCurrency);
+                                startGame(side, opponent, startingCurrency);
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
 
                                 System.out.println("start turn here");
@@ -135,9 +136,10 @@ public class Client {
             /**
              * Starts either the SCP or Town version of the game based on server specificiation.
              * @param side The side that the player will play as.
+             * @param opponent The player that this player will face off against.
              * @param startingCurrency The starting currency that player will receive.
              */
-            public void startGame(String side, int startingCurrency){
+            public void startGame(String side, String opponent, int startingCurrency){
                 if(side.equals("s")){ //this player is on the SCP side
                     System.out.println("start scp game");
                 }else if(side.equals("t")){ //this player is on the town side

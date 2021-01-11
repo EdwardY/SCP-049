@@ -96,7 +96,7 @@ public abstract class GameWindow{
          * When the mouse is dragged.
          * @param MouseEvent The action performed by the mouse.
          */
-        public void mouseMoved(MouseEvent e){
+        public void mouseDragged(MouseEvent e){
             System.out.println("dragged");
         }
 

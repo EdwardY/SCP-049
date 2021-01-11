@@ -61,14 +61,15 @@ class Game {
         for(Building currentBuilding: this.buildings){
             if(currentBuilding.getHealth() <= 0){
                 Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), 10, 10);
-                //TODO: adjust width and height based on building size and npc size
                 for(Human currentHuman: this.humans){
-                    if(buildingArea.contains(currentHuman.getX(), currentHuman.getY())){
+                    Rectangle humanArea = new Rectangle(currentHuman.getX(), currentHuman.getY(), NPC.SIZE, NPC.SIZE);
+                    if(buildingArea.contains(humanArea)){
                         this.humans.remove(currentHuman);
                     }
                 }
                 for(SCP0492 currentScp: this.scps){
-                    if(buildingArea.contains(currentScp.getX(), currentScp.getY())){
+                    Rectangle scpArea = new Rectangle(currentScp.getX(), currentScp.getY(), NPC.SIZE, NPC.SIZE);
+                    if(buildingArea.contains(scpArea)){
                         this.scps.remove(currentScp);
                     }
                 }

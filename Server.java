@@ -167,21 +167,33 @@ class Server {
                         if(prefix.equals("<c>")){
                             this.username = input.readLine();
                         }else if(prefix.equals("<b>")){
+                            boolean success = false;
                             String buildingType = input.readLine();
                             String coords = input.readLine();
                             int x = Integer.parseInt(coords.split(" ")[0]);
                             int y = Integer.parseInt(coords.split(" ")[1]);
-                            buildBuilding(buildingType, x, y);
+                            success = buildBuilding(buildingType, x, y);
+                            reportTransactionStatus(success);
                         }else if(prefix.equals("<e>")){
+                            boolean success = false;
                             String eventType = input.readLine();
                             int level = Integer.parseInt(input.readLine());
                             if(!isWholeGameEvent(eventType)){
                                 String coords = input.readLine();
                                 int x = Integer.parseInt(coords.split(" ")[0]);
                                 int y = Integer.parseInt(coords.split(" ")[1]);
+                                success = createEvent(eventType, level, x, y);
                             }else{
-
+                                success = createEvent(eventType, level);
                             }
+                            reportTransactionStatus(success);
+                        }else if(prefix.equals("<u>")){
+                            boolean success = false;
+                            String coords = input.readLine();
+                            int x = Integer.parseInt(coords.split(" ")[0]);
+                            int y = Integer.parseInt(coords.split(" ")[1]);
+                            success = upgrade(x, y);
+                            reportTransactionStatus(success);
                         }
                     }
                 }catch(IOException e){
@@ -209,6 +221,18 @@ class Server {
         }
 
         /**
+         * Sends a message to the client about whether or not a certain task was sucessful
+         * @param success if the task was successful or not
+         */
+        private void reportTransactionStatus(boolean success){
+            if(success){
+                sendMessage("<st>");
+            }else{
+                sendMessage("<f>");
+            }
+        }
+
+        /**
          * Checks for if the type of event is a whole game event
          * @param eventType the string for the type of event
          * @return true if it's a whole game event, false otherwise
@@ -218,12 +242,18 @@ class Server {
         }
 
         /**
-         * Creates the {@code Building} then adds it to the game
+         * <p>
+         * Tries to create the {@code Building} based on the type. If the building got created add it to the game's master list of 
+         * {@code Building} objects. Send a message to the client to show how much of the resource got spent. return true if 
+         * successful.
+         * </p>
          * @param type the type of {@code Building}
          * @param x top left x coordinate 
          * @param y top left y coordinate
+         * @return boolean sucess depending on if it worked or not
          */
-        private void buildBuilding(String type, int x, int y){
+        private boolean buildBuilding(String type, int x, int y){
+            boolean success = false;
             Image sprite = Toolkit.getDefaultToolkit().getImage("./assets/" + type + ".png");
             int price = Integer.MAX_VALUE;
             Building building = null;
@@ -246,23 +276,118 @@ class Server {
                 building = new Residency(Residency.INITIAL_PRICE, Residency.INITIAL_HEALTH, Residency.INITIAL_HEALTH, sprite, x, y, Residency.INITIAL_MAX_CAP);
                 price = Residency.INITIAL_PRICE;
             }
-            if(building != null){
-                if(game.getMoney() >= price){
-                    game.addBuilding(building);
-                }
+            if((building != null) && (game.getMoney() >= price)){
+                game.addBuilding(building);
+                success = true;
+                sendMessage("<r>");
+                sendMessage("dubercoin");
+                sendMessage("" + (price * -1));
             }
+            return success;
         }
 
         /**
-         * Creates an {@code Event}
+         * <p>
+         * Creates an {@code Event} based on the type if the player has sufficient funds and the data given is not incorrect. 
+         * Returns true if successfully created, false otherwise. {@code Stonks} does not get created by the user and functions 
+         * differently.
+         * </p>
+         * @param type the type of {@code Event}
+         * @param level the level of the {@code Event}
+         * @param x the x coordinates for the middle of the {@code Event}
+         * @param y the y coordinates for the middle of the {@code Event}
+         * @return boolean success, if the creation was successful or not
+         */
+        private boolean createEvent(String type, int level, int x, int y){
+            boolean success = false;
+            Event event = null;
+            int price = Integer.MAX_VALUE;
+            if(type.equals("earthquake")){
+                event = new Earthquake(level, x, y);
+                price = Earthquake.getCostByLevel(level);
+            }else if(type.equals("fire")){
+                event = new Fire(level, x, y);
+                price = Fire.getCostByLevel(level);
+            }else if(type.equals("infect")){
+                event = new Infect(level, x, y);
+                price = Infect.getCostByLevel(level);
+            }else if(type.equals("snow")){
+                event = new Snow(level, x, y);
+                price = Snow.getCostByLevel(level);
+            }else if(type.equals("thunderstorm")){
+                event = new Thunderstorm(level, x, y);
+                price = Thunderstorm.getCostByLevel(level);
+            }else if(type.equals("tornado")){
+                event = new Tornado(level, x, y);
+                price = Tornado.getCostByLevel(level);
+            }
+            if((event != null) && (game.getHume() >= price)){
+                game.startEvent(event);
+                sendMessage("<r>");
+                sendMessage("hume");
+                sendMessage("" + (price * -1));
+            }
+            return success;
+        }
+
+        /**
+         * <p>
+         * Creates an {@code Event} based on the type if the player has sufficient funds and the data given is not incorrect. 
+         * Returns true if successfully created, false otherwise. {@code Stonks} does not get created by the user and functions 
+         * differently.
+         * </p>
          * @param type the type of event to create
+         * @return boolean success, if the event succeeded
          */
         private boolean createEvent(String type, int level){
-            //TODO: finish this up
+            boolean success = false;
+            Event event = null;
+            int price = Integer.MAX_VALUE;
             if(type.equals("stonks")){
                 game.startEvent(new Stonks(level));
+                return true;
+            }else if(type.equals("riot")){
+                event = new Riot(level);
+                price = Riot.getCostByLevel(level);
+            }else if(type.equals("mutate")){
+                event = new Mutate(level);
+                price = Mutate.getCostByLevel(level);
+            }else if(type.equals("warpreality")){
+                event = new WarpReality(level);
+                price = WarpReality.getCostByLevel(level);
             }
-            return false;
+            if((event != null) && (game.getHume() >= price)){
+                game.startEvent(event);
+                sendMessage("<r>");
+                sendMessage("hume");
+                sendMessage("" + (price * -1));
+            }
+            return success;
+        }
+
+        /**
+         * <p>
+         * Loops through all {@code Buildings} in the game. If the coordinates of the {@code Building} match the coordinates passed 
+         * in as parameters, check if the player has sufficient funds. If so, upgrade. Return success in the end for whether or not 
+         * the operation was a success.
+         * </p>
+         * @param x the x coordinate of the {@code Building} to upgrade
+         * @param y the y coordinate of the {@code Building} to upgrade
+         * @return boolean success, whether or not the operation was a success
+         */
+        private boolean upgrade(int x, int y){
+            boolean success = false;
+            ArrayList<Building> buildings = game.getBuildings();
+            for(Building building:buildings){
+                if((building.getX() == x) && (building.getY() == y)){
+                    //if(){
+                        //TODO: make sure there's enough money to upgrade the building
+                        building.upgrade();
+                        success = true;
+                    //}
+                }
+            }
+            return success;
         }
     }
 

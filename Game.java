@@ -1,7 +1,11 @@
-import java.util.ArrayList;
+//graphics imports
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+
+//data structures
+import java.util.ArrayList;
+
 /**
  * [Game.java]
  * A class for storing all game parts which the server can access
@@ -109,6 +113,11 @@ class Game {
         for(Event currentEvent:this.events){
             currentEvent.affect(this);
             currentEvent.decreaseTimeLeft();
+            if(currentEvent instanceof Tornado){
+                int dx = (int)Math.round((Math.random()*2) - 1);
+                int dy = (int)Math.round((Math.random()*2) - 1);
+                ((Tornado)currentEvent).translate(dx, dy);
+            }
             if(currentEvent.getTimeLeft() <= 0){
                 this.events.remove(currentEvent);
             }

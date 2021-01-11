@@ -1,4 +1,7 @@
+//graphics imports
 import java.awt.Rectangle;
+
+//data structure utilities
 import java.util.ArrayList;
 
 /**

@@ -1,7 +1,11 @@
-import java.util.ArrayList;
+//graphics imports
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+
+//data structures
+import java.util.ArrayList;
+
 /**
  * [Game.java]
  * A class for storing all game parts which the server can access

@@ -130,11 +130,82 @@ public class Client {
                                     scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));   
                                     //TODO: fix NPC consctructors later, no longer needs image
                                 }
+
+
+                                objectNum = Integer.parseInt(input.readLine());
+                                ArrayList<Event> eventList = new ArrayList<Event>();
+                                for(int i = 0; i < objectNum; i ++){
+                                    objectInfo = input.readLine();
+                                    objectValues = objectInfo.split(" ");
+                                    String eventType = objectValues[0];
+
+                                    if(eventType.equals("Infect")){
+                                        //TODO: Construct new Infect object
+                                    }else if (eventType.equals("Earthquake")){
+                                        //TODO: Construct new Earthquake object
+                                    }else if(eventType.equals("Fire")){
+                                        //TODO: Construct new Fire object
+                                    }else if(eventType.equals("Mutate")){
+                                        //TODO: Create new Mutate event
+                                    }else if(eventType.equals("Riot")){
+                                        //TODO: Create new Riot event
+                                    }else if(eventType.equals("Snow")){
+                                        //TODO: create new Snow event
+                                    }else if(eventType.equals("Thunderstorm")){
+                                        //TODO: create new Thunderstorm event
+                                    }else if(eventType.equals("Tornado")){
+                                        //TODO: Create new Tornado event
+                                    }else if(eventType.equals("WarpReality")){
+                                        //TODO: Create new WarpReality event
+                                    }else if(eventType.equals("Stonks")){
+                                        //TODO: Create new Stonks event
+                                    }
+                                }
+
                                 objectNum = Integer.parseInt(input.readLine());
                                 ArrayList<Building> buildingList = new ArrayList<Building>();
                                 for(int i = 0; i < objectNum; i++){
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
+                                    String buildingType = input.readLine();
+                                    if(buildingType.equals("Bank")){
+                                        //TODO: Build new bank object
+                                    }else if(buildingType.equals("FoodBuilding")){
+                                        //TODO: Build new FoodBuilding object.
+                                    }else if(buildingType.equals("Hospital")){
+                                        //TODO: Build new Hospital object.
+                                    }else if(buildingType.equals("MilitaryBase")){
+                                        //TODO: Build new MilitaryBase object.
+                                    }else if(buildingType.equals("ProductionFacility")){
+                                        //TODO: Build new ProductionFacility object.
+                                    }else if(buildingType.equals("ResearchLab")){
+                                        //TODO: Build new ResearchLab object.
+                                    }else if(buildingType.equals("Residency")){
+                                        //TODO: Build new Residency object.
+                                    }
+
+                                }
+
+                                objectNum = Integer.parseInt(input.readLine());
+                                ArrayList<Human> humansList = new ArrayList<Human>();
+                                for(int i = 0; i < objectNum; i++){
+                                    objectInfo = input.readLine();
+                                    objectValues = objectInfo.split(" ");
+                                    String humanType = input.readLine();
+                                    if(humanType.equals("Cadet")){
+                                        //TODO: Build new Cadet object
+                                    }else if(humanType.equals("Citizen")){
+                                        //TODO: Build new Citizen object.
+                                    }else if(humanType.equals("Doctor")){
+                                        //TODO: Build new Doctor object.
+                                    }else if(humanType.equals("Researcher")){
+                                        //TODO: Build new Researcher object.
+                                    }else if(humanType.equals("Soldier")){
+                                        //TODO: Build new Soldier object.
+                                    }else if(humanType.equals("Spy")){
+                                        //TODO: Build new Spy object.
+                                    }
+
                                 }
 
 

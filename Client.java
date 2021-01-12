@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.net.Socket;
 
 
+import java.util.ArrayList;
 
 /**
  * [Client.java]
@@ -119,14 +120,25 @@ public class Client {
                                 player.startTurn();
 
                             }else if(prefix.equals("<te>")){ //server says to end the current turn
-                                //TODO: This part is not complete yet.
-                                if (player instanceof SCP){
-                                    int scpNum = Integer.parseInt(input.readLine());
-                                    player.endTurn();
-                                }else if (player instanceof Town){
-                                    int buildingNum = Integer.parseInt(input.readLine());
-                                    player.endTurn();
+                                String objectInfo;
+                                String [] objectValues;
+                                int objectNum = Integer.parseInt(input.readLine());
+                                ArrayList<SCP0492> scpList = new ArrayList<SCP0492>();
+                                for(int i = 0; i < objectNum; i ++){
+                                    objectInfo = input.readLine();
+                                    objectValues = objectInfo.split(" ");
+                                    scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));   
+                                    //TODO: fix NPC consctructors later, no longer needs image
                                 }
+                                objectNum = Integer.parseInt(input.readLine());
+                                ArrayList<Building> buildingList = new ArrayList<Building>();
+                                for(int i = 0; i < objectNum; i++){
+                                    objectInfo = input.readLine();
+                                    objectValues = objectInfo.split(" ");
+                                }
+
+
+                                
     
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed

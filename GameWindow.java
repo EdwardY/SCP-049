@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionListener;
@@ -114,17 +115,21 @@ public abstract class GameWindow{
         }
 
         /**
-         * When the mouse Moved.
+         * When the mouse Moved. Updates mouse coordinates
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseMoved(MouseEvent e){
+            this.x = e.getX();
+            this.y = e.getY();
         }
 
         /**
-         * When the mouse is moved while its button is pressed.
+         * When the mouse is moved while its button is pressed. Updates mouse coordinates
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseDragged(MouseEvent e){
+            this.x = e.getX();
+            this.y = e.getY();
         }
 
 

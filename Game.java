@@ -155,6 +155,14 @@ class Game {
     }
 
     /**
+     * Gets the {@code Event} objects
+     * @return events, a list of all game {@code Event} objects
+     */
+    public ArrayList<Event> getEvents(){
+        return this.events;
+    }
+
+    /**
      * Gets the amount of money the town has
      * @return money, the amount of money the town side has
      */

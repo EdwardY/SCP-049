@@ -409,12 +409,26 @@ class Server {
         private long curTime;
         /** boolean for if a turn is ongoing or waiting for next turn */
         private boolean turnGoing;
+        /** All users in the game */
+        private ClientHandler[] allUsers;
 
         /** 
          * Constructor for the {@code GameHandler} class
          */
         GameHandler(){
             this.turnGoing = false;
+            this.allUsers = new ClientHandler[]{scp, town};
+        }
+
+        /**
+         * Sends a message to a specific {@code ClientHandlers}
+         * @param ch the array of {@code ClientHandlers} to send to
+         * @param msg the message to send
+         */
+        private void sendTo(ClientHandler[] ch, String msg){
+            for(int i = 0;i < ch.length;i++){
+                ch[i].sendMessage(msg);
+            }
         }
 
         /**
@@ -432,14 +446,33 @@ class Server {
                     if(curTime - lastTime >= ONE_MINUTE){
                         lastTime = curTime;
                         game.doTurn();
-                        scp.sendMessage("<te>");
-                        // scp.sendMessage("" + game.getScps().size());
-                        // for(int i = 0;i < game.getScps().size();i++){
-                        //     SCP0492 curScp = game.getScps().get(i);
-                        //     scp.sendMessage(curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
-                        // }
+                        sendTo(allUsers, "<te>");
+                        //scps
+                        sendTo(allUsers, "" + game.getScps().size());
+                        for(int i = 0;i < game.getScps().size();i++){
+                            SCP0492 curScp = game.getScps().get(i);
+                            sendTo(allUsers, curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
+                        }
 
-                        town.sendMessage("<te>");
+                        //events
+                        sendTo(allUsers, "" + game.getEvents().size());
+                        for(int i = 0;i < game.getEvents().size();i++){
+                            Event curEvent = game.getEvents().get(i);
+                            if(curEvent instanceof WholeGameEvent){
+                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getEffectAmount());
+                            }else{
+                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getEffectAmount() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()) + " " + (int)(((AoeEvent)curEvent).getAoe().getWidth())  + " " + (int)(((AoeEvent)curEvent).getAoe().getHeight()));
+                            }
+                        }
+
+                        //buildings
+                        sendTo(allUsers, "" + game.getBuildings().size());
+                        for(int i = 0;i < game.getBuildings().size();i++){
+                            Building curBuilding = game.getBuildings().get(i);
+                            sendTo(allUsers, curBuilding.getClass().getSimpleName() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY());
+                        }
+
+                        //town food supply
                         town.sendMessage("<r>");
                         town.sendMessage("Food");
                         if(game.getFood() > game.getHumans().size()){
@@ -450,8 +483,7 @@ class Server {
                 }else{
                     if(curTime - lastTime >= ONE_MINUTE/2){
                         lastTime = curTime;
-                        town.sendMessage("<ts>");
-                        scp.sendMessage("<ts>");
+                        sendTo(allUsers, "<ts>");
                         turnGoing = !turnGoing;
                     }
                 }

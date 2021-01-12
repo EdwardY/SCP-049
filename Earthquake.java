@@ -60,6 +60,5 @@ class Earthquake extends PhysicalEvent{
      */
     public void draw(Graphics g){
         g.drawImage(this.getSprite(), this.getAoe().x, this.getAoe().y, this.getAoe().width, this.getAoe().height, null);
-        //TODO: maybe improve this later to only draw where there are buildings or something
     }
 }

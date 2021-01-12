@@ -241,7 +241,7 @@ class Server {
          * @return true if it's a whole game event, false otherwise
          */
         private boolean isWholeGameEvent(String eventType){
-            return eventType.equals("stonks") || eventType.equals("riot") || eventType.equals("mutate") || eventType.equals("warpreality");
+            return eventType.equals("Stonks") || eventType.equals("Riot") || eventType.equals("Mutate") || eventType.equals("WarpReality");
         }
 
         /**
@@ -257,25 +257,25 @@ class Server {
          */
         private boolean buildBuilding(String type, int x, int y){
             boolean success = false;
-            Image sprite = Toolkit.getDefaultToolkit().getImage("./assets/" + type + ".png");
+            Image sprite = Toolkit.getDefaultToolkit().getImage("./assets/" + type.toLowerCase() + ".png");
             int price = Integer.MAX_VALUE;
             Building building = null;
-            if(type.equals("bank")){
+            if(type.equals("Bank")){
                 building = new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, sprite, x, y);
                 price = Bank.INITIAL_PRICE;
-            }else if(type.equals("foodbuilding")){
+            }else if(type.equals("FoodBuilding")){
                 building = new FoodBuilding(FoodBuilding.INITIAL_PRICE, FoodBuilding.INITIAL_HEALTH, FoodBuilding.INITIAL_HEALTH, sprite, x, y);
                 price = FoodBuilding.INITIAL_PRICE;
-            }else if(type.equals("hospital")){
+            }else if(type.equals("Hospital")){
                 building = new Hospital(Hospital.INITIAL_PRICE, Hospital.INITIAL_HEALTH, Hospital.INITIAL_HEALTH, sprite, x, y, Hospital.INITIAL_MAX_CAP);
                 price = Hospital.INITIAL_PRICE;
-            }else if(type.equals("militarybase")){
+            }else if(type.equals("MilitaryBase")){
                 building = new MilitaryBase(MilitaryBase.INITIAL_PRICE, MilitaryBase.INITIAL_HEALTH, MilitaryBase.INITIAL_HEALTH, sprite, x, y);
                 price = MilitaryBase.INITIAL_PRICE;
-            }else if(type.equals("researchlab")){
+            }else if(type.equals("ResearchLab")){
                 building = new ResearchLab(ResearchLab.INITIAL_PRICE, ResearchLab.INITIAL_HEALTH, ResearchLab.INITIAL_HEALTH, sprite, x, y);
                 price = ResearchLab.INITIAL_PRICE;
-            }else if(type.equals("residency")){
+            }else if(type.equals("Residency")){
                 building = new Residency(Residency.INITIAL_PRICE, Residency.INITIAL_HEALTH, Residency.INITIAL_HEALTH, sprite, x, y, Residency.INITIAL_MAX_CAP);
                 price = Residency.INITIAL_PRICE;
             }
@@ -283,7 +283,7 @@ class Server {
                 game.addBuilding(building);
                 success = true;
                 sendMessage("<r>");
-                sendMessage("dubercoin");
+                sendMessage("Money");
                 sendMessage("" + (price * -1));
             }
             return success;
@@ -305,29 +305,29 @@ class Server {
             boolean success = false;
             Event event = null;
             int price = Integer.MAX_VALUE;
-            if(type.equals("earthquake")){
+            if(type.equals("Earthquake")){
                 event = new Earthquake(level, x, y);
                 price = Earthquake.getCostByLevel(level);
-            }else if(type.equals("fire")){
+            }else if(type.equals("Fire")){
                 event = new Fire(level, x, y);
                 price = Fire.getCostByLevel(level);
-            }else if(type.equals("infect")){
+            }else if(type.equals("Infect")){
                 event = new Infect(level, x, y);
                 price = Infect.getCostByLevel(level);
-            }else if(type.equals("snow")){
+            }else if(type.equals("Snow")){
                 event = new Snow(level, x, y);
                 price = Snow.getCostByLevel(level);
-            }else if(type.equals("thunderstorm")){
+            }else if(type.equals("Thunderstorm")){
                 event = new Thunderstorm(level, x, y);
                 price = Thunderstorm.getCostByLevel(level);
-            }else if(type.equals("tornado")){
+            }else if(type.equals("Tornado")){
                 event = new Tornado(level, x, y);
                 price = Tornado.getCostByLevel(level);
             }
             if((event != null) && (game.getHume() >= price)){
                 game.startEvent(event);
                 sendMessage("<r>");
-                sendMessage("hume");
+                sendMessage("Hume");
                 sendMessage("" + (price * -1));
             }
             return success;
@@ -346,23 +346,23 @@ class Server {
             boolean success = false;
             Event event = null;
             int price = Integer.MAX_VALUE;
-            if(type.equals("stonks")){
+            if(type.equals("Stonks")){
                 game.startEvent(new Stonks(level));
                 return true;
-            }else if(type.equals("riot")){
+            }else if(type.equals("Riot")){
                 event = new Riot(level);
                 price = Riot.getCostByLevel(level);
-            }else if(type.equals("mutate")){
+            }else if(type.equals("Mutate")){
                 event = new Mutate(level);
                 price = Mutate.getCostByLevel(level);
-            }else if(type.equals("warpreality")){
+            }else if(type.equals("WarpReality")){
                 event = new WarpReality(level);
                 price = WarpReality.getCostByLevel(level);
             }
             if((event != null) && (game.getHume() >= price)){
                 game.startEvent(event);
                 sendMessage("<r>");
-                sendMessage("hume");
+                sendMessage("Hume");
                 sendMessage("" + (price * -1));
             }
             return success;

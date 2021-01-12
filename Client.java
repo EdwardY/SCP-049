@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.net.Socket;
 
 
+
 /**
  * [Client.java]
  * The client program used by the players to communicate with the server and launch the game.
@@ -47,6 +48,8 @@ public class Client {
     private MessageHandler messageHandler;
     /**Used to check if the program should still run or not. */
     private boolean running;
+    /**Stores this client so other objects can be linked to it. */
+    private Client thisClient = this;
   
 
 
@@ -83,6 +86,9 @@ public class Client {
 
 
 
+    //TODO: some method parameters between Town/SCP/Player and client do not match, e.g. .start
+
+
     //start of inner classes
         /**
          * An inner class used to receives messages from the server.
@@ -101,11 +107,13 @@ public class Client {
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
                                 if(side.equals("s")){ //this player is on the SCP side
-                                    System.out.println("start scp game");
+                                    player = new SCP(username, thisClient, startingCurrency);
+                                    ((SCP)player).start();
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
                                     System.out.println("start town game");
                                 }
+
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
 
                                 System.out.println("start turn here");
@@ -190,7 +198,7 @@ public class Client {
         //set JFrame
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
-        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE); //?????????
+        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE); 
 
         //set JPanel
         panel = new JPanel();

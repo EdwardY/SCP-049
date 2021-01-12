@@ -29,6 +29,14 @@ public class SCP extends Player{
         scps = new ArrayList<SCP0492>();
     }//end of constructor
 
+
+    /**
+     * starts the game as the SCP side.
+     */
+    public void start(){
+        System.out.println("starting game...");
+    }
+    
     /**
      * Creates an SCP event that the player chose to use that is not location-based.
      * @param eventType The name of the event that will be created.

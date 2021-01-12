@@ -22,7 +22,7 @@ import java.net.Socket;
 
 /**
  * [Client.java]
- * The client program used by the players of the game.
+ * The client program used by the players to communicate with the server and launch the game.
  * @author Vivian Dai, Damon Ma, and Edward Yang
  * @version 1.0 on January 4, 2021 
  */
@@ -254,7 +254,6 @@ public class Client {
         * @param port The port.
         */
         public void connect(String username, String address, int port){
-            System.out.println("Work in progress");
             try {
       
                 socket = new Socket(address, port); //attempt socket connection

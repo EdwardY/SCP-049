@@ -24,13 +24,44 @@ import java.awt.event.MouseEvent;
  */
 public abstract class GameWindow{
     /**The window that the game will use. */
-   private JFrame window;
+   private JFrame window = new JFrame("Code-049");
    /**The JPanel displaying all game objects on the game grid.*/
-   private JPanel grid;
+   private JPanel grid = new JPanel();
    /**The JPanel displaying all statistics about the player.*/
-   private JPanel infoBar;
+   private JPanel infoBar = new JPanel();
 
+
+    /**
+     * Updates the main game window.
+     */
     public abstract void update();
+
+
+
+    /**
+    * Gets the JFrame of the game window.
+    * @return The JFrame of the game window.
+    */
+    public JFrame getWindow(){
+        return this.window;
+    }
+
+
+    /**
+    * Gets the grid JPanel of the game window.
+    * @return The grid JPanel of the game window.
+    */
+    public JPanel getGrid(){
+        return this.grid;
+    }
+
+    /**
+    * Gets the stats bar JPanel of the game window.
+    * @return The stats bar JPanel of the game window.
+    */
+    public JPanel getInfoBar(){
+        return this.infoBar;
+    }
 
 
     /**
@@ -116,8 +147,6 @@ public abstract class GameWindow{
         public int getMouseY(){
             return this.y;
         }
-
-
 
     }//end of inner class
 

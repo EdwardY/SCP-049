@@ -1,5 +1,21 @@
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 /**
  * [SCP.java]
@@ -15,7 +31,8 @@ public class SCP extends Player{
     private ArrayList<SCP0492> scps;
     /**The amount of hume points (SCP currency) that the player has. */
     private int hume;
-    
+    /**The game window that the player will use to play the game. */
+    private SCPGameWindow gameWindow;
 
     /**
      * Constructor for a new SCP game
@@ -34,7 +51,8 @@ public class SCP extends Player{
      * starts the game as the SCP side.
      */
     public void start(){
-        System.out.println("starting game...");
+        gameWindow = new SCPGameWindow();
+        gameWindow.run();
     }
 
 
@@ -88,11 +106,34 @@ public class SCP extends Player{
     //start of inner class for the game window
     public class SCPGameWindow extends GameWindow{
 
+        /**
+         * Runs the SCP version of the game.
+         */
+        public void run(){
+            JFrame gameWindow = getWindow();
+            gameWindow.setSize(50,50); //TODO: Discuss game window sizes
+            gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+            JPanel gridPanel = getGrid();
+            gridPanel.setBounds(0, 0, 0, 0); //TODO: Discuss game window sizes and dimensions of JPanels
+            gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            gameWindow.add(gridPanel);
 
 
-        public void update(){
-            System.out.println("Game window should open here");
+            JPanel infoBarPanel = getInfoBar();
+            infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
+            infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
+            gameWindow.add(infoBarPanel);
         }
-    }
+
+        /**
+         * Updates the game screen.
+         */
+        public void update(){
+            System.out.println("Hello");
+            //TODO: Not complete yet
+        }
+
+    }//end of inner class
 
 }//end of class

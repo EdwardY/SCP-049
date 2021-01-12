@@ -118,9 +118,16 @@ public class Client {
 
                                 player.startTurn();
 
-                            }else if(prefix.equals("<ts>")){ //server says to end the current turn
-
-                                player.endTurn();
+                            }else if(prefix.equals("<te>")){ //server says to end the current turn
+                                //TODO: This part is not complete yet.
+                                if (player instanceof SCP){
+                                    int scpNum = Integer.parseInt(input.readLine());
+                                    player.endTurn();
+                                }else if (player instanceof Town){
+                                    int buildingNum = Integer.parseInt(input.readLine());
+                                    player.endTurn();
+                                }
+    
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
 
@@ -133,11 +140,11 @@ public class Client {
                             }else if(prefix.equals("<r>")){ //change in resources
                                 String resourceType = input.readLine();
                                 int resourceChange = Integer.parseInt(input.readLine());
-                                if(resourceType.equals("Money")){
+                                if(resourceType.equals("dubercoin")){
                                     ((Town)player).changeFood(resourceChange);
-                                }else if(resourceType.equals("Food")){
+                                }else if(resourceType.equals("food")){
                                     ((Town)player).changeFood(resourceChange);
-                                }else if(resourceType.equals("Hume")){
+                                }else if(resourceType.equals("hume")){
                                     ((SCP)player).changeHume(resourceChange);
                                 }             
                             }//end of if statements
@@ -198,7 +205,7 @@ public class Client {
         //set JFrame
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
-        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE); 
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
         //set JPanel
         panel = new JPanel();
@@ -355,7 +362,7 @@ public class Client {
         //set JFrame
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
-        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //set JPanel
         panel = new JPanel();

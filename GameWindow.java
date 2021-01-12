@@ -74,45 +74,43 @@ public abstract class GameWindow{
         private int y;
 
         /**
-         * When the mouse's left click is pressed.
+         * When the mouse's click button is pressed.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mousePressed(MouseEvent e){
-            System.out.println("pressed");
         }
 
         /**
-         * When the mouse's left click is released.
+         * When the mouse's click button is released.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseReleased(MouseEvent e){
-            System.out.println("released");
         }
 
         /**
-         * When the mouse entered.
+         * When the mouse enters a component.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseEntered(MouseEvent e){
-            System.out.println("entered");
+            if((x <= 100) && (x >= 0) && (y <= 100) && (y >= 0)){
+                System.out.println("your button works.");
+            }
         }
 
 
         /**
-         * When the mouse exited.
+         * When the mouse exits a component.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseExited(MouseEvent e){
-            System.out.println("exited");
         }
 
 
         /**
-         * When the mouse is left-clicked.
+         * When the mouse's button is pressed and released.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseClicked(MouseEvent e){
-            System.out.println("clicked");
         }
 
         /**
@@ -120,15 +118,13 @@ public abstract class GameWindow{
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseMoved(MouseEvent e){
-            System.out.println("moved");
         }
 
         /**
-         * When the mouse is dragged.
+         * When the mouse is moved while its button is pressed.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseDragged(MouseEvent e){
-            System.out.println("dragged");
         }
 
 

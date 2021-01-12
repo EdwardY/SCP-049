@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class SCP extends Player{
     /**An arraylist of all SCPs in the game. */
     private ArrayList<SCP0492> scps;
-    /**The amount of hume points (SCP currency) that the play has. */
+    /**The amount of hume points (SCP currency) that the player has. */
     private int hume;
     
 
@@ -21,10 +21,10 @@ public class SCP extends Player{
      * Constructor for a new SCP game
      * @param username The username of the player
      * @param playerClient The client that the player is using the send and receive messages from the server.
-     * @param hume THe amount of hume points that the player will start off with.
+     * @param hume The amount of hume points that the player will start off with.
      */
-    public SCP(String username, Client playerClient, int hume){
-        super(username, playerClient);
+    public SCP(String username, Client playerClient, String opponent, int hume){
+        super(username, playerClient, opponent);
         this.hume = hume;
         scps = new ArrayList<SCP0492>();
     }//end of constructor
@@ -36,7 +36,35 @@ public class SCP extends Player{
     public void start(){
         System.out.println("starting game...");
     }
+
+
+    /**
+     * Changes the amount of the player's hume points
+     * @param change The amount of hume points that the player will gain or lose.
+     */
+    public void changeHume(int change){
+        this.hume += change;
+    }
     
+    //TODO: method for client-game transactions
+
+
+    /**
+     * Starts the current turn in the game.
+     */
+    public void endTurn(){
+        System.out.println("Not a functional method yet.");
+        //TODO: Not a functional method yet.
+    }
+
+    /**
+     * Ends the current turn in the game.
+     */
+    public void startTurn(){
+        System.out.println("Not a functional method yet.");
+        //TODO: Not a functional method yet.
+    }
+
     /**
      * Creates an SCP event that the player chose to use that is not location-based.
      * @param eventType The name of the event that will be created.

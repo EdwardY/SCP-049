@@ -44,7 +44,7 @@ public class Client {
     private Socket socket;
     /**The username of the player. */
     private String username;
-    /** Used to send and receivemessages to the server*/
+    /** Used to send and receive messages with the server*/
     private MessageHandler messageHandler;
     /**Used to check if the program should still run or not. */
     private boolean running;
@@ -107,39 +107,39 @@ public class Client {
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
                                 if(side.equals("s")){ //this player is on the SCP side
-                                    player = new SCP(username, thisClient, startingCurrency);
-                                    ((SCP)player).start();
+                                    player = new SCP(username, thisClient, opponent, startingCurrency);
+                                    player.start();
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
-                                    System.out.println("start town game");
+                                    player = new Town(username, thisClient, opponent, startingCurrency, startingFood);
                                 }
 
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
 
-                                System.out.println("start turn here");
+                                player.startTurn();
 
                             }else if(prefix.equals("<ts>")){ //server says to end the current turn
 
-                                System.out.println("end turn here");
+                                player.endTurn();
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
 
                                 System.out.println("something something transaction didn't go through");
-
+                                //TODO: Not done properly yet.
                             }else if(prefix.equals("<st>")){ //transaction is successful
 
                                 System.out.println("something something congrats purchase successful");
-
+                                //TODO: Not done properly yet.
                             }else if(prefix.equals("<r>")){ //change in resources
                                 String resourceType = input.readLine();
                                 int resourceChange = Integer.parseInt(input.readLine());
-                                if(resourceType.equals("DuberCoin")){
-                                    System.out.println("change in DuberCoins");
-                                }else if(resourceType.equals("food")){
-                                    System.out.println("change in food");
-                                }else if(resourceType.equals("hume")){
-                                    System.out.println("change in hume points");
-                                }                                
+                                if(resourceType.equals("Money")){
+                                    ((Town)player).changeFood(resourceChange);
+                                }else if(resourceType.equals("Food")){
+                                    ((Town)player).changeFood(resourceChange);
+                                }else if(resourceType.equals("Hume")){
+                                    ((SCP)player).changeHume(resourceChange);
+                                }             
                             }//end of if statements
 
                         }

@@ -20,9 +20,10 @@ import java.awt.event.ActionEvent;
 import java.net.Socket;
 
 
+
 /**
  * [Client.java]
- * The client program used by the players of the game.
+ * The client program used by the players to communicate with the server and launch the game.
  * @author Vivian Dai, Damon Ma, and Edward Yang
  * @version 1.0 on January 4, 2021 
  */
@@ -43,10 +44,12 @@ public class Client {
     private Socket socket;
     /**The username of the player. */
     private String username;
-    /** Used to send and receivemessages to the server*/
+    /** Used to send and receive messages with the server*/
     private MessageHandler messageHandler;
     /**Used to check if the program should still run or not. */
     private boolean running;
+    /**Stores this client so other objects can be linked to it. */
+    private Client thisClient = this;
   
 
 
@@ -83,6 +86,9 @@ public class Client {
 
 
 
+    //TODO: some method parameters between Town/SCP/Player and client do not match, e.g. .start
+
+
     //start of inner classes
         /**
          * An inner class used to receives messages from the server.
@@ -101,37 +107,46 @@ public class Client {
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
                                 if(side.equals("s")){ //this player is on the SCP side
-                                    System.out.println("start scp game");
+                                    player = new SCP(username, thisClient, opponent, startingCurrency);
+                                    player.start();
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
-                                    System.out.println("start town game");
+                                    player = new Town(username, thisClient, opponent, startingCurrency, startingFood);
                                 }
+
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
 
-                                System.out.println("start turn here");
+                                player.startTurn();
 
-                            }else if(prefix.equals("<ts>")){ //server says to end the current turn
-
-                                System.out.println("end turn here");
+                            }else if(prefix.equals("<te>")){ //server says to end the current turn
+                                //TODO: This part is not complete yet.
+                                if (player instanceof SCP){
+                                    int scpNum = Integer.parseInt(input.readLine());
+                                    player.endTurn();
+                                }else if (player instanceof Town){
+                                    int buildingNum = Integer.parseInt(input.readLine());
+                                    player.endTurn();
+                                }
+    
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
 
                                 System.out.println("something something transaction didn't go through");
-
+                                //TODO: Not done properly yet.
                             }else if(prefix.equals("<st>")){ //transaction is successful
 
                                 System.out.println("something something congrats purchase successful");
-
+                                //TODO: Not done properly yet.
                             }else if(prefix.equals("<r>")){ //change in resources
                                 String resourceType = input.readLine();
                                 int resourceChange = Integer.parseInt(input.readLine());
-                                if(resourceType.equals("DuberCoin")){
-                                    System.out.println("change in DuberCoins");
+                                if(resourceType.equals("dubercoin")){
+                                    ((Town)player).changeFood(resourceChange);
                                 }else if(resourceType.equals("food")){
-                                    System.out.println("change in food");
+                                    ((Town)player).changeFood(resourceChange);
                                 }else if(resourceType.equals("hume")){
-                                    System.out.println("change in hume points");
-                                }                                
+                                    ((SCP)player).changeHume(resourceChange);
+                                }             
                             }//end of if statements
 
                         }
@@ -190,7 +205,7 @@ public class Client {
         //set JFrame
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
-        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE); //?????????
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 
         //set JPanel
         panel = new JPanel();
@@ -254,7 +269,6 @@ public class Client {
         * @param port The port.
         */
         public void connect(String username, String address, int port){
-            System.out.println("Work in progress");
             try {
       
                 socket = new Socket(address, port); //attempt socket connection
@@ -348,7 +362,7 @@ public class Client {
         //set JFrame
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
-        window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //set JPanel
         panel = new JPanel();

@@ -19,9 +19,9 @@ public class Town extends Player {
     /**Array list for storing the human population */
     private ArrayList<Human> population = new ArrayList<>();
     /**An integer for storing the money the player has */
-    private int money = 0;
+    private int money;
     /**an integer for storing the food that the player has */
-    private int food = 0;
+    private int food;
 
     /**
      * Constructor for the town side player's class
@@ -30,6 +30,63 @@ public class Town extends Player {
      */
     Town(String username, Client client){
         super(username, client);
+
+    Town(String username, Client playerClient, String opponent, int money, int food){
+        super(username, playerClient, opponent);
+        this.money = money;
+        this.food = food; 
+    }
+
+
+    /**
+     * Starts the town version of the game.
+     */
+    public void start(){
+        System.out.println("Starting town game...");
+        //TODO: nothing is actually here yet.
+
+    }
+
+    /**
+     * Changes the amount of money that the player has.
+     * @param change The amount of money that the player will gain or lose.
+     */
+    public void changeMoney(int change){
+        this.money += change;
+    }
+
+    /**
+     * Changes the amount of food that the player has.
+     * @param change The amount of food that the player will gain or lose;
+     */
+    public void changeFood(int change){
+        this.food += change;
+    }
+
+
+    /**
+     * Starts the current turn in the game.
+     */
+    public void endTurn(){
+        System.out.println("Not a functional method yet.");
+        //TODO: Not a functional method yet.
+    }
+
+    /**
+     * Ends the current turn in the game.
+     */
+    public void startTurn(){
+        System.out.println("Not a functional method yet.");
+        //TODO: Not a functional method yet.
+    }
+
+    //TODO: method for client-game transactions
+
+
+    public ArrayList<JFrame> getGameGraphics(){
+
+        //TODO: ask vivian and damon how exactly the graphics are going to work
+
     }
 
     

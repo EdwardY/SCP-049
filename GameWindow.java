@@ -24,13 +24,44 @@ import java.awt.event.MouseEvent;
  */
 public abstract class GameWindow{
     /**The window that the game will use. */
-   private JFrame window;
+   private JFrame window = new JFrame("Code-049");
    /**The JPanel displaying all game objects on the game grid.*/
-   private JPanel grid;
+   private JPanel grid = new JPanel();
    /**The JPanel displaying all statistics about the player.*/
-   private JPanel infoBar;
+   private JPanel infoBar = new JPanel();
 
+
+    /**
+     * Updates the main game window.
+     */
     public abstract void update();
+
+
+
+    /**
+    * Gets the JFrame of the game window.
+    * @return The JFrame of the game window.
+    */
+    public JFrame getWindow(){
+        return this.window;
+    }
+
+
+    /**
+    * Gets the grid JPanel of the game window.
+    * @return The grid JPanel of the game window.
+    */
+    public JPanel getGrid(){
+        return this.grid;
+    }
+
+    /**
+    * Gets the stats bar JPanel of the game window.
+    * @return The stats bar JPanel of the game window.
+    */
+    public JPanel getInfoBar(){
+        return this.infoBar;
+    }
 
 
     /**
@@ -43,45 +74,43 @@ public abstract class GameWindow{
         private int y;
 
         /**
-         * When the mouse's left click is pressed.
+         * When the mouse's click button is pressed.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mousePressed(MouseEvent e){
-            System.out.println("pressed");
         }
 
         /**
-         * When the mouse's left click is released.
+         * When the mouse's click button is released.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseReleased(MouseEvent e){
-            System.out.println("released");
         }
 
         /**
-         * When the mouse entered.
+         * When the mouse enters a component.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseEntered(MouseEvent e){
-            System.out.println("entered");
+            if((x <= 100) && (x >= 0) && (y <= 100) && (y >= 0)){
+                System.out.println("your button works.");
+            }
         }
 
 
         /**
-         * When the mouse exited.
+         * When the mouse exits a component.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseExited(MouseEvent e){
-            System.out.println("exited");
         }
 
 
         /**
-         * When the mouse is left-clicked.
+         * When the mouse's button is pressed and released.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseClicked(MouseEvent e){
-            System.out.println("clicked");
         }
 
         /**
@@ -89,15 +118,13 @@ public abstract class GameWindow{
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseMoved(MouseEvent e){
-            System.out.println("moved");
         }
 
         /**
-         * When the mouse is dragged.
+         * When the mouse is moved while its button is pressed.
          * @param MouseEvent The action performed by the mouse.
          */
         public void mouseDragged(MouseEvent e){
-            System.out.println("dragged");
         }
 
 
@@ -116,8 +143,6 @@ public abstract class GameWindow{
         public int getMouseY(){
             return this.y;
         }
-
-
 
     }//end of inner class
 

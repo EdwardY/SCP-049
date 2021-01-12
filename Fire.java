@@ -54,13 +54,10 @@ class Fire extends PhysicalEvent{
         }
     }
     /**
-     * Draws the {@code Fire} sprite in some random places in the area of effect
+     * Draws the {@code Fire} sprite in the area of effect
      * @param g the {@code Graphics} to draw the {@code Fire} on
      */
     public void draw(Graphics g){
-        for(int i = 0;i < (this.getAoe().width + this.getAoe().height)/10;i++){
-            g.drawImage(this.getSprite(), (int)(Math.random()*this.getAoe().width) + this.getAoe().x, (int)(Math.random()*this.getAoe().height) + this.getAoe().y, null);
-        } 
-        //TODO: restrict the bottom right boundaries after getting a fire sprite
+        g.drawImage(this.getSprite(), this.getAoe().x, this.getAoe().y, this.getAoe().width, this.getAoe().height, null);
     }
 }

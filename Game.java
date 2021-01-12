@@ -117,6 +117,8 @@ class Game {
                 int dx = (int)Math.round((Math.random()*2) - 1);
                 int dy = (int)Math.round((Math.random()*2) - 1);
                 ((Tornado)currentEvent).translate(dx, dy);
+            }else if((currentEvent instanceof Thunderstorm) && (((Thunderstorm)currentEvent).getStrikesLeft() <= 0){
+                this.events.remove(currentEvent);
             }
             if(currentEvent.getTimeLeft() <= 0){
                 this.events.remove(currentEvent);

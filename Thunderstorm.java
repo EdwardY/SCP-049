@@ -79,6 +79,7 @@ class Thunderstorm extends PhysicalEvent{
                 buildings.get(i).downgrade();
             }
         }
+        this.strikesLeft--;
     }
 
     /**

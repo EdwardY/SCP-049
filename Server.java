@@ -433,14 +433,18 @@ class Server {
                         lastTime = curTime;
                         game.doTurn();
                         scp.sendMessage("<te>");
-                        scp.sendMessage("" + game.getScps().size());
-                        for(int i = 0;i < game.getScps().size();i++){
-                            SCP0492 curScp = game.getScps().get(i);
-                            scp.sendMessage(curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
-                        }
+                        // scp.sendMessage("" + game.getScps().size());
+                        // for(int i = 0;i < game.getScps().size();i++){
+                        //     SCP0492 curScp = game.getScps().get(i);
+                        //     scp.sendMessage(curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
+                        // }
 
                         town.sendMessage("<te>");
-
+                        town.sendMessage("<r>");
+                        town.sendMessage("Food");
+                        if(game.getFood() > game.getHumans().size()){
+                            town.sendMessage("" + game.getHumans().size());
+                        }
                         turnGoing = !turnGoing;
                     }
                 }else{

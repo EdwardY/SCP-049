@@ -27,10 +27,9 @@ public class Town extends Player {
      * Constructor for the town side player's class
      * @param username The username of the player
      * @param client The client that will connect to the server
+     * @param money the amount of money the user will begin with
+     * @param food the amount of food the user wil begin with
      */
-    Town(String username, Client client){
-        super(username, client);
-
     Town(String username, Client playerClient, String opponent, int money, int food){
         super(username, playerClient, opponent);
         this.money = money;
@@ -84,6 +83,7 @@ public class Town extends Player {
 
 
     public ArrayList<JFrame> getGameGraphics(){
+
 
         //TODO: ask vivian and damon how exactly the graphics are going to work
 
@@ -173,24 +173,6 @@ public class Town extends Player {
     public int getFood(){
 
         return this.food;
-    }
-
-    
-    /** 
-     * @param newMoney
-     */
-    public void setMoney(int newMoney){
-
-        this.money = newMoney;
-    }
-
-    
-    /** 
-     * @param newFood
-     */
-    public void setFood(int newFood){
-
-        this.food = newFood;
     }
 
 }

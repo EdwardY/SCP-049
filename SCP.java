@@ -27,12 +27,12 @@ import java.awt.event.MouseEvent;
 
 
 public class SCP extends Player{
-    /**An arraylist of all SCPs in the game. */
-    private ArrayList<SCP0492> scps;
+
     /**The amount of hume points (SCP currency) that the player has. */
     private int hume;
     /**The game window that the player will use to play the game. */
     private SCPGameWindow gameWindow;
+
 
     /**
      * Constructor for a new SCP game
@@ -102,6 +102,38 @@ public class SCP extends Player{
     }//end of method
 
 
+
+    //start of getters
+
+    /**
+     * Gets the player's game window.
+     * @return The player's game window.
+     */
+    private SCPGameWindow getSCPGameWindow(){
+        return this.gameWindow;
+    }
+        /**
+     * Gets the amount of hume points that the player has.
+     * @return the number of hume points.
+     */
+    private int getHume(){
+        return this.hume;
+    }
+
+    //end of getters
+
+
+    //start of setters
+
+    /**
+     * Changes the amount of the player's hume points.
+     * @param hume The player's new hume points.
+     */
+    private void setHume(int hume){
+        this.hume = hume;
+    }
+
+    //end of setters
 
     //start of inner class for the game window
     public class SCPGameWindow extends GameWindow{

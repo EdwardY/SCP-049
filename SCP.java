@@ -38,12 +38,12 @@ public class SCP extends Player{
      * Constructor for a new SCP game
      * @param username The username of the player
      * @param playerClient The client that the player is using the send and receive messages from the server.
+     * @param opponent The username of the opponent that the player will play against.
      * @param hume The amount of hume points that the player will start off with.
      */
     public SCP(String username, Client playerClient, String opponent, int hume){
         super(username, playerClient, opponent);
         this.hume = hume;
-        scps = new ArrayList<SCP0492>();
     }//end of constructor
 
 
@@ -109,14 +109,14 @@ public class SCP extends Player{
      * Gets the player's game window.
      * @return The player's game window.
      */
-    private SCPGameWindow getSCPGameWindow(){
+    public SCPGameWindow getSCPGameWindow(){
         return this.gameWindow;
     }
         /**
      * Gets the amount of hume points that the player has.
      * @return the number of hume points.
      */
-    private int getHume(){
+    public int getHume(){
         return this.hume;
     }
 
@@ -129,7 +129,7 @@ public class SCP extends Player{
      * Changes the amount of the player's hume points.
      * @param hume The player's new hume points.
      */
-    private void setHume(int hume){
+    public void setHume(int hume){
         this.hume = hume;
     }
 
@@ -142,17 +142,17 @@ public class SCP extends Player{
          * Runs the SCP version of the game.
          */
         public void run(){
-            JFrame gameWindow = getWindow();
+            JFrame gameWindow = this.getWindow();
             gameWindow.setSize(50,50); //TODO: Discuss game window sizes
             gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-            JPanel gridPanel = getGrid();
+            JPanel gridPanel = this.getGrid();
             gridPanel.setBounds(0, 0, 0, 0); //TODO: Discuss game window sizes and dimensions of JPanels
             gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             gameWindow.add(gridPanel);
 
 
-            JPanel infoBarPanel = getInfoBar();
+            JPanel infoBarPanel = this.getInfoBar();
             infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
             infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
             gameWindow.add(infoBarPanel);

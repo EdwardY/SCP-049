@@ -25,12 +25,18 @@ import java.awt.event.MouseEvent;
  */
 public abstract class GameWindow{
     /**The window that the game will use. */
-   private JFrame window = new JFrame("Code-049");
+   private JFrame window;
    /**The JPanel displaying all game objects on the game grid.*/
-   private JPanel grid = new JPanel();
+   private JPanel grid;
    /**The JPanel displaying all statistics about the player.*/
-   private JPanel infoBar = new JPanel();
+   private JPanel infoBar;
 
+
+   public GameWindow(){
+       this.window = new JFrame("Code-049");
+       this.grid = new JPanel();
+       this.infoBar = new JPanel();
+   }
 
     /**
      * Updates the main game window.
@@ -135,7 +141,7 @@ public abstract class GameWindow{
 
         /**
          * Returns the x-value of the mouse's position.
-         * @return THe x-value of the mouse's position.
+         * @return The x-value of the mouse's position.
          */
         public int getMouseX(){
             return this.x;

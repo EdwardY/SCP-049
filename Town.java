@@ -13,11 +13,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class Town extends Player {
-
-    /**an array list storing all the buildings */
-    private ArrayList<Building> buildings = new ArrayList<>();
-    /**Array list for storing the human population */
-    private ArrayList<Human> population = new ArrayList<>();
     /**An integer for storing the money the player has */
     private int money;
     /**an integer for storing the food that the player has */
@@ -26,7 +21,8 @@ public class Town extends Player {
     /**
      * Constructor for the town side player's class
      * @param username The username of the player
-     * @param client The client that will connect to the server
+     * @param playerClient The client that will connect to the server
+     * @param opponent The username of the opponent that the player will play against.
      * @param money the amount of money the user will begin with
      * @param food the amount of food the user wil begin with
      */
@@ -97,6 +93,8 @@ public class Town extends Player {
      */
     public void buildBuilding(String buildingType, int x, int y){
 
+        ArrayList<Building> buildings= this.getBuildings();
+
         //TODO: decide on the cost of the buildings to initially build
         Image sprite = Toolkit.getDefaultToolkit().getImage("./assets/" + buildingType + ".png");
 
@@ -144,7 +142,7 @@ public class Town extends Player {
      * @param y
      */
     public void upgradeBuilding(int x , int y){
-
+        ArrayList<Building> buildings = this.getBuildings();
         //TODO: figure out if I want to optimize efficiency
         for(int i = 0; i < buildings.size(); i ++){
 
@@ -156,23 +154,45 @@ public class Town extends Player {
 
     }
 
-    
+    //start of getters
     /** 
-     * @return int
+     * Gets the amount of money the player has.
+     * @return The player's money.
      */
     public int getMoney(){
-
         return this.money;
 
     }
 
     
     /** 
-     * @return int
+     * Gets the amount of food that the player has.
+     * @return The player's food.
      */
     public int getFood(){
-
         return this.food;
     }
+    //end of getters
 
-}
+    //start of setters
+
+    /**
+     * Sets the amount of money that the player has.
+     * @param money The new amount of money.
+     */
+    public void setMoney(int money){
+        this.money = money;
+    }
+
+    /**
+     * Sets the amount of food that the player has.
+     * @param food The new amount of food.
+     */
+    public void setFood(int food){
+        this.food = food;
+    }
+
+    //end of setters
+
+
+}//end of class

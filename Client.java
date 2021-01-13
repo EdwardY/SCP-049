@@ -127,7 +127,7 @@ public class Client {
                                 for(int i = 0; i < objectNum; i ++){
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
-                                    scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));   
+                                    //scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));   
                                     //TODO: fix NPC consctructors later, no longer needs image
                                 }
 

@@ -33,11 +33,17 @@ abstract class Player {
      * Constructor for the {@code Player} class
      * @param username the username of the {@code Player}
      * @param playerClient The client program of the player that connected to the server.
+     * @param opponent The username of the opponent that the player will play against.
      */
     public Player(String username, Client playerClient, String opponent){
         this.username = username;
         this.playerClient = playerClient;
         this.opponent = opponent;
+        this.gameFrames = new ArrayList<JFrame>();
+        this.humans = new ArrayList<Human>();
+        this.buildings = new ArrayList<Building>();
+        this.events = new ArrayList<Event>();
+        this.scps = new ArrayList<SCP0492>();
     }
 
     /**
@@ -75,7 +81,7 @@ abstract class Player {
      * Gets all of the player's SCP0492's.
      * @return The player's SCP0492's.
      */
-    private ArrayList<SCP0492> getSCPs(){
+    public  ArrayList<SCP0492> getSCPs(){
         return this.scps;
     }
 
@@ -86,7 +92,7 @@ abstract class Player {
      * Gets the list of human NPC's.
      * @return The list of humans.
      */
-    private ArrayList<Human> getHumans(){
+    public ArrayList<Human> getHumans(){
         return this.humans;
     }
 
@@ -94,7 +100,7 @@ abstract class Player {
      * Gets the list of buildings.
      * @return The list of buildings.
      */
-    private ArrayList<Building> getBuildings(){
+    public ArrayList<Building> getBuildings(){
         return this.buildings;
     }
 
@@ -102,7 +108,7 @@ abstract class Player {
      * Gets the list of events in the game.
      * @return The list of game events.
      */
-    private ArrayList<Event> getEvents(){
+    public ArrayList<Event> getEvents(){
         return this.events;
     }
     //end of getters
@@ -116,7 +122,7 @@ abstract class Player {
      * Sets all of the human NPC's.
      * @param humans The list of humans.
      */
-    private void setHumans(ArrayList<Human> humans){
+    public void setHumans(ArrayList<Human> humans){
         this.humans = humans;
     }
 
@@ -124,7 +130,7 @@ abstract class Player {
      * Sets the list of all SCP0492 NPC's.
      * @param scps The list of SCP0492's.
      */
-    private void setSCPs(ArrayList<SCP0492> scps){
+    public void setSCPs(ArrayList<SCP0492> scps){
         this.scps = scps;
     }
 
@@ -133,7 +139,7 @@ abstract class Player {
      * Sets the list of all game events.
      * @param events The list of events.
      */
-    private void setEvents(ArrayList<Event> events){
+    public void setEvents(ArrayList<Event> events){
         this.events = events;
     }
 
@@ -141,7 +147,7 @@ abstract class Player {
      * Sets the list of all buildings.
      * @param buildings The list of buildings.
      */
-    private void setBuildings(ArrayList<Building> buildings){
+    public void setBuildings(ArrayList<Building> buildings){
         this.buildings = buildings;
     }
 

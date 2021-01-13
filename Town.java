@@ -80,7 +80,7 @@ public class Town extends Player {
 
     public ArrayList<JFrame> getGameGraphics(){
 
-
+        return new ArrayList<JFrame>(); //for now to be able to test run the program.
         //TODO: ask vivian and damon how exactly the graphics are going to work
 
     }

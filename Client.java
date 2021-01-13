@@ -354,13 +354,13 @@ public class Client {
         public void connect(String username, String address, int port){
             try {
       
-                socket = new Socket(address, port); //attempt socket connection
+                thisClient.socket = new Socket(address, port); //attempt socket connection
             
                 //input to server
                 InputStreamReader stream1= new InputStreamReader(socket.getInputStream()); 
-                input = new BufferedReader(stream1);
+                thisClient.input = new BufferedReader(stream1);
                 //output to server
-                output = new PrintWriter(socket.getOutputStream()); //assign printwriter to network stream
+                thisClient.output = new PrintWriter(socket.getOutputStream()); //assign printwriter to network stream
             
                 //get messages from server
                 try{
@@ -370,15 +370,17 @@ public class Client {
                 sendMessage("<c>");
                 sendMessage(username);
               
+
+                window.dispose();
+
                 }catch(IOException e){
                     connectionErrorLabel.setText("A communications error has occured.");
                 }
             } catch (IOException e) {  //connection error occured
                 connectionErrorLabel.setText("Error: Could not connect to server.");
             }
-
             //close the login window since there's no need for it anymore
-            window.dispose();
+
         }//end of method
 
 

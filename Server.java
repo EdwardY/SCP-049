@@ -59,6 +59,21 @@ class Server {
     }
 
     /**
+     * Sends a message to both users to start the game
+     */
+    private void startGame(){
+        this.gameThread = new Thread(new GameHandler());
+        this.town.sendMessage("<s>");
+        this.town.sendMessage("t");
+        this.town.sendMessage(this.scp.getUsername());
+        this.town.sendMessage("" + game.getMoney());
+        this.town.sendMessage("" + game.getFood());
+        this.scp.sendMessage("<s>");
+        this.scp.sendMessage("s");
+        this.scp.sendMessage(this.town.getUsername());
+        this.scp.sendMessage("" + game.getHume());
+    }
+    /**
      * <p>
      * Starts looking for connections. Will keep looking for connections as long as there isn't the requirement of two players. 
      * If there are no players in the game, SCP or town role will be assigned randomly. If there already is a player then the 
@@ -70,41 +85,42 @@ class Server {
         Socket client = null;
         try{
             serverSock = new ServerSocket(this.port);
-            //serverSock.setSoTimeout(1000);
+            serverSock.setSoTimeout(100000); //TODO: take off timeout later
             while(running){
                 client = serverSock.accept();
+                System.out.println("Client");
                 if((this.scp == null) && (this.town == null)){
                     //assign at random
                     double rand = Math.random();
                     if(rand > 0.5){
                         this.scp = new ClientHandler(client);
                         this.scpThread = new Thread(this.scp);
+                        this.scpThread.start();
                         this.scp.sendMessage("<w>");
+                        System.out.println("SCP");
                     }else{
                         this.town = new ClientHandler(client);
                         this.townThread = new Thread(this.scp);
+                        this.townThread.start();
                         this.town.sendMessage("<w>");
+                        System.out.println("Town");
                     }
                 }else if(this.scp == null){
                     //assigns scp
                     this.scp = new ClientHandler(client);
                     this.scpThread = new Thread(this.scp);
+                    this.scpThread.start();
+                    startGame();
+                    System.out.println("SCP");
                 }else{
                     //assigns town
                     this.town = new ClientHandler(client);
                     this.townThread = new Thread(this.scp);
+                    this.townThread.start();
+                    startGame();
+                    System.out.println("Town");
                 }
             }
-            this.gameThread = new Thread(new GameHandler());
-            this.town.sendMessage("<s>");
-            this.town.sendMessage("t");
-            this.town.sendMessage("" + game.getMoney());
-            this.town.sendMessage("" + game.getFood());
-            this.town.sendMessage(this.scp.getUsername());
-            this.scp.sendMessage("<s>");
-            this.scp.sendMessage("s");
-            this.scp.sendMessage(this.town.getUsername());
-            this.scp.sendMessage("" + game.getHume());
         }catch(Exception e){ 
             System.out.println("Error accepting connection");
         }

@@ -391,8 +391,7 @@ public class Client {
                 //if there is input
                 while(!input.ready()){}
                 sendMessage("<c>");
-                sendMessage(username);
-              
+                sendMessage(username);              
 
                 window.dispose();
 

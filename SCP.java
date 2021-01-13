@@ -86,19 +86,41 @@ public class SCP extends Player{
     /**
      * Creates an SCP event that the player chose to use that is not location-based.
      * @param eventType The name of the event that will be created.
+     * @param level The level of the event.
      */
-    public void startEvent(String eventType){
-        System.out.println("new event!");
+    public void startEvent(String eventType, int level){
+        if(eventType.equals("Stonks")){
+            //TODO: add new Stonks event to arraylist
+        }else if(eventType.equals("Riot")){
+            //TODO: add new Riot event to arraylist
+        }else if(eventType.equals("Mutate")){
+            //TODO: add new Mutate event to arraylist
+        }else if(eventType.equals("warpReality"){
+            //TODO: add new WarpReality event to arraylist
+        })
     }//end of method
 
     /**
      * Creates an SCP event that the player chose to use that is location-based.
      * @param eventType The name of the event to be created.
+     * @param level The level of the event.
      * @param x The x-value of the event's position.
-     * @param y THe y-value of the event's position.
+     * @param y The y-value of the event's position.
      */
-    public void startEvent(String eventType, int x, int y){
-        System.out.println("new event!");
+    public void startEvent(String eventType, int level, int x, int y){
+        if(eventType.equals("Earthquake")){
+            //TODO: Create new Earthquake event and add it to the arraylist
+        }else if(eventType.equals("Fire")){
+            //TODO: Create new Fire event and add it to the arrayList
+        }else if(eventType.equals("Thunderstorm")){
+            //TODO: Create new Thunderstorm event and add it to the arraylist
+        }else if(eventType.equals("Snow")){
+            //TODO: Create new Snow event and add it to the arraylist.
+        }else if(eventType.equals("tornado")){
+            //TODO: Create new tornado event and add it to the arraylist.
+        }else if(eventType.equals("Infect")){
+            //TODO: Create new Infect event and add it to the arraylist.
+        }
     }//end of method
 
 

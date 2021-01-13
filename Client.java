@@ -49,6 +49,10 @@ public class Client {
     private MessageHandler messageHandler;
     /**Used to check if the program should still run or not. */
     private boolean running;
+    /**login window for the game. */
+    private LoginWindow loginWindow;
+    /**standby window that appears when the player is the first to join and waiting for the next to join. */
+    private StandbyWindow standbyWindow;
   
 
 
@@ -64,7 +68,8 @@ public class Client {
      * The login process for the client.
      */
     public void login(){
-        new LoginWindow().run();
+        loginWindow = new LoginWindow();
+        loginWindow.run();
     }
 
 
@@ -72,7 +77,8 @@ public class Client {
      * Opens the window telling the player that the game is waiting for the second player to join.
      */
     public void startStandby(){
-        new StandbyWindow().run();
+        standbyWindow = new StandbyWindow();
+        standbyWindow.run();
     }
 
       /**
@@ -83,7 +89,21 @@ public class Client {
         messageHandler.sendMessage(message);
     }
 
+    /**
+     * Gets the window used to login.
+     * @return the login window.
+     */
+    public LoginWindow getLoginWindow(){
+        return this.loginWindow;
+    }
 
+    /**
+     * Gets the widow used for the player to standby.
+     * @return The standby window
+     */
+    public StandbyWindow getStandbyWindow(){
+        return this.standbyWindow;
+    }
 
     //TODO: some method parameters between Town/SCP/Player and client do not match, e.g. .start
 
@@ -112,6 +132,10 @@ public class Client {
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
                                     player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
+                                }
+
+                                if(Client.this.getStandbyWindow() != null){
+                                    Client.this.getStandbyWindow().close();
                                 }
 
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn

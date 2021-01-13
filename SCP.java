@@ -156,7 +156,9 @@ public class SCP extends Player{
             infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
             infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
             gameWindow.add(infoBarPanel);
-        }
+
+            gameWindow.setVisible(true);
+        }// end of window
 
         /**
          * Updates the game screen.

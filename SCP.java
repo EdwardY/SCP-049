@@ -89,15 +89,14 @@ public class SCP extends Player{
      * @param level The level of the event.
      */
     public void startEvent(String eventType, int level){
-        if(eventType.equals("Stonks")){
-            //TODO: add new Stonks event to arraylist
-        }else if(eventType.equals("Riot")){
+        //TODO: Implement stonks event for TOWN SIDE, does not belong as an scp event
+        if(eventType.equals("Riot")){
             //TODO: add new Riot event to arraylist
         }else if(eventType.equals("Mutate")){
             //TODO: add new Mutate event to arraylist
-        }else if(eventType.equals("warpReality"){
+        }else if(eventType.equals("warpReality")){
             //TODO: add new WarpReality event to arraylist
-        })
+        }
     }//end of method
 
     /**
@@ -165,20 +164,21 @@ public class SCP extends Player{
          */
         public void run(){
             JFrame gameWindow = this.getWindow();
-            gameWindow.setSize(50,50); //TODO: Discuss game window sizes
+            gameWindow.setSize(1080,1920); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
             gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
             JPanel gridPanel = this.getGrid();
-            gridPanel.setBounds(0, 0, 0, 0); //TODO: Discuss game window sizes and dimensions of JPanels
+            gridPanel.setBounds(0, 0, 1080, 1080);
             gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            gridPanel.setBackground(Color.gray);
             gameWindow.add(gridPanel);
 
 
             JPanel infoBarPanel = this.getInfoBar();
-            infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
-            infoBarPanel.setBounds(0,0,0,0); //TODO: Discuss game window sizes and dimensions of JPanels
+            infoBarPanel.setBounds(1080,0,256,1080);
+            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            gridPanel.setBackground(Color.white);
             gameWindow.add(infoBarPanel);
-
             gameWindow.setVisible(true);
         }// end of window
 

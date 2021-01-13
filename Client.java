@@ -373,7 +373,7 @@ public class Client {
 
                 window.dispose();
 
-                }catch(IOException e){
+                }catch(IOException e){ 
                     connectionErrorLabel.setText("A communications error has occured.");
                 }
             } catch (IOException e) {  //connection error occured
@@ -411,9 +411,10 @@ public class Client {
                 ipAddress = addressEntry.getText();
                 
                 //attempt to connect to the server
+                messageHandler = new MessageHandler();
                 connect(username, ipAddress, port);
                 running = true; 
-                messageHandler = new MessageHandler();
+                
                 Thread t = new Thread(messageHandler); //start the server communication in a new thread
                 t.start(); //start thread*/
             }

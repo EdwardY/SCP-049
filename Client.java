@@ -49,8 +49,6 @@ public class Client {
     private MessageHandler messageHandler;
     /**Used to check if the program should still run or not. */
     private boolean running;
-    /**Stores this client so other objects can be linked to it. */
-    private Client thisClient = this;
   
 
 
@@ -108,11 +106,11 @@ public class Client {
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
                                 if(side.equals("s")){ //this player is on the SCP side
-                                    player = new SCP(username, thisClient, opponent, startingCurrency);
+                                    player = new SCP(username, Client.this, opponent, startingCurrency);
                                     player.start();
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
-                                    player = new Town(username, thisClient, opponent, startingCurrency, startingFood);
+                                    player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
                                 }
 
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
@@ -354,13 +352,13 @@ public class Client {
         public void connect(String username, String address, int port){
             try {
       
-                thisClient.socket = new Socket(address, port); //attempt socket connection
+                Client.this.socket = new Socket(address, port); //attempt socket connection
             
                 //input to server
                 InputStreamReader stream1= new InputStreamReader(socket.getInputStream()); 
-                thisClient.input = new BufferedReader(stream1);
+                Client.this.input = new BufferedReader(stream1);
                 //output to server
-                thisClient.output = new PrintWriter(socket.getOutputStream()); //assign printwriter to network stream
+                Client.this.output = new PrintWriter(socket.getOutputStream()); //assign printwriter to network stream
             
                 //get messages from server
                 try{

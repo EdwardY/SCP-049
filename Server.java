@@ -71,7 +71,7 @@ class Server {
         try{
             serverSock = new ServerSocket(this.port);
             //serverSock.setSoTimeout(1000);
-            while((this.scp == null) || (this.town == null)){
+            while(running){
                 client = serverSock.accept();
                 if((this.scp == null) && (this.town == null)){
                     //assign at random

@@ -100,8 +100,9 @@ public class Client {
                         if(input.ready()){
                             prefix = input.readLine();
                             if(prefix.equals("<w>")){  //waiting for another player to join
-                                startStandby();
+                                Client.this.startStandby();
                             }else if(prefix.equals("<s>")){  //start game
+                                System.out.println("Game start!");
                                 String side = input.readLine();
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
@@ -444,6 +445,8 @@ public class Client {
          */
         public void run(){
         //set JFrame
+
+
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -451,12 +454,17 @@ public class Client {
         //set JPanel
         panel = new JPanel();
         panel.setLayout(null);
+        panel.setBounds(0,0,400,300); 
         window.add(panel);
         
         //Label to show players where to login
         standbyLabel = new JLabel("Waiting for player 2 to join...");
         standbyLabel.setBounds(20,30,200,25); 
         panel.add(standbyLabel);
+
+
+
+        window.setVisible(true);
         }//end of method
 
 

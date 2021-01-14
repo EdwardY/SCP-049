@@ -62,10 +62,11 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
      */
     abstract public String toString();
 
-    public void upgrade(){
-        
-        this.setLevel(this.level + 1);
-    }
+    /**
+     * 
+     * @return the amount of money it costs to upgrade this building
+     */
+    abstract public int upgrade();
 
     public void downgrade(){
 
@@ -140,6 +141,17 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
     public Image getImage(){
         return this.sprite;
     }
+
+    /**
+     * 
+     * @return the level of the building
+     */
+    public int getLevel(){
+
+        return this.level;
+    }
+
+    
     
 
 }

@@ -21,6 +21,7 @@ class Residency extends Building{
     private int maxCapacity;
     private ArrayList<Human> residents = new ArrayList<>();
 
+ 
     /**
      * Constructs a residency building that humans need to live in
      * @param initialPrice initial price of the building
@@ -85,6 +86,23 @@ class Residency extends Building{
     public void takeDamage(int damage){
 
         this.setHealth(this.getHealth() - damage);
+    }
+
+    /**
+     * @return the cost that the building takes to upgrade
+     */
+    public int upgrade(){
+        
+        this.setLevel(this.getLevel() + 1);
+
+        return this.getLevel() * 3/2;
+    }
+
+
+    /** */
+    public void train(){
+
+        //TODO: fill out this method
     }
 
 

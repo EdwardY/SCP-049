@@ -32,8 +32,10 @@ class Bank extends ProductionFacility{
 
 
     public int earnResource(){
-        int resource = 0; 
+        int resource = 100; 
         //TODO: figure out how bank makes money
+        //TODO: for now bank gets 1000 dollars per round
+
         return resource;
     }
 
@@ -44,7 +46,8 @@ class Bank extends ProductionFacility{
     //inherited methods
     public void repair(int repair){
 
-        //TODO: figure out repair mechanic
+        this.setHealth(this.getHealth() + repair);
+        //TODO: clear up out repair mechanic
     }
 
     
@@ -52,6 +55,7 @@ class Bank extends ProductionFacility{
      * @return String format of the object
      */
     public String toString(){
+
         String stringToReturn = "";
 
         return stringToReturn;
@@ -79,5 +83,14 @@ class Bank extends ProductionFacility{
         //Bank bg color is green of course
     }
 
+    /**
+     * @return the cost that the building takes to upgrade
+     */
+    public int upgrade(){
+        
+        this.setLevel(this.getLevel() + 1);
+
+        return this.getLevel() * 3/2;
+    }
 
 }

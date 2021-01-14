@@ -86,6 +86,17 @@ public class ResearchLab extends Military{
         //Research lab has a background color of magenta
     }
 
+    /**
+     * @return the cost that the building takes to upgrade
+     */
+    public int upgrade(){
+        
+        this.setLevel(this.getLevel() + 1);
+
+        return this.getLevel() * 3/2;
+    }
+
+
     //Setters
     public void setProgress(double newProgress){
 
@@ -96,4 +107,6 @@ public class ResearchLab extends Military{
 
         this.successRate = newRate;
     }
+
+    
 }

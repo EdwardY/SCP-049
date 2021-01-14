@@ -18,6 +18,15 @@ class Riot extends WholeGameEvent{
     }
 
     /**
+     * Constructor for the {@code Riot} class with a specified time left, passes values into the superclass
+     * @param level the level of the {@code Riot}
+     * @param timeLeft the time left for thhe {@code Riot}
+     */
+    public Riot(int level, int timeLeft){
+        super(timeLeft, level*3, level);
+    }
+
+    /**
      * Calculates the cost based on the level
      * @param level the intended level
      * @return the final cost

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 class Earthquake extends PhysicalEvent{
     /**
-     * The constructor for the {@code Earthquake} class, passes values into the superclass based on level, only lasts 1 turn
+     * The constructor for new {@code Earthquakes}, passes values into the superclass based on level, only lasts 1 turn
      * @param effectAmount the amount the {@code Earthquake} will affect {@code Buildings} (it will affect {@code NPCs} less)
      * @param x the x center location of the {@code Earthquake}
      * @param y the y center location of the {@code Earthquake}
@@ -23,6 +23,18 @@ class Earthquake extends PhysicalEvent{
     public Earthquake(int level, int x, int y){
         //TODO: earthquake, image, adjust rect size later 
         super(1, level*10, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
+    }
+
+    /**
+     * The constructor for the {@code Earthquake} class, passes values into the superclass based on level, only lasts 1 turn
+     * @param effectAmount the amount the {@code Earthquake} will affect {@code Buildings} (it will affect {@code NPCs} less)
+     * @param timeLeft the time left in the {@code Earthquake}
+     * @param x the x center location of the {@code Earthquake}
+     * @param y the y center location of the {@code Earthquake}
+     */
+    public Earthquake(int level, int timeLeft, int x, int y){
+        //TODO: earthquake, image, adjust rect size later 
+        super(timeLeft, level*10, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
     }
 
     /**

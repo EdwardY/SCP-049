@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 class Fire extends PhysicalEvent{
     /**
-     * Constructor for the {@code Fire} class, passes parameters into the super constructor based on level
+     * Constructor for new {@code Fires}, passes parameters into the super constructor based on level
      * @param level the level of the {@code Fire}
      * @param x the center x position of the {@code Fire}
      * @param y the center y position of the {@code Fire}
@@ -23,6 +23,18 @@ class Fire extends PhysicalEvent{
     public Fire(int level, int x, int y){
         //TOOD: fire, adjust values later when known
         super(level*2, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
+    }
+
+    /**
+     * Constructor for the {@code Fire} class, passes parameters into the super constructor based on level
+     * @param level the level of the {@code Fire}
+     * @param timeLeft the time left for the {@code Fire}
+     * @param x the center x position of the {@code Fire}
+     * @param y the center y position of the {@code Fire}
+     */
+    public Fire(int level, int timeLeft, int x, int y){
+        //TOOD: fire, adjust values later when known
+        super(timeLeft, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
     }
     
     /**

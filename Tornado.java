@@ -14,8 +14,10 @@ import java.util.ArrayList;
  */
 
 class Tornado extends PhysicalEvent implements Moveable{
+
     /** The total time for how long the {@code Tornado} lasts */
     private int totalTime;
+
     /**
      * The constructor for the {@code Tornado} class, gives values based on level
      * @param level the level of the {@code Tonado}
@@ -25,6 +27,19 @@ class Tornado extends PhysicalEvent implements Moveable{
     public Tornado(int level, int x, int y){
         //TODO: tornado adjut values later when known
         super(level*2, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
+        this.totalTime = level*2;
+    }
+
+    /**
+     * The constructor for the {@code Tornado} class when time left is known, gives values based on level
+     * @param level the level of the {@code Tornado}
+     * @param timeLeft the time left for the {@code Tornado}
+     * @param x the center x position which the {@code Tornado} starts at
+     * @param y the center y position which the {@code Tornado} starts at
+     */
+    public Tornado(int level, int timeLeft, int x, int y){
+        //TODO: tornado adjut values later when known
+        super(timeLeft, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
         this.totalTime = level*2;
     }
 

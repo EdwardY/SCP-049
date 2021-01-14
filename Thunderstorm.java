@@ -21,8 +21,7 @@ class Thunderstorm extends PhysicalEvent{
     
     /**
      * <p>
-     * The constructor for the {@code Thunderstorm} class. The {@code Thunderstorm} can go on infinitely long as long as the strike 
-     * isn't getting used. The strike from the {@code Thunderstorm} will level down a {@code Building} by 1 level. The next strike 
+     * The constructor for the {@code Thunderstorm} class. The strike from the {@code Thunderstorm} will level down a {@code Building} by 1 level. The next strike 
      * positions are set by the x and y parameters.
      * </p>
      * @param level the level of the {@code Thunderstorm}
@@ -31,7 +30,24 @@ class Thunderstorm extends PhysicalEvent{
      */
     public Thunderstorm(int level, int x, int y){
         //TODO: thunderstomrm, adjust things later
-        super(Integer.MAX_VALUE, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
+        super(level*2, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
+        this.strikesLeft = level;
+        this.xStrikePos = x;
+        this.yStrikePos = y;
+    }
+
+    /**
+     * <p>
+     * The constructor for the {@code Thunderstorm} class when the time left is known
+     * </p>
+     * @param level the level of the {@code Thunderstorm}
+     * @param timeLeft the time left for the {@code Thunderstorm}
+     * @param x the middle of the x of where the {@code Thunderstorm} will be
+     * @param y the middle of the y of where the {@code Thunderstorm} will be
+     */
+    public Thunderstorm(int level, int timeLeft, int x, int y){
+        //TODO: thunderstomrm, adjust things later
+        super(timeLeft, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
         this.strikesLeft = level;
         this.xStrikePos = x;
         this.yStrikePos = y;

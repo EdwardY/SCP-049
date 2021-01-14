@@ -21,6 +21,15 @@ class Mutate extends WholeGameEvent{
     }
 
     /**
+     * Constructor for {@code Mutate} when there's a specified time left
+     * @param level the level of the {@code Mutate}
+     * @param timeLeft the time left for the {@code Mutate}
+     */
+    public Mutate(int level, int timeLeft){
+        super(timeLeft, 1, level);
+    }
+
+    /**
      * Calculates the cost based on the level
      * @param level the intended level
      * @return the final cost

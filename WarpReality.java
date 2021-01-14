@@ -12,6 +12,15 @@ class WarpReality extends WholeGameEvent{
     WarpReality(int level){
         super(level*2, level*2, level);
     }
+
+    /**
+     * Constructor for the {@code WarpReality} when the time left is known
+     * @param level the level of the {@code WarpReality} {@code Event}
+     * @param timeLeft the time left for the {@code WarpReality}
+     */
+    WarpReality(int level, int timeLeft){
+        super(timeLeft, level*2, level);
+    }
     
     /**
      * Calculates the cost based on the level

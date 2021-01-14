@@ -1,6 +1,3 @@
-import java.awt.Toolkit;
-
-
 /**
  * [Spy.java]
  * A special type of soldier that can acquire enemy information.
@@ -32,19 +29,20 @@ public class Spy extends Cadet{
 
     /**
      * Constructor to create a new spy if health needs to be specified.
+     * @param age The spy's age.
      * @param health The spy's health
      * @param x The spy's horizontal location.
      * @param y The spy's vertical position.
      * @param successRate The chance of the spy gaining enemy intel.
      * @param sus The chance that the spy will be caught by the enemy.
      */
-    public Spy(int health, int x, int y, double successRate, double sus){
-        super(health, 100, x, y, "Spy");
+    public Spy(int age, int health, int x, int y, double successRate, double sus){
+        super(age, health, 100, x, y, "Spy");
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor
 
-    //TODO: Empty method for getINtel, mechanics not thoroughly discussed yet.
+    //TODO: Empty method for getIntel, mechanics not thoroughly discussed yet.
 
 
     /**

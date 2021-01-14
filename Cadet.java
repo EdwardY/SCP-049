@@ -26,14 +26,15 @@ public class Cadet extends Human{
 
     /**
      * Another constructor for a new cadet object that is also a spy when health is specified.
+     * @param age The spy's age.
      * @param health The spy's health
      * @param maxHealth The health of the spy
      * @param x The horizontal location of the cadet/spy.
      * @param y The vertical location of the cadet/spy.
      * @param type The String used to identify if the object is a cadet or spy
      */
-    public Cadet(int health, int maxHealth, int x, int y, String type){
-        super(health, maxHealth, x, y, Toolkit.getDefaultToolkit().getImage("./assets/spy.png"), 3);
+    public Cadet(int age, int health, int maxHealth, int x, int y, String type){
+        super(age, health, maxHealth, x, y, Toolkit.getDefaultToolkit().getImage("./assets/spy.png"), 3);
     }//end of constructor
 
     
@@ -53,6 +54,7 @@ public class Cadet extends Human{
 
     /**
      * Another constructor for a new cadet object that is also a soldier when health is specified.
+     * @param age The age of the soldier.
      * @param health The health of the cadet/soldier.
      * @param maxHealth The maxHealth of the cadet/soldier.
      * @param x The horizontal location of the cadet/soldier.
@@ -60,8 +62,8 @@ public class Cadet extends Human{
      * @param sprite The image of the cadet/soldier that is displayed to the player.
      * @param priority The priority of the healing in a hospital.
      */
-    public Cadet(int health, int maxHealth, int x, int y, Image sprite, int priority){
-        super(health, maxHealth, x, y, sprite, priority);
+    public Cadet(int age, int health, int maxHealth, int x, int y, Image sprite, int priority){
+        super(age, health, maxHealth, x, y, sprite, priority);
     }
 
     /**

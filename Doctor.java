@@ -17,6 +17,7 @@ public class Doctor extends Human{
      * Constructor to make a new doctor object. 
      * @param x The horizontal position of the Doctor.
      * @param y The vertical position of the Doctor.
+     * @param healingAmount The amount of healing the doctor can perform.
      */
     public Doctor(int x, int y, int healingAmount){
         super(100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/doctor.png"), 2);
@@ -25,14 +26,25 @@ public class Doctor extends Human{
 
 
     /**
-     * Another constructor to make a new doctor object when health is specified. 
+     * Another constructor to make a new doctor object when health is specified.
+     * @param age The age of the doctor. 
      * @param x The horizontal position of the Doctor.
      * @param y The vertical position of the Doctor.
+     * @param healingAMount THe amount of healing the doctor can perform.
      */
-    public Doctor(int health, int x, int y, int healingAmount){
-        super(health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/doctor.png"), 2);
+    public Doctor(int age, int health, int x, int y, int healingAmount){
+        super(age, health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/doctor.png"), 2);
         this.healingAmount = healingAmount;
     }//end of constructor
+
+
+    /**
+     * Heals a target NPC
+     * @param target The NPC that will receive the healing
+     */
+    public void heal(NPC target){
+        target.repair(this.healingAmount);
+    }
 
     //start of getters
     /**

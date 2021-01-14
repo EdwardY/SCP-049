@@ -24,11 +24,12 @@ public class Researcher extends Human{
 
     /**
     * Another constructor for a new Researcher object when health is specified.
+    * @param age The age of the researcher.
     * @param x The horizontal location of the Researcher.
     * @param y The vertical location of the Researcher.
     */
-    public Researcher(int health, int x, int y){
-        super(health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/researcher.png"), 4); 
+    public Researcher(int age, int health, int x, int y){
+        super(age, health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/researcher.png"), 4); 
     }//end of constructor
 
 

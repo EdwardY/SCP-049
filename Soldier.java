@@ -25,14 +25,15 @@ public class Soldier extends Cadet implements Troop{
 
     /**
      * Another constructor to create a new soldier when health is specified.
+     * @param age The soldier's age.
      * @param health The soldier's health.
      * @param maxHealth The soldier's maximum health.
      * @param x The soldier's horizontal location.
      * @param y The soldier's vertical position.
      * @param priority The priority of the soldier over all other humans in the game.
      */
-    public Soldier(int health, int maxHealth, int x, int y, int attackDamage){
-        super(health, maxHealth, x, y, Toolkit.getDefaultToolkit().getImage("./assets/soldier.png"),  1);
+    public Soldier(int age, int health, int maxHealth, int x, int y, int attackDamage){
+        super(age, health, maxHealth, x, y, Toolkit.getDefaultToolkit().getImage("./assets/soldier.png"),  1);
         this.attackDamage = attackDamage;
     }//end of constructor
 

@@ -22,11 +22,13 @@ public class Citizen extends Human{
 
     /**
      * Another constructor to make a new citizen object when health is specified.
+     * @param age The age of the citizen.
+     * @param health The health of the citizen
      * @param x The horizontal position of the citizen.
      * @param y The vertical position of the citizen.
      */
-    public Citizen(int health, int x, int y){
-        super(health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/citizen.png"), 6);
+    public Citizen(int age, int health, int x, int y){
+        super(age, health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/citizen.png"), 6);
     }//end of constructor
 
 

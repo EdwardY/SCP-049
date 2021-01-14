@@ -10,7 +10,7 @@ import java.awt.Image;
 
 public abstract class Human extends NPC{
     /**The age of the human */
-    private int age = 0;
+    private int age;
     /**The priority or importance of the human over all other humans in a hospital. */
     private int priority;
     //The ranking in priority is: Soldier, Doctor, Spy, Researcher, Cadet, Citizen
@@ -31,11 +31,13 @@ public abstract class Human extends NPC{
      */
     public Human(int maxHealth, int x, int y, Image sprite, int priority){
         super(maxHealth, x, y, sprite);
+        this.age = 0;
         this.priority = priority;    
     }//end of constructor
 
     /**
      * Constructor for a new Human object when health is specified.
+     * @param age The age of the human.
      * @param health The health of the human.
      * @param maxHealth The maximum health of the human.
      * @param x The horizontal location of the human.
@@ -46,8 +48,9 @@ public abstract class Human extends NPC{
      * @param maxHunger The maximum hunger of the human.
 
      */
-    public Human(int health, int maxHealth, int x, int y, Image sprite, int priority){
-        super(maxHealth, x, y, sprite);
+    public Human(int age, int health, int maxHealth, int x, int y, Image sprite, int priority){
+        super(health, maxHealth, x, y, sprite);
+        this.age = age;
         this.priority = priority;    
     }//end of constructor
 

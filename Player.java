@@ -1,5 +1,7 @@
 //swing imports
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 //util imports
 import java.util.ArrayList;
@@ -52,6 +54,28 @@ abstract class Player {
      */
     public ArrayList<JFrame> getGameGraphics(){
         return this.gameFrames;
+    }
+
+    /**
+     * Tells the player what side they will be playing on
+     * @param side The side that the player will be playing as
+     */
+    public void displaySide(String side){
+        String welcomeMessage = "Welcome player " + this.username + "! You will be playing as the " + side + "against " + this.opponent + "! Your objective is to";
+        //TODO: PLaceholder instructions, may be subject to change at the end of the game
+        if (side.equals("Town")){
+            welcomeMessage += "survive the SCP invasion for 10 turns!";
+        }else if (side.equals("SCP")){
+            welcomeMessage += "destroy the town in 10 turns!";
+        }else{ //TODO: This block of the if statement is temporary (for testing)
+            System.out.println("An error has occured");
+        }//end of if statement blockl
+
+        welcomeMessage += "Good luck, and may the best player win...";
+
+
+        new WelcomeWindow(welcomeMessage).run();
+        
     }
 
     /**
@@ -152,5 +176,57 @@ abstract class Player {
     }
 
     //end of setters
+
+
+    /**
+     * Inner class to display the welcome window to the player at the beginning of the game.
+     */
+    public class WelcomeWindow{
+        /**The JFrame and window the the welcome window */
+        private JFrame window;
+        /**The Jpanel that will hold the JTextArea */
+        private JPanel mainPanel;
+        /**The welcome message to be displayed to the player. */
+        private String welcomeMessage;
+        /**The JTextArea used to display the welcome message to the player.*/
+        private JTextArea welcomeBox;
+
+
+        /**
+         * Constructor for the WelcomeWindow.
+         * @param welcomeMessage The welcome message for the player.
+         */
+        public WelcomeWindow(String welcomeMessage){
+            this.welcomeMessage = welcomeMessage;
+        }
+
+        /**
+         * Runs the WelcomeWindow.
+         */
+        public void run(){
+            this.window = new JFrame("Now entering Code-049!");
+            this.mainPanel = new JPanel();
+            this.welcomeBox = new JTextArea(welcomeMessage);
+
+            //set the window
+            this.window.setSize(500, 500);
+            this.window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            //set the main JPanel
+            this.mainPanel.setBounds(0,0,500,500);
+            this.window.add(this.mainPanel);
+
+            //set the text box
+            this.welcomeBox.setBounds(0,0,500,500);
+            this.welcomeBox.setEditable(false);
+            this.mainPanel.add(this.welcomeBox);
+            
+            //allow player to see this window
+            this.window.setVisible(true);
+
+
+        }//end of method
+
+    }//end of inner class
 
 }//end of class

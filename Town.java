@@ -1,16 +1,34 @@
-/**
- * [Town.java]
- * A class that creates the basic class that the "town" player uses
- * @author Edward Yang
- * @version 1.0 2021/1/11
- */
-
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+
 import java.awt.Graphics;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+
+/**
+ * [Town.java]
+ * A class that creates the basic class that the "town" player uses
+ * @author Vivian Dai, Damon Ma, and Edward Yang
+ * @version 1.0 on January 11, 2020
+ */
+
 
 public class Town extends Player {
     /**An integer for storing the money the player has */
@@ -193,6 +211,59 @@ public class Town extends Player {
     }
 
     //end of setters
+
+
+
+    /**
+     * An inner class that will run the main game window that the user will use to play the game.
+     */
+    public class TowngameWindow extends GameWindow{
+
+        /**
+         * Method runs the town version of the game.
+         */
+        public void run(){
+            //get the JPanels and JFrame of the game window from parent class
+            JFrame gameWindow = this.getWindow();
+            JPanel gridPanel = this.getGrid();
+            JPanel infoBarPanel = this.getInfoBar();
+
+            //setting the JFrame
+            gameWindow.setSize(1080, 1920);
+            gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+            //Setting the JPanel for the game grid
+            gridPanel.setBounds(0, 0, 1080, 1080);
+            gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            gridPanel.setBackground(Color.gray);
+            gameWindow.add(gridPanel); 
+
+            //Setting the JPanel for the game 
+            infoBarPanel.setBounds(1080,0,256,1080);
+            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            gridPanel.setBackground(Color.white);
+            gameWindow.add(infoBarPanel);
+
+            //let user see the window
+            gameWindow.setVisible(true);
+            
+
+            Town.this.displaySide("Town");
+
+             }//end of method
+
+
+            /**
+             * Updates the game screen
+             */
+            //TODO: Ask what this method is for, not actually sure what it's supposed to do
+             public void update(){
+                 System.out.println("Method not complete yet");
+                 //TODO: Incomplete method
+             }
+
+
+    }//end of inner class
 
 
 }//end of class

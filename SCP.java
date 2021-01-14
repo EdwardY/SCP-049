@@ -17,6 +17,11 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
+import java.awt.Graphics;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Toolkit;
+
 /**
  * [SCP.java]
  * The SCP version of the Code-049 game.
@@ -156,7 +161,9 @@ public class SCP extends Player{
 
     //end of setters
 
-    //start of inner class for the game window
+    /**
+     * An inner class that will run the game window that the player will use.
+     */
     public class SCPGameWindow extends GameWindow{
 
         /**
@@ -179,12 +186,19 @@ public class SCP extends Player{
             infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             gridPanel.setBackground(Color.white);
             gameWindow.add(infoBarPanel);
+
+
+            //let user see the window
             gameWindow.setVisible(true);
+
+
+            SCP.this.displaySide("SCP");
         }// end of window
 
         /**
          * Updates the game screen.
          */
+        //TODO: Ask what this method is for, not actually sure what it's supposed to do
         public void update(){
             System.out.println("Hello");
             //TODO: Not complete yet

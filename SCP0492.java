@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 
 
 public class SCP0492 extends NPC implements Troop{
+    /**The attack range of this unit. */
+    static final int RANGE = 20;
     /**The level of this unit. */
     static int level;
     /**The damage dealt when this unit attacks.*/

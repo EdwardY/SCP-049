@@ -7,6 +7,8 @@ import java.awt.Toolkit;
  * @version 1.0 on December 24, 2020
  */
 public class Soldier extends Cadet implements Troop{
+    /**The attack range of this unit. */
+    static final int RANGE = 20;
     /**The amount of damage the soldier will do to its target. */
     private int attackDamage;
 

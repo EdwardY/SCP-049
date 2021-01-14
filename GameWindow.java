@@ -87,6 +87,10 @@ public abstract class GameWindow{
      * @version 1.0 on January 14, 2021
      */
     public class GraphicsPanel extends JPanel{
+
+        /**
+         * Constructor for the {@code GraphicsPanel}
+         */
         public GraphicsPanel(){
             setFocusable(true);
             requestFocusInWindow();
@@ -97,7 +101,8 @@ public abstract class GameWindow{
          * @param g the {@code Graphics} to draw on
          */
         public void paintComponent(Graphics g){
-
+            super.paintComponent(g);
+            //TODO: draw in everything else :'D
         }
 
     }

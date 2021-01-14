@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 class Hospital extends Building{
     
@@ -34,12 +35,14 @@ class Hospital extends Building{
      * @param y the y coordinate of the building
      * @param maxCapacity the max capacity of the building
      */
-    Hospital(int initialPrice, int maxHealth, int health, Image sprite, int x, int y, int maxCapacity){
+    Hospital(int initialPrice, int maxHealth, int health, int x, int y, int maxCapacity){
         
-        super(initialPrice, maxHealth, health, sprite, x, y);
+        super(initialPrice, maxHealth, health,  x, y);
         this.maxCapacity = maxCapacity;
         doctors = new ArrayList<>();
         injured = new PriorityQueue<>();
+        this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/Hospital.png"));
+
     }
 
     //class methods
@@ -49,8 +52,15 @@ class Hospital extends Building{
      */
     public void heal(){
 
-        //incorporate levels
-        //remove human from queue and heal them based on the amount of doctors
+       for(int i = 0; i < doctors.size() && i < injured.size(); i ++){
+
+            if(injured.peek() != null){
+                Human patient = injured.remove();
+
+                //Doctors heall 100o
+                patient.repair(1000);
+            }
+       }
     }
 
     
@@ -58,28 +68,42 @@ class Hospital extends Building{
      * @param human the human to be added to the injured list
      */
     public void addInjured(Human human){
+        
+        injured.add(human);
 
-        if(injured.size() < maxCapacity){
-            injured.add(human);
+    }
+
+
+    /**
+     * 
+     * @param doctor The doctor to be added
+     */
+    public void addDoctors(Doctor doctor){
+
+        if(doctors.size() < maxCapacity){
+            doctors.add(doctor);
         }
     }
 
-    public void setDoctors(){
-
-        //TODO: determine how to figure out and sort doctors
+    /**
+     * Removing doctors in case of SCP attacking and converting
+     * @param numberRemoved number of doctors removed
+     */
+    public void removeDoctor(int numberRemoved){
+        //TODO: figure out if the same object needs to be removed or just the number of doctors need to be the same
     }
 
     //Inherited methods
     
     /** 
-     * @param repair
+     * @param repair The amount of health the building it going to be repaired by
      */
     public void repair(int repair){
 
         //TODO: determine how the repair mechanic is going to work
     }
 
-    
+
     /** 
      * @param g
      */
@@ -123,8 +147,49 @@ class Hospital extends Building{
      */
     public int getUpgradePrice(){
         
-        return this.getLevel() * 3/2;
+        return this.getLevel() * 3/2*1000;
     }
 
+    /**
+     * 
+     * @return The arrayList of doctors 
+     */
+    public ArrayList<Doctor> getDoctors(){
 
+        return this.doctors;
+    }
+
+    /**
+     * 
+     * @return the max capacity of doctors that can be inside the building
+     */
+    public int getMaxCapacity(){
+
+        return this.maxCapacity;
+    }
+
+    /**
+     * Upgrade the bulding's level and its stats
+     */
+    public void upgrade(){
+
+        //upgrade stats
+        this.setLevel(this.getLevel() + 1);
+        this.setMaxHealth(this.getHealth() + 500);
+        this.maxCapacity += 20;
+
+    }
+
+    /**
+     * Downgrade a building and its stats
+     */
+    public void downgrade(){
+
+        //downgrade a buildings stats 
+        this.setLevel(this.getLevel() - 1);
+        this.setMaxHealth(this.getHealth() - 500);
+        this.maxCapacity -= 20;
+
+        //TODO: what happens when health / capacity goes too low during an downgrade
+    }
 }

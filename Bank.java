@@ -8,6 +8,7 @@
  import java.awt.Graphics;
  import java.awt.Image;
  import java.awt.Color;
+ import java.awt.Toolkit;
 
 class Bank extends ProductionFacility{
     /** Initial health of the bank */
@@ -24,17 +25,15 @@ class Bank extends ProductionFacility{
      * @param x the x coordinate of the building on the game map
      * @param y The y coordinate of teh building on the game map
      */
-    Bank(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
-        super(initialPrice, maxHealth, health, sprite, x, y);
+    Bank(int initialPrice, int maxHealth, int health, int x, int y){
+        super(initialPrice, maxHealth, health, x, y);
 
-        //TODO: that's a lot of things to figure out how the bank will work
+        this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/Bank.png"));
     }
 
 
     public int earnResource(){
-        int resource = 100; 
-        //TODO: figure out how bank makes money
-        //TODO: for now bank gets 1000 dollars per round
+        int resource = 1000; 
 
         return resource;
     }
@@ -47,7 +46,6 @@ class Bank extends ProductionFacility{
     public void repair(int repair){
 
         this.setHealth(this.getHealth() + repair);
-        //TODO: clear up out repair mechanic
     }
 
     
@@ -88,7 +86,7 @@ class Bank extends ProductionFacility{
      */
     public int getUpgradePrice(){
         
-        return this.getLevel() * 3/2;
+        return this.getLevel() * 3/2*1000;
     }
 
 }

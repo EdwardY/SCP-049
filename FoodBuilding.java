@@ -7,6 +7,7 @@
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.Color;
 
 class FoodBuilding extends ProductionFacility{
@@ -25,9 +26,10 @@ class FoodBuilding extends ProductionFacility{
     * @param x the x coordinate of the building on the game map
     * @param y The y coordinate of teh building on the game map
     */
-   FoodBuilding(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
-       super(initialPrice, maxHealth, health, sprite, x, y);
+   FoodBuilding(int initialPrice, int maxHealth, int health, int x, int y){
+       super(initialPrice, maxHealth, health, x, y);
 
+       this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/FoodBuilding.png"));
        //TODO: that's a lot of things to figure out how the bank will work
    }
 
@@ -86,8 +88,31 @@ class FoodBuilding extends ProductionFacility{
      * @return the cost that the building takes to upgrade
      */
     public int getUpgradePrice(){
-        return this.getLevel() * 3/2;
+        return this.getLevel() * 3/2*1000;
     }
 
+    /**
+     * Upgrade the bulding's level and its stats
+     */
+    public void upgrade(){
+
+        //upgrade stats
+        this.setLevel(this.getLevel() + 1);
+        this.setMaxHealth(this.getHealth() + 500);
+
+
+    }
+
+    /**
+     * Downgrade a building and its stats
+     */
+    public void downgrade(){
+
+        //downgrade a buildings stats 
+        this.setLevel(this.getLevel() - 1);
+        this.setMaxHealth(this.getHealth() - 500);
+
+        //TODO: what happens when health / capacity goes too low during an downgrade
+    }
 
 }

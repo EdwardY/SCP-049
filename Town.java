@@ -111,40 +111,39 @@ public class Town extends Player {
      */
     public void buildBuilding(String buildingType, int x, int y){
 
-        ArrayList<Building> buildings= this.getBuildings();
+        ArrayList<Building> buildings = this.getBuildings();
 
         //TODO: decide on the cost of the buildings to initially build
-        Image sprite = Toolkit.getDefaultToolkit().getImage("./assets/" + buildingType + ".png");
 
         //add each created building to the ArrayList containing the buildings
         if(buildingType.equals("MilitaryBase")){
 
-            buildings.add(new MilitaryBase(1000, 100, 100, sprite, x, y));
+            buildings.add(new MilitaryBase(1000, 100, 100, x, y));
             money = money - 1000;
 
         }else if(buildingType.equals("ResearchLab")){
 
-            buildings.add(new ResearchLab(1000, 100, 100, sprite, x, y));
+            buildings.add(new ResearchLab(1000, 100, 100, x, y));
             money = money - 1000;
         
         }else if(buildingType.equals("Residency")){
         
-            buildings.add(new Residency(1000, 100, 100, sprite, x, y, 100));
+            buildings.add(new Residency(1000, 100, 100,x, y, 100));
             money = money - 1000;
 
         }else if(buildingType.equals("Hospital")){
 
-            buildings.add(new Hospital(1000, 100, 100, sprite, x, y, 100));
+            buildings.add(new Hospital(1000, 100, 100,  x, y, 100));
             money = money - 1000;
         
         }else if(buildingType.equals("FoodBuilding")){
 
-            buildings.add(new FoodBuilding(1000, 100, 100, sprite, x, y));
+            buildings.add(new FoodBuilding(1000, 100, 100,  x, y));
             money = money - 1000;
         
         }else if(buildingType.equals("Bank")){
 
-            buildings.add(new Bank(1000, 100, 100, sprite, x, y));
+            buildings.add(new Bank(1000, 100, 100, x, y));
             money = money - 1000;
             
         }else{  

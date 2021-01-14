@@ -21,8 +21,8 @@ abstract class Military extends Building{
      * @param x The x coordinate of the building on the game map
      * @param y The y coordinate of the building on the game map
      */
-    Military(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
-        super(initialPrice, maxHealth, health, sprite, x, y);
+    Military(int initialPrice, int maxHealth, int health, int x, int y){
+        super(initialPrice, maxHealth, health, x, y);
 
         //TODO: figure out all these thingies
     }

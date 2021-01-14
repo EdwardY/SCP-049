@@ -9,8 +9,10 @@
  import java.awt.Color;
  import java.awt.Graphics;
  import java.util.ArrayList; 
+ import java.awt.Toolkit;
 
 class Residency extends Building{
+
     /** Initial health of the residency */
     public static final int INITIAL_HEALTH = 100;
     /** Initial price of the residency */
@@ -32,10 +34,12 @@ class Residency extends Building{
      * @param y the y coordinate on the game map of the building
      * @param maxCap the maximum capacity of human residents
      */
-    Residency(int initialPrice, int maxHealth, int health, Image sprite, int x, int y, int maxCap){
+    Residency(int initialPrice, int maxHealth, int health, int x, int y, int maxCap){
 
-        super(initialPrice, maxHealth, health, sprite, x, y);
+        super(initialPrice, maxHealth, health, x, y);
         this.maxCapacity = maxCap;
+
+        this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/Residency.png"));
     }
     
     
@@ -93,16 +97,52 @@ class Residency extends Building{
      */
     public int getUpgradePrice(){
         
-        return this.getLevel() * 3/2;
+        return this.getLevel() * 3/2*1000;
     }
 
 
-    /** */
-    public void train(){
+    /**
+     * 
+     * @param training how many adults to be converted 
+     * @param type The type of Human to be trained to become
+     */
+    public void train(int training, String type){
 
-        //TODO: fill out this method
+        int trained = 0;
+
+        for(int i = 0; i < residents.size() && trained < training ;i ++){
+            
+            if(residents.get(i).getAge() >= 18){
+
+                //TODO:convert humans into stuff
+            }
+
+        }
     }
 
+    /**
+     * Upgrade the bulding's level and its stats
+     */
+    public void upgrade(){
 
+        //upgrade stats
+        this.setLevel(this.getLevel() + 1);
+        this.setMaxHealth(this.getHealth() + 500);
+        this.maxCapacity += 20;
+
+    }
+
+    /**
+     * Downgrade a building and its stats
+     */
+    public void downgrade(){
+
+        //downgrade a buildings stats 
+        this.setLevel(this.getLevel() - 1);
+        this.setMaxHealth(this.getHealth() - 500);
+        this.maxCapacity -= 20;
+
+        //TODO: what happens when health / capacity goes too low during an downgrade
+    }
 }
 

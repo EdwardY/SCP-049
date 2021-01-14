@@ -24,8 +24,8 @@ abstract class ProductionFacility extends Building{
      * @param x the x coordinate on the game map of the building's lcoation
      * @param y the y coordinate on the gmae map of the building's location
      */
-    ProductionFacility(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
-        super(initialPrice, maxHealth, health, sprite, x, y);
+    ProductionFacility(int initialPrice, int maxHealth, int health, int x, int y){
+        super(initialPrice, maxHealth, health, x, y);
     };
 
     abstract public int earnResource();

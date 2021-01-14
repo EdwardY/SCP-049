@@ -38,14 +38,13 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
      * @param x The x coordinate of the building
      * @param y The y Coordinate of the building
      */
-    Building(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
+    Building(int initialPrice, int maxHealth, int health, int x, int y){
 
         this.initialPrice = initialPrice;
         this.maxHealth = maxHealth;
         this.health = health;
         this.x = x;
         this.y = y;
-        this.sprite = sprite; 
         this.level = 1;
 
     }
@@ -71,14 +70,9 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
     /**
      * upgrades the building
      */
-    public void upgrade(){
-        this.setLevel(this.level + 1);
-    }
-
-    public void downgrade(){
-
-        this.setLevel(this.level - 1);
-    }
+    abstract public void upgrade();
+        
+    abstract public void downgrade();
 
     /**SETTERS */
 
@@ -105,6 +99,14 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
      */
     public void setHealth(int newHealth){
         this.health = newHealth;
+    }
+
+    /**
+     * @param newMax the maxHealth of the building is set to newMax
+     */
+    public void setMaxHealth(int newMax){
+
+        this.maxHealth = newMax;
     }
 
     /**GETTERS */
@@ -157,7 +159,6 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
 
         return this.level;
     }
-
     
     
 

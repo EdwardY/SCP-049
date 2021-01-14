@@ -9,6 +9,8 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.lang.Math;
+import java.awt.Toolkit;
+import java.util.ArrayList;
 
 public class ResearchLab extends Military{
     /** Initial health of the research lab */
@@ -19,7 +21,9 @@ public class ResearchLab extends Military{
     private int PRICE;
     private int NUMBER_OF_TURNS;
     private double progress = 0;
-    private double successRate = 5;
+    private double successRate = 0.05;
+    ArrayList<Researcher> researchers = new ArrayList<>();
+
 
     /**
      * ResearchLab constructor
@@ -30,9 +34,11 @@ public class ResearchLab extends Military{
      * @param x the x coordinate of the building on the game map
      * @param y the y coordinate of the building on the game map
      */
-    ResearchLab(int initialPrice, int maxHealth, int health, Image sprite, int x, int y){
-        super(initialPrice, maxHealth, health, sprite, x, y);
+    ResearchLab(int initialPrice, int maxHealth, int health, int x, int y){
+        super(initialPrice, maxHealth, health, x, y);
 
+
+        this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/ResearchLab.png"));
         //TODO: determine constructors of the private class variables
         //TODO: figure out Research mechanic
     }
@@ -92,7 +98,7 @@ public class ResearchLab extends Military{
     public int getUpgradePrice(){
         
 
-        return this.getLevel() * 3/2;
+        return this.getLevel() * 3/2*1000;
     }
 
 
@@ -107,5 +113,28 @@ public class ResearchLab extends Military{
         this.successRate = newRate;
     }
 
+    /**
+     * Upgrade the bulding's level and its stats
+     */
+    public void upgrade(){
+
+        //upgrade stats
+        this.setLevel(this.getLevel() + 1);
+        this.setMaxHealth(this.getHealth() + 500);
+
+
+    }
+
+    /**
+     * Downgrade a building and its stats
+     */
+    public void downgrade(){
+
+        //downgrade a buildings stats 
+        this.setLevel(this.getLevel() - 1);
+        this.setMaxHealth(this.getHealth() - 500);
+
+        //TODO: what happens when health / capacity goes too low during an downgrade
+    }
     
 }

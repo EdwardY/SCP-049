@@ -150,26 +150,20 @@ public class QuadTree {
           //calculate the distance between these two NPC's
           distance = (int)Math.sqrt(Math.pow(Math.abs(attackerX - targetX), 2) + Math.pow(Math.abs(attackerY - targetY), 2));
 
-          if(this.attackerList.get(i) instanceof SCP0492){ //if the attacker is an SCP0492
-            if(distance <= SCP0492.RANGE){ //if the target is within range of the SCP0492
+          if((this.attackerList.get(i) instanceof SCP0492) && (distance <= SCP0492.RANGE)){ //if the attacker is an SCP0492
               ((SCP0492)attackerList.get(i)).attack(targetList.get(j)); //attack the target
               if(this.targetList.get(j).getHealth() <= 0){ //if the target has no more health
                 this.targetList.remove(j); //remove the target from the list of targets since it is now destroyed
               }
 
               j = targetList.size(); //end inner for loop since the SCP0492 has already attacked
-
-            }//end of inner if statement block
-          }else if(this.attackerList.get(i) instanceof Soldier){ //if the attacker is a soldier.
-            if(distance <= Soldier.RANGE){ //if target is within the soldier's range
+          }else if((this.attackerList.get(i) instanceof Soldier) && (distance <= Soldier.RANGE)){ //if the attacker is a soldier.
               ((Soldier)attackerList.get(i)).attack(targetList.get(j));  //attack the target
               if(this.targetList.get(j).getHealth() <=0 ){ //if target has no more health
                 this.targetList.remove(j); //remove the object since the target is now destroyed
               }
 
               j = targetList.size(); //end inner for loop since Soldier has already attacked
-
-            }//end of inner if statement block
           }//end of if statement block
         }//end of inner for loop
       }//end of for loop

@@ -295,7 +295,6 @@ class Game {
     public void convert(NPC npc, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
         //temporary for now
         String imageURL = "";
-        Image tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 
 
         for(int i = 0;i < this.humans.size();i++){
@@ -303,19 +302,19 @@ class Game {
                 int currentXPosition = this.humans.get(i).getX();
                 int currentYPosition = this.humans.get(i).getY();
                 if(type.equals("Citizen")){
-                    humans.add(new Citizen(currentXPosition,currentYPosition,tempImage));
+                    humans.add(new Citizen(currentXPosition,currentYPosition));
                 }else if(type.equals("Cadet")){
-                    humans.add(new Cadet(currentXPosition, currentYPosition, tempImage));
+                    humans.add(new Cadet(currentXPosition, currentYPosition));
                 }else if(type.equals("Doctor")){
-                    humans.add(new Doctor(currentXPosition, currentYPosition, tempImage, healingAmount));
+                    humans.add(new Doctor(currentXPosition, currentYPosition, healingAmount));
                 }else if(type.equals("Researcher")){
-                    humans.add(new Researcher(currentXPosition, currentYPosition, tempImage));
+                    humans.add(new Researcher(currentXPosition, currentYPosition));
                 }else if(type.equals("Soldier")){
-                    humans.add(new Soldier(maxHealth, currentXPosition, currentYPosition, tempImage, attackDamage));
+                    humans.add(new Soldier(maxHealth, currentXPosition, currentYPosition, attackDamage));
                 }else if(type.equals("Spy")){
-                    humans.add(new Spy(currentXPosition, currentYPosition, tempImage, successRate, sus));
+                    humans.add(new Spy(currentXPosition, currentYPosition, successRate, sus));
                 }else if (type.equals("SCP0492")){
-                    scps.add(new SCP0492(maxHealth, currentXPosition, currentYPosition, tempImage, attackDamage));
+                    scps.add(new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage));
                 }
                 humans.remove(i);
                 return;

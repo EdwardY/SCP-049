@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  * [Soldier.java]
@@ -17,13 +17,10 @@ public class Soldier extends Cadet implements Troop{
      * @param maxHealth The soldier's maximum health.
      * @param x The soldier's horizontal location.
      * @param y The soldier's vertical position.
-     * @param sprite The image of the soldier that will appear to the players.
      * @param priority The priority of the soldier over all other humans in the game.
-     * @param hunger The hunger level of the soldier.
-     * @param maxHunger The maximum hunger level of the soldier.
      */
-    public Soldier(int maxHealth, int x, int y, Image sprite, int attackDamage){
-        super(maxHealth, x, y, sprite,  1);
+    public Soldier(int maxHealth, int x, int y, int attackDamage){
+        super(maxHealth, x, y, Toolkit.getDefaultToolkit().getImage("./assets/soldier.png"),  1);
         this.attackDamage = attackDamage;
     }//end of constructor
 

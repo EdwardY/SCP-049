@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  * [Researcher.java]
@@ -16,10 +16,9 @@ public class Researcher extends Human{
     * Constructor for a new Researcher object.
     * @param x The horizontal location of the Researcher.
     * @param y The vertical location of the Researcher.
-    * @param sprite The image of the Researcher that is displayed to the players.
     */
-   public Researcher(int x, int y, Image sprite){
-       super(100, x, y, sprite, 4); 
+   public Researcher(int x, int y){
+       super(100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/researcher.png"), 4); 
    }//end of constructor
 
 

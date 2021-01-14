@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.Toolkit;
 
 
 /**
@@ -17,10 +17,9 @@ public class Doctor extends Human{
      * Constructor to make a new doctor object. 
      * @param x The horizontal position of the Doctor.
      * @param y The vertical position of the Doctor.
-     * @param sprite The sprite of the Doctor.
      */
-    public Doctor(int x, int y, Image sprite, int healingAmount){
-        super(100, x, y, sprite, 2);
+    public Doctor(int x, int y, int healingAmount){
+        super(100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/doctor.png"), 2);
         this.healingAmount = healingAmount;
     }//end of constructor
 

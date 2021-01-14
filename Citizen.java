@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  * [Citizen.java]
@@ -14,11 +14,9 @@ public class Citizen extends Human{
      * Constructor to make a new citizen object.
      * @param x The horizontal position of the citizen.
      * @param y The vertical position of the citizen.
-     * @param sprite The sprite of the citizen.
-     * @param age The age of the citizen.
      */
-    public Citizen(int x, int y, Image sprite){
-        super(100, x, y, sprite, 6);
+    public Citizen(int x, int y){
+        super(100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/citizen.png"), 6);
     }//end of constructor
 
 

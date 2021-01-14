@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  * [SCP0492.java]
@@ -22,11 +22,10 @@ public class SCP0492 extends NPC implements Troop{
      * @param maxHealth The maximum health of the unit.
      * @param x The x-value of the unit's location on the grid.
      * @param y The y-value of the unit's location on the grid.
-     * @param sprite The image that the unit will have.
      * @param attackDamage The amount of damage that this unit will deal when attacking.
      */
-    public SCP0492 (int maxHealth, int x, int y, Image sprite, int attackDamage){
-        super(maxHealth, x, y, sprite);
+    public SCP0492 (int maxHealth, int x, int y, int attackDamage){
+        super(maxHealth, x, y, Toolkit.getDefaultToolkit().getImage("./assets/scp0492.png"));
         this.attackDamage = attackDamage;
     }//end of constructor
 

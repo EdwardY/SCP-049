@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.awt.Toolkit;
 
 /**
  * [Cadet.java]
@@ -16,11 +17,9 @@ public class Cadet extends Human{
      * Constructor for a new cadet object that is also a spy.
      * @param x The horizontal location of the cadet/spy.
      * @param y The vertical location of the cadet/spy.
-     * @param sprite The image of the cadet/spy that is displayed to the players.
-     * @param priority The priority of healing in a hospital.
      */
-    public Cadet(int x, int y, Image sprite, int priority){
-        super(100, x, y, sprite, priority);
+    public Cadet(int x, int y){
+        super(100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/cadet.png"), 5);
     }//end of constructor
 
     /**

@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.Toolkit;
 
 
 /**
@@ -20,12 +20,11 @@ public class Spy extends Cadet{
      * Constructor to create a new spy.
      * @param x The spy's horizontal location.
      * @param y The spy's vertical position.
-     * @param sprite The image of the spy that will appear to the players.
      * @param successRate The chance of the spy gaining enemy intel.
      * @param sus The chance that the spy will be caught by the enemy.
      */
-    public Spy(int x, int y, Image sprite, double successRate, double sus){
-        super(100, x, y, sprite, 3);
+    public Spy(int x, int y, double successRate, double sus){
+        super(100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/spy.png"), 3);
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor

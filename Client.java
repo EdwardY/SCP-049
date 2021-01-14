@@ -246,11 +246,11 @@ public class Client {
                             }else if(prefix.equals("<r>")){ //change in resources
                                 String resourceType = input.readLine();
                                 int resourceChange = Integer.parseInt(input.readLine());
-                                if(resourceType.equals("dubercoin")){
+                                if(resourceType.equals("Money")){
+                                    ((Town)player).changeMoney(resourceChange);
+                                }else if(resourceType.equals("Food")){
                                     ((Town)player).changeFood(resourceChange);
-                                }else if(resourceType.equals("food")){
-                                    ((Town)player).changeFood(resourceChange);
-                                }else if(resourceType.equals("hume")){
+                                }else if(resourceType.equals("Hume")){
                                     ((SCP)player).changeHume(resourceChange);
                                 }             
                             }//end of if statements

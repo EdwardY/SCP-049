@@ -24,7 +24,6 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
 
     /**
      * A constructor for the NPC class.
-     * @param health The health of the NPC.
      * @param maxHealth The maximum health of the NPC.
      * @param x The x-value of the NPC's location on the grid.
      * @param y The y-value of the NPC's location on the grid.
@@ -32,6 +31,22 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
      */
     public NPC (int maxHealth, int x, int y, Image sprite){
         this.health = maxHealth;
+        this.maxHealth = maxHealth;
+        this.x = x;
+        this.y = y;
+        this.sprite = sprite;
+    }//end of constructor
+
+    /**
+     * Another constructor for the NPC class if the health is specified.
+     * @param health The health of the NPC.
+     * @param maxHealth The maximum health of the NPC.
+     * @param x The x-value of the NPC's location on the grid.
+     * @param y The y-value of the NPC's location on the grid.
+     * @param sprite The image that the NPC will have.
+     */
+    public NPC (int health, int maxHealth, int x, int y, Image sprite){
+        this.health = health;
         this.maxHealth = maxHealth;
         this.x = x;
         this.y = y;

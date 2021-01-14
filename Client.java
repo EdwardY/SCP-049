@@ -7,10 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.BorderFactory;
+
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -150,7 +148,7 @@ public class Client {
                                 for(int i = 0; i < objectNum; i ++){
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
-                                    //scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));   
+                                    scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]) ));   
                                     //TODO: fix NPC consctructors later, no longer needs image
                                 }
 
@@ -216,23 +214,23 @@ public class Client {
                                     objectValues = objectInfo.split(" ");
                                     String humanType = input.readLine();
                                     if(humanType.equals("Cadet")){
-                                        //TODO: Build new Cadet object
+                                        humansList.add(new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
                                     }else if(humanType.equals("Citizen")){
-                                        //TODO: Build new Citizen object.
+                                        humansList.add(new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
                                     }else if(humanType.equals("Doctor")){
-                                        //TODO: Build new Doctor object.
+                                        humansList.add(new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3])));
                                     }else if(humanType.equals("Researcher")){
-                                        //TODO: Build new Researcher object.
+                                        humansList.add(new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
                                     }else if(humanType.equals("Soldier")){
-                                        //TODO: Build new Soldier object.
+                                        humansList.add(new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]) ));
                                     }else if(humanType.equals("Spy")){
-                                        //TODO: Build new Spy object.
+                                        humansList.add(new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Double.parseDouble(objectValues[3]), Double.parseDouble(objectValues[4])));
                                     }
 
                                 }
 
 
-                                
+                                //TODO: Not sure where to put all of these received game objects
     
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed

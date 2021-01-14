@@ -20,7 +20,6 @@ public abstract class Human extends NPC{
     private int maxHunger = 100;
     /**
      * Constructor for a new Human object.
-     * @param health The health of the human.
      * @param maxHealth The maximum health of the human.
      * @param x The horizontal location of the human.
      * @param y The vertical location of the human.
@@ -31,6 +30,23 @@ public abstract class Human extends NPC{
 
      */
     public Human(int maxHealth, int x, int y, Image sprite, int priority){
+        super(maxHealth, x, y, sprite);
+        this.priority = priority;    
+    }//end of constructor
+
+    /**
+     * Constructor for a new Human object when health is specified.
+     * @param health The health of the human.
+     * @param maxHealth The maximum health of the human.
+     * @param x The horizontal location of the human.
+     * @param y The vertical location of the human.
+     * @param sprite The image of the human that is displayed to the players.
+     * @param priority The priority of the human compared to others.
+     * @param hunger The hunger of the human.
+     * @param maxHunger The maximum hunger of the human.
+
+     */
+    public Human(int health, int maxHealth, int x, int y, Image sprite, int priority){
         super(maxHealth, x, y, sprite);
         this.priority = priority;    
     }//end of constructor

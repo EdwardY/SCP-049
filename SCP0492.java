@@ -29,6 +29,20 @@ public class SCP0492 extends NPC implements Troop{
         this.attackDamage = attackDamage;
     }//end of constructor
 
+
+    /**
+     * Another constructor for the SPC0492 class when health is specified.
+     * @param health The health of the unit.
+     * @param maxHealth The maximum health of the unit.
+     * @param x The x-value of the unit's location on the grid.
+     * @param y The y-value of the unit's location on the grid.
+     * @param attackDamage The amount of damage that this unit will deal when attacking.
+     */
+    public SCP0492 (int health, int maxHealth, int x, int y, int attackDamage){
+        super(health, maxHealth, x, y, Toolkit.getDefaultToolkit().getImage("./assets/scp0492.png"));
+        this.attackDamage = attackDamage;
+    }//end of constructor
+
      /**
      * Attacks a targeted NPC in the game
      * @param npc The target NPC that the unit is attacking.

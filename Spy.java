@@ -24,7 +24,22 @@ public class Spy extends Cadet{
      * @param sus The chance that the spy will be caught by the enemy.
      */
     public Spy(int x, int y, double successRate, double sus){
-        super(100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/spy.png"), 3);
+        super(100, x, y, "Spy");
+        this.successRate = successRate;
+        this.sus = sus;
+    }//end of constructor
+
+
+    /**
+     * Constructor to create a new spy if health needs to be specified.
+     * @param health The spy's health
+     * @param x The spy's horizontal location.
+     * @param y The spy's vertical position.
+     * @param successRate The chance of the spy gaining enemy intel.
+     * @param sus The chance that the spy will be caught by the enemy.
+     */
+    public Spy(int health, int x, int y, double successRate, double sus){
+        super(health, 100, x, y, "Spy");
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor

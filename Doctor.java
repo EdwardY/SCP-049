@@ -23,6 +23,17 @@ public class Doctor extends Human{
         this.healingAmount = healingAmount;
     }//end of constructor
 
+
+    /**
+     * Another constructor to make a new doctor object when health is specified. 
+     * @param x The horizontal position of the Doctor.
+     * @param y The vertical position of the Doctor.
+     */
+    public Doctor(int health, int x, int y, int healingAmount){
+        super(health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/doctor.png"), 2);
+        this.healingAmount = healingAmount;
+    }//end of constructor
+
     //start of getters
     /**
      * returns the amount a doctor can heal.

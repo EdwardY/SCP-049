@@ -330,9 +330,6 @@ class Server {
             }else if(type.equals("Infect")){
                 event = new Infect(level, x, y);
                 price = Infect.getCostByLevel(level);
-            }else if(type.equals("Snow")){
-                event = new Snow(level, x, y);
-                price = Snow.getCostByLevel(level);
             }else if(type.equals("Thunderstorm")){
                 event = new Thunderstorm(level, x, y);
                 price = Thunderstorm.getCostByLevel(level);

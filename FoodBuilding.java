@@ -80,16 +80,14 @@ class FoodBuilding extends ProductionFacility{
     //FoodBUilding has orange background
    }
 
-   /**
+
+    /**
+     * Calculates cost of upgrade
      * @return the cost that the building takes to upgrade
      */
-    public int upgrade(){
-        
-        this.setLevel(this.getLevel() + 1);
-
+    public int getUpgradePrice(){
         return this.getLevel() * 3/2;
     }
-
 
 
 }

@@ -396,11 +396,11 @@ class Server {
             ArrayList<Building> buildings = game.getBuildings();
             for(Building building:buildings){
                 if((building.getX() == x) && (building.getY() == y)){
-                    //if(){
-                        //TODO: make sure there's enough money to upgrade the building
+                    
+                    if(building.getUpgradePrice() <= game.getMoney()){
                         building.upgrade();
                         success = true;
-                    //}
+                    }
                 }
             }
             return success;

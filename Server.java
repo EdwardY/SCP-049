@@ -486,6 +486,13 @@ class Server {
                             sendTo(allUsers, curBuilding.getClass().getSimpleName() + " " + curBuilding.getMaxHealth() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY());
                         }
 
+                        //humans
+                        sendTo(allUsers, "" + game.getHumans().size());
+                        for(int i = 0;i < game.getHumans().size();i++){
+                            Human curHuman = game.getHumans().get(i);
+                            sendTo(allUsers, curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getMaxHealth() + " " + curHuman.getX() + " " + curHuman.getY());
+                        }
+
                         //town food supply
                         town.sendMessage("<r>");
                         town.sendMessage("Food");

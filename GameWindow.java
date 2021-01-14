@@ -27,16 +27,16 @@ import java.awt.event.MouseEvent;
 public abstract class GameWindow{
     /**The window that the game will use. */
    private JFrame window;
-   /**The JPanel displaying all game objects on the game grid.*/
-   private JPanel grid;
-   /**The JPanel displaying all statistics about the player.*/
-   private JPanel infoBar;
+   /**The GraphicsPanel displaying all game objects on the game grid.*/
+   private GraphicsPanel grid;
+   /**The GraphicsPanel displaying all statistics about the player.*/
+   private GraphicsPanel infoBar;
 
 
    public GameWindow(){
        this.window = new JFrame("Code-049");
-       this.grid = new JPanel();
-       this.infoBar = new JPanel();
+       this.grid = new GraphicsPanel();
+       this.infoBar = new GraphicsPanel();
    }
 
     /**
@@ -50,7 +50,7 @@ public abstract class GameWindow{
      */
     public void start(){
         while(true){
-            //TODO: repaint a jpanel 
+            this.window.repaint();
             try  {Thread.sleep(20);} catch(Exception e){}
         }
     }

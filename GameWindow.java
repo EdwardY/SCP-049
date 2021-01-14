@@ -27,16 +27,16 @@ import java.awt.event.MouseEvent;
 public abstract class GameWindow{
     /**The window that the game will use. */
    private JFrame window;
-   /**The GraphicsPanel displaying all game objects on the game grid.*/
-   private GraphicsPanel grid;
-   /**The GraphicsPanel displaying all statistics about the player.*/
-   private GraphicsPanel infoBar;
+   /**The DuberPanel displaying all game objects on the game grid.*/
+   private DuberPanel grid;
+   /**The DuberPanel displaying all statistics about the player.*/
+   private DuberPanel infoBar;
 
 
    public GameWindow(){
        this.window = new JFrame("Code-049");
-       this.grid = new GraphicsPanel();
-       this.infoBar = new GraphicsPanel();
+       this.grid = new DuberPanel();
+       this.infoBar = new DuberPanel();
    }
 
     /**
@@ -68,7 +68,7 @@ public abstract class GameWindow{
     * Gets the grid JPanel of the game window.
     * @return The grid JPanel of the game window.
     */
-    public JPanel getGrid(){
+    public DuberPanel getGrid(){
         return this.grid;
     }
 
@@ -76,22 +76,22 @@ public abstract class GameWindow{
     * Gets the stats bar JPanel of the game window.
     * @return The stats bar JPanel of the game window.
     */
-    public JPanel getInfoBar(){
+    public DuberPanel getInfoBar(){
         return this.infoBar;
     }
 
     /**
-     * [GraphicsPanel.java]
+     * [DuberPanel.java]
      * Custom {@code JPanel} class to be able to repaint things
      * @author Damon Ma, Edward Yang, Vivian Dai
      * @version 1.0 on January 14, 2021
      */
-    public class GraphicsPanel extends JPanel{
+    public class DuberPanel extends JPanel{
 
         /**
-         * Constructor for the {@code GraphicsPanel}
+         * Constructor for the {@code DuberPanel}
          */
-        public GraphicsPanel(){
+        public DuberPanel(){
             setFocusable(true);
             requestFocusInWindow();
         }

@@ -144,5 +144,41 @@ class Residency extends Building{
 
         //TODO: what happens when health / capacity goes too low during an downgrade
     }
+
+    /**
+     * @param amount Creating a certain amount of citizens
+     */
+    public void createCitizen(int amount){
+
+        for(int i = 0; i < amount; i ++){
+
+            residents.add(new Citizen(0, 100, this.getX(), this.getY()));
+        }
+    }
+
+    
+    public void specialize(int amount, String type){
+
+        //TODO: I might have to allocate and switch the coordinate of NPCS ask vivian and Damon
+        //public void move/allocate()
+    }
+
+    /**
+     * @return 
+     */
+    public int getAdults(){
+
+        int adults = 0;
+
+        //Check if they are 18
+        for(int i = 0; i < residents.size(); i ++){
+
+            if(residents.get(i).getAge() >= 18){
+
+                adults ++;
+            }
+        }
+        return adults;
+    }
 }
 

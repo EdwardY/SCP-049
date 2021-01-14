@@ -131,6 +131,32 @@ class Game {
     }
 
     /**
+     * <p>
+     * Loops through all {@code Humans} in the game. If the current {@code Human} is a {@code Spy}, generate two random numbers. 
+     * The first random number is the sus rate, if the {@code Spy} is too sus, then the enemy captures the {@code Spy} and it 
+     * gets removed. The second randomly generated number is the success rate. If the {@code Spy} has a success rate higher than 
+     * the generated number, true is returned so that super secret info can be revealed to the town. If no {@code Spy} manages 
+     * to get any info, false is returned.
+     * </p>
+     * @return true if successful, false if not
+     */
+    public boolean gotIntel(){
+        for(Human currentHuman:this.humans){
+            if(currentHuman instanceof Spy){
+                Spy spy = (Spy)currentHuman;
+                double sus = Math.random();
+                double success = Math.random();
+                if(sus < spy.getSus()){
+                    this.humans.remove(currentHuman);
+                }else if(success < spy.getSuccessRate()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Gets the buildings 
      * @return buildings, an {@code ArrayList} of all {@code Building} objects
      */
@@ -293,9 +319,6 @@ class Game {
      * @param healingAmount The amount of healing the NPC will be able to heal (if applicable).
      */
     public void convert(NPC npc, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
-        //temporary for now
-        String imageURL = "";
-
 
         for(int i = 0;i < this.humans.size();i++){
             if(this.humans.get(i).equals(npc)){
@@ -320,8 +343,6 @@ class Game {
                 return;
             }
         }
-
-        //TODO: no images for NPC's yet, may need to draw things
     }
 
     /**

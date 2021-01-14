@@ -494,6 +494,13 @@ class Server {
                         if(game.getFood() > game.getHumans().size()){
                             town.sendMessage("" + game.getHumans().size());
                         }
+                        
+                        //intel gathering
+                        if(game.gotIntel()){
+                            town.sendMessage("<i>");
+                            town.sendMessage("" + game.getHume());
+                        }
+
                         turnGoing = !turnGoing;
                     }
                 }else{

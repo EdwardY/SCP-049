@@ -171,23 +171,23 @@ public class Client {
                                     String eventType = objectValues[0];
 
                                     if(eventType.equals("Infect")){
-                                        //TODO: Construct new Infect object
+                                        eventList.add(new Infect(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]) ));
                                     }else if (eventType.equals("Earthquake")){
-                                        //TODO: Construct new Earthquake object
+                                        eventList.add(new Earthquake(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]) ));
                                     }else if(eventType.equals("Fire")){
-                                        //TODO: Construct new Fire object
+                                        eventList.add(new Fire(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]) ));
                                     }else if(eventType.equals("Mutate")){
-                                        //TODO: Create new Mutate event
+                                        eventList.add(new Mutate(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
                                     }else if(eventType.equals("Riot")){
-                                        //TODO: Create new Riot event
+                                        eventList.add(new Riot(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
                                     }else if(eventType.equals("Thunderstorm")){
-                                        //TODO: create new Thunderstorm event
+                                        eventList.add(new Thunderstorm(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]) ));
                                     }else if(eventType.equals("Tornado")){
-                                        //TODO: Create new Tornado event
+                                        eventList.add(new Tornado(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]) ));
                                     }else if(eventType.equals("WarpReality")){
-                                        //TODO: Create new WarpReality event
+                                        eventList.add(new WarpReality(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
                                     }else if(eventType.equals("Stonks")){
-                                        //TODO: Create new Stonks event
+                                        eventList.add(new Stonks(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
                                     }
                                 }
 

@@ -121,10 +121,8 @@ class Hospital extends Building{
     /**
      * @return the cost that the building takes to upgrade
      */
-    public int upgrade(){
+    public int getUpgradePrice(){
         
-        this.setLevel(this.getLevel() + 1);
-
         return this.getLevel() * 3/2;
     }
 

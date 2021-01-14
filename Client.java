@@ -156,9 +156,10 @@ public class Client {
                                 int objectNum = Integer.parseInt(input.readLine());
                                 ArrayList<SCP0492> scpList = new ArrayList<SCP0492>();
                                 for(int i = 0; i < objectNum; i ++){
+                                    SCP0492.level = Integer.parseInt(input.readLine());
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
-                                    scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]) ));   
+                                    scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));   
                                     //TODO: fix NPC consctructors later, no longer needs image
                                 }
 

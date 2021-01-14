@@ -65,16 +65,16 @@ public abstract class GameWindow{
 
 
     /**
-    * Gets the grid JPanel of the game window.
-    * @return The grid JPanel of the game window.
+    * Gets the grid DuberPanel of the game window.
+    * @return The grid DuberPanel of the game window.
     */
     public DuberPanel getGrid(){
         return this.grid;
     }
 
     /**
-    * Gets the stats bar JPanel of the game window.
-    * @return The stats bar JPanel of the game window.
+    * Gets the stats bar DuberPanel of the game window.
+    * @return The stats bar DuberPanel of the game window.
     */
     public DuberPanel getInfoBar(){
         return this.infoBar;

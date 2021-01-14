@@ -11,7 +11,6 @@ import javax.swing.JTextField;
 
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -50,7 +49,7 @@ public class Client {
     /**login window for the game. */
     private LoginWindow loginWindow;
     /**standby window that appears when the player is the first to join and waiting for the next to join. */
-    private StandbyWindow standbyWindow;
+    private StandbyWindow standbyWindow = null;
   
 
 
@@ -97,10 +96,20 @@ public class Client {
 
     /**
      * Gets the widow used for the player to standby.
-     * @return The standby window
+     * @return The standby window.
      */
     public StandbyWindow getStandbyWindow(){
         return this.standbyWindow;
+    }
+
+
+
+    /**
+     * sets the widow used for the player to standby.
+     * @standbyWindow The new standby window.
+     */
+    public void setStandbyWindow(StandbyWindow standbyWindow){
+        this.standbyWindow = standbyWindow;
     }
 
     //TODO: some method parameters between Town/SCP/Player and client do not match, e.g. .start
@@ -118,9 +127,9 @@ public class Client {
                         if(input.ready()){
                             prefix = input.readLine();
                             if(prefix.equals("<w>")){  //waiting for another player to join
-                                Client.this.startStandby();
+                                Client.this.startStandby(); //start standby window
                             }else if(prefix.equals("<s>")){  //start game
-                                System.out.println("Game start!");
+                                System.out.println("Game start!"); //TODO: Temp line for game testing, remove later
                                 String side = input.readLine();
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
@@ -132,8 +141,9 @@ public class Client {
                                     player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
                                 }
 
-                                if(Client.this.getStandbyWindow() != null){
-                                    Client.this.getStandbyWindow().close();
+                                if(Client.this.getStandbyWindow() != null){ //if standby window is open
+                                    Client.this.getStandbyWindow().close();  //close the standby window
+                                    Client.this.setStandbyWindow(null);
                                 }
 
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
@@ -230,15 +240,15 @@ public class Client {
                                 }
 
 
-                                //TODO: Not sure where to put all of these received game objects
+                                //TODO: Not sure where to put all of these received game objects since town/scp class isn't quite finished yet
     
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
 
                                 System.out.println("something something transaction didn't go through");
-                                //TODO: Not done properly yet.
+                                //TODO: Discuss how to manage transactions with group.
                             }else if(prefix.equals("<st>")){ //transaction is successful
-
+                                //TODO: Figure out how transactions will work (?)
                                 System.out.println("something something congrats purchase successful");
                                 //TODO: Not done properly yet.
                             }else if(prefix.equals("<r>")){ //change in resources
@@ -250,10 +260,16 @@ public class Client {
                                     ((Town)player).changeFood(resourceChange);
                                 }else if(resourceType.equals("Hume")){
                                     ((SCP)player).changeHume(resourceChange);
-                                }             
+                                }
+                                //TODO: Town/SCP side underdeveloped, not really sure what to do with this.
+
+                                
+                            }else if (prefix.equals("<i>")){
+                                int enemyHume = Integer.parseInt(input.readLine());
+                                //TODO: Town/SCP side underdeveloped, not really sure what to do with this.
                             }//end of if statements
 
-                        }
+                        }//end of if statement to check if there is input
                     }catch(IOException e){
                         System.out.println("Error receiving message from server");
                     }//end of try catch statement

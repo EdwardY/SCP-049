@@ -116,7 +116,9 @@ class Game {
             if(currentEvent instanceof Tornado){
                 int dx = (int)Math.round((Math.random()*2) - 1);
                 int dy = (int)Math.round((Math.random()*2) - 1);
-                ((Tornado)currentEvent).translate(dx, dy);
+                int distX = (int)Math.round(Math.random()*Building.SIZE);
+                int distY = (int)Math.round(Math.random()*Building.SIZE);
+                ((Tornado)currentEvent).translate(dx*distX, dy*distY);
             }else if((currentEvent instanceof Thunderstorm) && (((Thunderstorm)currentEvent).getStrikesLeft() <= 0)){
                 this.events.remove(currentEvent);
             }
@@ -126,7 +128,17 @@ class Game {
         }
     }
 
+    /**
+     * Loops through each SCP0492 and generates a random amount to move it by
+     */
     private void moveNpcs(){
+        for(int i = 0;i < this.scps.size();i++){
+            int dx = (int)Math.round((Math.random()*2) - 1);
+            int dy = (int)Math.round((Math.random()*2) - 1);
+            int distX = (int)Math.round(Math.random()*NPC.SIZE);
+            int distY = (int)Math.round(Math.random()*NPC.SIZE);
+            this.scps.get(i).translate(dx*distX, dy*distY);
+        }
         //TODO: move npcs that need to be moved
     }
 

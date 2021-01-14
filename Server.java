@@ -461,10 +461,11 @@ class Server {
                         game.doTurn();
                         sendTo(allUsers, "<te>");
                         //scps
+                        sendTo(allUsers, "" + SCP0492.level);
                         sendTo(allUsers, "" + game.getScps().size());
                         for(int i = 0;i < game.getScps().size();i++){
                             SCP0492 curScp = game.getScps().get(i);
-                            sendTo(allUsers, curScp.getHealth() + " " + curScp.getX() + " " + curScp.getY());
+                            sendTo(allUsers, curScp.getHealth() + " " + curScp.getMaxHealth() + " " + curScp.getX() + " " + curScp.getY() + " " + curScp.getAttackDamage());
                         }
 
                         //events
@@ -472,9 +473,9 @@ class Server {
                         for(int i = 0;i < game.getEvents().size();i++){
                             Event curEvent = game.getEvents().get(i);
                             if(curEvent instanceof WholeGameEvent){
-                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getEffectAmount());
+                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft());
                             }else{
-                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getEffectAmount() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()) + " " + (int)(((AoeEvent)curEvent).getAoe().getWidth())  + " " + (int)(((AoeEvent)curEvent).getAoe().getHeight()));
+                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()) + " " + (int)(((AoeEvent)curEvent).getAoe().getWidth())  + " " + (int)(((AoeEvent)curEvent).getAoe().getHeight()));
                             }
                         }
 
@@ -482,7 +483,7 @@ class Server {
                         sendTo(allUsers, "" + game.getBuildings().size());
                         for(int i = 0;i < game.getBuildings().size();i++){
                             Building curBuilding = game.getBuildings().get(i);
-                            sendTo(allUsers, curBuilding.getClass().getSimpleName() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY());
+                            sendTo(allUsers, curBuilding.getClass().getSimpleName() + " " + curBuilding.getMaxHealth() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY());
                         }
 
                         //town food supply

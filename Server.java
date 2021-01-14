@@ -273,26 +273,25 @@ class Server {
          */
         private boolean buildBuilding(String type, int x, int y){
             boolean success = false;
-            Image sprite = Toolkit.getDefaultToolkit().getImage("./assets/" + type.toLowerCase() + ".png");
             int price = Integer.MAX_VALUE;
             Building building = null;
             if(type.equals("Bank")){
-                building = new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, sprite, x, y);
+                building = new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, x, y);
                 price = Bank.INITIAL_PRICE;
             }else if(type.equals("FoodBuilding")){
-                building = new FoodBuilding(FoodBuilding.INITIAL_PRICE, FoodBuilding.INITIAL_HEALTH, FoodBuilding.INITIAL_HEALTH, sprite, x, y);
+                building = new FoodBuilding(FoodBuilding.INITIAL_PRICE, FoodBuilding.INITIAL_HEALTH, FoodBuilding.INITIAL_HEALTH, x, y);
                 price = FoodBuilding.INITIAL_PRICE;
             }else if(type.equals("Hospital")){
-                building = new Hospital(Hospital.INITIAL_PRICE, Hospital.INITIAL_HEALTH, Hospital.INITIAL_HEALTH, sprite, x, y, Hospital.INITIAL_MAX_CAP);
+                building = new Hospital(Hospital.INITIAL_PRICE, Hospital.INITIAL_HEALTH, Hospital.INITIAL_HEALTH, x, y, Hospital.INITIAL_MAX_CAP);
                 price = Hospital.INITIAL_PRICE;
             }else if(type.equals("MilitaryBase")){
-                building = new MilitaryBase(MilitaryBase.INITIAL_PRICE, MilitaryBase.INITIAL_HEALTH, MilitaryBase.INITIAL_HEALTH, sprite, x, y);
+                building = new MilitaryBase(MilitaryBase.INITIAL_PRICE, MilitaryBase.INITIAL_HEALTH, MilitaryBase.INITIAL_HEALTH, x, y);
                 price = MilitaryBase.INITIAL_PRICE;
             }else if(type.equals("ResearchLab")){
-                building = new ResearchLab(ResearchLab.INITIAL_PRICE, ResearchLab.INITIAL_HEALTH, ResearchLab.INITIAL_HEALTH, sprite, x, y);
+                building = new ResearchLab(ResearchLab.INITIAL_PRICE, ResearchLab.INITIAL_HEALTH, ResearchLab.INITIAL_HEALTH, x, y);
                 price = ResearchLab.INITIAL_PRICE;
             }else if(type.equals("Residency")){
-                building = new Residency(Residency.INITIAL_PRICE, Residency.INITIAL_HEALTH, Residency.INITIAL_HEALTH, sprite, x, y, Residency.INITIAL_MAX_CAP);
+                building = new Residency(Residency.INITIAL_PRICE, Residency.INITIAL_HEALTH, Residency.INITIAL_HEALTH, x, y, Residency.INITIAL_MAX_CAP);
                 price = Residency.INITIAL_PRICE;
             }
             if((building != null) && (game.getMoney() >= price)){

@@ -21,7 +21,7 @@ public class Spy extends Cadet{
      * @param sus The chance that the spy will be caught by the enemy.
      */
     public Spy(int x, int y, double successRate, double sus){
-        super(100, x, y, "Spy");
+        super(100, x, y);
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor
@@ -37,11 +37,10 @@ public class Spy extends Cadet{
      * @param sus The chance that the spy will be caught by the enemy.
      */
     public Spy(int age, int health, int x, int y, double successRate, double sus){
-        super(age, health, 100, x, y, "Spy");
+        super(age, health, x, y, 3);
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor
-
     //TODO: Empty method for getIntel, mechanics not thoroughly discussed yet.
 
 

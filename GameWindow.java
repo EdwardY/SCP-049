@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,16 +27,16 @@ import java.awt.event.MouseEvent;
 public abstract class GameWindow{
     /**The window that the game will use. */
    private JFrame window;
-   /**The JPanel displaying all game objects on the game grid.*/
-   private JPanel grid;
-   /**The JPanel displaying all statistics about the player.*/
-   private JPanel infoBar;
+   /**The GraphicsPanel displaying all game objects on the game grid.*/
+   private GraphicsPanel grid;
+   /**The GraphicsPanel displaying all statistics about the player.*/
+   private GraphicsPanel infoBar;
 
 
    public GameWindow(){
        this.window = new JFrame("Code-049");
-       this.grid = new JPanel();
-       this.infoBar = new JPanel();
+       this.grid = new GraphicsPanel();
+       this.infoBar = new GraphicsPanel();
    }
 
     /**
@@ -44,6 +45,15 @@ public abstract class GameWindow{
     public abstract void update();
 
 
+    /**
+     * Starts the animation of the {@code GameWindow}
+     */
+    public void start(){
+        while(true){
+            this.window.repaint();
+            try  {Thread.sleep(20);} catch(Exception e){}
+        }
+    }
 
     /**
     * Gets the JFrame of the game window.
@@ -70,9 +80,33 @@ public abstract class GameWindow{
         return this.infoBar;
     }
 
+    /**
+     * [GraphicsPanel.java]
+     * Custom {@code JPanel} class to be able to repaint things
+     * @author Damon Ma, Edward Yang, Vivian Dai
+     * @version 1.0 on January 14, 2021
+     */
+    public class GraphicsPanel extends JPanel{
+        public GraphicsPanel(){
+            setFocusable(true);
+            requestFocusInWindow();
+        }
+
+        /**
+         * Repaints the pannel
+         * @param g the {@code Graphics} to draw on
+         */
+        public void paintComponent(Graphics g){
+
+        }
+
+    }
 
     /**
+     * [DuberMouseHandler.java]
      * Inner class for mouse input.
+     * @author Damon Ma, Edward Yang, Vivian Dai
+     * @version 1.0 on January 11, 2021
      */
     public class DuberMouseHandler implements MouseMotionListener, MouseListener{
         /**The x-value of the mouse.*/

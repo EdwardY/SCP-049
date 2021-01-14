@@ -214,17 +214,17 @@ public class Client {
                                     objectValues = objectInfo.split(" ");
                                     String humanType = input.readLine();
                                     if(humanType.equals("Cadet")){
-                                        humansList.add(new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
+                                        humansList.add(new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
                                     }else if(humanType.equals("Citizen")){
-                                        humansList.add(new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
+                                        humansList.add(new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
                                     }else if(humanType.equals("Doctor")){
-                                        humansList.add(new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3])));
+                                        humansList.add(new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]) ));
                                     }else if(humanType.equals("Researcher")){
-                                        humansList.add(new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2])));
+                                        humansList.add(new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
                                     }else if(humanType.equals("Soldier")){
-                                        humansList.add(new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]) ));
+                                        humansList.add(new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]) ));
                                     }else if(humanType.equals("Spy")){
-                                        humansList.add(new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Double.parseDouble(objectValues[3]), Double.parseDouble(objectValues[4])));
+                                        humansList.add(new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
                                     }
 
                                 }

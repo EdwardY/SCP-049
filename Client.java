@@ -180,8 +180,6 @@ public class Client {
                                         //TODO: Create new Mutate event
                                     }else if(eventType.equals("Riot")){
                                         //TODO: Create new Riot event
-                                    }else if(eventType.equals("Snow")){
-                                        //TODO: create new Snow event
                                     }else if(eventType.equals("Thunderstorm")){
                                         //TODO: create new Thunderstorm event
                                     }else if(eventType.equals("Tornado")){

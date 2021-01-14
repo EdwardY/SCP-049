@@ -34,16 +34,14 @@ public class QuadTree {
     * @param width The width of the quadtree's boundary.
     * @param xPos The x-value of the boundary's midpoint.
     * @param yPos The y-value of the boundary's midpoint.
-    * @param attackerList All potential attackers in the quadtree.
-    * @param targetList All potential targets in the quadtree.
     * @param depth The amount of subdivisions of the quadtree.
     */
-    public QuadTree(int length, int width, int xPos, int yPos, ArrayList<NPC> attackerList, ArrayList<NPC> targetList, int depth){
+    public QuadTree(int length, int width, int xPos, int yPos, int depth){
       //TODO: Discuss whether we give the top-left point or the midpoint initially.
         this.boundary = new Boundary(length, width, xPos, yPos);  //make the boundary for the quadtree
         //define the rest of the quadtree's attributes
-        this.attackerList = attackerList;
-        this.targetList = targetList;
+        this.attackerList = new ArrayList<NPC>();
+        this.targetList = new ArrayList<NPC>();
         this.depth = depth;
     } //end of constructor
 
@@ -191,10 +189,10 @@ public class QuadTree {
     //end getting dimensions
     
     //based on this quadtree, split it into four smaller quadtrees, follows the quadrant system where the quadrant number is the index number +1 
-    this.leaves[0] = new QuadTree(newLength, newWidth, (currentXPos + (newWidth/2)), (currentYPos - (newLength/2)), new ArrayList<NPC>(), new ArrayList<NPC>(), this.depth+1);
-    this.leaves[1] = new QuadTree(newLength, newWidth, (currentXPos - (newWidth/2)), (currentYPos - (newLength/2)), new ArrayList<NPC>(), new ArrayList<NPC>(), this.depth+1);
-    this.leaves[2] = new QuadTree(newLength, newWidth, (currentXPos - (newWidth/2)), (currentYPos + (newLength/2)), new ArrayList<NPC>(), new ArrayList<NPC>(), this.depth+1);
-    this.leaves[3] = new QuadTree(newLength, newWidth, (currentXPos + (newWidth/2)), (currentYPos + (newLength/2)), new ArrayList<NPC>(), new ArrayList<NPC>(), this.depth+1);
+    this.leaves[0] = new QuadTree(newLength, newWidth, (currentXPos + (newWidth/2)), (currentYPos - (newLength/2)), this.depth+1);
+    this.leaves[1] = new QuadTree(newLength, newWidth, (currentXPos - (newWidth/2)), (currentYPos - (newLength/2)), this.depth+1);
+    this.leaves[2] = new QuadTree(newLength, newWidth, (currentXPos - (newWidth/2)), (currentYPos + (newLength/2)), this.depth+1);
+    this.leaves[3] = new QuadTree(newLength, newWidth, (currentXPos + (newWidth/2)), (currentYPos + (newLength/2)), this.depth+1);
     //end splitting
     
     for(int i = 0; i  < attackerList.size(); i++){ //move all of the attackers to the subtree that they belong in

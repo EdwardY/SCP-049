@@ -18,6 +18,7 @@ import java.net.Socket;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * [Client.java]
@@ -219,27 +220,53 @@ public class Client {
                                 }
 
                                 objectNum = Integer.parseInt(input.readLine());
+
                                 ArrayList<Human> humansList = new ArrayList<Human>();
-                                for(int i = 0; i < objectNum; i++){
-                                    objectInfo = input.readLine();
-                                    objectValues = objectInfo.split(" ");
-                                    String humanType = input.readLine();
-                                    if(humanType.equals("Cadet")){
-                                        humansList.add(new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
-                                    }else if(humanType.equals("Citizen")){
-                                        humansList.add(new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
-                                    }else if(humanType.equals("Doctor")){
-                                        humansList.add(new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]) ));
-                                    }else if(humanType.equals("Researcher")){
-                                        humansList.add(new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
-                                    }else if(humanType.equals("Soldier")){
-                                        humansList.add(new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]) ));
-                                    }else if(humanType.equals("Spy")){
-                                        humansList.add(new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
+                                HashMap<Integer, Human> humanMap = new HashMap<>();
+                                
+                                if(Client.this.getPlayer() instanceof SCP){
+                                    for(int i = 0; i < objectNum; i++){
+                                        objectInfo = input.readLine();
+                                        objectValues = objectInfo.split(" ");
+                                        String humanType = objectValues[0];
+                                        if(humanType.equals("Cadet")){
+                                            humansList.add(new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
+                                        }else if(humanType.equals("Citizen")){
+                                            humansList.add(new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
+                                        }else if(humanType.equals("Doctor")){
+                                            humansList.add(new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]) ));
+                                        }else if(humanType.equals("Researcher")){
+                                            humansList.add(new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
+                                        }else if(humanType.equals("Soldier")){
+                                            humansList.add(new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]) ));
+                                        }else if(humanType.equals("Spy")){
+                                            humansList.add(new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
+                                        }
+
                                     }
+                                }else if (Client.this.getPlayer() instanceof Town){
+                                    for(int i = 0; i < objectNum; i++){
+                                        objectInfo = input.readLine();
+                                        objectValues = objectInfo.split(" ");
+                                        int key = Integer.parseInt(objectValues[0]);
+                                        String humanType = objectValues[1];
+                                        if(humanType.equals("Cadet")){
+                                            humanMap.put(key, new Cadet(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])));
+                                        }else if(humanType.equals("Citizen")){
+                                            humanMap.put(key, new Citizen(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])));
+                                        }else if(humanType.equals("Doctor")){
+                                            humanMap.put(key, new Doctor(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[5]) ));
+                                        }else if(humanType.equals("Researcher")){
+                                            humanMap.put(key, new Researcher(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])));
+                                        }else if(humanType.equals("Soldier")){
+                                            humanMap.put(key, new Soldier(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]), Integer.parseInt(objectValues[7]) ));
+                                        }else if(humanType.equals("Spy")){
+                                            humanMap.put(key, new Spy(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Double.parseDouble(objectValues[6]), Double.parseDouble(objectValues[7])));
+                                        }
 
+                                    }
                                 }
-
+                                //TODO: Method outdated
                                 Client.this.getPlayer().updateGameObjects(humansList, buildingList, eventList, scpList);
                                 //TODO: Not sure where to put all of these received game objects since town/scp class isn't quite finished yet
     

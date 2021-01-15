@@ -28,15 +28,32 @@ public abstract class GameWindow{
     /**The window that the game will use. */
    private JFrame window;
    /**The DuberPanel displaying all game objects on the game grid.*/
-   private DuberPanel grid;
+   private GridPanel grid;
    /**The DuberPanel displaying all statistics about the player.*/
-   private DuberPanel infoBar;
+   private InfoBarPanel infoBar;
 
 
    public GameWindow(){
        this.window = new JFrame("Code-049");
-       this.grid = new DuberPanel();
-       this.infoBar = new DuberPanel();
+
+       //Setting the JPanel for the game grid
+       this.grid = new GridPanel();
+       grid.setBounds(0, 0, 1080, 1080);
+       grid.setBorder(BorderFactory.createLineBorder(Color.black));
+       grid.setBackground(Color.gray);
+
+       //Setting the JPanel for the game 
+       this.infoBar = new InfoBarPanel();
+       infoBar.setBounds(1080,0,256,1080);
+       infoBar.setBorder(BorderFactory.createLineBorder(Color.black));
+       infoBar.setBackground(Color.white);
+
+       window.add(grid);
+       window.add(infoBar);
+
+       //setting the JFrame
+       window.setSize(1080,1920); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
+       window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
    }
 
     /**
@@ -68,7 +85,7 @@ public abstract class GameWindow{
     * Gets the grid DuberPanel of the game window.
     * @return The grid DuberPanel of the game window.
     */
-    public DuberPanel getGrid(){
+    public GridPanel getGrid(){
         return this.grid;
     }
 
@@ -76,22 +93,22 @@ public abstract class GameWindow{
     * Gets the stats bar DuberPanel of the game window.
     * @return The stats bar DuberPanel of the game window.
     */
-    public DuberPanel getInfoBar(){
+    public InfoBarPanel getInfoBar(){
         return this.infoBar;
     }
 
     /**
-     * [DuberPanel.java]
-     * Custom {@code JPanel} class to be able to repaint things
+     * [GridPanel.java]
+     * Custom {@code JPanel} class to be able to repaint game grids
      * @author Damon Ma, Edward Yang, Vivian Dai
-     * @version 1.0 on January 14, 2021
+     * @version 1.0 on January 15, 2021
      */
-    public class DuberPanel extends JPanel{
+    public class GridPanel extends JPanel{
 
         /**
          * Constructor for the {@code DuberPanel}
          */
-        public DuberPanel(){
+        public GridPanel(){
             setFocusable(true);
             requestFocusInWindow();
         }
@@ -105,6 +122,32 @@ public abstract class GameWindow{
             //TODO: draw in everything else :'D
         }
 
+    }
+
+    /**
+     * [InfoBarPanel.java]
+     * Custom {@code JPanel} class to be able to repaint things
+     * @author Damon Ma, Edward Yang, Vivian Dai
+     * @version 1.0 on January 15, 2021
+     */
+    public class InfoBarPanel extends JPanel{
+
+        /**
+         * Constructor for the {@code DuberPanel}
+         */
+        public InfoBarPanel(){
+            setFocusable(true);
+            requestFocusInWindow();
+        }
+
+        /**
+         * Repaints the pannel
+         * @param g the {@code Graphics} to draw on
+         */
+        public void paintComponent(Graphics g){
+            super.paintComponent(g);
+            //TODO: draw in everything else :'D
+        }
     }
 
     /**

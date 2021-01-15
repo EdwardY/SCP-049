@@ -171,21 +171,11 @@ public class SCP extends Player{
          */
         public SCPGameWindow(){
             JFrame gameWindow = this.getWindow();
-            gameWindow.setSize(1080,1920); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
-            gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-            JPanel gridPanel = this.getGrid();
-            gridPanel.setBounds(0, 0, 1080, 1080);
-            gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-            gridPanel.setBackground(Color.gray);
-            gameWindow.add(gridPanel);
+            ScpGridPanel gridPanel = new ScpGridPanel();
 
 
-            JPanel infoBarPanel = this.getInfoBar();
-            infoBarPanel.setBounds(1080,0,256,1080);
-            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-            gridPanel.setBackground(Color.white);
-            gameWindow.add(infoBarPanel);
+            ScpInfoBarPanel infoBarPanel = new ScpInfoBarPanel();
 
 
             //let user see the window
@@ -202,6 +192,54 @@ public class SCP extends Player{
         public void update(){
             System.out.println("Hello");
             //TODO: Not complete yet
+        }
+
+        /**
+         * [ScpGridPanel.java]
+         * A {@code GridPanel} that draw SCP specific game graphics
+         * @author Damon Ma, Edward Yang, Vivian Dai
+         * @version 1.0 on January 15, 2021
+         */
+        private class ScpGridPanel extends GridPanel{
+            /**
+             * Constructor for the {@code GridPanel}
+             */
+            private ScpGridPanel(){
+                setFocusable(true);
+                requestFocusInWindow();
+            }
+
+            /**
+             * @param g the {@code Graphics} to draw on
+             */
+            public void paintComponent(Graphics g){
+                super.paintComponent(g);
+                //TODO: draw more things on top
+            }
+        }
+
+        /**
+         * [ScpInfoBarPanel.java]
+         * A {@code InfoBarPanel} that displays SCP side specific information
+         * @author Damon Ma, Edward Yang, Vivian Dai
+         * @version 1.0 on January 15, 2021
+         */
+        private class ScpInfoBarPanel extends InfoBarPanel{
+            /**
+             * Constructor for the {@code InfoBarPanel}
+             */
+            private ScpInfoBarPanel(){
+                setFocusable(true);
+                requestFocusInWindow();
+            }
+
+            /**
+             * @param g the {@code Graphics} to draw on
+             */
+            public void paintComponent(Graphics g){
+                super.paintComponent(g);
+                //TODO: draw more things on top
+            }
         }
 
     }//end of inner class

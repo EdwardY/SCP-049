@@ -221,27 +221,11 @@ public class Town extends Player {
         /**
          * Method runs the town version of the game.
          */
-        public void run(){
+        public TowngameWindow(){
             //get the JPanels and JFrame of the game window from parent class
             JFrame gameWindow = this.getWindow();
-            JPanel gridPanel = this.getGrid();
-            JPanel infoBarPanel = this.getInfoBar();
-
-            //setting the JFrame
-            gameWindow.setSize(1080, 1920);
-            gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
-            //Setting the JPanel for the game grid
-            gridPanel.setBounds(0, 0, 1080, 1080);
-            gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-            gridPanel.setBackground(Color.gray);
-            gameWindow.add(gridPanel); 
-
-            //Setting the JPanel for the game 
-            infoBarPanel.setBounds(1080,0,256,1080);
-            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-            gridPanel.setBackground(Color.white);
-            gameWindow.add(infoBarPanel);
+            TownGridPanel gridPanel = new TownGridPanel();
+            TownInfoBarPanel infoBarPanel = new TownInfoBarPanel();
 
             //let user see the window
             gameWindow.setVisible(true);
@@ -260,6 +244,53 @@ public class Town extends Player {
                  System.out.println("Method not complete yet");
                  //TODO: Incomplete method
              }
+        /**
+         * [TownGridPanel.java]
+         * A {@code GridPanel} that draw SCP specific game graphics
+         * @author Damon Ma, Edward Yang, Vivian Dai
+         * @version 1.0 on January 15, 2021
+         */
+        private class TownGridPanel extends GridPanel{
+            /**
+             * Constructor for the {@code GridPanel}
+             */
+            private TownGridPanel(){
+                setFocusable(true);
+                requestFocusInWindow();
+            }
+
+            /**
+             * @param g the {@code Graphics} to draw on
+             */
+            public void paintComponent(Graphics g){
+                super.paintComponent(g);
+                //TODO: draw more things on top
+            }
+        }
+
+        /**
+         * [TownInfoBarPanel.java]
+         * A {@code InfoBarPanel} that displays SCP side specific information
+         * @author Damon Ma, Edward Yang, Vivian Dai
+         * @version 1.0 on January 15, 2021
+         */
+        private class TownInfoBarPanel extends InfoBarPanel{
+            /**
+             * Constructor for the {@code InfoBarPanel}
+             */
+            private TownInfoBarPanel(){
+                setFocusable(true);
+                requestFocusInWindow();
+            }
+
+            /**
+             * @param g the {@code Graphics} to draw on
+             */
+            public void paintComponent(Graphics g){
+                super.paintComponent(g);
+                //TODO: draw more things on top
+            }
+        }
 
 
     }//end of inner class

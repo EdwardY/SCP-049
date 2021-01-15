@@ -88,11 +88,13 @@ class Thunderstorm extends PhysicalEvent{
      */
     @Override
     public void affect(Game game){
-        ArrayList<Building> buildings = game.getBuildings();
-        for(int i = 0;i < buildings.size();i++){
-            Rectangle buildingArea = new Rectangle(buildings.get(i).getX(), buildings.get(i).getX(), Building.SIZE, Building.SIZE);
+        for(Building currentBuilding: game.getBuildings()){
+            Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getX(), Building.SIZE, Building.SIZE);
             if(buildingArea.contains(this.xStrikePos, this.yStrikePos)){
-                buildings.get(i).downgrade();
+                currentBuilding.downgrade();
+                if(currentBuilding.getLevel() <= 0){
+                    game.getBuildings().remove(currentBuilding);
+                }
             }
         }
         this.strikesLeft--;

@@ -41,8 +41,7 @@ public class ResearchLab extends Military{
 
 
         this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/ResearchLab.png"));
-        //TODO: determine constructors of the private class variables
-        //TODO: figure out Research mechanic
+
     }
 
     //Class methods
@@ -140,6 +139,24 @@ public class ResearchLab extends Military{
         this.setMaxHealth(this.getHealth() - 500);
 
         //TODO: what happens when health / capacity goes too low during an downgrade
+    }
+
+    /**
+     * 
+     * @return the weapon level unlocked by research
+     */
+    public int getWeaponLevel(){
+
+        return this.weaponLevel;
+    }
+
+    /**
+     * 
+     * @return the armour level unlocked by research
+     */
+    public int getArmourLevel(){
+
+        return this.armourLevel;
     }
     
 }

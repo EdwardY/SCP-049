@@ -44,17 +44,6 @@ class Residency extends Building{
     
     
     /** 
-     * @param human the human to be added to the residency if there's space
-     */
-    public void addPeople(Human human){
-
-        if(residents.size() < maxCapacity){
-            residents.add(human);
-        }
-    }
-
-    
-    /** 
      * @param g draw the building on the game board
      */
     public void draw(Graphics g){
@@ -69,7 +58,7 @@ class Residency extends Building{
      */
     public void repair(int repair){
 
-        
+        this.setHealth(this.getHealth() + repair);
     }
 
     
@@ -106,7 +95,7 @@ class Residency extends Building{
      * @param training how many adults to be converted 
      * @param type The type of Human to be trained to become
      */
-    public void train(int training, String type){
+    public void specialize(int training, String type){
 
         int trained = 0;
 
@@ -114,6 +103,16 @@ class Residency extends Building{
             
             if(residents.get(i).getAge() >= 18){
 
+                if(type.equals("Doctor")){
+
+
+                }else if(type.equals("Cadet")){
+
+
+                }else if(type.equals("Researcher")){
+
+
+                }
                 //TODO:convert humans into stuff
             }
 
@@ -156,15 +155,8 @@ class Residency extends Building{
         }
     }
 
-    
-    public void specialize(int amount, String type){
-
-        //TODO: I might have to allocate and switch the coordinate of NPCS ask vivian and Damon
-        //public void move/allocate()
-    }
-
     /**
-     * @return 
+     * @return the amount of adults available to be converted to a certain type of person
      */
     public int getAdults(){
 
@@ -180,5 +172,35 @@ class Residency extends Building{
         }
         return adults;
     }
+
+    /**
+     * A turn has passed and everyone in the residency ages
+     */
+    public void gotOld(){
+
+        for (int i = 0; i < residents.size(); i ++){
+
+            residents.get(i).gotOld();
+        }
+    }
+
+    /**
+     * 
+     * @return The max capacity of this residency
+     */
+    public int getMaxCap(){
+
+        return this.maxCapacity;
+    }
+
+    /**
+     * 
+     * @return the number of people in this residency
+     */
+    public int getCurrentPopulation(){
+
+        return residents.size(); 
+    }
+
 }
 

@@ -35,8 +35,8 @@ class FoodBuilding extends ProductionFacility{
 
 
    public int earnResource(){
-       int resource = 0; 
-       //TODO: figure out how bank makes money
+
+       int resource = 1000;
        return resource;
    }
 
@@ -47,7 +47,7 @@ class FoodBuilding extends ProductionFacility{
    //inherited methods
    public void repair(int repair){
 
-       //TODO: figure out repair mechanic
+       this.setHealth(this.getHealth() + repair);
    }
 
    

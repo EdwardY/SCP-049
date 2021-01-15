@@ -59,7 +59,7 @@ public abstract class Human extends NPC{
      * Increases the age of the Human.
      */
     public void gotOld(){
-        this.age++;        
+        this.age+= 6;        
     }//end of method
 
     /**

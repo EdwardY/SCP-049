@@ -100,7 +100,7 @@ class Hospital extends Building{
      */
     public void repair(int repair){
 
-        //TODO: determine how the repair mechanic is going to work
+        this.setHealth(this.getHealth() + repair);
     }
 
 

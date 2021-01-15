@@ -67,7 +67,7 @@ class Bank extends ProductionFacility{
     public void takeDamage(int damage){
 
         this.setHealth(this.getHealth() - damage);
-        //TODO: maybe different building have different damage taking mechanics
+
     }
     
 
@@ -89,4 +89,27 @@ class Bank extends ProductionFacility{
         return this.getLevel() * 3/2*1000;
     }
 
+    /**
+     * Upgrade the bulding's level and its stats
+     */
+    public void upgrade(){
+
+        //upgrade stats
+        this.setLevel(this.getLevel() + 1);
+        this.setMaxHealth(this.getHealth() + 500);
+
+
+    }
+
+    /**
+     * Downgrade a building and its stats
+     */
+    public void downgrade(){
+
+        //downgrade a buildings stats 
+        this.setLevel(this.getLevel() - 1);
+        this.setMaxHealth(this.getHealth() - 500);
+
+        //TODO: what happens when health / capacity goes too low during an downgrade
+    }
 }

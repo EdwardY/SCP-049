@@ -22,7 +22,9 @@ public class ResearchLab extends Military{
     private int NUMBER_OF_TURNS;
     private double progress = 0;
     private double successRate = 0.05;
-    ArrayList<Researcher> researchers = new ArrayList<>();
+    private int weaponLevel = 1;
+    private int armourLevel = 1;
+    ArrayList<Researcher> researchers = new ArrayList<>(); 
 
 
     /**
@@ -56,13 +58,16 @@ public class ResearchLab extends Military{
         //TODO: figure out the developCure mechanic
     }
 
-    public void researchWeapon(){
-
-        //TODO: figure out the reserachWeapon and armour mechanic
+    public int researchWeapon(){
+        
+        this.weaponLevel ++;
+        return 1500 + this.weaponLevel * 500;
+        
     }
 
-    public void researchArmour(){
-
+    public int researchArmour(){
+        this.armourLevel ++;
+        return 1500 + this.weaponLevel * 500;
     }
 
 
@@ -71,6 +76,7 @@ public class ResearchLab extends Military{
 
     public void repair(int repair){
         
+        this.setHealth(this.getHealth() + repair);
     }
 
     public String toString(){
@@ -121,7 +127,6 @@ public class ResearchLab extends Military{
         //upgrade stats
         this.setLevel(this.getLevel() + 1);
         this.setMaxHealth(this.getHealth() + 500);
-
 
     }
 

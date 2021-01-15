@@ -55,7 +55,7 @@ class MilitaryBase extends Military{
     //inherited methods
     public void repair(int repair){
 
-        //TODO: figure out repair mechanic
+        this.setHealth(this.getHealth() + repair);
     }
 
     

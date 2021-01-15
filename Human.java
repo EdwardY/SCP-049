@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.lang.Math;
 
 /**
  * [Human.java]
@@ -53,7 +54,6 @@ public abstract class Human extends NPC{
         this.age = age;
         this.priority = priority;    
     }//end of constructor
-
 
     /**
      * Increases the age of the Human.

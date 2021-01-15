@@ -36,7 +36,6 @@ public class Cadet extends Human{
         super(age, health, 100, x, y, Toolkit.getDefaultToolkit().getImage("./assets/cadet.png"), 5);
     }
 
-
      /**
      * Constructor for a new cadet object that is also a spy.
      * @param maxHealth The health of the spy

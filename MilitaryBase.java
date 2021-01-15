@@ -43,8 +43,16 @@ class MilitaryBase extends Military{
      * @param number The number of troops to train 
      * @param type The type of troop to train 
      */
-    public void trainTroops(int number, String type){
-        //TODO: figure out trainTroops mechanic
+    public void trainTroops(int number, String type, int armourLevel, int weaponLevel){
+        
+        if(type.equals("Soldier")){
+
+        }else if(type.equals("Spy")){
+
+        }else{
+            
+        }
+
     }
 
 

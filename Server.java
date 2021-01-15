@@ -489,7 +489,15 @@ class Server {
                         sendTo(allUsers, "" + game.getHumans().size());
                         for(int i = 0;i < game.getHumans().size();i++){
                             Human curHuman = game.getHumans().get(i);
-                            sendTo(allUsers, curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getMaxHealth() + " " + curHuman.getX() + " " + curHuman.getY());
+                            String humanInfo = curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getX() + " " + curHuman.getY();
+                            if(curHuman instanceof Doctor){
+                                humanInfo += " " + ((Doctor)curHuman).getHealingAmount();
+                            }else if(curHuman instanceof Soldier){
+                                humanInfo = curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getMaxHealth() + " " + curHuman.getX() + " " + curHuman.getY() + ((Soldier)curHuman).getAttackDamage();
+                            }else if(curHuman instanceof Spy){
+                                humanInfo += " " + ((Spy)curHuman).getSuccessRate() + " " + ((Spy)curHuman).getSus();
+                            }
+                            sendTo(allUsers, humanInfo);
                         }
 
                         //town food supply

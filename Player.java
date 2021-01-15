@@ -143,6 +143,20 @@ abstract class Player {
 
 
     /**
+     * Updates all game objects at the end of the turn.
+     * @param humans The new list of humans.
+     * @param buildings The new list of buildings.
+     * @param events The new list of events.
+     * @param scps The new list of SCP0492s.
+     */
+    public void updateGameObjects(ArrayList<Human> humans, ArrayList<Building> buildings, ArrayList<Event> events, ArrayList<SCP0492> scps){
+        this.humans = (ArrayList<Human>)humans.clone();
+        this.buildings = (ArrayList<Building>)buildings.clone();
+        this.events = (ArrayList<Event>)events.clone();
+        this.scps = (ArrayList<SCP0492>)scps.clone();
+    }
+
+    /**
      * Sets all of the human NPC's.
      * @param humans The list of humans.
      */

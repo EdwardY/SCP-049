@@ -66,7 +66,6 @@ public class Client {
      */
     public void login(){
         loginWindow = new LoginWindow();
-        loginWindow.run();
     }
 
 
@@ -75,7 +74,6 @@ public class Client {
      */
     public void startStandby(){
         standbyWindow = new StandbyWindow();
-        standbyWindow.run();
     }
 
       /**
@@ -102,8 +100,13 @@ public class Client {
         return this.standbyWindow;
     }
 
-
-
+    /**
+     * Gets the player object from this client.
+     * @return The player object that this client is holding.
+     */
+    public Player getPlayer(){
+        return this.player;
+    }
     /**
      * sets the widow used for the player to standby.
      * @standbyWindow The new standby window.
@@ -160,7 +163,6 @@ public class Client {
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
                                     scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));   
-                                    //TODO: fix NPC consctructors later, no longer needs image
                                 }
 
 
@@ -238,7 +240,7 @@ public class Client {
 
                                 }
 
-
+                                Client.this.getPlayer().updateGameObjects(humansList, buildingList, eventList, scpList);
                                 //TODO: Not sure where to put all of these received game objects since town/scp class isn't quite finished yet
     
 
@@ -260,8 +262,6 @@ public class Client {
                                 }else if(resourceType.equals("Hume")){
                                     ((SCP)player).changeHume(resourceChange);
                                 }
-                                //TODO: Town/SCP side underdeveloped, not really sure what to do with this.
-
                                 
                             }else if (prefix.equals("<i>")){
                                 int enemyHume = Integer.parseInt(input.readLine());
@@ -317,11 +317,12 @@ public class Client {
         /**The JButton used to submit entered information*/
         private JButton enterButton;
 
+
         /**
-         * Runs the window so that players can login.
+         * Constructor for the Login Window
          */
-        public void run(){
-        //set JFrame
+        public LoginWindow(){
+            //set JFrame
         window = new JFrame("Welcome to Code-049!");
         window.setSize(400,300);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -379,8 +380,9 @@ public class Client {
         enterButton.addActionListener(new EnterButtonListener());
     
         window.setVisible(true); //make the window visible after adding everything            
+        }//end of constructor
 
-        }//end of method
+
 
          /**
         * Method connects the player's client program to the server.
@@ -477,9 +479,9 @@ public class Client {
 
 
         /**
-         * Opens the window to tell user to standby while the next player joins.
+         * Constructor that opens the window to tell user to standby while the next player joins.
          */
-        public void run(){
+        public StandbyWindow(){
         //set JFrame
 
 

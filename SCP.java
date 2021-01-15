@@ -57,7 +57,6 @@ public class SCP extends Player{
      */
     public void start(){
         gameWindow = new SCPGameWindow();
-        gameWindow.run();
     }
 
 
@@ -129,6 +128,7 @@ public class SCP extends Player{
 
 
 
+
     //start of getters
 
     /**
@@ -167,9 +167,9 @@ public class SCP extends Player{
     public class SCPGameWindow extends GameWindow{
 
         /**
-         * Runs the SCP version of the game.
+         * Constructor that will run the SCP version of the game.
          */
-        public void run(){
+        public SCPGameWindow(){
             JFrame gameWindow = this.getWindow();
             gameWindow.setSize(1080,1920); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
             gameWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

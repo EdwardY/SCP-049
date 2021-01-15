@@ -487,8 +487,9 @@ class Server {
 
                         //humans
                         sendTo(allUsers, "" + game.getHumans().size());
-                        for(int i = 0;i < game.getHumans().size();i++){
-                            Human curHuman = game.getHumans().get(i);
+                        for(int key: game.getHumanMap().keySet()){
+                            Human curHuman = game.getHumanMap().get(key);
+                            town.sendMessage("" + key);
                             String humanInfo = curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getX() + " " + curHuman.getY();
                             if(curHuman instanceof Doctor){
                                 humanInfo += " " + ((Doctor)curHuman).getHealingAmount();

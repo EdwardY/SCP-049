@@ -5,6 +5,9 @@ import java.awt.Toolkit;
 
 //data structures
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 /**
  * [Game.java]
@@ -22,6 +25,8 @@ class Game {
     private ArrayList<SCP0492> scps;
     /** The {@code ArrayList} of ongoing {@code Events} */
     private ArrayList<Event> events;
+    /** The {@code HashMap} of {@code Humans} so that each {@code Human} only needs an ID */
+    private HashMap<Integer, Human> humanMap;
     /** The amount of money the town side has */
     private int money;
     /** The amount of food the town side has */
@@ -36,6 +41,8 @@ class Game {
     private int foodPerTurn;
     /** The amount of hume points that are earned each turn */
     private int humePerTurn;
+    /** The ID to assign to the next {@code Human} created */
+    private int currentId;
 
     /**
      * Constructor for the {@code Game} class, assigns preset values
@@ -45,6 +52,7 @@ class Game {
         this.humans = new ArrayList<Human>();
         this.scps = new ArrayList<SCP0492>();
         this.events = new ArrayList<Event>();
+        this.humanMap = new HashMap<Integer, Human>();
         this.money = 10;
         this.food = 10;
         this.hume = 10;
@@ -52,6 +60,7 @@ class Game {
         this.moneyPerTurn = 0;
         this.foodPerTurn = 0;
         this.humePerTurn = 0;
+        this.currentId = 0;
     }
 
     /**
@@ -65,9 +74,11 @@ class Game {
         for(Building currentBuilding: this.buildings){
             if(currentBuilding.getHealth() <= 0){
                 Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), 10, 10);
-                for(Human currentHuman: this.humans){
+                for(int key:this.humanMap.keySet()){
+                    Human currentHuman = this.humanMap.get(key);
                     Rectangle humanArea = new Rectangle(currentHuman.getX(), currentHuman.getY(), NPC.SIZE, NPC.SIZE);
                     if(buildingArea.contains(humanArea)){
+                        this.humanMap.remove(key);
                         this.humans.remove(currentHuman);
                     }
                 }
@@ -78,6 +89,20 @@ class Game {
                     }
                 }
                 this.buildings.remove(currentBuilding);
+            }
+        }
+
+        for(int key: this.humanMap.keySet()){
+            Human currentHuman = this.humanMap.get(key);
+            if(currentHuman.getHealth() <= 0){
+                this.humanMap.remove(key);
+                this.humans.remove(currentHuman);
+            }
+        }
+
+        for(SCP0492 currentScp: this.scps){
+            if(currentScp.getHealth() <= 0){
+                scps.remove(currentScp);
             }
         }
     }
@@ -181,13 +206,15 @@ class Game {
      * @return true if successful, false if not
      */
     public boolean gotIntel(){
-        for(Human currentHuman:this.humans){
+        for(int key: this.humanMap.keySet()){
+            Human currentHuman = this.humanMap.get(key);
             if(currentHuman instanceof Spy){
                 Spy spy = (Spy)currentHuman;
                 double sus = Math.random();
                 double success = Math.random();
                 if(sus < spy.getSus()){
                     this.humans.remove(currentHuman);
+                    this.humanMap.remove(key);
                 }else if(success < spy.getSuccessRate()){
                     return true;
                 }
@@ -228,6 +255,14 @@ class Game {
         return this.events;
     }
 
+    /**
+     * Gets the {@code Human} objects but in the map
+     * @return humanMap, a map of all {@code Human} objects
+     */
+    public HashMap<Integer, Human> getHumanMap(){
+        return this.humanMap;
+    }
+    
     /**
      * Gets the amount of money the town has
      * @return money, the amount of money the town side has
@@ -285,6 +320,8 @@ class Game {
             scps.add((SCP0492)npc);
         }else{
             humans.add((Human)npc);
+            humanMap.put(currentId, (Human)npc);
+            currentId++;
         }
     }
 
@@ -360,29 +397,54 @@ class Game {
      */
     public void convert(NPC npc, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
 
-        for(int i = 0;i < this.humans.size();i++){
-            if(this.humans.get(i).equals(npc)){
-                int currentXPosition = this.humans.get(i).getX();
-                int currentYPosition = this.humans.get(i).getY();
-                if(type.equals("Citizen")){
-                    humans.add(new Citizen(currentXPosition,currentYPosition));
-                }else if(type.equals("Cadet")){
-                    humans.add(new Cadet(currentXPosition, currentYPosition));
-                }else if(type.equals("Doctor")){
-                    humans.add(new Doctor(currentXPosition, currentYPosition, healingAmount));
-                }else if(type.equals("Researcher")){
-                    humans.add(new Researcher(currentXPosition, currentYPosition));
-                }else if(type.equals("Soldier")){
-                    humans.add(new Soldier(maxHealth, currentXPosition, currentYPosition, attackDamage));
-                }else if(type.equals("Spy")){
-                    humans.add(new Spy(currentXPosition, currentYPosition, successRate, sus));
-                }else if (type.equals("SCP0492")){
-                    scps.add(new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage));
-                }
-                humans.remove(i);
-                return;
+        for(int key: this.humanMap.keySet()){
+            Human currentHuman = humanMap.get(key);
+            if(currentHuman.equals(npc)){
+                convert(key, type, maxHealth, attackDamage, priority, successRate, sus, healingAmount);
             }
         }
+    }
+
+    /**
+     * Converts an NPC to another type.
+     * @param key The key of the NPC being converted.
+     * @param type The type of NPC that the NPC will be converted to.
+     * @param health The health of the NPC.
+     * @param maxHealth The maximum health of the NPC.
+     * @param attackDamage The damage of the NPC (if applicable).
+     * @param priority The priority of the NPC.
+     * @param successRate The success rate of the NPC getting enemy intel (if applicable).
+     * @param sus The chance of the NPC getting caught by the enemy (if applicable).
+     * @param healingAmount The amount of healing the NPC will be able to heal (if applicable).
+     */
+    public void convert(int key, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
+        Human currentHuman = humanMap.get(key);
+        int currentXPosition = currentHuman.getX();
+        int currentYPosition = currentHuman.getY();
+        NPC newNpc = null;
+        if(type.equals("Citizen")){
+            newNpc = new Citizen(currentXPosition,currentYPosition);
+        }else if(type.equals("Cadet")){
+            newNpc = new Cadet(currentXPosition, currentYPosition);
+        }else if(type.equals("Doctor")){
+            newNpc = new Doctor(currentXPosition, currentYPosition, healingAmount);
+        }else if(type.equals("Researcher")){
+            newNpc = new Researcher(currentXPosition, currentYPosition);
+        }else if(type.equals("Soldier")){
+            newNpc = new Soldier(maxHealth, currentXPosition, currentYPosition, attackDamage);
+        }else if(type.equals("Spy")){
+            newNpc = new Spy(currentXPosition, currentYPosition, successRate, sus);
+        }else if (type.equals("SCP0492")){
+            newNpc = new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage);
+        }
+        this.humans.remove(currentHuman);
+        if(newNpc instanceof SCP0492){
+            scps.add((SCP0492)newNpc);
+        }else{
+            this.humans.add((Human)newNpc);
+            this.humanMap.replace(key, (Human)newNpc);
+        }
+        return;
     }
 
     /**
@@ -394,11 +456,10 @@ class Game {
      */
     public void doTurn(){
         this.turn++;
-        killDeadStuff();
         getResourcesFromBuildings();
         dealWithEvents();
         moveNpcs();
         handleAttacks();
-        //TODO: deal with passives (moving NPCs)
+        killDeadStuff();
     }
 }

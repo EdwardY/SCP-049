@@ -173,10 +173,17 @@ public class SCP extends Player{
             JFrame gameWindow = this.getWindow();
 
             ScpGridPanel gridPanel = new ScpGridPanel();
+            gridPanel.setBounds(0, 0, 1080, 1080);
+            gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            gridPanel.setBackground(Color.gray);
 
+            ScpInfoBarPanel infoBarPanel = new ScpInfoBarPanel();     
+            infoBarPanel.setBounds(1080, 0, 256, 1080);
+            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            infoBarPanel.setBackground(Color.white);
 
-            ScpInfoBarPanel infoBarPanel = new ScpInfoBarPanel();
-
+            gameWindow.add(gridPanel);
+            gameWindow.add(infoBarPanel);
 
             //let user see the window
             gameWindow.setVisible(true);

@@ -224,9 +224,20 @@ public class Town extends Player {
         public TowngameWindow(){
             //get the JPanels and JFrame of the game window from parent class
             JFrame gameWindow = this.getWindow();
-            TownGridPanel gridPanel = new TownGridPanel();
-            TownInfoBarPanel infoBarPanel = new TownInfoBarPanel();
 
+            TownGridPanel gridPanel = new TownGridPanel();
+            gridPanel.setBounds(0, 0, 1080, 1080);
+            gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            gridPanel.setBackground(Color.gray);
+
+            TownInfoBarPanel infoBarPanel = new TownInfoBarPanel();
+            infoBarPanel.setBounds(1080, 0, 256, 1080);
+            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+            infoBarPanel.setBackground(Color.white);
+
+            gameWindow.add(gridPanel);
+            gameWindow.add(infoBarPanel);
+            
             //let user see the window
             gameWindow.setVisible(true);
             

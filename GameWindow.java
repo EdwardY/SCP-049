@@ -27,33 +27,14 @@ import java.awt.event.MouseEvent;
 public abstract class GameWindow{
     /**The window that the game will use. */
    private JFrame window;
-   /**The DuberPanel displaying all game objects on the game grid.*/
-   private GridPanel grid;
-   /**The DuberPanel displaying all statistics about the player.*/
-   private InfoBarPanel infoBar;
-
 
    public GameWindow(){
        this.window = new JFrame("Code-049");
 
-       //Setting the JPanel for the game grid
-       this.grid = new GridPanel();
-       grid.setBounds(0, 0, 1080, 1080);
-       grid.setBorder(BorderFactory.createLineBorder(Color.black));
-       grid.setBackground(Color.gray);
-
-       //Setting the JPanel for the game 
-       this.infoBar = new InfoBarPanel();
-       infoBar.setBounds(1080,0,256,1080);
-       infoBar.setBorder(BorderFactory.createLineBorder(Color.black));
-       infoBar.setBackground(Color.white);
-
-       window.add(grid);
-       window.add(infoBar);
-
        //setting the JFrame
        window.setSize(1080,1920); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
    }
 
     /**
@@ -80,30 +61,13 @@ public abstract class GameWindow{
         return this.window;
     }
 
-
-    /**
-    * Gets the grid DuberPanel of the game window.
-    * @return The grid DuberPanel of the game window.
-    */
-    public GridPanel getGrid(){
-        return this.grid;
-    }
-
-    /**
-    * Gets the stats bar DuberPanel of the game window.
-    * @return The stats bar DuberPanel of the game window.
-    */
-    public InfoBarPanel getInfoBar(){
-        return this.infoBar;
-    }
-
     /**
      * [GridPanel.java]
      * Custom {@code JPanel} class to be able to repaint game grids
      * @author Damon Ma, Edward Yang, Vivian Dai
      * @version 1.0 on January 15, 2021
      */
-    public class GridPanel extends JPanel{
+    public abstract class GridPanel extends JPanel{
 
         /**
          * Constructor for the {@code DuberPanel}
@@ -130,7 +94,7 @@ public abstract class GameWindow{
      * @author Damon Ma, Edward Yang, Vivian Dai
      * @version 1.0 on January 15, 2021
      */
-    public class InfoBarPanel extends JPanel{
+    public abstract class InfoBarPanel extends JPanel{
 
         /**
          * Constructor for the {@code DuberPanel}
@@ -156,7 +120,7 @@ public abstract class GameWindow{
      * @author Damon Ma, Edward Yang, Vivian Dai
      * @version 1.0 on January 11, 2021
      */
-    public class DuberMouseHandler implements MouseMotionListener, MouseListener{
+    public abstract class DuberMouseHandler implements MouseMotionListener, MouseListener{
         /**The x-value of the mouse.*/
         private int x;
         /**The y-value of the mouse.*/

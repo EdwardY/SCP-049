@@ -144,6 +144,34 @@ class Game {
 
     /**
      * <p>
+     * Creates a {@code QuadTree} to handle the {@code SCP0492s} attacking {@code Humans}. Creates a second {@code QuadTree} to 
+     * handle {@code Soldiers} attacking {@code SCP0492s}
+     * </p>
+     */
+    private void handleAttacks(){
+        QuadTree scpAttack = new QuadTree(1080, 1080, 540, 540, 0);
+        for(int i = 0;i < scps.size();i++){
+            scpAttack.insertAttacker(scps.get(i));
+        }
+        for(int i = 0;i < humans.size();i++){
+            scpAttack.insertTarget(humans.get(i));
+        }
+        scpAttack.startCombat();
+
+        QuadTree soldierAttack = new QuadTree(1080, 1080, 540, 540, 0);
+        for(int i = 0;i < humans.size();i++){
+            if(humans.get(i) instanceof Soldier){
+                soldierAttack.insertAttacker((Soldier)humans.get(i));
+            }
+        }
+        for(int i = 0;i < scps.size();i++){
+            soldierAttack.insertTarget(scps.get(i));
+        }
+        soldierAttack.startCombat();
+    }
+
+    /**
+     * <p>
      * Loops through all {@code Humans} in the game. If the current {@code Human} is a {@code Spy}, generate two random numbers. 
      * The first random number is the sus rate, if the {@code Spy} is too sus, then the enemy captures the {@code Spy} and it 
      * gets removed. The second randomly generated number is the success rate. If the {@code Spy} has a success rate higher than 
@@ -360,7 +388,8 @@ class Game {
     /**
      * <p>
      * Increases turn number by one. Calls on killDeadStuff to kill off anything that should be dead. Calls getResourcesFromBuildings 
-     * to collect resources. Calls dealWithEvents to handle the {@code Events}. 
+     * to collect resources. Calls dealWithEvents to handle the {@code Events}. Calls on moveNpcs to move the mindless {@code NPCs} 
+     * Calls handleAttacks to deal with {@code SCP0492s} attacking {@code Humans} and {@code Soldiers} attacking {@code SCP0492s}
      * </p>
      */
     public void doTurn(){
@@ -369,6 +398,7 @@ class Game {
         getResourcesFromBuildings();
         dealWithEvents();
         moveNpcs();
+        handleAttacks();
         //TODO: deal with passives (moving NPCs)
     }
 }

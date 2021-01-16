@@ -53,7 +53,7 @@ class Game {
         this.scps = new ArrayList<SCP0492>();
         this.events = new ArrayList<Event>();
         this.humanMap = new HashMap<Integer, Human>();
-        this.money = 10;
+        this.money = 10; //TODO: coordinate money amounts
         this.food = 10;
         this.hume = 10;
         this.turn = 1;
@@ -71,9 +71,13 @@ class Game {
      * </p>
      */
     private void killDeadStuff(){
+
+        //loop through each building's area
         for(Building currentBuilding: this.buildings){
             if(currentBuilding.getHealth() <= 0){
-                Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), 10, 10);
+                Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), Building.SIZE, Building.SIZE);
+
+                //remove humans in the area
                 for(int key:this.humanMap.keySet()){
                     Human currentHuman = this.humanMap.get(key);
                     Rectangle humanArea = new Rectangle(currentHuman.getX(), currentHuman.getY(), NPC.SIZE, NPC.SIZE);
@@ -82,6 +86,8 @@ class Game {
                         this.humans.remove(currentHuman);
                     }
                 }
+
+                //remove spc in the area
                 for(SCP0492 currentScp: this.scps){
                     Rectangle scpArea = new Rectangle(currentScp.getX(), currentScp.getY(), NPC.SIZE, NPC.SIZE);
                     if(buildingArea.contains(scpArea)){
@@ -92,6 +98,7 @@ class Game {
             }
         }
 
+        //remove all humans with health less than 0
         for(int key: this.humanMap.keySet()){
             Human currentHuman = this.humanMap.get(key);
             if(currentHuman.getHealth() <= 0){
@@ -100,6 +107,7 @@ class Game {
             }
         }
 
+        //remove all scps with health less than 0
         for(SCP0492 currentScp: this.scps){
             if(currentScp.getHealth() <= 0){
                 scps.remove(currentScp);
@@ -154,15 +162,76 @@ class Game {
     }
 
     /**
+     * Consumes 10 food for every human each turn
+     */
+    private void eatFood(){
+
+        int humanNum = humanMap.size();
+        
+        if(this.getFood() >= humanNum*10){
+
+            this.changeFood(-1*humanNum*10);
+
+        }else{
+
+            for(int key: humanMap.keySet()){
+
+                if(this.getFood() >= 10){
+
+                    this.changeFood(-10);
+                
+                //no more food so anyone now will starve
+                }else{
+                    humanMap.get(key).changeHunger(-10);
+                }
+            }
+        }
+        //TODO: manage food
+    }
+
+    /**
      * Loops through each SCP0492 and generates a random amount to move it by
      */
-    private void moveNpcs(){
+    private void moveSpcs(){
+
         for(int i = 0;i < this.scps.size();i++){
+
             int dx = (int)Math.round((Math.random()*2) - 1);
             int dy = (int)Math.round((Math.random()*2) - 1);
             int distX = (int)Math.round(Math.random()*NPC.SIZE);
             int distY = (int)Math.round(Math.random()*NPC.SIZE);
-            this.scps.get(i).translate(dx*distX, dy*distY);
+
+            int xMove;
+            int yMove;
+            
+            //check and adjust for npcs moving out of bounds
+            if( dx*distX + this.scps.get(i).getX() > 1080){
+
+                //will move x coordinate to 1080
+                xMove = 1080 - this.scps.get(i).getX();
+            }else if( dx*distX + this.scps.get(i).getX() < 0){
+
+                //move npc to exactly 0
+                xMove =  dx*distX + this.scps.get(i).getX();
+            }else{
+
+                xMove = dx*distX;
+            }
+
+            if( dy*distY + this.scps.get(i).getY() > 1080){
+
+                //will move x coordinate to 1080
+                yMove = 1080 - this.scps.get(i).getY();
+            }else if( dy*distY + this.scps.get(i).getY() < 0){
+
+                //move npc to exactly 0
+                yMove =  dy*distY + this.scps.get(i).getY();
+            }else{
+
+                yMove = dy*distY;
+            }
+
+            this.scps.get(i).translate(xMove, yMove);
         }
         //TODO: move npcs that need to be moved
     }
@@ -174,6 +243,7 @@ class Game {
      * </p>
      */
     private void handleAttacks(){
+
         QuadTree scpAttack = new QuadTree(1080, 1080, 540, 540, 0);
         for(int i = 0;i < scps.size();i++){
             scpAttack.insertAttacker(scps.get(i));
@@ -458,7 +528,7 @@ class Game {
         this.turn++;
         getResourcesFromBuildings();
         dealWithEvents();
-        moveNpcs();
+        moveSpcs();
         handleAttacks();
         killDeadStuff();
     }

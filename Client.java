@@ -51,6 +51,8 @@ public class Client {
     private LoginWindow loginWindow;
     /**standby window that appears when the player is the first to join and waiting for the next to join. */
     private StandbyWindow standbyWindow = null;
+    /** string storing the last thing the client requested */
+    private String lastRequest = "";
   
 
 
@@ -116,6 +118,10 @@ public class Client {
         this.standbyWindow = standbyWindow;
     }
 
+    public void setLastRequest(String newRequest){
+        this.lastRequest = newRequest;
+    }
+
     //TODO: some method parameters between Town/SCP/Player and client do not match, e.g. .start
 
 
@@ -124,6 +130,7 @@ public class Client {
          * An inner class used to receives messages from the server.
          */
         private class MessageHandler implements Runnable{
+            /** A string storing the last thing the client requested */
             public void run(){
                 while(running){
                     try{
@@ -276,6 +283,20 @@ public class Client {
                             }else if(prefix.equals("<st>")){ //transaction is successful
                                 //TODO: Figure out how transactions will work (?)
                                 System.out.println("something something congrats purchase successful");
+                                String[] requests = lastRequest.split(" ");
+                                if(requests.length > 1){
+                                    if(requests[0].equals("<b>")){
+                                        ((Town)player).buildBuilding(requests[1], Integer.parseInt(requests[2]), Integer.parseInt(requests[2]));
+                                    }else if(requests[0].equals("<e>")){
+                                        if(requests.length == 3){
+                                            ((SCP)player).startEvent(requests[1], Integer.parseInt(requests[2]));
+                                        }else if(requests.length == 5){
+                                            ((SCP)player).startEvent(requests[1], Integer.parseInt(requests[2]), Integer.parseInt(requests[3]), Integer.parseInt(requests[4]));
+                                        }
+                                    }else if(requests[0].equals("<u>")){
+                                        ((Town)player).upgradeBuilding(Integer.parseInt(requests[1]), Integer.parseInt(requests[2]));
+                                    }
+                                }
                                 //TODO: Not done properly yet.
                             }else if(prefix.equals("<r>")){ //change in resources
                                 String resourceType = input.readLine();

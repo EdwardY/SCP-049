@@ -106,7 +106,8 @@ public class Town extends Player {
     }
 
     
-    /** buildingBuilding
+    /** 
+     * buildingBuilding
      * @param buildingType The type of building to be built
      * @param x the x coordinate of the buildings
      * @param y the y coordinate of the buildings
@@ -121,32 +122,26 @@ public class Town extends Player {
         if(buildingType.equals("MilitaryBase")){
 
             buildings.add(new MilitaryBase(1000, 100, 100, x, y));
-            money = money - 1000;
 
         }else if(buildingType.equals("ResearchLab")){
 
             buildings.add(new ResearchLab(1000, 100, 100, x, y));
-            money = money - 1000;
         
         }else if(buildingType.equals("Residency")){
         
             buildings.add(new Residency(1000, 100, 100,x, y, 100));
-            money = money - 1000;
 
         }else if(buildingType.equals("Hospital")){
 
             buildings.add(new Hospital(1000, 100, 100,  x, y, 100));
-            money = money - 1000;
         
         }else if(buildingType.equals("FoodBuilding")){
 
             buildings.add(new FoodBuilding(1000, 100, 100,  x, y));
-            money = money - 1000;
         
         }else if(buildingType.equals("Bank")){
 
             buildings.add(new Bank(1000, 100, 100, x, y));
-            money = money - 1000;
             
         }else{  
 
@@ -157,8 +152,9 @@ public class Town extends Player {
 
     
     /** 
-     * @param x
-     * @param y
+     * Upgrades the building at locations x, y
+     * @param x the x coordinates of the building to upgrade
+     * @param y the y coordinates of the building to upgrade
      */
     public void upgradeBuilding(int x , int y){
         ArrayList<Building> buildings = this.getBuildings();

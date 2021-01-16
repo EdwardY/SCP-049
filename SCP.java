@@ -21,6 +21,7 @@ import java.awt.Graphics;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.Font;
 
 /**
  * [SCP.java]
@@ -286,7 +287,27 @@ public class SCP extends Player{
              */
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
-                //TODO: draw more things on top
+                //TODO: Set the backgrounds for the other JPanels on both SCP and Town side too
+                this.setBackground(Color.WHITE);
+
+                g.setFont(new Font("Courier", Font.BOLD, 18));
+                g.setColor(Color.BLACK);
+
+                g.drawString("Username: " + SCP.this.getUsername(), 10, 125);
+                g.drawString("Opponent: " + SCP.this.getOpponent(), 10, 150);
+
+                g.drawString("Hume points: " + SCP.this.getHume(), 10, 325);
+
+                g.drawString("Humans: " + SCP.this.getHumans().size(), 10, 425);
+                g.drawString("SCP-049-2s: " + SCP.this.getSCPs().size(), 10, 450);
+                
+
+                g.setColor(Color.RED);
+                g.drawRect(0,475, 500, 50);
+                g.setColor(Color.GREEN);
+                g.drawRect(0, 475, SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()),50);
+
+
             }
         }
 

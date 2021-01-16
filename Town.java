@@ -354,8 +354,75 @@ public class Town extends Player {
             }
         }
 
+        /**
+         * [TownMouseHandler.java]
+         * Inner class for mouse input.
+         * @author Damon Ma, Edward Yang, Vivian Dai
+         * @version 1.0 on January 16, 2021
+         */
+        public class TownMouseHandler extends DuberMouseHandler{
+            /**
+             * When the mouse's click button is pressed.
+             * @param MouseEvent The action performed by the mouse.
+             */
+            public void mousePressed(MouseEvent e){
+            }
+
+            /**
+             * When the mouse's click button is released.
+             * @param MouseEvent The action performed by the mouse.
+             */
+            public void mouseReleased(MouseEvent e){
+            }
+
+            /**
+             * When the mouse enters a component.
+             * @param MouseEvent The action performed by the mouse.
+             */
+            public void mouseEntered(MouseEvent e){
+                if((this.getMouseX() <= 100) && (this.getMouseX() >= 0) && (this.getMouseY() <= 100) && (this.getMouseY() >= 0)){
+                    System.out.println("your button works.");
+                }
+            }
+
+
+            /**
+             * When the mouse exits a component.
+             * @param MouseEvent The action performed by the mouse.
+             */
+            public void mouseExited(MouseEvent e){
+            }
+
+
+            /**
+             * When the mouse's button is pressed and released.
+             * @param MouseEvent The action performed by the mouse.
+             */
+            public void mouseClicked(MouseEvent e){
+            }
+
+            /**
+             * When the mouse Moved. Updates mouse coordinates
+             * @param MouseEvent The action performed by the mouse.
+             */
+            public void mouseMoved(MouseEvent e){
+                super.mouseMoved(e);
+                // other things 
+            }
+
+            /**
+             * When the mouse is moved while its button is pressed. Updates mouse coordinates
+             * @param MouseEvent The action performed by the mouse.
+             */
+            public void mouseDragged(MouseEvent e){
+                super.mouseDragged(e);
+                //other things
+            }
+
+        }
 
     }//end of inner class
 
+    
 
 }//end of class

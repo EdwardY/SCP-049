@@ -127,46 +127,6 @@ public abstract class GameWindow{
         private int y;
 
         /**
-         * When the mouse's click button is pressed.
-         * @param MouseEvent The action performed by the mouse.
-         */
-        public void mousePressed(MouseEvent e){
-        }
-
-        /**
-         * When the mouse's click button is released.
-         * @param MouseEvent The action performed by the mouse.
-         */
-        public void mouseReleased(MouseEvent e){
-        }
-
-        /**
-         * When the mouse enters a component.
-         * @param MouseEvent The action performed by the mouse.
-         */
-        public void mouseEntered(MouseEvent e){
-            if((x <= 100) && (x >= 0) && (y <= 100) && (y >= 0)){
-                System.out.println("your button works.");
-            }
-        }
-
-
-        /**
-         * When the mouse exits a component.
-         * @param MouseEvent The action performed by the mouse.
-         */
-        public void mouseExited(MouseEvent e){
-        }
-
-
-        /**
-         * When the mouse's button is pressed and released.
-         * @param MouseEvent The action performed by the mouse.
-         */
-        public void mouseClicked(MouseEvent e){
-        }
-
-        /**
          * When the mouse Moved. Updates mouse coordinates
          * @param MouseEvent The action performed by the mouse.
          */

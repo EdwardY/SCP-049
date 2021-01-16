@@ -98,7 +98,21 @@ abstract class Player {
 
     //start of getters
 
+    /**
+     * Gets the username of the player.
+     * @return The username.
+     */
+    public String getUsername(){
+        return this.username;
+    }
 
+    /**
+     * Gets the opponent's username.
+     * @return The username.
+     */
+    public String getOpponent(){
+        return this.opponent;
+    }
 
 
     /**

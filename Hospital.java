@@ -109,7 +109,7 @@ class Hospital extends Building{
      */
     public void draw(Graphics g){
 
-        g.drawImage(this.getImage(), this.getX(), this.getY(), 128, 128, Color.RED, null);
+        g.drawImage(this.getImage(), this.getX(), this.getY(), Building.SIZE, Building.SIZE, Color.RED, null);
         //hospital has red background
     }
 

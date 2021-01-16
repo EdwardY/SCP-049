@@ -78,7 +78,7 @@ class FoodBuilding extends ProductionFacility{
     */
    public void draw(Graphics g){
 
-    g.drawImage(this.getImage(), this.getX(), this.getY(), 128, 128, Color.ORANGE, null);
+    g.drawImage(this.getImage(), this.getX(), this.getY(), Building.SIZE, Building.SIZE, Color.ORANGE, null);
     //FoodBUilding has orange background
    }
 

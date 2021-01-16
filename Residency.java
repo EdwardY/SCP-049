@@ -48,7 +48,7 @@ class Residency extends Building{
      */
     public void draw(Graphics g){
 
-        g.drawImage(this.getImage(), this.getX(), this.getY(), 128, 128, Color.BLUE, null);
+        g.drawImage(this.getImage(), this.getX(), this.getY(), Building.SIZE, Building.SIZE, Color.BLUE, null);
         //Residency has background color blue
     }
 

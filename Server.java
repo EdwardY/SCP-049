@@ -82,6 +82,7 @@ class Server {
      * </p>
      */
     public void go(){
+
         Socket client = null;
         try{
             serverSock = new ServerSocket(this.port);
@@ -89,9 +90,11 @@ class Server {
             while(running){
                 client = serverSock.accept();
                 System.out.println("Client");
+                
+                //both scp and town null, meaning first player to connect
                 if((this.scp == null) && (this.town == null)){
                     //assign at random
-                    double rand = Math.random();
+                    double rand = Math.random();    
                     if(rand > 0.5){
                         this.scp = new ClientHandler(client);
                         this.scpThread = new Thread(this.scp);
@@ -100,11 +103,12 @@ class Server {
                         System.out.println("SCP");
                     }else{
                         this.town = new ClientHandler(client);
-                        this.townThread = new Thread(this.scp);
+                        this.townThread = new Thread(this.town);
                         this.townThread.start();
                         this.town.sendMessage("<w>");
                         System.out.println("Town");
                     }
+                //if scp is not taken
                 }else if(this.scp == null){
                     //assigns scp
                     this.scp = new ClientHandler(client);
@@ -112,6 +116,7 @@ class Server {
                     this.scpThread.start();
                     startGame();
                     System.out.println("SCP");
+                //if town is not taken
                 }else{
                     //assigns town
                     this.town = new ClientHandler(client);
@@ -178,13 +183,18 @@ class Server {
          * </p>
          */
         public void run(){
+
             while(running){
                 String prefix = "";
                 try{
                     if(input.ready()){
                         prefix = input.readLine();
+
+                        //username
                         if(prefix.equals("<c>")){
                             this.username = input.readLine();
+
+                        //building 
                         }else if(prefix.equals("<b>")){
                             boolean success = false;
                             String buildingType = input.readLine();
@@ -193,6 +203,8 @@ class Server {
                             int y = Integer.parseInt(coords.split(" ")[1]);
                             success = buildBuilding(buildingType, x, y);
                             reportTransactionStatus(success);
+                        
+                        //event
                         }else if(prefix.equals("<e>")){
                             boolean success = false;
                             String eventType = input.readLine();
@@ -206,6 +218,8 @@ class Server {
                                 success = createEvent(eventType, level);
                             }
                             reportTransactionStatus(success);
+
+                        //upgrade
                         }else if(prefix.equals("<u>")){
                             boolean success = false;
                             String coords = input.readLine();
@@ -275,31 +289,48 @@ class Server {
             boolean success = false;
             int price = Integer.MAX_VALUE;
             Building building = null;
+
+            //create bank
             if(type.equals("Bank")){
                 building = new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, x, y);
                 price = Bank.INITIAL_PRICE;
+
+                //create food building
             }else if(type.equals("FoodBuilding")){
                 building = new FoodBuilding(FoodBuilding.INITIAL_PRICE, FoodBuilding.INITIAL_HEALTH, FoodBuilding.INITIAL_HEALTH, x, y);
                 price = FoodBuilding.INITIAL_PRICE;
+
+                //create a hospital
             }else if(type.equals("Hospital")){
                 building = new Hospital(Hospital.INITIAL_PRICE, Hospital.INITIAL_HEALTH, Hospital.INITIAL_HEALTH, x, y, Hospital.INITIAL_MAX_CAP);
                 price = Hospital.INITIAL_PRICE;
+
+                //create military base
             }else if(type.equals("MilitaryBase")){
                 building = new MilitaryBase(MilitaryBase.INITIAL_PRICE, MilitaryBase.INITIAL_HEALTH, MilitaryBase.INITIAL_HEALTH, x, y);
                 price = MilitaryBase.INITIAL_PRICE;
+
+                //build research lab
             }else if(type.equals("ResearchLab")){
                 building = new ResearchLab(ResearchLab.INITIAL_PRICE, ResearchLab.INITIAL_HEALTH, ResearchLab.INITIAL_HEALTH, x, y);
                 price = ResearchLab.INITIAL_PRICE;
+
+                //build residency
             }else if(type.equals("Residency")){
                 building = new Residency(Residency.INITIAL_PRICE, Residency.INITIAL_HEALTH, Residency.INITIAL_HEALTH, x, y, Residency.INITIAL_MAX_CAP);
                 price = Residency.INITIAL_PRICE;
             }
             if((building != null) && (game.getMoney() >= price)){
+
+                //pay for the costs
                 game.addBuilding(building);
                 success = true;
+
                 sendMessage("<r>");
                 sendMessage("Money");
                 sendMessage("" + (price * -1));
+                game.changeMoney(price * -1);
+
             }
             return success;
         }
@@ -323,24 +354,31 @@ class Server {
             if(type.equals("Earthquake")){
                 event = new Earthquake(level, x, y);
                 price = Earthquake.getCostByLevel(level);
+
             }else if(type.equals("Fire")){
                 event = new Fire(level, x, y);
                 price = Fire.getCostByLevel(level);
+
             }else if(type.equals("Infect")){
                 event = new Infect(level, x, y);
                 price = Infect.getCostByLevel(level);
+
             }else if(type.equals("Thunderstorm")){
                 event = new Thunderstorm(level, x, y);
                 price = Thunderstorm.getCostByLevel(level);
+
             }else if(type.equals("Tornado")){
                 event = new Tornado(level, x, y);
                 price = Tornado.getCostByLevel(level);
             }
             if((event != null) && (game.getHume() >= price)){
+
+                //initie and pay for event
                 game.startEvent(event);
                 sendMessage("<r>");
                 sendMessage("Hume");
                 sendMessage("" + (price * -1));
+                game.changeHume(price * -1);
             }
             return success;
         }
@@ -355,9 +393,11 @@ class Server {
          * @return boolean success, if the event succeeded
          */
         private boolean createEvent(String type, int level){
+
             boolean success = false;
             Event event = null;
             int price = Integer.MAX_VALUE;
+
             if(type.equals("Stonks")){
                 game.startEvent(new Stonks(level));
                 return true;
@@ -376,6 +416,7 @@ class Server {
                 sendMessage("<r>");
                 sendMessage("Hume");
                 sendMessage("" + (price * -1));
+                game.changeHume(price * -1);
             }
             return success;
         }
@@ -391,14 +432,19 @@ class Server {
          * @return boolean success, whether or not the operation was a success
          */
         private boolean upgrade(int x, int y){
+
             boolean success = false;
             ArrayList<Building> buildings = game.getBuildings();
+
+            //loop trough to find and upgrade the building
             for(Building building:buildings){
                 if((building.getX() == x) && (building.getY() == y)){
                     
                     if(building.getUpgradePrice() <= game.getMoney()){
                         building.upgrade();
                         success = true;
+                        game.changeMoney(building.getUpgradePrice() * -1);
+
                     }
                 }
             }
@@ -413,6 +459,7 @@ class Server {
      * @version 1.0 on January 9, 2021
      */
     private class GameHandler implements Runnable{
+
         /** one minute but in milliseconds */
         private static final int ONE_MINUTE = 60000;
         /** last update time */
@@ -452,9 +499,12 @@ class Server {
          * </p>
          */
         public void run(){
+
             while(running){
                 curTime = System.currentTimeMillis();
+
                 if(turnGoing){
+                    
                     if(curTime - lastTime >= ONE_MINUTE){
                         lastTime = curTime;
                         game.doTurn();

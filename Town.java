@@ -288,21 +288,19 @@ public class Town extends Player {
                 //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
                 g.setColor(Color.BLACK);
                 int emptyLotX = 0; //X-value of the empty lot to be drawn
-                for(int i = 0; i < 7; i ++){
+                for(int i = 0; i < GRID_SIZE; i ++){
                     int emptyLotY = 0; //Y-value of the empty lot to be drawn
-                    for(int j = 0; j < 7; j++){
-                        g.drawRect(emptyLotX, emptyLotY, 128, 128);
-                        emptyLotY += 158;
+                    for(int j = 0; j < GRID_SIZE; j++){
+                        g.drawRect(emptyLotX, emptyLotY, Building.SIZE, Building.SIZE);
+                        emptyLotY += (Building.SIZE + ROAD_SIZE);
                     }
-                    emptyLotX += 158;
+                    emptyLotX += (Building.SIZE + ROAD_SIZE);
                 }
 
 
                 //draw humans
-                //convert the hashmap of humans into an arraylist
-                ArrayList<Human> humanList = new ArrayList<Human>(Town.this.getHumanMap().values());
-                for(int i = 0; i < Town.this.getHumans().size(); i++){
-                    humanList.get(i).draw(g);
+                for(int key: Town.this.getHumanMap().keySet()){
+                    Town.this.getHumanMap().get(key).draw(g);
                 }
 
 

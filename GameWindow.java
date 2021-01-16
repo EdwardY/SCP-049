@@ -68,7 +68,12 @@ public abstract class GameWindow{
      * @version 1.0 on January 15, 2021
      */
     public abstract class GridPanel extends JPanel{
-        static final int ROAD_SIZE = 30;
+
+        /** The size of the road */
+        public static final int ROAD_SIZE = 30;
+        /** Number of buildings there will be in the grid's length and width */
+        public static final int GRID_SIZE = 7;
+        
         /**
          * Constructor for the {@code DuberPanel}
          */

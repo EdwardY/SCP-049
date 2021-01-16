@@ -323,6 +323,13 @@ public class SCP extends Player{
              * @param MouseEvent The action performed by the mouse.
              */
             public void mousePressed(MouseEvent e){
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                if((mouseX <= GridPanel.GRID_SIZE_PIXEL) && (mouseY <= GridPanel.GRID_SIZE_PIXEL)){
+                    //TODO: clicking on map is probably for starting a specific event
+                }else{
+                    //clicking the info bar, not sure if we'll make this do anything
+                }
             }
 
             /**

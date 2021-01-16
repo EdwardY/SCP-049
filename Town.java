@@ -366,6 +366,9 @@ public class Town extends Player {
                     //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
                     int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
                     int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
+                    if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){
+                        //TODO: display building/upgrade options here somewhere idk
+                    }
                 }else{
                     //clicking the info bar, not sure if we'll make this do anything
                 }

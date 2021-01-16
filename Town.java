@@ -363,10 +363,11 @@ public class Town extends Player {
                 int mouseX = e.getX();
                 int mouseY = e.getY();
                 if((mouseX <= GridPanel.GRID_SIZE_PIXEL) && (mouseY <= GridPanel.GRID_SIZE_PIXEL)){
-                    int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE));
-                    int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE));
+                    //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
+                    int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
+                    int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
                 }else{
-                    //clicking the info bar
+                    //clicking the info bar, not sure if we'll make this do anything
                 }
             }
 

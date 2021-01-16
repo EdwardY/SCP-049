@@ -72,8 +72,9 @@ public abstract class GameWindow{
         /** The size of the road */
         public static final int ROAD_SIZE = 30;
         /** Number of buildings there will be in the grid's length and width */
-        public static final int GRID_SIZE = 7;
-        
+        public static final int GRID_SIZE_BUILDING = 7;
+        /** The size of the grid in pixels */
+        public static final int GRID_SIZE_PIXEL = 1080;
         /**
          * Constructor for the {@code DuberPanel}
          */

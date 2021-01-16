@@ -288,9 +288,9 @@ public class Town extends Player {
                 //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
                 g.setColor(Color.BLACK);
                 int emptyLotX = 0; //X-value of the empty lot to be drawn
-                for(int i = 0; i < GRID_SIZE; i ++){
+                for(int i = 0; i < GRID_SIZE_BUILDING; i ++){
                     int emptyLotY = 0; //Y-value of the empty lot to be drawn
-                    for(int j = 0; j < GRID_SIZE; j++){
+                    for(int j = 0; j < GRID_SIZE_BUILDING; j++){
                         g.drawRect(emptyLotX, emptyLotY, Building.SIZE, Building.SIZE);
                         emptyLotY += (Building.SIZE + ROAD_SIZE);
                     }
@@ -360,6 +360,14 @@ public class Town extends Player {
              * @param MouseEvent The action performed by the mouse.
              */
             public void mousePressed(MouseEvent e){
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                if((mouseX <= GridPanel.GRID_SIZE_PIXEL) && (mouseY <= GridPanel.GRID_SIZE_PIXEL)){
+                    int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE));
+                    int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE));
+                }else{
+                    //clicking the info bar
+                }
             }
 
             /**

@@ -305,7 +305,7 @@ public class SCP extends Player{
                 g.setColor(Color.RED);
                 g.drawRect(0,475, 500, 50);
                 g.setColor(Color.GREEN);
-                g.drawRect(0, 475, SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()),50);
+                g.drawRect(0, 475, (SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()))*500,50);
 
 
             }

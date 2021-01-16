@@ -94,7 +94,7 @@ class MilitaryBase extends Military{
      */
     public void draw(Graphics g){
 
-        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.BLACK, null);
+        g.drawImage(this.getImage(), this.getX(), this.getY(), 128, 128, Color.BLACK, null);
         //Military base has a black background 
     }
 

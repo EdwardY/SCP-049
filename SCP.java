@@ -221,8 +221,48 @@ public class SCP extends Player{
              */
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
-                //TODO: draw more things on top
-            }
+
+                //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
+                g.setColor(Color.BLACK);
+                int emptyLotX = 0; //X-value of the empty lot to be drawn
+                for(int i = 0; i < 7; i ++){
+                    int emptyLotY = 0; //Y-value of the empty lot to be drawn
+                    for(int j = 0; j < 7; j++){
+                        g.drawRect(emptyLotX, emptyLotY, 128, 128);
+                        emptyLotY += 158;
+                    }
+                    emptyLotX += 158;
+                }
+
+
+                //draw humans
+                for(int i = 0; i < SCP.this.getHumans().size(); i++){
+                    SCP.this.getHumans().get(i).draw(g);
+                }
+
+
+                //draw humans
+                for(int i = 0; i < SCP.this.getSCPs().size(); i++){
+                    SCP.this.getSCPs().get(i).draw(g);
+                }
+
+                //draw buildings
+                for(int i = 0; i < SCP.this.getBuildings().size(); i++){
+                    SCP.this.getBuildings().get(i).draw(g);
+                }
+
+                //draw events
+                for(int i = 0; i < SCP.this.getEvents().size(); i++){
+                    if(SCP.this.getEvents().get(i) instanceof PhysicalEvent){
+                        ((PhysicalEvent)(SCP.this.getEvents().get(i))).draw(g);
+                    }
+                }
+
+
+            }//end of method
+
+            
+
         }
 
         /**

@@ -77,7 +77,7 @@ class Bank extends ProductionFacility{
      */
     public void draw(Graphics g){
 
-        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.GREEN, null);
+        g.drawImage(this.getImage(), this.getX(), this.getY(), 128, 128, Color.GREEN, null);
         //Bank bg color is green of course
     }
 

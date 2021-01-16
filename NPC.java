@@ -93,7 +93,7 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
      * @param g The object that will draw the NPC.
      */
     public void draw(Graphics g){
-        g.drawImage(this.sprite, this.x, this.y, null);
+        g.drawImage(this.sprite, this.x, this.y, 10, 10, null);
     }//end of method
 
     /**

@@ -105,7 +105,7 @@ public abstract class GameWindow{
         }
 
         /**
-         * Repaints the pannel
+         * Repaints the panel
          * @param g the {@code Graphics} to draw on
          */
         public void paintComponent(Graphics g){

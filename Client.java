@@ -209,8 +209,6 @@ public class Client {
                                         //TODO: Build new Hospital object.
                                     }else if(buildingType.equals("MilitaryBase")){
                                         //TODO: Build new MilitaryBase object.
-                                    }else if(buildingType.equals("ProductionFacility")){
-                                        //TODO: Build new ProductionFacility object.
                                     }else if(buildingType.equals("ResearchLab")){
                                         //TODO: Build new ResearchLab object.
                                     }else if(buildingType.equals("Residency")){

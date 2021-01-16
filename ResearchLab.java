@@ -93,7 +93,7 @@ public class ResearchLab extends Military{
 
     public void draw(Graphics g){
 
-        g.drawImage(this.getImage(), this.getX(), this.getY(), Color.MAGENTA, null);
+        g.drawImage(this.getImage(), this.getX(), this.getY(), 128, 128, Color.MAGENTA, null);
         //Research lab has a background color of magenta
     }
 

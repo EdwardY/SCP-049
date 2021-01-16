@@ -241,7 +241,7 @@ public class SCP extends Player{
                 }
 
 
-                //draw humans
+                //draw SCP0492s
                 for(int i = 0; i < SCP.this.getSCPs().size(); i++){
                     SCP.this.getSCPs().get(i).draw(g);
                 }

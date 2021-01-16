@@ -75,15 +75,15 @@ public abstract class GameWindow{
         public GridPanel(){
             setFocusable(true);
             requestFocusInWindow();
+            this.setBackground(Color.GRAY);;
         }
 
         /**
-         * Repaints the pannel
+         * Repaints the panel
          * @param g the {@code Graphics} to draw on
          */
         public void paintComponent(Graphics g){
             super.paintComponent(g);
-            //TODO: draw in everything else :'D
         }
 
     }

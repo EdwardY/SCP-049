@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,7 +36,8 @@ public class Town extends Player {
     private int money;
     /**an integer for storing the food that the player has */
     private int food;
-
+    /**A hashmap of all humans in the game so they can be referenced with a key. */
+    private HashMap<Integer, Human> humanMap;
     /**
      * Constructor for the town side player's class
      * @param username The username of the player
@@ -44,7 +46,7 @@ public class Town extends Player {
      * @param money the amount of money the user will begin with
      * @param food the amount of food the user wil begin with
      */
-    Town(String username, Client playerClient, String opponent, int money, int food){
+    public Town(String username, Client playerClient, String opponent, int money, int food){
         super(username, playerClient, opponent);
         this.money = money;
         this.food = food; 
@@ -189,7 +191,17 @@ public class Town extends Player {
     public int getFood(){
         return this.food;
     }
+
+    /**
+     * Gets the hash map of humans.
+     * @return The hash map of humans on the game.
+     */
+    public HashMap<Integer, Human> getHumanMap(){
+        return this.humanMap;
+    }
     //end of getters
+
+  
 
     //start of setters
 
@@ -275,7 +287,46 @@ public class Town extends Player {
              */
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
-                //TODO: draw more things on top
+
+
+                //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
+                g.setColor(Color.BLACK);
+                int emptyLotX = 0; //X-value of the empty lot to be drawn
+                for(int i = 0; i < 7; i ++){
+                    int emptyLotY = 0; //Y-value of the empty lot to be drawn
+                    for(int j = 0; j < 7; j++){
+                        g.drawRect(emptyLotX, emptyLotY, 128, 128);
+                        emptyLotY += 158;
+                    }
+                    emptyLotX += 158;
+                }
+
+
+                //draw humans
+                //convert the hashmap of humans into an arraylist
+                ArrayList<Human> humanList = new ArrayList<Human>(Town.this.getHumanMap().values());
+                for(int i = 0; i < Town.this.getHumans().size(); i++){
+                    humanList.get(i).draw(g);
+                }
+
+
+                //draw SCP0492s
+                for(int i = 0; i < Town.this.getSCPs().size(); i++){
+                    Town.this.getSCPs().get(i).draw(g);
+                }
+
+                //draw buildings
+                for(int i = 0; i < Town.this.getBuildings().size(); i++){
+                    Town.this.getBuildings().get(i).draw(g);
+                }
+
+                //draw events
+                for(int i = 0; i < Town.this.getEvents().size(); i++){
+                    if(Town.this.getEvents().get(i) instanceof PhysicalEvent){
+                        ((PhysicalEvent)(Town.this.getEvents().get(i))).draw(g);
+                    }
+                }
+
             }
         }
 

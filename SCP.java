@@ -227,9 +227,9 @@ public class SCP extends Player{
                 //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
                 g.setColor(Color.BLACK);
                 int emptyLotX = 0; //X-value of the empty lot to be drawn
-                for(int i = 0; i < 7; i ++){
+                for(int i = 0; i < GRID_SIZE_BUILDING; i ++){
                     int emptyLotY = 0; //Y-value of the empty lot to be drawn
-                    for(int j = 0; j < 7; j++){
+                    for(int j = 0; j < GRID_SIZE_BUILDING; j++){
                         g.drawRect(emptyLotX, emptyLotY, 128, 128);
                         emptyLotY += 158;
                     }

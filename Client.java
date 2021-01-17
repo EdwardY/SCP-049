@@ -150,6 +150,7 @@ public class Client {
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
                                     player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
+                                    player.start();
                                 }
 
                                 if(Client.this.getStandbyWindow() != null){ //if standby window is open

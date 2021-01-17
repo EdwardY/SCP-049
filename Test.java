@@ -1,7 +1,7 @@
 public class Test {
     public static void main(String[] args){
-        Town t = new Town("username", new Client(), "opponent", 10, 10);
-        t.start();
+        new Town("username", new Client(), "opponent", 10, 10).start();
+        new SCP("username", new Client(), "opponent", 10).start();
     }
     
 }

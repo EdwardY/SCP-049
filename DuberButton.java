@@ -38,4 +38,18 @@ abstract class DuberButton implements Drawable{
     public void toggleActive(){
         this.active = !active;
     }
+
+    /** 
+     * Turns the button on
+     */
+    public void activate(){
+        this.active = true;
+    }
+
+    /**
+     * Turns the button off
+     */
+    public void deactivate(){
+        this.active = false;
+    }
 }

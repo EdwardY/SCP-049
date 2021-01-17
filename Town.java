@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionListener;
@@ -34,13 +35,14 @@ import java.awt.Font;
 public class Town extends Player {
     /**The game window that the player will use to play the game. */
     private TownGameWindow gameWindow;
-
     /**An integer for storing the money the player has */
     private int money;
     /**an integer for storing the food that the player has */
     private int food;
     /**A hashmap of all humans in the game so they can be referenced with a key. */
     private HashMap<Integer, Human> humanMap;
+    
+
     /**
      * Constructor for the town side player's class
      * @param username The username of the player
@@ -262,6 +264,12 @@ public class Town extends Player {
      * An inner class that will run the main game window that the user will use to play the game.
      */
     public class TownGameWindow extends GameWindow{
+        /** Stores the types of buildings that can be built */
+        private DuberTextButton[] buildingTypesButtons;
+        /** Button to build */
+        private DuberTextButton buildButton;
+        /** Button to upgrade */
+        private DuberTextButton upgradeButton;
 
         /**
          * Method runs the town version of the game.
@@ -281,6 +289,18 @@ public class Town extends Player {
             
             //let user see the window
             gameWindow.setVisible(true);
+
+            // all the buttons
+            this.buildingTypesButtons = new DuberTextButton[6];
+            this.buildingTypesButtons[0] = new DuberTextButton("MilitaryBase", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 540, 180, 30));
+            this.buildingTypesButtons[1] = new DuberTextButton("ResearchLab", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 580, 180, 30));
+            this.buildingTypesButtons[2] = new DuberTextButton("Residency", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 620, 180, 30));
+            this.buildingTypesButtons[3] = new DuberTextButton("Hospital", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 660, 180, 30));
+            this.buildingTypesButtons[4] = new DuberTextButton("FoodBuilding", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30));
+            this.buildingTypesButtons[5] = new DuberTextButton("Bank", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30));
+
+            this.upgradeButton = new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
+            this.buildButton = new DuberTextButton("Build", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
             
 
             Town.this.displaySide("Town");
@@ -381,6 +401,13 @@ public class Town extends Player {
                     g.fillRect(10 + GRID_SIZE_WIDTH, 475, 460, 25);
                 }
 
+                //buttons
+                for(int i = 0;i < buildingTypesButtons.length;i++){
+                    buildingTypesButtons[i].draw(g);
+                }
+                buildButton.draw(g);
+                upgradeButton.draw(g);
+
             }
         }
 
@@ -438,9 +465,15 @@ public class Town extends Player {
                     if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
                         Building clickedBuilding = findBuilding(buildingX, buildingY);
                         if(clickedBuilding != null){
-                            //TODO: display options for a actual building
-                        }else{
+                            System.out.println("upgrade");
                             //TODO: display options to build building
+                            
+                        }else{
+                            //activate any button that has to do with building things
+                            for(int i = 0;i < buildingTypesButtons.length;i++){
+                                buildingTypesButtons[i].activate();
+                            }
+                            buildButton.activate();
                         }
                     }
                 }else{

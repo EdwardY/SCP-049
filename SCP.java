@@ -95,13 +95,12 @@ public class SCP extends Player{
      * @param level The level of the event.
      */
     public void startEvent(String eventType, int level){
-        //TODO: Implement stonks event for TOWN SIDE, does not belong as an scp event
         if(eventType.equals("Riot")){
-            //TODO: add new Riot event to arraylist
+            this.getEvents().add(new Riot(level));
         }else if(eventType.equals("Mutate")){
-            //TODO: add new Mutate event to arraylist
+            this.getEvents().add(new Mutate(level));
         }else if(eventType.equals("warpReality")){
-            //TODO: add new WarpReality event to arraylist
+            this.getEvents().add(new WarpReality(level));
         }
     }//end of method
 
@@ -114,17 +113,15 @@ public class SCP extends Player{
      */
     public void startEvent(String eventType, int level, int x, int y){
         if(eventType.equals("Earthquake")){
-            //TODO: Create new Earthquake event and add it to the arraylist
+            this.getEvents().add(new Earthquake(level, x, y));
         }else if(eventType.equals("Fire")){
-            //TODO: Create new Fire event and add it to the arrayList
+            this.getEvents().add(new Fire(level, x, y));
         }else if(eventType.equals("Thunderstorm")){
-            //TODO: Create new Thunderstorm event and add it to the arraylist
-        }else if(eventType.equals("Snow")){
-            //TODO: Create new Snow event and add it to the arraylist.
+            this.getEvents().add(new Thunderstorm(level, x, y));
         }else if(eventType.equals("tornado")){
-            //TODO: Create new tornado event and add it to the arraylist.
+            this.getEvents().add(new Tornado(level, x, y));
         }else if(eventType.equals("Infect")){
-            //TODO: Create new Infect event and add it to the arraylist.
+            this.getEvents().add(new Infect(level, x, y));
         }
     }//end of method
 

@@ -22,6 +22,7 @@ import java.awt.Graphics;
 import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.Font;
 
 /**
  * [Town.java]
@@ -344,7 +345,24 @@ public class Town extends Player {
              */
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
-                //TODO: draw more things on top
+                this.setBackground(Color.WHITE);
+
+                g.setFont(new Font("Courier", Font.BOLD, 18));
+                g.setColor(Color.BLACK);
+
+                g.drawString("Username: " + Town.this.getUsername(), 10, 125);
+                g.drawString("Opponent: " + Town.this.getOpponent(), 10, 150);
+
+                g.drawString("DuberCoin: " + Town.this.getMoney(), 10, 325);
+
+                g.drawString("Humans: " + Town.this.getHumans().size(), 10, 425);
+                g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10, 450);
+                
+
+                g.setColor(Color.RED);
+                g.drawRect(0,475, 500, 50);
+                g.setColor(Color.GREEN);
+                g.drawRect(0, 475, (Town.this.getHumans().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
             }
         }
 

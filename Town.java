@@ -41,6 +41,10 @@ public class Town extends Player {
     private int food;
     /**A hashmap of all humans in the game so they can be referenced with a key. */
     private HashMap<Integer, Human> humanMap;
+    /** The x and y location of the last "building area" clicked */
+    private int buildX, buildY;
+    /** The string for the type of building */
+    private String type;
     
 
     /**
@@ -468,7 +472,7 @@ public class Town extends Player {
                         Building clickedBuilding = findBuilding(buildingX, buildingY);
                         if(clickedBuilding != null){
                             System.out.println("upgrade");
-                            //TODO: display options to build building
+                            upgradeButton.activate();
                             
                         }else{
                             //activate any button that has to do with building things
@@ -479,7 +483,16 @@ public class Town extends Player {
                         }
                     }
                 }else{
-                    //clicking the info bar, not sure if we'll make this do anything
+                    for(int i = 0;i < buildingTypesButtons.length;i++){
+                        if(buildingTypesButtons[i].inBounds(mouseX, mouseY)){
+                            type = buildingTypesButtons[i].getText();
+                        }
+                    }
+                    if(buildButton.inBounds(mouseX, mouseY)){
+                        //TODO: send a build request
+                    }else if(upgradeButton.inBounds(mouseX, mouseY)){
+                        //TODO: send a upgrade request
+                    }
                 }
             }
 

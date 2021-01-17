@@ -58,7 +58,7 @@ public class SCP extends Player{
      * starts the game as the SCP side.
      */
     public void start(){
-        gameWindow = new SCPGameWindow();
+        this.gameWindow = new SCPGameWindow();
     }
 
 

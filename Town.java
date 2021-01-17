@@ -93,8 +93,7 @@ public class Town extends Player {
      * Ends the current turn in the game.
      */
     public void startTurn(){
-        System.out.println("Not a functional method yet.");
-        //TODO: Not a functional method yet.
+        this.gameWindow = new TownGameWindow();
     }
 
     //TODO: method for client-game transactions

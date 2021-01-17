@@ -426,7 +426,7 @@ public class SCP extends Player{
                     }
                     for(int i = 0;i < aoeEventButtons.length;i++){
                         if(aoeEventButtons[i].inBounds(mouseX, mouseY)){
-                            type = wholeGameEventButtons[i].getText();
+                            type = aoeEventButtons[i].getText();
                             startEventButton.activate();
                         }
                     }

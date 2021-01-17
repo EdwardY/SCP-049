@@ -28,6 +28,8 @@ abstract class Player {
     private ArrayList<Event> events;
     /**An arraylist of all SCPs in the game. */
     private ArrayList<SCP0492> scps;
+    /**The turn timer for the game. */
+    private TurnTimer timer;
 
     /**
      * Constructor for the {@code Player} class
@@ -43,6 +45,10 @@ abstract class Player {
         this.buildings = new ArrayList<Building>();
         this.events = new ArrayList<Event>();
         this.scps = new ArrayList<SCP0492>();
+
+        //create and start the turn-timer.
+        this.timer = new TurnTimer();
+        Thread t = new Thread(this.timer);
     }
 
     /**
@@ -66,7 +72,7 @@ abstract class Player {
             welcomeMessage += "destroy the town in 10 turns!";
         }else{ //TODO: This block of the if statement is temporary (for testing)
             System.out.println("An error has occured");
-        }//end of if statement blockl
+        }//end of if statement block
 
         welcomeMessage += "Good luck, and may the best player win...";
 
@@ -168,6 +174,15 @@ abstract class Player {
 
     //end of setters
 
+    /**
+     * An inner class that is used to tell the player how much time they have left in the turn.
+     */
+    public class TurnTimer implements Runnable{
+
+        public void run(){
+
+        }
+    }
 
     /**
      * Inner class to display the welcome window to the player at the beginning of the game.

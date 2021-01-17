@@ -9,8 +9,10 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionListener;
@@ -211,20 +213,32 @@ public class SCP extends Player{
          */
         public SCPGameWindow(){
             JFrame gameWindow = this.getWindow();
+            gameWindow.setLayout(new GridLayout(0, 2));
 
             ScpGridPanel gridPanel = new ScpGridPanel();
             gridPanel.setBounds(0, 0, 1080, 1080);
+            gridPanel.setPreferredSize(new Dimension(1080, 1080));
+            gridPanel.setMaximumSize(new Dimension(1080, 1080));
+            gridPanel.setMinimumSize(new Dimension(1080, 1080));
+            gridPanel.setLocation(0, 0);
             gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             gridPanel.setBackground(Color.gray);
 
             ScpInfoBarPanel infoBarPanel = new ScpInfoBarPanel();     
             infoBarPanel.setBounds(1080, 0, 256, 1080);
+            infoBarPanel.setPreferredSize(new Dimension(256, 1080));
+            infoBarPanel.setMaximumSize(new Dimension(256, 1080));
+            infoBarPanel.setMinimumSize(new Dimension(256, 1080));
+            infoBarPanel.setLocation(1080, 0);
             infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             infoBarPanel.setBackground(Color.white);
 
-            gameWindow.add(gridPanel);
-            gameWindow.add(infoBarPanel);
+            gameWindow.addMouseListener(mouseHandler);
+            gameWindow.addMouseMotionListener(mouseHandler);
+            gameWindow.add(gridPanel, BorderLayout.EAST);
+            gameWindow.add(infoBarPanel, BorderLayout.WEST);
 
+            gameWindow.doLayout();
             //let user see the window
             gameWindow.setVisible(true);
 
@@ -344,7 +358,6 @@ public class SCP extends Player{
                 g.drawRect(0,475, 500, 50);
                 g.setColor(Color.GREEN);
                 if(SCP.this.getSCPs().size() > 0){
-    
                     g.drawRect(0, 475, (SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()))*500,50);
                 }else{
                     g.drawRect(0,475,500, 50);

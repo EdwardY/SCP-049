@@ -43,6 +43,14 @@ class Game {
     private int humePerTurn;
     /** The ID to assign to the next {@code Human} created */
     private int currentId;
+    /**The changes in money per turn*/
+    private int moneyChange;
+    /**The amount of change in food per Turn */
+    private int foodChange;
+    /**The amount of change in hume per Turn */
+    private int humeChange;
+    /**casualties of humans */
+    private int casualties = 0; //TODO: send moneyChange - casualties from the server
 
     /**
      * Constructor for the {@code Game} class, assigns preset values
@@ -82,8 +90,10 @@ class Game {
                     Human currentHuman = this.humanMap.get(key);
                     Rectangle humanArea = new Rectangle(currentHuman.getX(), currentHuman.getY(), NPC.SIZE, NPC.SIZE);
                     if(buildingArea.contains(humanArea)){
+
                         this.humanMap.remove(key);
                         this.humans.remove(currentHuman);
+                        this.casualties ++;
                     }
                 }
 
@@ -104,6 +114,7 @@ class Game {
             if(currentHuman.getHealth() <= 0){
                 this.humanMap.remove(key);
                 this.humans.remove(currentHuman);
+                this.casualties ++;
             }
         }
 
@@ -134,6 +145,9 @@ class Game {
         }
         this.money += this.moneyPerTurn;
         this.food += this.foodPerTurn;
+        this.changeFoodChange( this.foodPerTurn);
+        this.changeMoneyChange(this.moneyPerTurn);
+
     }
 
     /**
@@ -170,7 +184,8 @@ class Game {
         
         if(this.getFood() >= humanNum*10){
 
-            this.changeFood(-1*humanNum*10);
+            this.changeFood(-10*humanNum);
+            this.changeFoodChange(-10*humanNum);
 
         }else{
 
@@ -179,7 +194,8 @@ class Game {
                 if(this.getFood() >= 10){
 
                     this.changeFood(-10);
-                
+                    this.changeFoodChange(-10);
+
                 //no more food so anyone now will starve
                 }else{
                     humanMap.get(key).changeHunger(-10);
@@ -366,6 +382,30 @@ class Game {
     }
 
     /**
+     * Gets the amount of change in money this turn
+     * @return moneyChange
+     */
+    public int getMoneyChange(){
+        return this.moneyChange;
+    }
+
+    /**
+     * Gets the amount of hume changed this turn
+     * @return HumeChange
+     */
+    public int getHumeChange(){
+        return this.humeChange;
+    }
+
+    /**
+     * Gets the amount of food changed this turn
+     * @return foodChang
+     */
+    public int getFoodChange(){
+        return this.foodChange;
+    }
+
+    /**
      * Gets the current turn
      * @return turn, the number of turns that have passed so far
      */
@@ -452,6 +492,29 @@ class Game {
         this.humePerTurn += change;
     }
 
+    /**
+     * Changes the humeChange by change
+     * @param change the change in hume
+     */
+    public void changeHumeChange(int change){
+        this.humeChange += change;
+    }
+
+    /**
+     * Changes foodChange by change
+     * @param change
+     */
+    public void changeFoodChange(int change){
+        this.foodChange += change;
+    }
+
+    /**
+     * Changes moneyChange by change
+     * @param change
+     */
+    public void changeMoneyChange(int change){
+        this.moneyChange += change;
+    }
 
     /**
      * Converts an NPC to another type.
@@ -525,11 +588,24 @@ class Game {
      * </p>
      */
     public void doTurn(){
+
+        //TODO: resetting here will miss somethings from the server i presume , figure out where to reset report variables
+        //resets turn changes 
+        this.foodChange = 0;
+        this.moneyChange = 0;
+        this.humeChange = 0;
+        this.casualties = 0;
+                
+
         this.turn++;
+        //end of turn methods
         getResourcesFromBuildings();
         dealWithEvents();
         moveSpcs();
         handleAttacks();
         killDeadStuff();
+        eatFood();
+
+
     }
 }

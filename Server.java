@@ -330,6 +330,7 @@ class Server {
                 sendMessage("Money");
                 sendMessage("" + (price * -1));
                 game.changeMoney(price * -1);
+                game.changeMoneyChange(price*-1);
 
             }
             return success;
@@ -379,6 +380,7 @@ class Server {
                 sendMessage("Hume");
                 sendMessage("" + (price * -1));
                 game.changeHume(price * -1);
+                game.changeHumeChange(price*-1);
             }
             return success;
         }
@@ -417,6 +419,7 @@ class Server {
                 sendMessage("Hume");
                 sendMessage("" + (price * -1));
                 game.changeHume(price * -1);
+                game.changeHumeChange(price * -1);
             }
             return success;
         }
@@ -441,9 +444,11 @@ class Server {
                 if((building.getX() == x) && (building.getY() == y)){
                     
                     if(building.getUpgradePrice() <= game.getMoney()){
-                        building.upgrade();
+
+                        building.upgrade(); //TODO: does this use the class abstract method or the upgrade method for each overwritten method???
                         success = true;
                         game.changeMoney(building.getUpgradePrice() * -1);
+                        game.changeMoneyChange(building.getUpgradePrice() * -1);
 
                     }
                 }

@@ -22,8 +22,6 @@ abstract class Player {
     private String opponent;
     /** A list of all frames */
     private ArrayList<JFrame> gameFrames;
-    /**An arrayList of enemy humans. */
-    private ArrayList<Human> humans;
     /**An arrayList of enemy buildings. */
     private ArrayList<Building> buildings;
     /** An ArrayList of all events.*/
@@ -42,7 +40,6 @@ abstract class Player {
         this.playerClient = playerClient;
         this.opponent = opponent;
         this.gameFrames = new ArrayList<JFrame>();
-        this.humans = new ArrayList<Human>();
         this.buildings = new ArrayList<Building>();
         this.events = new ArrayList<Event>();
         this.scps = new ArrayList<SCP0492>();
@@ -124,16 +121,6 @@ abstract class Player {
     }
 
 
-
-
-    /**
-     * Gets the list of human NPC's.
-     * @return The list of humans.
-     */
-    public ArrayList<Human> getHumans(){
-        return this.humans;
-    }
-
     /**
      * Gets the list of buildings.
      * @return The list of buildings.
@@ -153,30 +140,6 @@ abstract class Player {
 
 
     //start of setters
-
-
-
-    /**
-     * Updates all game objects at the end of the turn.
-     * @param humans The new list of humans.
-     * @param buildings The new list of buildings.
-     * @param events The new list of events.
-     * @param scps The new list of SCP0492s.
-     */
-    public void updateGameObjects(ArrayList<Human> humans, ArrayList<Building> buildings, ArrayList<Event> events, ArrayList<SCP0492> scps){
-        this.humans = (ArrayList<Human>)humans.clone();
-        this.buildings = (ArrayList<Building>)buildings.clone();
-        this.events = (ArrayList<Event>)events.clone();
-        this.scps = (ArrayList<SCP0492>)scps.clone();
-    }
-
-    /**
-     * Sets all of the human NPC's.
-     * @param humans The list of humans.
-     */
-    public void setHumans(ArrayList<Human> humans){
-        this.humans = humans;
-    }
 
     /**
      * Sets the list of all SCP0492 NPC's.

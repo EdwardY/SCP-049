@@ -40,6 +40,8 @@ public class SCP extends Player{
     private SCPGameWindow gameWindow;
     /** The thing that keeps track of all mouse events during the game */
     private SCPGameWindow.SCPMouseHandler mouseHandler;
+    /**An ArrayList of enemy humans that the SCP must infect or destroy. */
+    private ArrayList<Human> humanList;
 
 
 
@@ -53,6 +55,7 @@ public class SCP extends Player{
     public SCP(String username, Client playerClient, String opponent, int hume){
         super(username, playerClient, opponent);
         this.hume = hume;
+        this.humanList = new ArrayList<Human>();
     }//end of constructor
 
 
@@ -128,7 +131,19 @@ public class SCP extends Player{
         }
     }//end of method
 
-
+    /**
+     * Updates all game objects at the end of the turn.
+     * @param humans The new list of humans.
+     * @param buildings The new list of buildings.
+     * @param events The new list of events.
+     * @param scps The new list of SCP0492s.
+     */
+    public void updateGameObjects(ArrayList<Human> humans, ArrayList<Building> buildings, ArrayList<Event> events, ArrayList<SCP0492> scps){
+        this.setHumans((ArrayList<Human>)humans.clone());
+        this.setBuildings((ArrayList<Building>)buildings.clone());
+        this.setEvents((ArrayList<Event>)events.clone());
+        this.setSCPs((ArrayList<SCP0492>)scps.clone());
+    }
 
 
     //start of getters
@@ -148,10 +163,27 @@ public class SCP extends Player{
         return this.hume;
     }
 
+    /**
+     * Gets the list of humans.
+     * @return The list of humans.
+     */
+    public ArrayList<Human> getHumans(){
+        return this.humanList;
+    }
     //end of getters
 
 
+
+
     //start of setters
+
+    /**
+     * Sets the ArrayList of humans.
+     * @param humanList The new list of humans.
+     */
+    public void setHumans(ArrayList<Human> humanList){
+        this.humanList = humanList;
+    }
 
     /**
      * Changes the amount of the player's hume points.

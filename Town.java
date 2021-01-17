@@ -84,6 +84,20 @@ public class Town extends Player {
         this.food += change;
     }
 
+    /**
+     * Updates all game objects at the end of the turn.
+     * @param humans The new HashMap of humans.
+     * @param buildings The new list of buildings.
+     * @param events The new list of events.
+     * @param scps The new list of SCP0492s.
+     */
+    public void updateGameObjects(HashMap<Integer, Human> humans, ArrayList<Building> buildings, ArrayList<Event> events, ArrayList<SCP0492> scps){
+        this.setHumanMap((HashMap<Integer, Human>)humans.clone());
+        this.setBuildings((ArrayList<Building>)buildings.clone());
+        this.setEvents((ArrayList<Event>)events.clone());
+        this.setSCPs((ArrayList<SCP0492>)scps.clone());
+    }
+
 
     /**
      * Starts the current turn in the game.
@@ -205,6 +219,14 @@ public class Town extends Player {
   
 
     //start of setters
+
+    /**
+     * Sets the HashMap of humans.
+     * @param humans The new HashMap of humans.
+     */
+    public void setHumanMap(HashMap<Integer, Human> humans){
+        this.humanMap = humans;
+    }
 
     /**
      * Sets the amount of money that the player has.
@@ -373,14 +395,14 @@ public class Town extends Player {
 
                 g.drawString("DuberCoin: " + Town.this.getMoney(), 10, 325);
 
-                g.drawString("Humans: " + Town.this.getHumans().size(), 10, 425);
+                g.drawString("Humans: " + Town.this.getHumanMap().size(), 10, 425);
                 g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10, 450);
                 
 
                 g.setColor(Color.RED);
                 g.drawRect(0,475, 500, 50);
                 g.setColor(Color.GREEN);
-                g.drawRect(0, 475, (Town.this.getHumans().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
+                g.drawRect(0, 475, (Town.this.getHumanMap().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
             }
         }
 

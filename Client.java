@@ -166,8 +166,9 @@ public class Client {
                                 String [] objectValues;
                                 int objectNum = Integer.parseInt(input.readLine());
                                 ArrayList<SCP0492> scpList = new ArrayList<SCP0492>();
+
+                                SCP0492.level = Integer.parseInt(input.readLine());
                                 for(int i = 0; i < objectNum; i ++){
-                                    SCP0492.level = Integer.parseInt(input.readLine());
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
                                     scpList.add(new SCP0492(Integer.parseInt(objectValues[0]), Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));   
@@ -207,29 +208,28 @@ public class Client {
                                 for(int i = 0; i < objectNum; i++){
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
-                                    String buildingType = input.readLine();
+                                    String buildingType = objectValues[0];
                                     if(buildingType.equals("Bank")){
-                                        //TODO: Build new bank object
+                                        buildingList.add(new Bank(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])   ));
                                     }else if(buildingType.equals("FoodBuilding")){
-                                        //TODO: Build new FoodBuilding object.
+                                        buildingList.add(new FoodBuilding(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])   ));
                                     }else if(buildingType.equals("Hospital")){
-                                        //TODO: Build new Hospital object.
+                                        buildingList.add(new Hospital(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6])));
                                     }else if(buildingType.equals("MilitaryBase")){
-                                        //TODO: Build new MilitaryBase object.
+                                        buildingList.add(new MilitaryBase(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])   ));
                                     }else if(buildingType.equals("ResearchLab")){
-                                        //TODO: Build new ResearchLab object.
+                                        buildingList.add(new ResearchLab(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])   ));
                                     }else if(buildingType.equals("Residency")){
-                                        //TODO: Build new Residency object.
+                                        buildingList.add(new Residency(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]),  Integer.parseInt(objectValues[6])));
                                     }
 
                                 }
 
                                 objectNum = Integer.parseInt(input.readLine());
 
-                                ArrayList<Human> humansList = new ArrayList<Human>();
-                                HashMap<Integer, Human> humanMap = new HashMap<>();
                                 
                                 if(Client.this.getPlayer() instanceof SCP){
+                                    ArrayList<Human> humansList = new ArrayList<Human>();
                                     for(int i = 0; i < objectNum; i++){
                                         objectInfo = input.readLine();
                                         objectValues = objectInfo.split(" ");
@@ -247,9 +247,11 @@ public class Client {
                                         }else if(humanType.equals("Spy")){
                                             humansList.add(new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
                                         }
+                                        ((SCP)Client.this.getPlayer()).updateGameObjects(humansList, buildingList, eventList, scpList); //call method to update the game objects
 
                                     }
-                                }else if (Client.this.getPlayer() instanceof Town){
+                                }else if (Client.this.getPlayer() instanceof Town){                                
+                                    HashMap<Integer, Human> humanMap = new HashMap<>();
                                     for(int i = 0; i < objectNum; i++){
                                         objectInfo = input.readLine();
                                         objectValues = objectInfo.split(" ");
@@ -268,12 +270,10 @@ public class Client {
                                         }else if(humanType.equals("Spy")){
                                             humanMap.put(key, new Spy(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Double.parseDouble(objectValues[6]), Double.parseDouble(objectValues[7])));
                                         }
+                                        ((Town)Client.this.getPlayer()).updateGameObjects(humanMap, buildingList, eventList, scpList); //call method to update the game objects
 
                                     }
                                 }
-                                //TODO: Method outdated
-                                Client.this.getPlayer().updateGameObjects(humansList, buildingList, eventList, scpList);
-                                //TODO: Not sure where to put all of these received game objects since town/scp class isn't quite finished yet
     
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed

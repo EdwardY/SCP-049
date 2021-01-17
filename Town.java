@@ -402,7 +402,12 @@ public class Town extends Player {
                 g.setColor(Color.RED);
                 g.drawRect(0,475, 500, 50);
                 g.setColor(Color.GREEN);
-                g.drawRect(0, 475, (Town.this.getHumanMap().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
+                if(Town.this.getSCPs().size() > 0){
+    
+                    g.drawRect(0, 475, (Town.this.getHumanMap().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
+                }else{
+                    g.drawRect(0,475,500, 50);
+                }
             }
         }
 

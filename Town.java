@@ -290,9 +290,6 @@ public class Town extends Player {
             gameWindow.add(gridPanel);
             gameWindow.addMouseListener(new TownMouseHandler());
             gameWindow.addMouseMotionListener(new TownMouseHandler());
-            
-            //let user see the window
-            gameWindow.setVisible(true);
 
             // all the buttons
             this.buildingTypesButtons = new DuberTextButton[6];
@@ -306,6 +303,9 @@ public class Town extends Player {
             this.upgradeButton = new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
             this.buildButton = new DuberTextButton("Build", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
             
+            
+            //let user see the window
+            gameWindow.setVisible(true);
 
             Town.this.displaySide("Town");
             super.start();
@@ -479,13 +479,13 @@ public class Town extends Player {
                             for(int i = 0;i < buildingTypesButtons.length;i++){
                                 buildingTypesButtons[i].activate();
                             }
-                            buildButton.activate();
                         }
                     }
                 }else{
                     for(int i = 0;i < buildingTypesButtons.length;i++){
                         if(buildingTypesButtons[i].inBounds(mouseX, mouseY)){
                             type = buildingTypesButtons[i].getText();
+                            buildButton.activate();
                         }
                     }
                     if(buildButton.inBounds(mouseX, mouseY)){

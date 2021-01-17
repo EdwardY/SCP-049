@@ -13,6 +13,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionListener;
@@ -48,7 +49,7 @@ public class SCP extends Player{
     /** Level of event to start */
     private String level;
     /** Location to start events */
-    private int x, y;
+    private int eventX, eventY;
 
 
     /**
@@ -62,6 +63,8 @@ public class SCP extends Player{
         super(username, playerClient, opponent);
         this.hume = hume;
         this.humanList = new ArrayList<Human>();
+        this.eventX = -1;
+        this.eventY = -1;
     }//end of constructor
 
 
@@ -204,6 +207,12 @@ public class SCP extends Player{
      * An inner class that will run the game window that the player will use.
      */
     public class SCPGameWindow extends GameWindow{
+        /** Stores buttons for aoe events */
+        private DuberTextButton[] aoeEventButtons;
+        /** Stores buttons for whole game events */
+        private DuberTextButton[] wholeGameEventButtons;
+        /** The button to start the event */
+        private DuberTextButton startEventButton;
 
         /**
          * Constructor that will run the SCP version of the game.
@@ -221,6 +230,27 @@ public class SCP extends Player{
             gameWindow.add(gridPanel);
             gameWindow.addMouseListener(new SCPMouseHandler());
             gameWindow.addMouseMotionListener(new SCPMouseHandler());
+
+            //all buttons
+            aoeEventButtons = new DuberTextButton[5];
+            aoeEventButtons[0] = new DuberTextButton("Earthquake", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 540, 180, 30));
+            aoeEventButtons[1] = new DuberTextButton("Fire", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 580, 180, 30));
+            aoeEventButtons[2] = new DuberTextButton("Thunderstorm", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 620, 180, 30));
+            aoeEventButtons[3] = new DuberTextButton("Tornado", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 660, 180, 30));
+            aoeEventButtons[4] = new DuberTextButton("Infect", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30));
+
+            wholeGameEventButtons = new DuberTextButton[3];
+            wholeGameEventButtons[0] = new DuberTextButton("Riot", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 780, 180, 30));
+            wholeGameEventButtons[1] = new DuberTextButton("Mutate", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 820, 180, 30));
+            wholeGameEventButtons[2] = new DuberTextButton("WarpReality", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 860, 180, 30));
+
+            startEventButton = new DuberTextButton("Start", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
+
+            //whole game event buttons are active always
+            for(int i = 0;i < wholeGameEventButtons.length;i++){
+                wholeGameEventButtons[i].activate();
+            }
+
 
             //let user see the window
             gameWindow.setVisible(true);
@@ -246,6 +276,7 @@ public class SCP extends Player{
          * @version 1.0 on January 15, 2021
          */
         private class ScpGridPanel extends GridPanel{
+            
             /**
              * Constructor for the {@code GridPanel}
              */
@@ -322,6 +353,15 @@ public class SCP extends Player{
                 }else{
                     g.fillRect(10 + GRID_SIZE_WIDTH,475,460, 25);
                 }
+
+                //buttons
+                for(int i = 0;i < aoeEventButtons.length;i++){
+                    aoeEventButtons[i].draw(g);
+                }
+                for(int i = 0;i < wholeGameEventButtons.length;i++){
+                    wholeGameEventButtons[i].draw(g);
+                }
+                startEventButton.draw(g);
             }//end of method
 
         }
@@ -369,11 +409,31 @@ public class SCP extends Player{
              */
             @Override
             public void mouseClicked(MouseEvent e){
-                if((e.getX() <= GridPanel.GRID_SIZE_WIDTH) && (e.getY() <= GridPanel.GRID_SIZE_LENGTH)){
-                    //set the x and y of event location to the location mouse was pressed
-                    x = e.getX();
-                    y = e.getY();
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                if((mouseX <= GridPanel.GRID_SIZE_WIDTH) && (mouseY <= GridPanel.GRID_SIZE_LENGTH)){
+                    eventX = mouseX;
+                    eventY = mouseY;
+                    for(int i = 0;i < aoeEventButtons.length;i++){
+                        aoeEventButtons[i].activate();
+                    }
                 }else{
+                    for(int i = 0;i < wholeGameEventButtons.length;i++){
+                        if(wholeGameEventButtons[i].inBounds(mouseX, mouseY)){
+                            type = wholeGameEventButtons[i].getText();
+                            startEventButton.activate();
+                        }
+                    }
+                    for(int i = 0;i < aoeEventButtons.length;i++){
+                        if(aoeEventButtons[i].inBounds(mouseX, mouseY)){
+                            type = wholeGameEventButtons[i].getText();
+                            startEventButton.activate();
+                        }
+                    }
+                    if(startEventButton.inBounds(mouseX, mouseY)){
+                        //TODO: send a request to start the event
+                    }
+
                     //clicking the info bar, not sure if we'll make this do anything
                 }
             }

@@ -523,9 +523,9 @@ class Server {
                         }
 
                         //events
-                        sendTo(allUsers, "" + game.getEvents().size());
-                        for(int i = 0;i < game.getEvents().size();i++){
-                            Event curEvent = game.getEvents().get(i);
+                        sendTo(allUsers, "" + game.getEventsWithoutStonks().size());
+                        for(int i = 0;i < game.getEventsWithoutStonks().size();i++){
+                            Event curEvent = game.getEventsWithoutStonks().get(i);
                             if(curEvent instanceof WholeGameEvent){
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft());
                             }else{

@@ -152,6 +152,23 @@ class Game {
 
     /**
      * <p>
+     * Generates a random value. Find the chance of a {@code Stonks} occuring by multiplying 1% by the current turn number. The 
+     * chance of {@code Stonks} increases as time goes on. A {@code Stonks} is created if the first random value is lower than 
+     * the chance of {@code Stonks}. If this happens, a random number between 1 and 3 is generated for the level of the 
+     * {@code Stonks}.
+     * </p>
+     */
+    private void calculateStonks(){
+        double randomStonksChance = Math.random();
+        double stonksChance = 0.01 * this.turn;
+        if(randomStonksChance <= stonksChance){
+            int level = (int)Math.round(Math.random()*2) + 1;
+            startEvent(new Stonks(level));
+        }
+    }
+
+    /**
+     * <p>
      * Loops through the list of events and allows the {@code Event} to affect this {@code Game}. Decreases how much time is left in 
      * the {@code Event}. Check if the currentEvent should still be alive, if not delete it.
      * </p>
@@ -339,6 +356,20 @@ class Game {
      */
     public ArrayList<Event> getEvents(){
         return this.events;
+    }
+
+    /**
+     * Gets the {@code Event} objects excluding the {@code Stonk} objects
+     * @return
+     */
+    public ArrayList<Event> getEventsWithoutStonks(){
+        ArrayList<Event> toReturn = new ArrayList<Event>();
+        for(int i = 0;i < this.events.size();i++){
+            if(!(this.events.get(i) instanceof Stonks)){
+                toReturn.add(this.events.get(i));
+            }
+        }
+        return toReturn;
     }
 
     /**
@@ -592,12 +623,12 @@ class Game {
         this.turn++;
         //end of turn methods
         getResourcesFromBuildings();
+        calculateStonks();
         dealWithEvents();
         moveSpcs();
         handleAttacks();
         killDeadStuff();
         eatFood();
-
 
     }
 

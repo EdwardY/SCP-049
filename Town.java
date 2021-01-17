@@ -382,6 +382,8 @@ public class Town extends Player {
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 
+                g.drawString("Time left: " + Town.this.getTimer().getTime(), 10 + GRID_SIZE_WIDTH, 20);
+                System.out.println(Town.this.getTimer().getTime());
                 g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
                 g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
 

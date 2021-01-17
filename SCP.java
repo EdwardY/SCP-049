@@ -43,6 +43,12 @@ public class SCP extends Player{
     /**An ArrayList of enemy humans that the SCP must infect or destroy. */
     private ArrayList<Human> humanList;
 
+    /** Type of event to start */
+    private String type;
+    /** Level of event to start */
+    private String level;
+    /** Location to start events */
+    private int x, y;
 
 
     /**
@@ -105,7 +111,7 @@ public class SCP extends Player{
             this.getEvents().add(new Riot(level));
         }else if(eventType.equals("Mutate")){
             this.getEvents().add(new Mutate(level));
-        }else if(eventType.equals("warpReality")){
+        }else if(eventType.equals("WarpReality")){
             this.getEvents().add(new WarpReality(level));
         }
     }//end of method
@@ -124,7 +130,7 @@ public class SCP extends Player{
             this.getEvents().add(new Fire(level, x, y));
         }else if(eventType.equals("Thunderstorm")){
             this.getEvents().add(new Thunderstorm(level, x, y));
-        }else if(eventType.equals("tornado")){
+        }else if(eventType.equals("Tornado")){
             this.getEvents().add(new Tornado(level, x, y));
         }else if(eventType.equals("Infect")){
             this.getEvents().add(new Infect(level, x, y));
@@ -355,10 +361,10 @@ public class SCP extends Player{
              * @param MouseEvent The action performed by the mouse.
              */
             public void mousePressed(MouseEvent e){
-                int mouseX = e.getX();
-                int mouseY = e.getY();
-                if((mouseX <= GridPanel.GRID_SIZE_PIXEL) && (mouseY <= GridPanel.GRID_SIZE_PIXEL)){
-                    //TODO: clicking on map is probably for starting a specific event
+                if((e.getX() <= GridPanel.GRID_SIZE_PIXEL) && (e.getY() <= GridPanel.GRID_SIZE_PIXEL)){
+                    //set the x and y of event location to the location mouse was pressed
+                    x = e.getX();
+                    y = e.getY();
                 }else{
                     //clicking the info bar, not sure if we'll make this do anything
                 }

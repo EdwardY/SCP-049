@@ -117,6 +117,14 @@ abstract class Player {
         return this.opponent;
     }
 
+    /**
+     * Gets the game's turn timer.
+     * @return The timer.
+     */
+    public TurnTimer getTimer(){
+        return this.timer;
+    }
+
 
     /**
      * Gets all of the player's SCP0492's.
@@ -179,8 +187,52 @@ abstract class Player {
      */
     public class TurnTimer implements Runnable{
 
-        public void run(){
+        /**Boolean will determine if the timer needs to run*/
+        private boolean running;
+        /**The time left in the turn */
+        private int timeLeft;
 
+        /**
+         * Constructor for the timer.
+         */
+        public TurnTimer(){
+            this.running = true;
+            this.timeLeft = 60;
+        }
+
+        /**
+         * Runs the timer
+         */
+        public void run(){
+            while(running){
+                try {
+                    Thread.sleep(1000);
+                    this.timeLeft = this.timeLeft -1;
+                } catch(InterruptedException ex) {
+                    System.out.println("Timer error");
+                }
+            }
+        }
+
+        /**
+         * returns the amount of time left
+         */
+        public int getTime(){
+            return this.timeLeft;
+        }
+
+        /**
+         * Resets the amount of time left
+         */
+        public void resetTime(){
+            this.timeLeft = 60;
+        }
+
+        /**
+         * turns the timer on or off
+         */
+        public void toggleTimer(){
+            this.running = !this.running;
         }
     }
 

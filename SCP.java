@@ -302,6 +302,9 @@ public class SCP extends Player{
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 
+                g.drawString("Time left: " + SCP.this.getTimer().getTime(), 10 + GRID_SIZE_WIDTH, 20);
+
+
                 g.drawString("Username: " + SCP.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
                 g.drawString("Opponent: " + SCP.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
 

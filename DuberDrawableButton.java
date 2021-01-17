@@ -12,7 +12,7 @@ class DuberDrawableButton extends DuberButton{
     private Drawable sprite;
 
     /**
-     * Constructor for the {@code DuberButton}
+     * Constructor for the {@code DuberDrawableButton}
      * @param sprite the drawable thing to draw
      * @param boundaries the boundaries of the button
      */
@@ -22,10 +22,12 @@ class DuberDrawableButton extends DuberButton{
     }
 
     /**
-     * Draws the {@code DuberButton}
+     * Draws the {@code DuberDrawableButton} but only if the button is active 
      * @param g the {@code Graphics} to draw on
      */
     public void draw(Graphics g){
-        sprite.draw(g);
+        if(active){
+            sprite.draw(g);
+        }
     }
 }

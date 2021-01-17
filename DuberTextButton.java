@@ -16,7 +16,7 @@ class DuberTextButton extends DuberButton{
     private int x, y;
 
     /**
-     * Constructor for the {@code DuberButton}
+     * Constructor for the {@code DuberTextButton}
      * @param text the text to write in the button
      * @param boundaries the boundaries of the button
      */
@@ -29,16 +29,18 @@ class DuberTextButton extends DuberButton{
     }
 
     /**
-     * Draws the {@code DuberButton}
+     * Draws the {@code DuberTextButton} if active
      * @param g the {@code Graphics} to draw on
      */
     public void draw(Graphics g){
-        g.setColor(Color.WHITE);
-        g.fillRect(super.boundaries.x, super.boundaries.y, super.boundaries.width, super.boundaries.height);
-        g.setColor(Color.BLACK);
-        g.drawRect(super.boundaries.x, super.boundaries.y, super.boundaries.width, super.boundaries.height);
-        g.setFont(new Font("Courier", Font.BOLD, 18));
-        g.drawString(text, x, y);
+        if(active){    
+            g.setColor(Color.WHITE);
+            g.fillRect(super.boundaries.x, super.boundaries.y, super.boundaries.width, super.boundaries.height);
+            g.setColor(Color.BLACK);
+            g.drawRect(super.boundaries.x, super.boundaries.y, super.boundaries.width, super.boundaries.height);
+            g.setFont(new Font("Courier", Font.BOLD, 18));
+            g.drawString(text, x, y);
+        }
     }
 
     /**

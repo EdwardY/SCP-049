@@ -8,7 +8,9 @@ import java.awt.Rectangle;
  */
 abstract class DuberButton implements Drawable{
     /** boundaries of the {@code DuberButton} */
-    Rectangle boundaries;
+    protected Rectangle boundaries;
+    /** Boolean for whether or not the {@code DuberButton} is currently active */
+    protected boolean active;
 
     /**
      * Constructor for the {@code DuberButton}
@@ -16,15 +18,24 @@ abstract class DuberButton implements Drawable{
      */
     DuberButton(Rectangle boundaries){
         this.boundaries = boundaries;
+        this.active = false;
     }
 
     /**
      * Checks if a certain x, y value is within the boundaries
      * @param x the x coordinates to check
      * @param y the y coordinates to check
-     * @return true if the x and y are within the boundaries, false otherwise
+     * @return true if the x and y are within the boundaries and the button is active, false otherwise
      */
     public boolean inBounds(int x, int y){
-        return boundaries.contains(x, y);
+        return ((active) && boundaries.contains(x, y));
+        
+    }
+
+    /**
+     * Toggles active to the opposite of what it was
+     */
+    public void toggleActive(){
+        this.active = !active;
     }
 }

@@ -32,7 +32,7 @@ public abstract class GameWindow{
        this.window = new JFrame("Code-049");
 
        //setting the JFrame
-       window.setSize(1080,1920); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
+       window.setSize(1920,1080); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
    }
@@ -71,10 +71,14 @@ public abstract class GameWindow{
 
         /** The size of the road */
         public static final int ROAD_SIZE = 30;
-        /** Number of buildings there will be in the grid's length and width */
-        public static final int GRID_SIZE_BUILDING = 7;
-        /** The size of the grid in pixels */
-        public static final int GRID_SIZE_PIXEL = 1080;
+        /** The number oc rows of buildings. */
+        public static final int GRID_SIZE_BUILDING_WIDTH = 8;
+        /**The number of columns of buildings */
+        public static final int GRID_SIZE_BUILDING_LENGTH = 6;
+        /** The length of the grid in pixels. */
+        public static final int GRID_SIZE_LENGTH = 1080;
+        /**The width of the grid in pizels.*/
+        public static final int GRID_SIZE_WIDTH = 1420;
         /**
          * Constructor for the {@code DuberPanel}
          */

@@ -321,11 +321,11 @@ public class Town extends Player {
 
                 //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
                 g.setColor(Color.BLACK);
-                int emptyLotX = 0; //X-value of the empty lot to be drawn
-                for(int i = 0; i < GRID_SIZE_BUILDING; i ++){
-                    int emptyLotY = 0; //Y-value of the empty lot to be drawn
-                    for(int j = 0; j < GRID_SIZE_BUILDING; j++){
-                        g.drawRect(emptyLotX, emptyLotY, Building.SIZE, Building.SIZE);
+                int emptyLotX = 30; //X-value of the empty lot to be drawn
+                for(int i = 0; i < GRID_SIZE_BUILDING_WIDTH; i ++){
+                    int emptyLotY = 30; //Y-value of the empty lot to be drawn
+                    for(int j = 0; j < GRID_SIZE_BUILDING_LENGTH; j++){
+                        g.fillRect(emptyLotX, emptyLotY, Building.SIZE, Building.SIZE);
                         emptyLotY += (Building.SIZE + ROAD_SIZE);
                     }
                     emptyLotX += (Building.SIZE + ROAD_SIZE);
@@ -357,28 +357,28 @@ public class Town extends Player {
 
                 //draw infobar
                 g.setColor(Color.WHITE);
-                g.fillRect(GRID_SIZE_PIXEL, 0, 500, GRID_SIZE_PIXEL);
+                g.fillRect(GRID_SIZE_WIDTH, 0, 500, GRID_SIZE_LENGTH);
 
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 
-                g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_PIXEL, 125);
-                g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_PIXEL, 150);
+                g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
+                g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
 
-                g.drawString("DuberCoin: " + Town.this.getMoney(), 10 + GRID_SIZE_PIXEL, 325);
+                g.drawString("DuberCoin: " + Town.this.getMoney(), 10 + GRID_SIZE_WIDTH, 325);
 
-                g.drawString("Humans: " + Town.this.getHumanMap().size(), 10 + GRID_SIZE_PIXEL, 425);
-                g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10 + GRID_SIZE_PIXEL, 450);
+                g.drawString("Humans: " + Town.this.getHumanMap().size(), 10 + GRID_SIZE_WIDTH, 425);
+                g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10 + GRID_SIZE_WIDTH, 450);
                 
 
                 g.setColor(Color.RED);
-                g.drawRect(0+ GRID_SIZE_PIXEL, 475, 500, 50);
+                g.fillRect( 10 + GRID_SIZE_WIDTH, 475, 460, 25);
                 g.setColor(Color.GREEN);
                 if(Town.this.getSCPs().size() > 0){
     
-                    g.drawRect(0 + GRID_SIZE_PIXEL, 475, (Town.this.getHumanMap().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
+                    g.fillRect(10 + GRID_SIZE_WIDTH, 475, (Town.this.getHumanMap().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*460, 25);
                 }else{
-                    g.drawRect(0+ GRID_SIZE_PIXEL, 475, 500, 50);
+                    g.fillRect(10 + GRID_SIZE_WIDTH, 475, 460, 25);
                 }
 
             }
@@ -431,7 +431,7 @@ public class Town extends Player {
             public void mouseClicked(MouseEvent e){
                 int mouseX = e.getX();
                 int mouseY = e.getY();
-                if((mouseX <= GridPanel.GRID_SIZE_PIXEL) && (mouseY <= GridPanel.GRID_SIZE_PIXEL)){
+                if((mouseX <= GridPanel.GRID_SIZE_WIDTH) && (mouseY <= GridPanel.GRID_SIZE_LENGTH)){
                     //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
                     int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
                     int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);

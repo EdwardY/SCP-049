@@ -262,14 +262,14 @@ public class SCP extends Player{
 
                 //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
                 g.setColor(Color.BLACK);
-                int emptyLotX = 0; //X-value of the empty lot to be drawn
-                for(int i = 0; i < this.GRID_SIZE_BUILDING; i ++){
-                    int emptyLotY = 0; //Y-value of the empty lot to be drawn
-                    for(int j = 0; j < this.GRID_SIZE_BUILDING; j++){
-                        g.drawRect(emptyLotX, emptyLotY, 128, 128);
-                        emptyLotY += 158;
+                int emptyLotX = 30; //X-value of the empty lot to be drawn
+                for(int i = 0; i < this.GRID_SIZE_BUILDING_WIDTH; i ++){
+                    int emptyLotY = 30; //Y-value of the empty lot to be drawn
+                    for(int j = 0; j < this.GRID_SIZE_BUILDING_LENGTH; j++){
+                        g.fillRect(emptyLotX, emptyLotY, 128, 128);
+                        emptyLotY += (Building.SIZE + ROAD_SIZE);
                     }
-                    emptyLotX += 158;
+                    emptyLotX += (Building.SIZE + ROAD_SIZE);
                 }
 
 
@@ -298,27 +298,26 @@ public class SCP extends Player{
 
                 //draw infobar
                 g.setColor(Color.WHITE);
-                g.fillRect(GRID_SIZE_PIXEL, 0, 500, GRID_SIZE_PIXEL);
-
+                g.fillRect(GRID_SIZE_WIDTH, 0, 500, GRID_SIZE_LENGTH);
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 
-                g.drawString("Username: " + SCP.this.getUsername(), 10 + GRID_SIZE_PIXEL, 125);
-                g.drawString("Opponent: " + SCP.this.getOpponent(), 10 + GRID_SIZE_PIXEL, 150);
+                g.drawString("Username: " + SCP.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
+                g.drawString("Opponent: " + SCP.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
 
-                g.drawString("Hume points: " + SCP.this.getHume(), 10 + GRID_SIZE_PIXEL, 325);
+                g.drawString("Hume points: " + SCP.this.getHume(), 10 + GRID_SIZE_WIDTH, 325);
 
-                g.drawString("Humans: " + SCP.this.getHumans().size(), 10 + GRID_SIZE_PIXEL, 425);
-                g.drawString("SCP-049-2s: " + SCP.this.getSCPs().size(), 10 + GRID_SIZE_PIXEL, 450);
+                g.drawString("Humans: " + SCP.this.getHumans().size(), 10 + GRID_SIZE_WIDTH, 425);
+                g.drawString("SCP-049-2s: " + SCP.this.getSCPs().size(), 10 + GRID_SIZE_WIDTH, 450);
                 
 
                 g.setColor(Color.RED);
-                g.drawRect(0 + GRID_SIZE_PIXEL, 475, 500, 50);
+                g.fillRect(10 + GRID_SIZE_WIDTH, 475, 460, 25);
                 g.setColor(Color.GREEN);
                 if(SCP.this.getSCPs().size() > 0){
-                    g.drawRect(0 + GRID_SIZE_PIXEL, 475, (SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()))*500,50);
+                    g.fillRect(10 + GRID_SIZE_WIDTH, 475, (SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()))*460, 25);
                 }else{
-                    g.drawRect(0 + GRID_SIZE_PIXEL,475,500, 50);
+                    g.fillRect(10 + GRID_SIZE_WIDTH,475,460, 25);
                 }
             }//end of method
 
@@ -367,7 +366,7 @@ public class SCP extends Player{
              */
             @Override
             public void mouseClicked(MouseEvent e){
-                if((e.getX() <= GridPanel.GRID_SIZE_PIXEL) && (e.getY() <= GridPanel.GRID_SIZE_PIXEL)){
+                if((e.getX() <= GridPanel.GRID_SIZE_WIDTH) && (e.getY() <= GridPanel.GRID_SIZE_LENGTH)){
                     //set the x and y of event location to the location mouse was pressed
                     x = e.getX();
                     y = e.getY();

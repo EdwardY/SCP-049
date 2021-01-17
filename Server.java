@@ -573,6 +573,7 @@ class Server {
                     }
                 }else{
                     if(curTime - lastTime >= ONE_MINUTE/2){
+                        game.resetTurnChanges();
                         lastTime = curTime;
                         sendTo(allUsers, "<ts>");
                         turnGoing = !turnGoing;

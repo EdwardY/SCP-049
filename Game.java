@@ -1,13 +1,9 @@
 //graphics imports
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 
 //data structures
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.swing.text.DefaultStyledDocument.ElementSpec;
 
 /**
  * [Game.java]
@@ -50,7 +46,7 @@ class Game {
     /**The amount of change in hume per Turn */
     private int humeChange;
     /**casualties of humans */
-    private int casualties = 0; //TODO: send moneyChange - casualties from the server
+    private int casualties; //TODO: send moneyChange - casualties from the server
 
     /**
      * Constructor for the {@code Game} class, assigns preset values
@@ -69,6 +65,10 @@ class Game {
         this.foodPerTurn = 0;
         this.humePerTurn = 0;
         this.currentId = 0;
+        this.moneyChange = 0;
+        this.foodChange = 0;
+        this.humeChange = 0;
+        this.casualties = 0;
     }
 
     /**
@@ -589,14 +589,6 @@ class Game {
      */
     public void doTurn(){
 
-        //TODO: resetting here will miss somethings from the server i presume , figure out where to reset report variables
-        //resets turn changes 
-        this.foodChange = 0;
-        this.moneyChange = 0;
-        this.humeChange = 0;
-        this.casualties = 0;
-                
-
         this.turn++;
         //end of turn methods
         getResourcesFromBuildings();
@@ -607,5 +599,16 @@ class Game {
         eatFood();
 
 
+    }
+
+    /**
+     * Resets the values that got changed per turn
+     */
+    public void resetTurnChanges(){
+        //resets turn changes 
+        this.foodChange = 0;
+        this.moneyChange = 0;
+        this.humeChange = 0;
+        this.casualties = 0;
     }
 }

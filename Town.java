@@ -11,8 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseMotionListener;
@@ -36,8 +34,6 @@ import java.awt.Font;
 public class Town extends Player {
     /**The game window that the player will use to play the game. */
     private TownGameWindow gameWindow;
-    /** The thing that will keep track of all mouse events during the game */
-    private TownGameWindow.TownMouseHandler mouseHandler;
 
     /**An integer for storing the money the player has */
     private int money;
@@ -66,7 +62,6 @@ public class Town extends Player {
      */
     public void start(){
         this.gameWindow = new TownGameWindow();
-        this.mouseHandler = this.gameWindow.new TownMouseHandler();
     }
 
     /**
@@ -274,26 +269,22 @@ public class Town extends Player {
         public TownGameWindow(){
             //get the JPanels and JFrame of the game window from parent class
             JFrame gameWindow = this.getWindow();
-            gameWindow.setLayout(new GridLayout(0, 2));
 
             TownGridPanel gridPanel = new TownGridPanel();
-            gridPanel.setBounds(0, 0, 1080, 1080);
+            gridPanel.setBounds(0, 0, 1080, 1336);
             gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             gridPanel.setBackground(Color.gray);
 
-            TownInfoBarPanel infoBarPanel = new TownInfoBarPanel();
-            infoBarPanel.setBounds(1080, 0, 256, 1080);
-            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-            infoBarPanel.setBackground(Color.white);
-
             gameWindow.add(gridPanel);
-            gameWindow.add(infoBarPanel);
+            gameWindow.addMouseListener(new TownMouseHandler());
+            gameWindow.addMouseMotionListener(new TownMouseHandler());
             
             //let user see the window
             gameWindow.setVisible(true);
             
 
             Town.this.displaySide("Town");
+            super.start();
 
              }//end of method
 
@@ -364,52 +355,32 @@ public class Town extends Player {
                     }
                 }
 
-            }
-        }
-
-        /**
-         * [TownInfoBarPanel.java]
-         * A {@code InfoBarPanel} that displays SCP side specific information
-         * @author Damon Ma, Edward Yang, Vivian Dai
-         * @version 1.0 on January 15, 2021
-         */
-        private class TownInfoBarPanel extends InfoBarPanel{
-            /**
-             * Constructor for the {@code InfoBarPanel}
-             */
-            private TownInfoBarPanel(){
-                setFocusable(true);
-                requestFocusInWindow();
-            }
-
-            /**
-             * @param g the {@code Graphics} to draw on
-             */
-            public void paintComponent(Graphics g){
-                super.paintComponent(g);
-                this.setBackground(Color.WHITE);
+                //draw infobar
+                g.setColor(Color.WHITE);
+                g.fillRect(GRID_SIZE_PIXEL, 0, 500, GRID_SIZE_PIXEL);
 
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 
-                g.drawString("Username: " + Town.this.getUsername(), 10, 125);
-                g.drawString("Opponent: " + Town.this.getOpponent(), 10, 150);
+                g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_PIXEL, 125);
+                g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_PIXEL, 150);
 
-                g.drawString("DuberCoin: " + Town.this.getMoney(), 10, 325);
+                g.drawString("DuberCoin: " + Town.this.getMoney(), 10 + GRID_SIZE_PIXEL, 325);
 
-                g.drawString("Humans: " + Town.this.getHumanMap().size(), 10, 425);
-                g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10, 450);
+                g.drawString("Humans: " + Town.this.getHumanMap().size(), 10 + GRID_SIZE_PIXEL, 425);
+                g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10 + GRID_SIZE_PIXEL, 450);
                 
 
                 g.setColor(Color.RED);
-                g.drawRect(0,475, 500, 50);
+                g.drawRect(0+ GRID_SIZE_PIXEL, 475, 500, 50);
                 g.setColor(Color.GREEN);
                 if(Town.this.getSCPs().size() > 0){
     
-                    g.drawRect(0, 475, (Town.this.getHumanMap().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
+                    g.drawRect(0 + GRID_SIZE_PIXEL, 475, (Town.this.getHumanMap().size()/(Town.this.getHumanMap().size() + Town.this.getSCPs().size()))*500,50);
                 }else{
-                    g.drawRect(0,475,500, 50);
+                    g.drawRect(0+ GRID_SIZE_PIXEL, 475, 500, 50);
                 }
+
             }
         }
 
@@ -425,23 +396,6 @@ public class Town extends Player {
              * @param MouseEvent The action performed by the mouse.
              */
             public void mousePressed(MouseEvent e){
-                int mouseX = e.getX();
-                int mouseY = e.getY();
-                if((mouseX <= GridPanel.GRID_SIZE_PIXEL) && (mouseY <= GridPanel.GRID_SIZE_PIXEL)){
-                    //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
-                    int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
-                    int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
-                    if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
-                        Building clickedBuilding = findBuilding(buildingX, buildingY);
-                        if(clickedBuilding != null){
-                            //TODO: display options for a actual building
-                        }else{
-                            //TODO: display options to build building
-                        }
-                    }
-                }else{
-                    //clicking the info bar, not sure if we'll make this do anything
-                }
             }
 
             /**
@@ -475,6 +429,23 @@ public class Town extends Player {
              * @param MouseEvent The action performed by the mouse.
              */
             public void mouseClicked(MouseEvent e){
+                int mouseX = e.getX();
+                int mouseY = e.getY();
+                if((mouseX <= GridPanel.GRID_SIZE_PIXEL) && (mouseY <= GridPanel.GRID_SIZE_PIXEL)){
+                    //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
+                    int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
+                    int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
+                    if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
+                        Building clickedBuilding = findBuilding(buildingX, buildingY);
+                        if(clickedBuilding != null){
+                            //TODO: display options for a actual building
+                        }else{
+                            //TODO: display options to build building
+                        }
+                    }
+                }else{
+                    //clicking the info bar, not sure if we'll make this do anything
+                }
             }
 
             /**

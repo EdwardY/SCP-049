@@ -91,33 +91,6 @@ public abstract class GameWindow{
         public void paintComponent(Graphics g){
             super.paintComponent(g);
         }
-
-    }
-
-    /**
-     * [InfoBarPanel.java]
-     * Custom {@code JPanel} class to be able to repaint things
-     * @author Damon Ma, Edward Yang, Vivian Dai
-     * @version 1.0 on January 15, 2021
-     */
-    public abstract class InfoBarPanel extends JPanel{
-
-        /**
-         * Constructor for the {@code DuberPanel}
-         */
-        public InfoBarPanel(){
-            setFocusable(true);
-            requestFocusInWindow();
-        }
-
-        /**
-         * Repaints the panel
-         * @param g the {@code Graphics} to draw on
-         */
-        public void paintComponent(Graphics g){
-            super.paintComponent(g);
-            //TODO: draw in everything else :'D
-        }
     }
 
     /**

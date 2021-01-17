@@ -40,8 +40,6 @@ public class SCP extends Player{
     private int hume;
     /**The game window that the player will use to play the game. */
     private SCPGameWindow gameWindow;
-    /** The thing that keeps track of all mouse events during the game */
-    private SCPGameWindow.SCPMouseHandler mouseHandler;
     /**An ArrayList of enemy humans that the SCP must infect or destroy. */
     private ArrayList<Human> humanList;
 
@@ -72,7 +70,6 @@ public class SCP extends Player{
      */
     public void start(){
         this.gameWindow = new SCPGameWindow();
-        this.mouseHandler = this.gameWindow.new SCPMouseHandler();
     }
 
 
@@ -213,37 +210,24 @@ public class SCP extends Player{
          */
         public SCPGameWindow(){
             JFrame gameWindow = this.getWindow();
-            gameWindow.setLayout(new GridLayout(0, 2));
+            //gameWindow.setLayout(new GridLayout(0, 2));
 
             ScpGridPanel gridPanel = new ScpGridPanel();
-            gridPanel.setBounds(0, 0, 1080, 1080);
-            gridPanel.setPreferredSize(new Dimension(1080, 1080));
-            gridPanel.setMaximumSize(new Dimension(1080, 1080));
-            gridPanel.setMinimumSize(new Dimension(1080, 1080));
-            gridPanel.setLocation(0, 0);
+            gridPanel.setBounds(0, 0, 1336, 1080);
+
             gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             gridPanel.setBackground(Color.gray);
 
-            ScpInfoBarPanel infoBarPanel = new ScpInfoBarPanel();     
-            infoBarPanel.setBounds(1080, 0, 256, 1080);
-            infoBarPanel.setPreferredSize(new Dimension(256, 1080));
-            infoBarPanel.setMaximumSize(new Dimension(256, 1080));
-            infoBarPanel.setMinimumSize(new Dimension(256, 1080));
-            infoBarPanel.setLocation(1080, 0);
-            infoBarPanel.setBorder(BorderFactory.createLineBorder(Color.black));
-            infoBarPanel.setBackground(Color.white);
+            gameWindow.add(gridPanel);
+            gameWindow.addMouseListener(new SCPMouseHandler());
+            gameWindow.addMouseMotionListener(new SCPMouseHandler());
 
-            gameWindow.addMouseListener(mouseHandler);
-            gameWindow.addMouseMotionListener(mouseHandler);
-            gameWindow.add(gridPanel, BorderLayout.EAST);
-            gameWindow.add(infoBarPanel, BorderLayout.WEST);
-
-            gameWindow.doLayout();
             //let user see the window
             gameWindow.setVisible(true);
 
 
             SCP.this.displaySide("SCP");
+            super.start();
         }// end of window
 
         /**
@@ -312,84 +296,48 @@ public class SCP extends Player{
                     }
                 }
 
-
-            }//end of method
-
-            
-
-        }
-
-        /**
-         * [ScpInfoBarPanel.java]
-         * A {@code InfoBarPanel} that displays SCP side specific information
-         * @author Damon Ma, Edward Yang, Vivian Dai
-         * @version 1.0 on January 15, 2021
-         */
-        private class ScpInfoBarPanel extends InfoBarPanel{
-            /**
-             * Constructor for the {@code InfoBarPanel}
-             */
-            private ScpInfoBarPanel(){
-                setFocusable(true);
-                requestFocusInWindow();
-            }
-
-            /**
-             * @param g the {@code Graphics} to draw on
-             */
-            public void paintComponent(Graphics g){
-                super.paintComponent(g);
-                //TODO: Set the backgrounds for the other JPanels on both SCP and Town side too
-                this.setBackground(Color.WHITE);
+                //draw infobar
+                g.setColor(Color.WHITE);
+                g.fillRect(GRID_SIZE_PIXEL, 0, 500, GRID_SIZE_PIXEL);
 
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 
-                g.drawString("Username: " + SCP.this.getUsername(), 10, 125);
-                g.drawString("Opponent: " + SCP.this.getOpponent(), 10, 150);
+                g.drawString("Username: " + SCP.this.getUsername(), 10 + GRID_SIZE_PIXEL, 125);
+                g.drawString("Opponent: " + SCP.this.getOpponent(), 10 + GRID_SIZE_PIXEL, 150);
 
-                g.drawString("Hume points: " + SCP.this.getHume(), 10, 325);
+                g.drawString("Hume points: " + SCP.this.getHume(), 10 + GRID_SIZE_PIXEL, 325);
 
-                g.drawString("Humans: " + SCP.this.getHumans().size(), 10, 425);
-                g.drawString("SCP-049-2s: " + SCP.this.getSCPs().size(), 10, 450);
+                g.drawString("Humans: " + SCP.this.getHumans().size(), 10 + GRID_SIZE_PIXEL, 425);
+                g.drawString("SCP-049-2s: " + SCP.this.getSCPs().size(), 10 + GRID_SIZE_PIXEL, 450);
                 
 
                 g.setColor(Color.RED);
-                g.drawRect(0,475, 500, 50);
+                g.drawRect(0 + GRID_SIZE_PIXEL, 475, 500, 50);
                 g.setColor(Color.GREEN);
                 if(SCP.this.getSCPs().size() > 0){
-                    g.drawRect(0, 475, (SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()))*500,50);
+                    g.drawRect(0 + GRID_SIZE_PIXEL, 475, (SCP.this.getHumans().size()/(SCP.this.getHumans().size() + SCP.this.getSCPs().size()))*500,50);
                 }else{
-                    g.drawRect(0,475,500, 50);
+                    g.drawRect(0 + GRID_SIZE_PIXEL,475,500, 50);
                 }
-            }
-        }
+            }//end of method
 
-        /**
-         * [SCPMouseHandler.java]
-         * Inner class for mouse input.
-         * @author Damon Ma, Edward Yang, Vivian Dai
-         * @version 1.0 on January 16, 2021
-         */
-        public class SCPMouseHandler extends DuberMouseHandler{
+        }
+        
+        private class SCPMouseHandler extends DuberMouseHandler{
             /**
              * When the mouse's click button is pressed.
              * @param MouseEvent The action performed by the mouse.
              */
+            @Override
             public void mousePressed(MouseEvent e){
-                if((e.getX() <= GridPanel.GRID_SIZE_PIXEL) && (e.getY() <= GridPanel.GRID_SIZE_PIXEL)){
-                    //set the x and y of event location to the location mouse was pressed
-                    x = e.getX();
-                    y = e.getY();
-                }else{
-                    //clicking the info bar, not sure if we'll make this do anything
-                }
             }
 
             /**
              * When the mouse's click button is released.
              * @param MouseEvent The action performed by the mouse.
              */
+            @Override
             public void mouseReleased(MouseEvent e){
             }
 
@@ -397,9 +345,10 @@ public class SCP extends Player{
              * When the mouse enters a component.
              * @param MouseEvent The action performed by the mouse.
              */
+            @Override
             public void mouseEntered(MouseEvent e){
                 if((this.getMouseX() <= 100) && (this.getMouseX() >= 0) && (this.getMouseY() <= 100) && (this.getMouseY() >= 0)){
-                    System.out.println("your button works.");
+                    //System.out.println("your button works.");
                 }
             }
 
@@ -416,7 +365,15 @@ public class SCP extends Player{
              * When the mouse's button is pressed and released.
              * @param MouseEvent The action performed by the mouse.
              */
+            @Override
             public void mouseClicked(MouseEvent e){
+                if((e.getX() <= GridPanel.GRID_SIZE_PIXEL) && (e.getY() <= GridPanel.GRID_SIZE_PIXEL)){
+                    //set the x and y of event location to the location mouse was pressed
+                    x = e.getX();
+                    y = e.getY();
+                }else{
+                    //clicking the info bar, not sure if we'll make this do anything
+                }
             }
 
             /**
@@ -436,8 +393,9 @@ public class SCP extends Player{
                 super.mouseDragged(e);
                 //other things
             }
-
         }
+
+        
 
     }//end of inner class
 

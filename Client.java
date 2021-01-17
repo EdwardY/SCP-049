@@ -253,22 +253,22 @@ public class Client {
                                 }else if (Client.this.getPlayer() instanceof Town){                                
                                     HashMap<Integer, Human> humanMap = new HashMap<>();
                                     for(int i = 0; i < objectNum; i++){
+                                        int key = Integer.parseInt(input.readLine());
                                         objectInfo = input.readLine();
                                         objectValues = objectInfo.split(" ");
-                                        int key = Integer.parseInt(objectValues[0]);
-                                        String humanType = objectValues[1];
+                                        String humanType = objectValues[0];
                                         if(humanType.equals("Cadet")){
-                                            humanMap.put(key, new Cadet(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])));
+                                            humanMap.put(key, new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
                                         }else if(humanType.equals("Citizen")){
-                                            humanMap.put(key, new Citizen(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])));
+                                            humanMap.put(key, new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
                                         }else if(humanType.equals("Doctor")){
-                                            humanMap.put(key, new Doctor(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[5]) ));
+                                            humanMap.put(key, new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]) ));
                                         }else if(humanType.equals("Researcher")){
-                                            humanMap.put(key, new Researcher(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])));
+                                            humanMap.put(key, new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
                                         }else if(humanType.equals("Soldier")){
-                                            humanMap.put(key, new Soldier(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]), Integer.parseInt(objectValues[7]) ));
+                                            humanMap.put(key, new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]) ));
                                         }else if(humanType.equals("Spy")){
-                                            humanMap.put(key, new Spy(Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Double.parseDouble(objectValues[6]), Double.parseDouble(objectValues[7])));
+                                            humanMap.put(key, new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
                                         }
                                         ((Town)Client.this.getPlayer()).updateGameObjects(humanMap, buildingList, eventList, scpList); //call method to update the game objects
 

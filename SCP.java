@@ -38,6 +38,8 @@ public class SCP extends Player{
     private int hume;
     /**The game window that the player will use to play the game. */
     private SCPGameWindow gameWindow;
+    /** The thing that keeps track of all mouse events during the game */
+    private SCPGameWindow.SCPMouseHandler mouseHandler;
 
 
 
@@ -59,6 +61,7 @@ public class SCP extends Player{
      */
     public void start(){
         this.gameWindow = new SCPGameWindow();
+        this.mouseHandler = this.gameWindow.new SCPMouseHandler();
     }
 
 

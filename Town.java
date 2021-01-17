@@ -33,6 +33,11 @@ import java.awt.Font;
 
 
 public class Town extends Player {
+    /**The game window that the player will use to play the game. */
+    private TownGameWindow gameWindow;
+    /** The thing that will keep track of all mouse events during the game */
+    private TownGameWindow.TownMouseHandler mouseHandler;
+
     /**An integer for storing the money the player has */
     private int money;
     /**an integer for storing the food that the player has */
@@ -59,9 +64,8 @@ public class Town extends Player {
      * Starts the town version of the game.
      */
     public void start(){
-        System.out.println("Starting town game...");
-        //TODO: nothing is actually here yet.
-
+        this.gameWindow = new TownGameWindow();
+        this.mouseHandler = this.gameWindow.new TownMouseHandler();
     }
 
     /**
@@ -93,7 +97,7 @@ public class Town extends Player {
      * Ends the current turn in the game.
      */
     public void startTurn(){
-        this.gameWindow = new TownGameWindow();
+        //TODO: do turn stuff
     }
 
     //TODO: method for client-game transactions
@@ -239,12 +243,12 @@ public class Town extends Player {
     /**
      * An inner class that will run the main game window that the user will use to play the game.
      */
-    public class TowngameWindow extends GameWindow{
+    public class TownGameWindow extends GameWindow{
 
         /**
          * Method runs the town version of the game.
          */
-        public TowngameWindow(){
+        public TownGameWindow(){
             //get the JPanels and JFrame of the game window from parent class
             JFrame gameWindow = this.getWindow();
 

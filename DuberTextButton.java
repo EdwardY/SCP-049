@@ -33,8 +33,19 @@ class DuberTextButton extends DuberButton{
      * @param g the {@code Graphics} to draw on
      */
     public void draw(Graphics g){
-        g.setFont(new Font("Courier", Font.BOLD, 18));
+        g.setColor(Color.WHITE);
+        g.fillRect(super.boundaries.x, super.boundaries.y, super.boundaries.width, super.boundaries.height);
         g.setColor(Color.BLACK);
+        g.drawRect(super.boundaries.x, super.boundaries.y, super.boundaries.width, super.boundaries.height);
+        g.setFont(new Font("Courier", Font.BOLD, 18));
         g.drawString(text, x, y);
+    }
+
+    /**
+     * Gets the text
+     * @return text, the String for the text this button contains
+     */
+    public String getText(){
+        return this.text;
     }
 }

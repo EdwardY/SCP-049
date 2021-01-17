@@ -8,7 +8,7 @@ import java.awt.Rectangle;
  */
 abstract class DuberButton implements Drawable{
     /** boundaries of the {@code DuberButton} */
-    private Rectangle boundaries;
+    Rectangle boundaries;
 
     /**
      * Constructor for the {@code DuberButton}

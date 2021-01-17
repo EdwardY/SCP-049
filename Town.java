@@ -51,6 +51,7 @@ public class Town extends Player {
         super(username, playerClient, opponent);
         this.money = money;
         this.food = food; 
+        humanMap = new HashMap<Integer, Human>();
     }
 
 
@@ -220,7 +221,21 @@ public class Town extends Player {
 
     //end of setters
 
-
+    /**
+     * Looks for if a building with the coordinates of (x, y) exist
+     * @param x the x coordinate of the building
+     * @param y the y coordinate of the building
+     * @return null if no such building exists, otherwise, the building in the (x, y) position
+     */
+    private Building findBuilding(int x, int y){
+        Building buildingToReturn = null;
+        for(int i = 0;i < this.getBuildings().size();i++){
+            if((this.getBuildings().get(i).getX() == x) && (this.getBuildings().get(i).getY() == y)){
+                buildingToReturn = this.getBuildings().get(i);
+            }
+        }
+        return buildingToReturn;
+    }
 
     /**
      * An inner class that will run the main game window that the user will use to play the game.
@@ -384,8 +399,13 @@ public class Town extends Player {
                     //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
                     int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
                     int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
-                    if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){
-                        //TODO: display building/upgrade options here somewhere idk
+                    if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
+                        Building clickedBuilding = findBuilding(buildingX, buildingY);
+                        if(clickedBuilding != null){
+                            //TODO: display options for a actual building
+                        }else{
+                            //TODO: display options to build building
+                        }
                     }
                 }else{
                     //clicking the info bar, not sure if we'll make this do anything

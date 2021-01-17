@@ -64,17 +64,17 @@ abstract class Player {
      * @param side The side that the player will be playing as
      */
     public void displaySide(String side){
-        String welcomeMessage = "Welcome player " + this.username + "! You will be playing as the " + side + "against " + this.opponent + "! Your objective is to";
+        String welcomeMessage = "Welcome player " + this.username + "! You will be playing as the " + side + " against " + this.opponent + "! Your objective is to";
         //TODO: PLaceholder instructions, may be subject to change at the end of the game
         if (side.equals("Town")){
-            welcomeMessage += "survive the SCP invasion for 10 turns!";
+            welcomeMessage += " survive the SCP invasion for 10 turns!";
         }else if (side.equals("SCP")){
-            welcomeMessage += "destroy the town in 10 turns!";
+            welcomeMessage += " destroy the town in 10 turns!";
         }else{ //TODO: This block of the if statement is temporary (for testing)
             System.out.println("An error has occured");
         }//end of if statement block
 
-        welcomeMessage += "Good luck, and may the best player win...";
+        welcomeMessage += " Good luck, and may the best player win...";
 
 
         new WelcomeWindow(welcomeMessage).run();
@@ -212,7 +212,8 @@ abstract class Player {
         public void run(){
             this.window = new JFrame("Now entering Code-049!");
             this.mainPanel = new JPanel();
-            this.welcomeBox = new JTextArea(welcomeMessage);
+            this.welcomeBox = new JTextArea();
+
 
             //set the window
             this.window.setSize(500, 500);
@@ -224,6 +225,8 @@ abstract class Player {
 
             //set the text box
             this.welcomeBox.setBounds(0,0,500,500);
+            this.welcomeBox.setLineWrap(true);
+            this.welcomeBox.setText(this.welcomeMessage);
             this.welcomeBox.setEditable(false);
             this.mainPanel.add(this.welcomeBox);
             

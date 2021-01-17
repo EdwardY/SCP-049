@@ -62,6 +62,7 @@ class Server {
      * Sends a message to both users to start the game
      */
     private void startGame(){
+        while((this.scp.getUsername() == null) || (this.town.getUsername() == null)){}
         this.gameThread = new Thread(new GameHandler());
         this.town.sendMessage("<s>");
         this.town.sendMessage("t");
@@ -72,6 +73,7 @@ class Server {
         this.scp.sendMessage("s");
         this.scp.sendMessage(this.town.getUsername());
         this.scp.sendMessage("" + game.getHume());
+        System.out.println(this.town.getUsername() + " " + this.scp.getUsername());
     }
     /**
      * <p>
@@ -114,16 +116,18 @@ class Server {
                     this.scp = new ClientHandler(client);
                     this.scpThread = new Thread(this.scp);
                     this.scpThread.start();
-                    startGame();
+                    this.scp.sendMessage("<w>");
                     System.out.println("SCP");
+                    startGame();
                 //if town is not taken
-                }else{
+                }else if(this.town == null){
                     //assigns town
                     this.town = new ClientHandler(client);
                     this.townThread = new Thread(this.scp);
                     this.townThread.start();
-                    startGame();
+                    this.town.sendMessage("<w>");
                     System.out.println("Town");
+                    startGame();
                 }
             }
         }catch(Exception e){ 

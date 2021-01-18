@@ -69,6 +69,10 @@ class Game {
         this.foodChange = 0;
         this.humeChange = 0;
         this.casualties = 0;
+
+        this.buildings.add(new Residency(Residency.INITIAL_PRICE, Residency.INITIAL_HEALTH, Residency.INITIAL_HEALTH, 30, 30, Residency.INITIAL_MAX_CAP));
+        this.buildings.add(new FoodBuilding(FoodBuilding.INITIAL_PRICE, FoodBuilding.INITIAL_HEALTH, FoodBuilding.INITIAL_HEALTH, 188, 30));
+        this.buildings.add(new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, 346, 30));
     }
 
     /**

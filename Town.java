@@ -301,7 +301,7 @@ public class Town extends Player {
         super.sendMessage("<b>");
         super.sendMessage(type);
         super.sendMessage(x + " " + y);
-        
+
         //set last request
         this.getPlayerClient().setLastRequest("<b> " + type + " " + x + " " + y);
 
@@ -470,7 +470,6 @@ public class Town extends Player {
                 g.setColor(Color.BLACK);
 
                 g.drawString("Time left: " + Town.this.getTimer().getTime(), 10 + GRID_SIZE_WIDTH, 20);
-                System.out.println(Town.this.getTimer().getTime());
                 g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
                 g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
 
@@ -551,8 +550,8 @@ public class Town extends Player {
                 int buildingY;
                 if((mouseX <= GridPanel.GRID_SIZE_WIDTH) && (mouseY <= GridPanel.GRID_SIZE_LENGTH)){
                     //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
-                    buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
-                    buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
+                    buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE) + GameWindow.GridPanel.ROAD_SIZE;
+                    buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE) + GameWindow.GridPanel.ROAD_SIZE;
                     if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
                         Building clickedBuilding = findBuilding(buildingX, buildingY);
                         if(clickedBuilding != null){

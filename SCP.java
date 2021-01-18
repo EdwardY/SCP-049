@@ -212,6 +212,36 @@ public class SCP extends Player{
     //start of getters
 
     /**
+     * Gets the price of an event given its type and level.
+     * @param eventType The type of event.
+     * @param level The level of the event.
+     * @return The price of the event.
+     */
+    public int getPrice(String eventType, int level){
+        int cost;
+
+        if(eventType.equals("Riot")){
+            cost = Riot.getCostByLevel(level);
+        }else if(eventType.equals("Mutate")){
+            cost = Mutate.getCostByLevel(level);
+        }else if(eventType.equals("WarpReality")){
+            cost = WarpReality.getCostByLevel(level);
+        }else if(eventType.equals("Earthquake")){
+            cost = Earthquake.getCostByLevel(level);
+        }else if (eventType.equals("Fire")){
+            cost = Fire.getCostByLevel(level);
+        }else if (eventType.equals("Thunderstorm")){
+            cost = Thunderstorm.getCostByLevel(level);
+        }else if (eventType.equals("Tornado")){
+            cost = Tornado.getCostByLevel(level);
+        }else if (eventType.equals("Infect")){
+            cost = Infect.getCostByLevel(level);
+        }
+
+        return cost;
+    }//end of method
+
+    /**
      * Gets the player's game window.
      * @return The player's game window.
      */

@@ -260,11 +260,19 @@ public class Town extends Player {
      * @param y the y coordiante to build the building
      */
     public void requestBuilding(String type, int x, int y){
-
+        //send message
         super.sendMessage("<b>");
         super.sendMessage(type);
         super.sendMessage(x + " " + y);
+        
+        //set last request
         this.getPlayerClient().setLastRequest("<b> " + type + " " + x + " " + y);
+
+        //deactivate the buttons
+        this.gameWindow.buildButton.deactivate();
+        for(int i = 0;i < this.gameWindow.buildingTypesButtons.length;i++){
+            this.gameWindow.buildingTypesButtons[i].deactivate();
+        }
     }
 
     /**
@@ -273,10 +281,15 @@ public class Town extends Player {
      * @param y the y coordiante of the requested upgrade 
      */
     public void requestUpgrade(int x, int y){
-
+        //send message
         super.sendMessage("<u>");
         sendMessage(x + " " + y);
+
+        //set last request
         this.getPlayerClient().setLastRequest("<u>> " + x + " " + y);
+
+        //deactivate the buttons
+        this.gameWindow.upgradeButton.deactivate();
     }
 
     //end of setters

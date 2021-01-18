@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 
 
 public class Citizen extends Human{
+    /**The price to create a citizen. */
+    static final int CITIZEN_PRICE = 5;
     
     /**
      * Constructor to make a new citizen object.

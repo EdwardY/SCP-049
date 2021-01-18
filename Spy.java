@@ -12,6 +12,8 @@ public class Spy extends Cadet{
     private double successRate;
     /**The chance of the spy being caught by the enemy */
     private double sus;
+    /**The price of creating a spy */
+    static final int SPY_PRICE = 100;
 
     /**
      * Constructor to create a new spy.

@@ -13,7 +13,8 @@ import java.awt.Toolkit;
 
 
 public class Cadet extends Human{
-
+    /**The price to produce a cadet. */
+    static final int CADET_PRICE = 10;
 
     /**
      * Constructor for a new cadet object.

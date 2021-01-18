@@ -11,6 +11,8 @@ public class Soldier extends Cadet implements Troop{
     static final int RANGE = 20;
     /**The amount of damage the soldier will do to its target. */
     private int attackDamage;
+    /**The base price of a soldier. */
+    static final int BASE_SOLDIER_PRICE = 20;
 
 
     /**

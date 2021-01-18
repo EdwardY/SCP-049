@@ -1,28 +1,18 @@
+
+//graphics imports
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+
+//data structures 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//jframe
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
 import javax.swing.BorderFactory;
-
-import java.awt.Color;
-import java.awt.Rectangle;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-
-import java.awt.Graphics;
-import java.awt.Frame;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.Font;
 
 /**
  * [Town.java]

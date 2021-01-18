@@ -5,7 +5,6 @@
  * @version 0.1 December 2020
  */
 
-import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.lang.Math;

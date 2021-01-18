@@ -5,8 +5,6 @@
  * @Version 0.1 December 24th 2020
  */
 
-import java.awt.Image;
-
 abstract class Military extends Building{
     
     private static boolean[] unlockedTroops;

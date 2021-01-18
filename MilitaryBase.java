@@ -5,7 +5,6 @@
  * @version 0.1 Decemeber 26th 2020
  */
 
-import java.awt.Image;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.awt.Color;

@@ -6,10 +6,6 @@
  */
 
 
-import java.awt.Graphics;
-import java.awt.Image;
-
-
 abstract class ProductionFacility extends Building{
     
     private int resource;

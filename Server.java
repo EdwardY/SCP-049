@@ -1,7 +1,3 @@
-//graphics imports
-import java.awt.Image;
-import java.awt.Toolkit;
-
 //io imports
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

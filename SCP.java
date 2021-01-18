@@ -76,21 +76,22 @@ public class SCP extends Player{
     }
 
 
+    /**
+     * Requests a location-based event to the server.
+     * @param type The type of event.
+     * @param level The level of the event.
+     * @param x The x-value of the event's coordinates.
+     * @param y The y-value of the event's coordinates.
+     */
     private void requestEvent(String type, int level, int x, int y){
-        String message = "<e>\n"; //identifier prefix for requesting an event
-        if(type.equals("Earthquake")){
-            message += "Earthquake";
-        }else if(type.equals("Fire")){
-            message += "Fire";
-        }else if(type.equals("Thunderstorm")){
-            message += "Thunderstorm";
-        }else if(type.equals("Tornado")){
-            message += "Tornado";
-        }else if (type.equals("Infect")){
-            message += "infect";
-        }
-        //TODO: Send rest of message.
+        sendMessage("<e>\ntype\nlevel\nx\ny"); 
     }
+
+
+    private void requestEvent(String type, int level){
+        sendMessage("<e>\ntype\nlevel");
+    }
+    
 //TODO: Finish other requestEvent method
     /**
      * starts the game as the SCP side.

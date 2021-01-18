@@ -198,6 +198,31 @@ public class Town extends Player {
     }
 
     //start of getters
+
+    /**
+     * Gets the price of an NPC.
+     * @param type The type of NPC.
+     */
+    public int getPrice(String type){
+        if(type.equals("Cadet")){
+            return Cadet.CADET_PRICE;
+        }else if(type.equals("Citizen")){
+            return Citizen.CITIZEN_PRICE;
+        }else if(type.equals("Doctor")){
+            return Doctor.DOCTOR_PRICE;
+        }else if(type.equals("Researcher")){
+            return Researcher.RESEARCHER_PRICE;
+        }else if(type.equals("Soldier")){
+            //TODO: May need to do more stuff to calculate armor and weapon prices.
+            return Soldier.BASE_SOLDIER_PRICE;
+        }else if(type.equals("Spy")){
+            return Spy.SPY_PRICE;
+        }else{ //nothing proper was given so just send -1
+            return -1;
+        }
+    }
+
+
     /** 
      * Gets the amount of money the player has.
      * @return The player's money.

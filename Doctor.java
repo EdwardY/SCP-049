@@ -13,7 +13,7 @@ public class Doctor extends Human{
     /**The amount of health a doctor can replenish to the tartget per turn. */
     private int healingAmount;
     /**The cost to make a doctor. */
-    private int DOCTOR_PRICE = 10;
+    static final int DOCTOR_PRICE = 10;
 
       /**
      * Constructor to make a new doctor object. 

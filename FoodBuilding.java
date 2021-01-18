@@ -1,3 +1,7 @@
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.Color;
+
 /**
  * [FoodBuilding.java]
  * A building extending ProductionFacilities that can be used to produce money
@@ -5,9 +9,6 @@
  * @version 0.1 December 26th 2020
  */
 
-import java.awt.Graphics;
-import java.awt.Toolkit;
-import java.awt.Color;
 
 class FoodBuilding extends ProductionFacility{
     

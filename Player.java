@@ -1,3 +1,6 @@
+//graphics imports
+import java.awt.Color;
+
 //swing imports
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -5,8 +8,6 @@ import javax.swing.JTextArea;
 
 //util imports
 import java.util.ArrayList;
-
-import java.awt.Color;
 
 /**
  * [Player.java]

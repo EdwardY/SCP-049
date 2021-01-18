@@ -1,4 +1,9 @@
-/**
+
+ //imports 
+ import java.awt.Image;
+ import java.awt.Graphics;
+ 
+ /**
  * Building.java
  * An abstract class, templating for the building that can be built
  * @author Edward Yang
@@ -6,9 +11,6 @@
  */
 
 
- //imports 
-import java.awt.Image;
-import java.awt.Graphics;
 
 
 abstract class Building implements Drawable, DestroyableAndRepairable {

@@ -105,6 +105,9 @@ public class SCP extends Player{
         //reset x and y
         eventX = -1;
         eventY = -1;
+
+        //reset displaying price
+        this.gameWindow.displayPrice = false;
     }
 
 
@@ -125,6 +128,9 @@ public class SCP extends Player{
             this.gameWindow.levels[i].deactivate();
         }
         this.gameWindow.startEventButton.deactivate();
+
+        //reset displaying price
+        this.gameWindow.displayPrice = false;
     }
 
     /**
@@ -304,6 +310,8 @@ public class SCP extends Player{
         private DuberTextButton[] levels;
         /** The button to start the event */
         private DuberTextButton startEventButton;
+        /** boolean for whether or not the price for the event should be displayed */
+        private boolean displayPrice;
 
         /**
          * Constructor that will run the SCP version of the game.
@@ -461,6 +469,16 @@ public class SCP extends Player{
                     levels[i].draw(g);
                 }
                 startEventButton.draw(g);
+
+                if(displayPrice){
+                    int price = getPrice(type, Integer.parseInt(level));
+                    if(price <= hume){
+                        g.setColor(Color.GREEN);
+                    }else{
+                        g.setColor(Color.RED);
+                    }
+                    g.drawString("Level " + level + " " + type + " costs " + price + " hume", GRID_SIZE_LENGTH + 360, 960);
+                }
             }//end of method
 
         }
@@ -537,6 +555,7 @@ public class SCP extends Player{
                         if(levels[i].inBounds(mouseX, mouseY)){
                             level = levels[i].getText();
                             startEventButton.activate();
+                            displayPrice = true;
                         }
                     }
                     if(startEventButton.inBounds(mouseX, mouseY)){

@@ -576,6 +576,7 @@ class Server {
                     }
                 }else{
                     if(curTime - lastTime >= ONE_MINUTE/2){
+                        lastTime = curTime;
                         game.resetTurnChanges();
                         lastTime = curTime;
                         sendTo(allUsers, "<ts>");

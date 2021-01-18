@@ -49,7 +49,7 @@ abstract class Player {
         this.scps = new ArrayList<SCP0492>();
 
         //create and start the turn-timer.
-        this.timer = new TurnTimer();
+        this.timer = new TurnTimer(60);
         Thread t = new Thread(this.timer);
         t.start();
     }
@@ -214,9 +214,9 @@ abstract class Player {
         /**
          * Constructor for the timer.
          */
-        public TurnTimer(){
+        public TurnTimer(int timeLeft){
             this.running = true;
-            this.timeLeft = 60;
+            this.timeLeft = timeLeft;
         }
 
         /**
@@ -226,7 +226,7 @@ abstract class Player {
             while(running){
                 try {
                     Thread.sleep(1000);
-                    this.timeLeft = this.timeLeft -1;
+                    this.timeLeft--;
                 } catch(InterruptedException ex) {
                     System.out.println("Timer error");
                 }
@@ -243,15 +243,15 @@ abstract class Player {
         /**
          * Resets the amount of time left
          */
-        public void resetTime(){
-            this.timeLeft = 60;
+        public void resetTime(int timeLeft){
+            this.timeLeft = timeLeft;
         }
 
         /**
-         * turns the timer on or off
+         * quits the timer
          */
-        public void toggleTimer(){
-            this.running = !this.running;
+        public void quitTimer(){
+            this.running = false;
         }
     }
 

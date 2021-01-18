@@ -142,11 +142,39 @@ public class Town extends Player {
      * @param x the x coordinate of the buildings
      * @param y the y coordinate of the buildings
      */
-    public void buildBuilding(){
+    public void buildBuilding(String buildingType, int x, int y){
 
         ArrayList<Building> buildings = this.getBuildings();
 
-        //TODO: decide on the cost of the buildings to initially build
+        //add each created building to the ArrayList containing the buildings
+        if(buildingType.equals("MilitaryBase")){
+
+            buildings.add(new MilitaryBase(1000, 100, 100, x, y));
+
+        }else if(buildingType.equals("ResearchLab")){
+
+            buildings.add(new ResearchLab(1000, 100, 100, x, y));
+        
+        }else if(buildingType.equals("Residency")){
+        
+            buildings.add(new Residency(1000, 100, 100,x, y, 100));
+
+        }else if(buildingType.equals("Hospital")){
+
+            buildings.add(new Hospital(1000, 100, 100,  x, y, 100));
+        
+        }else if(buildingType.equals("FoodBuilding")){
+
+            buildings.add(new FoodBuilding(1000, 100, 100,  x, y));
+        
+        }else if(buildingType.equals("Bank")){
+
+            buildings.add(new Bank(1000, 100, 100, x, y));
+            
+        }else{  
+
+            System.out.println("hey that's not the right building to build");
+        }
 
     }
 

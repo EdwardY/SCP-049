@@ -49,6 +49,7 @@ abstract class Player {
         //create and start the turn-timer.
         this.timer = new TurnTimer();
         Thread t = new Thread(this.timer);
+        t.start();
     }
 
     /**

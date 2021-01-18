@@ -84,15 +84,20 @@ public class SCP extends Player{
      * @param y The y-value of the event's coordinates.
      */
     private void requestEvent(String type, int level, int x, int y){
-        sendMessage("<e>\n" + type + "\n" + level + "\n" + x + "\n" +y); 
+        sendMessage("<e>");
+        sendMessage(type);
+        sendMessage("" +level);
+        sendMessage("" + x);
+        sendMessage("" + y); 
     }
 
 
     private void requestEvent(String type, int level){
-        sendMessage("<e>\n" + type + "\n" +level);
+        sendMessage("<e>");
+        sendMessage(type);
+        sendMessage("" + level);
     }
 
-//TODO: Finish other requestEvent method
     /**
      * starts the game as the SCP side.
      */

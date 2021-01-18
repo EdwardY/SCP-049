@@ -83,19 +83,44 @@ public class SCP extends Player{
      * @param x The x-value of the event's coordinates.
      * @param y The y-value of the event's coordinates.
      */
-    private void requestEvent(String type, int level, int x, int y){
+    private void requestEvent(String type, String level, int x, int y){
+        //request 
         sendMessage("<e>");
         sendMessage(type);
-        sendMessage("" +level);
-        sendMessage("" + x);
-        sendMessage("" + y); 
+        sendMessage(level);
+        sendMessage(x + " " + y);
+
+        //save last request
+        this.getPlayerClient().setLastRequest("<e> " + type + " " + level + " " + x + " " + y);
+
+        //deactivate buttons
+        for(int i = 0;i < this.gameWindow.aoeEventButtons.length;i++){
+            this.gameWindow.aoeEventButtons[i].deactivate();
+        }
+        for(int i = 0;i < this.gameWindow.levels.length;i++){
+            this.gameWindow.levels[i].deactivate();
+        }
+        this.gameWindow.startEventButton.deactivate();
     }
 
 
-    private void requestEvent(String type, int level){
+    private void requestEvent(String type, String level){
+        //request
         sendMessage("<e>");
         sendMessage(type);
-        sendMessage("" + level);
+        sendMessage(level);
+
+        //save request
+        this.getPlayerClient().setLastRequest("<e> " + type + " " + level);
+
+        //deactivate buttons
+        for(int i = 0;i < this.gameWindow.aoeEventButtons.length;i++){
+            this.gameWindow.aoeEventButtons[i].deactivate();
+        }
+        for(int i = 0;i < this.gameWindow.levels.length;i++){
+            this.gameWindow.levels[i].deactivate();
+        }
+        this.gameWindow.startEventButton.deactivate();
     }
 
     /**

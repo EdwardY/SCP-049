@@ -22,7 +22,7 @@ class Fire extends PhysicalEvent{
      */
     public Fire(int level, int x, int y){
         //TOOD: fire, adjust values later when known
-        super(level*2, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
+        super(level*2, level*10, level, new Rectangle(x - (level * Building.SIZE), y - (level * Building.SIZE), (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
     }
 
     /**
@@ -34,7 +34,7 @@ class Fire extends PhysicalEvent{
      */
     public Fire(int level, int timeLeft, int x, int y){
         //TOOD: fire, adjust values later when known
-        super(timeLeft, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
+        super(timeLeft, level*10, level, new Rectangle(x - (level * Building.SIZE), y - (level * Building.SIZE), (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
     }
     
     /**
@@ -43,7 +43,7 @@ class Fire extends PhysicalEvent{
      * @return the final cost
      */
     public static int getCostByLevel(int level){
-        return level*5;
+        return level*4;
     }
 
     /**

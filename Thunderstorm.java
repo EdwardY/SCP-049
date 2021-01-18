@@ -3,9 +3,6 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-//data structures useds
-import java.util.ArrayList;
-
 /**
  * [Thunderstorm.java]
  * {@code Thunderstorm} class, can hit {@code Buildings} with lightning
@@ -29,8 +26,7 @@ class Thunderstorm extends PhysicalEvent{
      * @param y the middle of the y of where the {@code Thunderstorm} will be
      */
     public Thunderstorm(int level, int x, int y){
-        //TODO: thunderstomrm, adjust things later
-        super(level*2, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
+        super(level, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
         this.strikesLeft = level;
         this.xStrikePos = x;
         this.yStrikePos = y;
@@ -46,7 +42,6 @@ class Thunderstorm extends PhysicalEvent{
      * @param y the middle of the y of where the {@code Thunderstorm} will be
      */
     public Thunderstorm(int level, int timeLeft, int x, int y){
-        //TODO: thunderstomrm, adjust things later
         super(timeLeft, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
         this.strikesLeft = level;
         this.xStrikePos = x;
@@ -59,7 +54,7 @@ class Thunderstorm extends PhysicalEvent{
      * @return the final cost
      */
     public static int getCostByLevel(int level){
-        return level*5;
+        return level*20;
     }
 
     /**

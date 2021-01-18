@@ -23,11 +23,8 @@ class DuberTextButton extends DuberButton{
     DuberTextButton(String text, Rectangle boundaries){
         super(boundaries);
         this.text = text;
-        //TODO: the x and y might be slightly scuffed because size of each character is not being considered
         this.x = boundaries.x + 18;
         this.y = boundaries.y + 18;
-        // this.x = (int)boundaries.getCenterX() - ((text.length()/(int)text.lines().count())/2);
-        // this.y = (int)boundaries.getCenterY() - ((int)text.lines().count())/2;
     }
 
     /**

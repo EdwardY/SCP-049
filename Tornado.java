@@ -25,8 +25,7 @@ class Tornado extends PhysicalEvent implements Moveable{
      * @param y the center y position which the {@code Tornado} starts at
      */
     public Tornado(int level, int x, int y){
-        //TODO: tornado adjut values later when known
-        super(level*2, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
+        super(level*2, level*15, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
         this.totalTime = level*2;
     }
 
@@ -38,7 +37,6 @@ class Tornado extends PhysicalEvent implements Moveable{
      * @param y the center y position which the {@code Tornado} starts at
      */
     public Tornado(int level, int timeLeft, int x, int y){
-        //TODO: tornado adjut values later when known
         super(timeLeft, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
         this.totalTime = level*2;
     }

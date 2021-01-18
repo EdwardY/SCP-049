@@ -23,7 +23,7 @@ class Riot extends WholeGameEvent{
      * @param timeLeft the time left for thhe {@code Riot}
      */
     public Riot(int level, int timeLeft){
-        super(timeLeft, level*3, level);
+        super(timeLeft, level*10, level);
     }
 
     /**
@@ -32,7 +32,7 @@ class Riot extends WholeGameEvent{
      * @return the final cost
      */
     public static int getCostByLevel(int level){
-        return level*5;
+        return level*2;
     }
 
     /**

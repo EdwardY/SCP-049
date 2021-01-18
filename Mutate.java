@@ -17,7 +17,7 @@ class Mutate extends WholeGameEvent{
      * @param level the level of the {@code Mutate}
      */
     public Mutate(int level){
-        super(1, 1, level);
+        super(1, 50, level);
     }
 
     /**
@@ -26,7 +26,7 @@ class Mutate extends WholeGameEvent{
      * @param timeLeft the time left for the {@code Mutate}
      */
     public Mutate(int level, int timeLeft){
-        super(timeLeft, 1, level);
+        super(timeLeft, 50, level);
     }
 
     /**
@@ -35,7 +35,7 @@ class Mutate extends WholeGameEvent{
      * @return the final cost
      */
     public static int getCostByLevel(int level){
-        return 5;
+        return 30;
     }
 
     /**

@@ -21,8 +21,7 @@ class Earthquake extends PhysicalEvent{
      * @param y the y center location of the {@code Earthquake}
      */
     public Earthquake(int level, int x, int y){
-        //TODO: earthquake, image, adjust rect size later 
-        super(1, level*10, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
+        super(1, level*200, level, new Rectangle(x - (level * Building.SIZE), y - (level * Building.SIZE), (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
     }
 
     /**
@@ -33,8 +32,7 @@ class Earthquake extends PhysicalEvent{
      * @param y the y center location of the {@code Earthquake}
      */
     public Earthquake(int level, int timeLeft, int x, int y){
-        //TODO: earthquake, image, adjust rect size later 
-        super(timeLeft, level*10, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
+        super(timeLeft, level*200, level, new Rectangle(x - (level * Building.SIZE), y - (level * Building.SIZE), (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
     }
 
     /**

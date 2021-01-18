@@ -202,6 +202,7 @@ public class Town extends Player {
     /**
      * Gets the price of an NPC.
      * @param type The type of NPC.
+     * @return The price of the NPC.
      */
     public int getPrice(String type){
         if(type.equals("Cadet")){
@@ -220,6 +221,17 @@ public class Town extends Player {
         }else{ //nothing proper was given so just send -1
             return -1;
         }
+    }
+
+    /**
+     * Gets the price of a building.
+     * @param type The type of the building
+     * @param level The level of the building
+     * @return The price of the building
+     */
+    public int getPrice(String type, int level){
+        //TODO: Building Prices/calculations here.
+        return 0;
     }
 
 

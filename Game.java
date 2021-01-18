@@ -35,8 +35,6 @@ class Game {
     private int moneyPerTurn;
     /** The increase in food each turn */
     private int foodPerTurn;
-    /** The amount of hume points that are earned each turn */
-    private int humePerTurn;
     /** The ID to assign to the next {@code Human} created */
     private int currentId;
     /**The changes in money per turn*/
@@ -63,7 +61,6 @@ class Game {
         this.turn = 1;
         this.moneyPerTurn = 0;
         this.foodPerTurn = 0;
-        this.humePerTurn = 0;
         this.currentId = 0;
         this.moneyChange = 0;
         this.foodChange = 0;
@@ -517,14 +514,6 @@ class Game {
      */
     public void changeFoodPerTurn(int change){
         this.foodPerTurn += change;
-    }
-
-    /**
-     * Changes the humePerTurn by change
-     * @param change the change in hume points per turn
-     */
-    public void changeHumePerTurn(int change){
-        this.humePerTurn += change;
     }
 
     /**

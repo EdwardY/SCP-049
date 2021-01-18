@@ -68,7 +68,7 @@ class Server {
         this.scp.sendMessage("s");
         this.scp.sendMessage(this.town.getUsername());
         this.scp.sendMessage("" + game.getHume());
-        System.out.println(this.town.getUsername() + " " + this.scp.getUsername());
+        this.gameThread.start();
     }
     /**
      * <p>

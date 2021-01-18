@@ -6,6 +6,8 @@ import javax.swing.JTextArea;
 //util imports
 import java.util.ArrayList;
 
+import java.awt.Color;
+
 /**
  * [Player.java]
  * Stores information about the player
@@ -290,10 +292,11 @@ abstract class Player {
 
             //set the main JPanel
             this.mainPanel.setBounds(0,0,500,500);
+            this.mainPanel.setBackground(Color.WHITE);
             this.window.add(this.mainPanel);
 
             //set the text box
-            this.welcomeBox.setBounds(0,0,500,500);
+            this.welcomeBox.setBounds(10,0,460,500);
             this.welcomeBox.setLineWrap(true);
             this.welcomeBox.setText(this.welcomeMessage);
             this.welcomeBox.setEditable(false);

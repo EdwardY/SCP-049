@@ -36,15 +36,6 @@ public class Town extends Player {
     /** The string for the type of building */
     private String type;
     
-    /** obj for reference of the classes during comparison */
-    Residency residency = new Residency(0,0,0,0,0,0); //TODO: find a better way to compare classes of object
-    MilitaryBase militaryBase = new MilitaryBase(0,0,0,0,0);
-    Hospital hospital = new Hospital(0,0,0,0,0,0);
-    ResearchLab researchLab = new ResearchLab(0,0,0,0,0);
-    Bank bank = new Bank(0,0,0,0,0);
-    FoodBuilding foodBuilding = new FoodBuilding(0,0,0,0,0);
-
-    
 
     /**
      * Constructor for the town side player's class
@@ -347,6 +338,18 @@ public class Town extends Player {
         private DuberTextButton buildButton;
         /** Button to upgrade */
         private DuberTextButton upgradeButton;
+        /** Buttons relating to residency */
+        private DuberTextButton[] residencyButtons;
+        /** Buttons relating to military base */
+        private DuberTextButton[] militaryBaseButtons;
+        /** Buttons relating to hospital */
+        private DuberTextButton[] hospitalButtons;
+        /** Buttons relating to the research lab */
+        private DuberTextButton[] researchLabButtons;
+        /** Buttons related to the food building */
+        private DuberTextButton[] foodBuildingButtons;
+        /** Buttons related to the bank */
+        private DuberTextButton[] bankButtons;
 
         /**
          * Method runs the town version of the game.
@@ -375,6 +378,7 @@ public class Town extends Player {
 
             this.upgradeButton = new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
             this.buildButton = new DuberTextButton("Build", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
+            //TODO: initialize the buttons for specific buildings
             
             
             //let user see the window
@@ -485,6 +489,24 @@ public class Town extends Player {
                 }
                 buildButton.draw(g);
                 upgradeButton.draw(g);
+                for(int i = 0;i < residencyButtons.length;i++){
+                    residencyButtons[i].draw(g);
+                }
+                for(int i = 0;i < militaryBaseButtons.length;i++){
+                    militaryBaseButtons[i].draw(g);
+                }
+                for(int i = 0;i < hospitalButtons.length;i++){
+                    hospitalButtons[i].draw(g);
+                }
+                for(int i = 0;i < researchLabButtons.length;i++){
+                    researchLabButtons[i].draw(g);
+                }
+                for(int i = 0;i < foodBuildingButtons.length;i++){
+                    foodBuildingButtons[i].draw(g);
+                }
+                for(int i = 0;i < bankButtons.length;i++){
+                    bankButtons[i].draw(g);
+                }
 
             }
         }
@@ -549,18 +571,30 @@ public class Town extends Player {
                             upgradeButton.activate();
                             //TODO: helpful reminder to display the upgrade price when activating the upgrade button
                             //TODO: open up windows for each building
-                            if(clickedBuilding.getClass().equals(residency.getClass())){
-
-                            }else if(clickedBuilding.getClass().equals(militaryBase.getClass())){
-                            
-                            }else if(clickedBuilding.getClass().equals(hospital.getClass())){
-                            
-                            }else if(clickedBuilding.getClass().equals(researchLab.getClass())){
-                            
-                            }else if(clickedBuilding.getClass().equals(foodBuilding.getClass())){
-                            
-                            }else if(clickedBuilding.getClass().equals(bank.getClass())){
-                            
+                            if(clickedBuilding instanceof Residency){
+                                for(int i = 0;i < residencyButtons.length;i++){
+                                    residencyButtons[i].activate();
+                                }
+                            }else if(clickedBuilding instanceof MilitaryBase){
+                                for(int i = 0;i < militaryBaseButtons.length;i++){
+                                    militaryBaseButtons[i].activate();
+                                }
+                            }else if(clickedBuilding instanceof Hospital){
+                                for(int i = 0;i < hospitalButtons.length;i++){
+                                    hospitalButtons[i].activate();
+                                }
+                            }else if(clickedBuilding instanceof ResearchLab){
+                                for(int i = 0;i < researchLabButtons.length;i++){
+                                    researchLabButtons[i].activate();
+                                }
+                            }else if(clickedBuilding instanceof FoodBuilding){
+                                for(int i = 0;i < foodBuildingButtons.length;i++){
+                                    foodBuildingButtons[i].activate();
+                                }
+                            }else if(clickedBuilding instanceof Bank){
+                                for(int i = 0;i < bankButtons.length;i++){
+                                    bankButtons[i].activate();
+                                }
                             }
                             
                         }else{
@@ -571,6 +605,7 @@ public class Town extends Player {
                         }
                     }
                 }else{
+                    //duber buttons on the info bar
                     for(int i = 0;i < buildingTypesButtons.length;i++){
                         if(buildingTypesButtons[i].inBounds(mouseX, mouseY)){
                             type = buildingTypesButtons[i].getText();
@@ -587,6 +622,37 @@ public class Town extends Player {
                         requestUpgrade(buildX,buildY);
                         
 
+                    }
+                    //TODO: honestly should probably make methods for this stuff
+                    for(int i = 0;i < residencyButtons.length;i++){
+                        if(residencyButtons[i].inBounds(mouseX, mouseY)){
+                            //TODO: fun
+                        }
+                    }
+                    for(int i = 0;i < militaryBaseButtons.length;i++){
+                        if(militaryBaseButtons[i].inBounds(mouseX, mouseY)){
+                            //TODO: fun
+                        }
+                    }
+                    for(int i = 0;i < hospitalButtons.length;i++){
+                        if(hospitalButtons[i].inBounds(mouseX, mouseY)){
+                            //TODO: fun
+                        }
+                    }
+                    for(int i = 0;i < researchLabButtons.length;i++){
+                        if(researchLabButtons[i].inBounds(mouseX, mouseY)){
+                            //TODO: fun
+                        }
+                    }
+                    for(int i = 0;i < foodBuildingButtons.length;i++){
+                        if(foodBuildingButtons[i].inBounds(mouseX, mouseY)){
+                            //TODO: fun
+                        }
+                    }
+                    for(int i = 0;i < bankButtons.length;i++){
+                        if(bankButtons[i].inBounds(mouseX, mouseY)){
+                            //TODO: fun
+                        }
                     }
                 }
             }

@@ -132,7 +132,9 @@ public class Client {
         private class MessageHandler implements Runnable{
             /** A string storing the last thing the client requested */
             public void run(){
+
                 while(running){
+                    
                     try{
                         String prefix;
                         if(input.ready()){

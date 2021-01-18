@@ -46,6 +46,15 @@ public class Town extends Player {
     /** The string for the type of building */
     private String type;
     
+    /** obj for reference of the classes during comparison */
+    Residency residency = new Residency(0,0,0,0,0,0); //TODO: find a better way to compare classes of object
+    MilitaryBase militaryBase = new MilitaryBase(0,0,0,0,0);
+    Hospital hospital = new Hospital(0,0,0,0,0,0);
+    ResearchLab researchLab = new ResearchLab(0,0,0,0,0);
+    Bank bank = new Bank(0,0,0,0,0);
+    FoodBuilding foodBuilding = new FoodBuilding(0,0,0,0,0);
+
+    
 
     /**
      * Constructor for the town side player's class
@@ -133,41 +142,11 @@ public class Town extends Player {
      * @param x the x coordinate of the buildings
      * @param y the y coordinate of the buildings
      */
-    public void buildBuilding(String buildingType, int x, int y){
+    public void buildBuilding(){
 
         ArrayList<Building> buildings = this.getBuildings();
 
         //TODO: decide on the cost of the buildings to initially build
-
-        //add each created building to the ArrayList containing the buildings
-        if(buildingType.equals("MilitaryBase")){
-
-            buildings.add(new MilitaryBase(1000, 100, 100, x, y));
-
-        }else if(buildingType.equals("ResearchLab")){
-
-            buildings.add(new ResearchLab(1000, 100, 100, x, y));
-        
-        }else if(buildingType.equals("Residency")){
-        
-            buildings.add(new Residency(1000, 100, 100,x, y, 100));
-
-        }else if(buildingType.equals("Hospital")){
-
-            buildings.add(new Hospital(1000, 100, 100,  x, y, 100));
-        
-        }else if(buildingType.equals("FoodBuilding")){
-
-            buildings.add(new FoodBuilding(1000, 100, 100,  x, y));
-        
-        }else if(buildingType.equals("Bank")){
-
-            buildings.add(new Bank(1000, 100, 100, x, y));
-            
-        }else{  
-
-            System.out.println("hey that's not the right building to build");
-        }
 
     }
 
@@ -244,6 +223,27 @@ public class Town extends Player {
      */
     public void setFood(int food){
         this.food = food;
+    }
+
+    /**
+     * Request to build a building at coordinates x y
+     * @param type The type of building to be built
+     * @param x the x coordinate to build the building
+     * @param y the y coordiante to build the building
+     */
+    public void requestBuilding(String type, int x, int y){
+
+        super.sendMessage("<b> " + type + " " + x + " " + y);
+    }
+
+    /**
+     * Request to upgrade a building at corodinate x,y
+     * @param x the x coordinate of the requested upgrade
+     * @param y the y coordiante of the requested upgrade 
+     */
+    public void requestUpgrade(int x, int y){
+
+        super.sendMessage("<u> " + x + " "+ y);
     }
 
     //end of setters
@@ -464,15 +464,32 @@ public class Town extends Player {
             public void mouseClicked(MouseEvent e){
                 int mouseX = e.getX();
                 int mouseY = e.getY();
+                int buildingX;
+                int buildingY;
                 if((mouseX <= GridPanel.GRID_SIZE_WIDTH) && (mouseY <= GridPanel.GRID_SIZE_LENGTH)){
                     //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
-                    int buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
-                    int buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
+                    buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
+                    buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE);
                     if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
                         Building clickedBuilding = findBuilding(buildingX, buildingY);
                         if(clickedBuilding != null){
                             System.out.println("upgrade");
                             upgradeButton.activate();
+                            //TODO: helpful reminder to display the upgrade price when activating the upgrade button
+                            //TODO: open up windows for each building
+                            if(clickedBuilding.getClass().equals(residency.getClass())){
+
+                            }else if(clickedBuilding.getClass().equals(militaryBase.getClass())){
+                            
+                            }else if(clickedBuilding.getClass().equals(hospital.getClass())){
+                            
+                            }else if(clickedBuilding.getClass().equals(researchLab.getClass())){
+                            
+                            }else if(clickedBuilding.getClass().equals(foodBuilding.getClass())){
+                            
+                            }else if(clickedBuilding.getClass().equals(bank.getClass())){
+                            
+                            }
                             
                         }else{
                             //activate any button that has to do with building things
@@ -489,9 +506,15 @@ public class Town extends Player {
                         }
                     }
                     if(buildButton.inBounds(mouseX, mouseY)){
-                        //TODO: send a build request
+                        
+                        requestBuilding(type, buildingX, buildingY);
+                        
+
                     }else if(upgradeButton.inBounds(mouseX, mouseY)){
-                        //TODO: send a upgrade request
+                        
+                        requestUpgrade(buildingX,buildingY);
+                        
+
                     }
                 }
             }

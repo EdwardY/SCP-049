@@ -68,7 +68,7 @@ abstract class Player {
         String welcomeMessage = "Welcome player " + this.username + "! You will be playing as the " + side + " against " + this.opponent + "! Your objective is to";
         //TODO: PLaceholder instructions, may be subject to change at the end of the game
         if (side.equals("Town")){
-            welcomeMessage += " survive the SCP invasion for 10 turns!";
+            welcomeMessage += " survive the SCP invasion for 10 turns!"; //TODO: remember to balance the turns amount 
         }else if (side.equals("SCP")){
             welcomeMessage += " destroy the town in 10 turns!";
         }else{ //TODO: This block of the if statement is temporary (for testing)
@@ -187,6 +187,15 @@ abstract class Player {
     public void setBuildings(ArrayList<Building> buildings){
         this.buildings = buildings;
     }
+
+    /**
+     * @param message the message to be sent to the server
+     */
+    public void sendMessage(String message){
+
+        playerClient.sendMessage(message);
+    }
+
 
     //end of setters
 

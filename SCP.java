@@ -67,11 +67,31 @@ public class SCP extends Player{
         this.eventY = -1;
     }//end of constructor
 
-
+    /**
+     * Sends a message to the server.
+     * @param message The message to be sent.
+     */
     public void sendMessage(String message){
         SCP.this.getPlayerClient().sendMessage(message);
     }
 
+
+    private void requestEvent(String type, int level, int x, int y){
+        String message = "<e>\n"; //identifier prefix for requesting an event
+        if(type.equals("Earthquake")){
+            message += "Earthquake";
+        }else if(type.equals("Fire")){
+            message += "Fire";
+        }else if(type.equals("Thunderstorm")){
+            message += "Thunderstorm";
+        }else if(type.equals("Tornado")){
+            message += "Tornado";
+        }else if (type.equals("Infect")){
+            message += "infect";
+        }
+        //TODO: Send rest of message.
+    }
+//TODO: Finish other requestEvent method
     /**
      * starts the game as the SCP side.
      */

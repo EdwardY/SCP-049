@@ -142,11 +142,39 @@ public class Town extends Player {
      * @param x the x coordinate of the buildings
      * @param y the y coordinate of the buildings
      */
-    public void buildBuilding(){
+    public void buildBuilding(String buildingType, int x, int y){
 
         ArrayList<Building> buildings = this.getBuildings();
 
-        //TODO: decide on the cost of the buildings to initially build
+        //add each created building to the ArrayList containing the buildings
+        if(buildingType.equals("MilitaryBase")){
+
+            buildings.add(new MilitaryBase(1000, 100, 100, x, y));
+
+        }else if(buildingType.equals("ResearchLab")){
+
+            buildings.add(new ResearchLab(1000, 100, 100, x, y));
+        
+        }else if(buildingType.equals("Residency")){
+        
+            buildings.add(new Residency(1000, 100, 100,x, y, 100));
+
+        }else if(buildingType.equals("Hospital")){
+
+            buildings.add(new Hospital(1000, 100, 100,  x, y, 100));
+        
+        }else if(buildingType.equals("FoodBuilding")){
+
+            buildings.add(new FoodBuilding(1000, 100, 100,  x, y));
+        
+        }else if(buildingType.equals("Bank")){
+
+            buildings.add(new Bank(1000, 100, 100, x, y));
+            
+        }else{  
+
+            System.out.println("hey that's not the right building to build");
+        }
 
     }
 
@@ -232,8 +260,19 @@ public class Town extends Player {
      * @param y the y coordiante to build the building
      */
     public void requestBuilding(String type, int x, int y){
+        //send message
+        super.sendMessage("<b>");
+        super.sendMessage(type);
+        super.sendMessage(x + " " + y);
+        
+        //set last request
+        this.getPlayerClient().setLastRequest("<b> " + type + " " + x + " " + y);
 
-        super.sendMessage("<b> " + type + " " + x + " " + y);
+        //deactivate the buttons
+        this.gameWindow.buildButton.deactivate();
+        for(int i = 0;i < this.gameWindow.buildingTypesButtons.length;i++){
+            this.gameWindow.buildingTypesButtons[i].deactivate();
+        }
     }
 
     /**
@@ -242,8 +281,15 @@ public class Town extends Player {
      * @param y the y coordiante of the requested upgrade 
      */
     public void requestUpgrade(int x, int y){
+        //send message
+        super.sendMessage("<u>");
+        sendMessage(x + " " + y);
 
-        super.sendMessage("<u> " + x + " "+ y);
+        //set last request
+        this.getPlayerClient().setLastRequest("<u>> " + x + " " + y);
+
+        //deactivate the buttons
+        this.gameWindow.upgradeButton.deactivate();
     }
 
     //end of setters
@@ -507,12 +553,12 @@ public class Town extends Player {
                     }
                     if(buildButton.inBounds(mouseX, mouseY)){
                         
-                        requestBuilding(type, buildingX, buildingY);
+                        requestBuilding(type, buildX, buildY);
                         
 
                     }else if(upgradeButton.inBounds(mouseX, mouseY)){
                         
-                        requestUpgrade(buildingX,buildingY);
+                        requestUpgrade(buildX,buildY);
                         
 
                     }

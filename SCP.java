@@ -101,6 +101,10 @@ public class SCP extends Player{
             this.gameWindow.levels[i].deactivate();
         }
         this.gameWindow.startEventButton.deactivate();
+
+        //reset x and y
+        eventX = -1;
+        eventY = -1;
     }
 
 
@@ -536,7 +540,11 @@ public class SCP extends Player{
                         }
                     }
                     if(startEventButton.inBounds(mouseX, mouseY)){
-                        //TODO: send a request to start the event
+                        if((eventX == -1) && (eventY == -1)){
+                            requestEvent(type, level);
+                        }else{
+                            requestEvent(type, level, eventX, eventY);
+                        }
                     }
 
                     //clicking the info bar, not sure if we'll make this do anything

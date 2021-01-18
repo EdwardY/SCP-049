@@ -233,7 +233,10 @@ public class Town extends Player {
      */
     public void requestBuilding(String type, int x, int y){
 
-        super.sendMessage("<b> " + type + " " + x + " " + y);
+        super.sendMessage("<b>");
+        super.sendMessage(type);
+        super.sendMessage(x + " " + y);
+        this.getPlayerClient().setLastRequest("<b> " + type + " " + x + " " + y);
     }
 
     /**
@@ -243,7 +246,9 @@ public class Town extends Player {
      */
     public void requestUpgrade(int x, int y){
 
-        super.sendMessage("<u> " + x + " "+ y);
+        super.sendMessage("<u>");
+        sendMessage(x + " " + y);
+        this.getPlayerClient().setLastRequest("<u>> " + x + " " + y);
     }
 
     //end of setters
@@ -507,12 +512,12 @@ public class Town extends Player {
                     }
                     if(buildButton.inBounds(mouseX, mouseY)){
                         
-                        requestBuilding(type, buildingX, buildingY);
+                        requestBuilding(type, buildX, buildY);
                         
 
                     }else if(upgradeButton.inBounds(mouseX, mouseY)){
                         
-                        requestUpgrade(buildingX,buildingY);
+                        requestUpgrade(buildX,buildY);
                         
 
                     }

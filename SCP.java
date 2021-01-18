@@ -211,6 +211,8 @@ public class SCP extends Player{
         private DuberTextButton[] aoeEventButtons;
         /** Stores buttons for whole game events */
         private DuberTextButton[] wholeGameEventButtons;
+        /** Buttons to store the levels */
+        private DuberTextButton[] levels;
         /** The button to start the event */
         private DuberTextButton startEventButton;
 
@@ -243,6 +245,11 @@ public class SCP extends Player{
             wholeGameEventButtons[0] = new DuberTextButton("Riot", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 780, 180, 30));
             wholeGameEventButtons[1] = new DuberTextButton("Mutate", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 820, 180, 30));
             wholeGameEventButtons[2] = new DuberTextButton("WarpReality", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 860, 180, 30));
+
+            levels = new DuberTextButton[3];
+            for(int i = 0;i < levels.length;i++){
+                levels[i] = new DuberTextButton("" + (i + 1), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + i*80, 900, 60, 30));
+            }
 
             startEventButton = new DuberTextButton("Start", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
 
@@ -361,6 +368,9 @@ public class SCP extends Player{
                 for(int i = 0;i < wholeGameEventButtons.length;i++){
                     wholeGameEventButtons[i].draw(g);
                 }
+                for(int i = 0;i < levels.length;i++){
+                    levels[i].draw(g);
+                }
                 startEventButton.draw(g);
             }//end of method
 
@@ -421,12 +431,22 @@ public class SCP extends Player{
                     for(int i = 0;i < wholeGameEventButtons.length;i++){
                         if(wholeGameEventButtons[i].inBounds(mouseX, mouseY)){
                             type = wholeGameEventButtons[i].getText();
-                            startEventButton.activate();
+                            for(int j = 0;j < levels.length;j++){
+                                levels[j].activate();
+                            }
                         }
                     }
                     for(int i = 0;i < aoeEventButtons.length;i++){
                         if(aoeEventButtons[i].inBounds(mouseX, mouseY)){
                             type = aoeEventButtons[i].getText();
+                            for(int j = 0;j < levels.length;j++){
+                                levels[j].activate();
+                            }
+                        }
+                    }
+                    for(int i = 0;i < levels.length;i++){
+                        if(levels[i].inBounds(mouseX, mouseY)){
+                            level = levels[i].getText();
                             startEventButton.activate();
                         }
                     }

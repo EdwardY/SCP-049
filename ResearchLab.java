@@ -1,3 +1,10 @@
+
+import java.awt.Graphics;
+import java.awt.Color;
+import java.lang.Math;
+import java.awt.Toolkit;
+import java.util.ArrayList;
+
 /**
  * [ResearchLab.java]
  * An object building on the game map allowing the plaers to upgrade weapons, armor, and develop a cure
@@ -5,11 +12,6 @@
  * @version 0.1 December 2020
  */
 
-import java.awt.Graphics;
-import java.awt.Color;
-import java.lang.Math;
-import java.awt.Toolkit;
-import java.util.ArrayList;
 
 public class ResearchLab extends Military{
     /** Initial health of the research lab */

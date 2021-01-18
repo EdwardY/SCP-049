@@ -1,14 +1,14 @@
-/**
+ import java.awt.Color;
+ import java.awt.Graphics;
+ import java.util.ArrayList; 
+ import java.awt.Toolkit;
+ 
+ /**
  * [Residency.java]
  * A building that humans live in
  * @author Edward Yang
  * @version 0.1 Devember 26th 2020
  */
-
- import java.awt.Color;
- import java.awt.Graphics;
- import java.util.ArrayList; 
- import java.awt.Toolkit;
 
 class Residency extends Building{
 

@@ -1,15 +1,15 @@
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Toolkit;
+
 /**
  * [Hospital.java]
  * A hostpital building object allowing NPCs to heal
  * @author Edward Yang
  * @version 0.1 december 24 2020
  */
-
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Toolkit;
 
 class Hospital extends Building{
     

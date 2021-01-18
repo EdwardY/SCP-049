@@ -68,6 +68,10 @@ public class SCP extends Player{
     }//end of constructor
 
 
+    public void sendMessage(String message){
+        SCP.this.getPlayerClient().sendMessage(message);
+    }
+
     /**
      * starts the game as the SCP side.
      */

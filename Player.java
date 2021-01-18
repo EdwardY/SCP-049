@@ -125,6 +125,13 @@ abstract class Player {
     public TurnTimer getTimer(){
         return this.timer;
     }
+    /**
+     * Gets the client program that this player class belongs to
+     * @return The client program
+     */
+    public Client getPlayerClient(){
+        return this.playerClient;
+    }
 
 
     /**

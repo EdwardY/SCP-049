@@ -218,7 +218,7 @@ public class SCP extends Player{
      * @return The price of the event.
      */
     public int getPrice(String eventType, int level){
-        int cost;
+        int cost = 0;
 
         if(eventType.equals("Riot")){
             cost = Riot.getCostByLevel(level);

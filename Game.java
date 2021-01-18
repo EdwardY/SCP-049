@@ -57,9 +57,9 @@ class Game {
         this.scps = new ArrayList<SCP0492>();
         this.events = new ArrayList<Event>();
         this.humanMap = new HashMap<Integer, Human>();
-        this.money = 10; //TODO: coordinate money amounts
+        this.money = 500; //TODO: coordinate money amounts
         this.food = 10;
-        this.hume = 10;
+        this.hume = 50;
         this.turn = 1;
         this.moneyPerTurn = 0;
         this.foodPerTurn = 0;

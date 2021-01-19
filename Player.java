@@ -107,6 +107,11 @@ abstract class Player {
 
     //TODO: abstract method for client-game transactions.
 
+    /**
+     * Abstract method to end the game
+     * @param victory The string that indicates if the player won, lost, or tied against the other player.
+     */
+    public abstract void endGame(String victory);
 
     //start of getters
 

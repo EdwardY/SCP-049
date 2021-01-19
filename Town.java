@@ -1,3 +1,7 @@
+//Java Swing imports
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 //graphics imports
 import java.awt.Color;
@@ -77,6 +81,14 @@ public class Town extends Player {
     }
 
     /**
+     * Displays the intel that a spy has recovered.
+     * @param hume The enemy's hume points (SCP currency).
+     */
+    public void displayIntel(int hume){
+        new IntelWindow().displayIntel(hume);
+    }
+
+    /**
      * Updates all game objects at the end of the turn.
      * @param humans The new HashMap of humans.
      * @param buildings The new list of buildings.
@@ -107,6 +119,14 @@ public class Town extends Player {
         this.getTimer().resetTime(60);
     }
 
+    /**
+     * Ends the game when server indicates that the game is finished.
+     * @param victory Determines if the player won, lost, or tied against the other player.
+     */
+    public void endGame(String victory){
+        new ResultsWindow().getResults(victory, true);
+        this.gameWindow.getWindow().dispose();
+    }
 
 
     public ArrayList<JFrame> getGameGraphics(){
@@ -329,6 +349,55 @@ public class Town extends Player {
     }
 
     //start of inner classes
+
+    /**
+     * An inner class that displays intel gathered by a spy.
+     */
+    public class IntelWindow {
+        /**The JFrame of the intel window. */
+        private JFrame window;
+        /**The JPanel of the intel window. */
+        private JPanel mainPanel;
+        /**The textbox that will display the intel. */
+        private JTextArea intelBox;
+    
+    
+        /**
+         * Constructor for the end-of-game window.
+         */
+        public IntelWindow(){
+            this.window = new JFrame("An agent has valuable intel for you!");
+            this.window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            this.window.setSize(500, 500);
+            this.window.setBackground(Color.WHITE);
+            this.mainPanel = new JPanel();
+            this.mainPanel.setBounds(10, 10, 450, 450);
+            this.window.add(mainPanel);
+            this.intelBox = new JTextArea();
+            this.intelBox.setLineWrap(true);
+            this.intelBox.setEditable(false);
+            this.intelBox.setBounds(5, 0, 445, 445);
+            this.window.add(intelBox);
+            this.window.setVisible(true);
+        }
+    
+        /**
+         * Shows the user that one of their spies gathered.
+         * @param hume The enemy's amount of hume points(SCP Currency) that the spy found.
+         */
+        public void displayIntel(int hume){
+    
+            //update the window
+            this.intelBox.setText("CLASSIFIED TOP-SECRET INTEL:\n\nYour spy has discovered that your enemy has " + hume + " hume points!");
+            this.intelBox.repaint();
+            this.intelBox.revalidate();
+            this.window.repaint();
+    
+        }//end of method
+    
+    
+    
+    }//end of class
 
     /**
      * An inner class the displays and end-of-turn report to the player.

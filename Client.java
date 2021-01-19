@@ -280,11 +280,9 @@ public class Client {
     
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
+                                lastRequest = ""; //clear the last request
 
-                                System.out.println("something something transaction didn't go through");
-                                //TODO: Discuss how to manage transactions with group.
                             }else if(prefix.equals("<st>")){ //transaction is successful
-                                //TODO: Figure out how transactions will work (?)
                                 System.out.println("something something congrats purchase successful");
                                 String[] requests = lastRequest.split(" ");
                                 if(requests.length > 1){
@@ -300,7 +298,6 @@ public class Client {
                                         ((Town)player).upgradeBuilding(Integer.parseInt(requests[1]), Integer.parseInt(requests[2]));
                                     }
                                 }
-                                //TODO: Not done properly yet.
                             }else if(prefix.equals("<r>")){ //change in resources
                                 String resourceType = input.readLine();
                                 int resourceChange = Integer.parseInt(input.readLine());
@@ -312,18 +309,15 @@ public class Client {
                                     ((SCP)player).changeHume(resourceChange);
                                 }
                                 
+
+
                             }else if (prefix.equals("<i>")){
                                 int enemyHume = Integer.parseInt(input.readLine());
-                                //TODO: Town/SCP side underdeveloped, not really sure what to do with this.
-                            }else if(prefix.equals("<ge>")){
-                                String status = input.readLine();
-                                if(status.equals("win")){
-                                    //TODO: win screen
-                                }else if(status.equals("lose")){
-                                    //TODO: lose screen
-                                }else if(status.equals("tie")){
-                                    //TODO: tie screen
+                                if(Client.this.player instanceof Town){
+                                    ((Town)Client.this.player).displayIntel();
                                 }
+                            }else if(prefix.equals("<ge>")){ //if server says game is finished
+                                Client.this.getPlayer().endGame(input.readLine());
                             }//end of if statements
 
                         }//end of if statement to check if there is input

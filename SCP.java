@@ -148,6 +148,15 @@ public class SCP extends Player{
     }
 
     /**
+     * Ends the game
+     * @param victory Determines if the player won, lost, or tied against the other player.
+     */
+    public void endGame(String victory){
+        new ResultsWindow().getResults(victory, false);
+        this.gameWindow.getWindow().dispose();
+    }
+
+    /**
      * Creates an SCP event that the player chose to use that is not location-based.
      * @param eventType The name of the event that will be created.
      * @param level The level of the event.

@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import GameWindow.GridPanel;
+
 /**
  * [Game.java]
  * A class for storing all game parts which the server can access
@@ -275,14 +277,11 @@ class Game {
     }
 
     /**
-     * <p>
-     * Creates a {@code QuadTree} to handle the {@code SCP0492s} attacking {@code Humans}. Creates a second {@code QuadTree} to 
-     * handle {@code Soldiers} attacking {@code SCP0492s}
-     * </p>
+     * Handles attacking mechanics with a quadtree for SCP0492s attacking humans and another for Soldiers attacking SCP0492s.
      */
     private void handleAttacks(){
 
-        QuadTree scpAttack = new QuadTree(1420/2, 1080/2, 540, 540, 0);
+        QuadTree scpAttack = new QuadTree(1080, 1420, 710, 540, 0);
         for(int i = 0;i < scps.size();i++){
             scpAttack.insertAttacker(scps.get(i));
         }
@@ -291,7 +290,7 @@ class Game {
         }
         scpAttack.startCombat();
 
-        QuadTree soldierAttack = new QuadTree(1420/2, 1080/2, 540, 540, 0);
+        QuadTree soldierAttack = new QuadTree(1080, 1420, 710, 540, 0);
         for(int i = 0;i < humans.size();i++){
             if(humans.get(i) instanceof Soldier){
                 soldierAttack.insertAttacker((Soldier)humans.get(i));

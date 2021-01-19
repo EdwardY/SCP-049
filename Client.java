@@ -122,9 +122,6 @@ public class Client {
         this.lastRequest = newRequest;
     }
 
-    //TODO: some method parameters between Town/SCP/Player and client do not match, e.g. .start
-
-
     //start of inner classes
         /**
          * An inner class used to receives messages from the server.
@@ -314,7 +311,7 @@ public class Client {
                             }else if (prefix.equals("<i>")){
                                 int enemyHume = Integer.parseInt(input.readLine());
                                 if(Client.this.player instanceof Town){
-                                    ((Town)Client.this.player).displayIntel();
+                                    ((Town)Client.this.player).displayIntel(enemyHume);
                                 }
                             }else if(prefix.equals("<ge>")){ //if server says game is finished
                                 Client.this.getPlayer().endGame(input.readLine());

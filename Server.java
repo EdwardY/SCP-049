@@ -519,6 +519,7 @@ class Server {
                             sendTo(allUsers, "<ge>");
                             scp.sendMessage("win");
                             town.sendMessage("lose");
+                            running = false;
                         }
                         //TODO: implement town win, then check and send for town win
 
@@ -526,6 +527,7 @@ class Server {
                         if(game.getTurn() > Game.MAX_TURNS){
                             sendTo(allUsers, "<ge>");
                             sendTo(allUsers, "tie");
+                            running = false;
                         }
 
                         //scps

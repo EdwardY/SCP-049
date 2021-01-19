@@ -95,18 +95,18 @@ public class Town extends Player {
      * Starts the current turn in the game.
      */
     public void endTurn(){
-        System.out.println("Not a functional method yet.");
-        //TODO: Not a functional method yet.
+        this.getTimer().resetTime(30);
+        new TownReportWindow().generateReport(this.humanMap, this.getBuildings(), this.money);
+
     }
 
     /**
      * Ends the current turn in the game.
      */
     public void startTurn(){
-        //TODO: do turn stuff
+        this.getTimer().resetTime(60);
     }
 
-    //TODO: method for client-game transactions
 
 
     public ArrayList<JFrame> getGameGraphics(){
@@ -327,6 +327,98 @@ public class Town extends Player {
         }
         return buildingToReturn;
     }
+
+    //start of inner classes
+
+    /**
+     * An inner class the displays and end-of-turn report to the player.
+     */
+    public class TownReportWindow extends ReportWindow{
+        /**
+         * Generates and displays and end-of-turn report to the player
+         * @param humans The list of the player's human NPCs.
+         * @param buildings The list of buildings.
+         * @param duberCoins The amount of duberCoins (Town currency) that the player has at the start of the turn.
+         */
+        public void generateReport(HashMap<Integer, Human> humans, ArrayList<Building> buildings, int duberCoins){
+            //the total amount of SCP game objects
+            int humanNum = humans.size();
+            int buildingNum = buildings.size();
+
+
+            //used to count the amount of each human NPC
+            int cadetCounter = 0;
+            int citizenCounter = 0;
+            int doctorCounter = 0;
+            int researcherCounter = 0;
+            int soldierCounter = 0;
+            int spyCounter = 0;
+
+
+
+
+            //used to count the amount of buildings
+            int bankCounter = 0;
+            int foodBuildingCounter = 0;
+            int hospitalCounter = 0;
+            int militaryBaseCounter = 0;
+            int researchLabCounter = 0;
+            int residencyCounter = 0;
+
+
+            //count the amount of each human NPC
+            for(int i = 0; i < humans.size(); i ++){
+                if(humans.get(i) instanceof Citizen){
+                    citizenCounter ++;
+                }else if (humans.get(i) instanceof Cadet){
+                    cadetCounter++;
+                }else if (humans.get(i) instanceof Doctor){
+                    doctorCounter ++;
+                }else if(humans.get(i) instanceof Researcher){
+                    researcherCounter++;
+                }else if(humans.get(i) instanceof Soldier){
+                    soldierCounter++;
+                }else if (humans.get(i) instanceof Spy){
+                    spyCounter++;
+                }//end of block if statements
+
+            }//end of for loop
+
+
+            //count the amount of each human NPC
+            for(int i = 0; i < buildings.size(); i ++){
+                if(buildings.get(i) instanceof Bank){
+                    bankCounter ++;
+                }else if (buildings.get(i) instanceof FoodBuilding){
+                    foodBuildingCounter++;
+                }else if (buildings.get(i) instanceof Hospital){
+                    hospitalCounter ++;
+                }else if(buildings.get(i) instanceof MilitaryBase){
+                    militaryBaseCounter++;
+                }else if(buildings.get(i) instanceof ResearchLab){
+                    researchLabCounter++;
+                }else if (buildings.get(i) instanceof Residency){
+                    residencyCounter++;
+                }//end of block if statements
+            
+            }//end of for loop
+
+            String report = "DuberCoins: " + duberCoins + "\nTotal population: " + humanNum + "\nBuildings: " + buildingNum + "\n\nAll humans:";
+            report += "\n\nCitizens: " + citizenCounter + "\nCadets: " + cadetCounter + "\nDoctors: " + doctorCounter + "\nResearchers: " + researcherCounter;
+            report += "\nSoldiers: " + soldierCounter + "\nSpies: " + spyCounter + "\n\nAll Buildings:\n\nBanks: " + bankCounter + "\nFood Buildings: " + foodBuildingCounter;
+            report += "\nHospitals: " + hospitalCounter + "\nMilitary Bases: " + militaryBaseCounter + "\nResearch Labs: " + researchLabCounter  + "Reseidencies: " + residencyCounter;
+
+            //update the report window
+            this.getReportBox().setText(report);
+            this.getReportBox().repaint();
+            this.getReportBox().revalidate();
+
+            this.getWindow().repaint();
+
+
+        }//end of method
+
+    }//end of class
 
     /**
      * An inner class that will run the main game window that the user will use to play the game.

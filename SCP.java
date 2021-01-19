@@ -80,21 +80,7 @@ public class SCP extends Player{
         //save last request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level + " " + x + " " + y);
 
-        //deactivate buttons
-        for(int i = 0;i < this.gameWindow.aoeEventButtons.length;i++){
-            this.gameWindow.aoeEventButtons[i].deactivate();
-        }
-        for(int i = 0;i < this.gameWindow.levels.length;i++){
-            this.gameWindow.levels[i].deactivate();
-        }
-        this.gameWindow.startEventButton.deactivate();
-
-        //reset x and y
-        eventX = -1;
-        eventY = -1;
-
-        //reset displaying price
-        this.gameWindow.displayPrice = false;
+        reset();
     }
 
 
@@ -107,6 +93,11 @@ public class SCP extends Player{
         //save request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level);
 
+        reset();
+    }
+
+
+    private void reset(){
         //deactivate buttons
         for(int i = 0;i < this.gameWindow.aoeEventButtons.length;i++){
             this.gameWindow.aoeEventButtons[i].deactivate();
@@ -115,6 +106,10 @@ public class SCP extends Player{
             this.gameWindow.levels[i].deactivate();
         }
         this.gameWindow.startEventButton.deactivate();
+
+        //reset x and y
+        eventX = -1;
+        eventY = -1;
 
         //reset displaying price
         this.gameWindow.displayPrice = false;
@@ -136,23 +131,20 @@ public class SCP extends Player{
         this.hume += change;
     }
     
-    //TODO: method for client-game transactions
-
 
     /**
      * Starts the current turn in the game.
      */
     public void endTurn(){
-        System.out.println("Not a functional method yet.");
-        //TODO: Not a functional method yet.
+        this.getTimer().resetTime(30);
+        new SCPReportWindow().generateReport(this.getSCPs(), this.getEvents(), this.hume);
     }
 
     /**
      * Ends the current turn in the game.
      */
     public void startTurn(){
-        System.out.println("Not a functional method yet.");
-        //TODO: Not a functional method yet.
+        this.getTimer().resetTime(60);
     }
 
     /**
@@ -284,6 +276,74 @@ public class SCP extends Player{
     }
 
     //end of setters
+
+    //start of inner classes
+    /**
+     * An inner class that makes an end-of-turn report for the player
+     */
+    public class SCPReportWindow extends ReportWindow{
+
+        /**
+         * Generates and displays and end-of-turn report to the player
+         * @param scps The list of the player's SCP0492 NPCs.
+         * @param events The list of SCP events.
+         * @param hume The amount of hume points (SCP currency) that the player has at the start of the turn.
+         */
+        public void generateReport(ArrayList<SCP0492> scps, ArrayList<Event> events, int hume){
+            //the total amount of SCP game objects
+            int scpNum = scps.size();
+            int eventNum = events.size();
+
+
+            //used to count the amount of each event
+            int infectCounter = 0;
+            int earthquakeCounter = 0;
+            int fireCounter = 0;
+            int mutateCounter = 0;
+            int riotCounter = 0;
+            int thunderstormCounter = 0;
+            int tornadoCounter = 0;
+            int warpRealityCounter = 0;
+
+
+            //count the amount of each event
+            for(int i = 0; i < events.size(); i ++){
+                if(events.get(i) instanceof Infect){
+                    infectCounter ++;
+                }else if (events.get(i) instanceof Earthquake){
+                    earthquakeCounter++;
+                }else if (events.get(i) instanceof Fire){
+                    fireCounter ++;
+                }else if(events.get(i) instanceof Mutate){
+                    mutateCounter++;
+                }else if(events.get(i) instanceof Riot){
+                    riotCounter++;
+                }else if (events.get(i) instanceof Thunderstorm){
+                    thunderstormCounter++;
+                }else if(events.get(i) instanceof Tornado){
+                    tornadoCounter++;
+                }else if(events.get(i) instanceof WarpReality){
+                    warpRealityCounter++;
+                }//end of block if statements
+
+            }//end of for loop
+
+            String report = "Hume points: " + hume + "\nTotal SCP-049-2: " + scpNum + "\nTotal events: " + eventNum + "\n\nAll events:";
+            report += "\n\nEarthquakes: " + earthquakeCounter + "\nFires: " + fireCounter + "\nInfections: " + infectCounter + "\nMutations: " + mutateCounter + "\nRiots: " + riotCounter;
+            report += "\nThunderstorms: " + thunderstormCounter + "\nTornadoes: " + tornadoCounter + "Warped Realities: " + warpRealityCounter; 
+
+            //update the report window
+            this.getReportBox().setText(report);
+            this.getReportBox().repaint();
+            this.getReportBox().revalidate();
+
+            this.getWindow().repaint();
+
+
+        }//end of method
+
+    }//end of class
+
 
     /**
      * An inner class that will run the game window that the player will use.

@@ -2,6 +2,7 @@
 import javax.swing.JTextArea;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.Color;
 
 
 /**
@@ -24,6 +25,7 @@ public abstract class ReportWindow{
         this.window = new JFrame("End of turn report:");
         this.window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.window.setSize(500, 900);
+        this.window.setBackground(Color.WHITE);
         this.mainPanel = new JPanel();
         this.mainPanel.setBounds(10, 10, 450, 850);
         this.window.add(mainPanel);

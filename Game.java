@@ -15,6 +15,8 @@ import java.util.HashMap;
 class Game {
     /** Maximum number of turns before the game comes to a stalemate */
     public static final int MAX_TURNS = 10;
+    /** Percent of total NPCs that must be SCP-049-2s in order for the SCP side to achieve world domination and win the game */
+    private static final double SCP_WIN_PERCENT = 0.6;
     /** The {@code ArrayList} containing all {@code Buildings} in the {@code Game} */
     private ArrayList<Building> buildings;
     /** The {@code NPCs} belonging to the town side */
@@ -301,6 +303,27 @@ class Game {
         soldierAttack.startCombat();
     }
 
+    /**
+     * Checks for if the SCP side has satisfied their winning conditions (60% of total population is SCP-049-2s)
+     * @return true if the winning conditions have been satisfied, false otherwise
+     */
+    public boolean checkScpWin(){
+        int humanCount = this.getHumans().size();
+        int scpCount = this.getScps().size();
+        int total = humanCount + scpCount;
+        if(total == 0){//check for dividing by 0 math errors
+            return false;
+        }else{
+            if(scpCount/total >= SCP_WIN_PERCENT){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
+    //TODO: implement town win
+    
     /**
      * <p>
      * Loops through all {@code Humans} in the game. If the current {@code Human} is a {@code Spy}, generate two random numbers. 

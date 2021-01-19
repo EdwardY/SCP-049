@@ -514,10 +514,18 @@ class Server {
                         game.doTurn();
                         sendTo(allUsers, "<te>");
 
-                        //In case of turn ending
+                        //check for if either side has won
+                        if(game.checkScpWin()){
+                            sendTo(allUsers, "<ge>");
+                            scp.sendMessage("win");
+                            town.sendMessage("lose");
+                        }
+                        //TODO: implement town win, then check and send for town win
+
+                        //In case of game ending because max turns reached
                         if(game.getTurn() > Game.MAX_TURNS){
                             sendTo(allUsers, "<ge>");
-                            //TODO: determine winner, loser, etc. and send that too
+                            sendTo(allUsers, "tie");
                         }
 
                         //scps

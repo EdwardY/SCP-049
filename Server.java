@@ -513,6 +513,13 @@ class Server {
                         lastTime = curTime;
                         game.doTurn();
                         sendTo(allUsers, "<te>");
+
+                        //In case of turn ending
+                        if(game.getTurn() > Game.MAX_TURNS){
+                            sendTo(allUsers, "<ge>");
+                            //TODO: determine winner, loser, etc. and send that too
+                        }
+
                         //scps
                         sendTo(allUsers, "" + SCP0492.level);
                         sendTo(allUsers, "" + game.getScps().size());

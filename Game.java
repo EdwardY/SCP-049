@@ -13,6 +13,8 @@ import java.util.HashMap;
  */
 
 class Game {
+    /** Maximum number of turns before the game comes to a stalemate */
+    public static final int MAX_TURNS = 10;
     /** The {@code ArrayList} containing all {@code Buildings} in the {@code Game} */
     private ArrayList<Building> buildings;
     /** The {@code NPCs} belonging to the town side */
@@ -606,22 +608,26 @@ class Game {
 
     /**
      * <p>
-     * Increases turn number by one. Calls on killDeadStuff to kill off anything that should be dead. Calls getResourcesFromBuildings 
-     * to collect resources. Calls dealWithEvents to handle the {@code Events}. Calls on moveNpcs to move the mindless {@code NPCs} 
-     * Calls handleAttacks to deal with {@code SCP0492s} attacking {@code Humans} and {@code Soldiers} attacking {@code SCP0492s}
+     * Checks for if the current turn count is still valid. If so, increase turn number by one. Calls 
+     * getResourcesFromBuildings to collect resources. Calls dealWithEvents to handle the {@code Events}. 
+     * Calls on moveNpcs to move the mindless {@code NPCs} Calls handleAttacks to deal with {@code SCP0492s} 
+     * attacking {@code Humans} and {@code Soldiers} attacking {@code SCP0492s}. Calls on eatFood to handle the fact 
+     * {@code Humans} need to consume objects of nutritious value if they wish to continue metabolising. Calls on 
+     * killDeadStuff to kill off anything that should be dead. 
      * </p>
      */
     public void doTurn(){
-
-        this.turn++;
-        //end of turn methods
-        getResourcesFromBuildings();
-        calculateStonks();
-        dealWithEvents();
-        moveSpcs();
-        handleAttacks();
-        killDeadStuff();
-        eatFood();
+        if(this.turn <= MAX_TURNS){
+            this.turn++;
+            //end of turn methods
+            getResourcesFromBuildings();
+            calculateStonks();
+            dealWithEvents();
+            moveSpcs();
+            handleAttacks();
+            eatFood();
+            killDeadStuff();
+        }
 
     }
 

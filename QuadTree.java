@@ -37,7 +37,6 @@ public class QuadTree {
     * @param depth The amount of subdivisions of the quadtree.
     */
     public QuadTree(int length, int width, int xPos, int yPos, int depth){
-      //TODO: Discuss whether we give the top-left point or the midpoint initially.
         this.boundary = new Boundary(length, width, xPos, yPos);  //make the boundary for the quadtree
         //define the rest of the quadtree's attributes
         this.attackerList = new ArrayList<NPC>();
@@ -167,7 +166,6 @@ public class QuadTree {
       }//end of for loop
 
 
-      //TODO: Compare + attack things
 
     }else{ //if there are other leaves, call those leaves to start the comparison
       for(int i = 0; i < leaves.length; i ++){

@@ -421,15 +421,6 @@ public class SCP extends Player{
         }// end of window
 
         /**
-         * Updates the game screen.
-         */
-        //TODO: Ask what this method is for, not actually sure what it's supposed to do
-        public void update(){
-            System.out.println("Hello");
-            //TODO: Not complete yet
-        }
-
-        /**
          * [ScpGridPanel.java]
          * A {@code GridPanel} that draw SCP specific game graphics
          * @author Damon Ma, Edward Yang, Vivian Dai

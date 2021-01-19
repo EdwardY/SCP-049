@@ -280,7 +280,7 @@ class Game {
      */
     private void handleAttacks(){
 
-        QuadTree scpAttack = new QuadTree(1420, 1080, 540, 540, 0);
+        QuadTree scpAttack = new QuadTree(1420/2, 1080/2, 540, 540, 0);
         for(int i = 0;i < scps.size();i++){
             scpAttack.insertAttacker(scps.get(i));
         }
@@ -289,7 +289,7 @@ class Game {
         }
         scpAttack.startCombat();
 
-        QuadTree soldierAttack = new QuadTree(1420, 1080, 540, 540, 0);
+        QuadTree soldierAttack = new QuadTree(1420/2, 1080/2, 540, 540, 0);
         for(int i = 0;i < humans.size();i++){
             if(humans.get(i) instanceof Soldier){
                 soldierAttack.insertAttacker((Soldier)humans.get(i));

@@ -43,18 +43,7 @@ public class Spy extends Cadet{
         this.successRate = successRate;
         this.sus = sus;
     }//end of constructor
-    //TODO: Empty method for getIntel, mechanics not thoroughly discussed yet.
 
-
-    /**
-     * Gains intel from the enemy side.
-     * @return The intel that was gathered.
-     */
-    public String getIntel(){
-        return("sample intel, figure out this method later.");
-    }
-
-    //TODO: getIntel method is incomplete.
 
     //start of getters
 

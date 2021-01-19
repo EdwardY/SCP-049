@@ -24,15 +24,11 @@ public abstract class GameWindow{
        this.window = new JFrame("Code-049");
 
        //setting the JFrame
-       window.setSize(1920,1080); //TODO: Dimensions may need to be adjusted for later based on JPanel sizes.
+       window.setSize(1920,1080); 
        window.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
    }
 
-    /**
-     * Updates the main game window.
-     */
-    public abstract void update();
 
 
     /**

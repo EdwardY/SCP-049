@@ -550,15 +550,6 @@ public class Town extends Player {
 
              }//end of method
 
-
-            /**
-             * Updates the game screen
-             */
-            //TODO: Ask what this method is for, not actually sure what it's supposed to do
-             public void update(){
-                 System.out.println("Method not complete yet");
-                 //TODO: Incomplete method
-             }
         /**
          * [TownGridPanel.java]
          * A {@code GridPanel} that draw SCP specific game graphics
@@ -581,7 +572,6 @@ public class Town extends Player {
                 super.paintComponent(g);
 
 
-                //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
                 g.setColor(Color.BLACK);
                 int emptyLotX = 30; //X-value of the empty lot to be drawn
                 for(int i = 0; i < GRID_SIZE_BUILDING_WIDTH; i ++){

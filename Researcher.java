@@ -11,7 +11,6 @@ import java.awt.Toolkit;
 public class Researcher extends Human{
     /**The price to produce a researcher. */
     static final int RESEARCHER_PRICE = 15;
-    //TODO: methods that have to do with researching/upgrading mechanics.
 
     /**
     * Constructor for a new Researcher object.

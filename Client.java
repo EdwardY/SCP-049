@@ -315,6 +315,15 @@ public class Client {
                             }else if (prefix.equals("<i>")){
                                 int enemyHume = Integer.parseInt(input.readLine());
                                 //TODO: Town/SCP side underdeveloped, not really sure what to do with this.
+                            }else if(prefix.equals("<ge>")){
+                                String status = input.readLine();
+                                if(status.equals("win")){
+                                    //TODO: win screen
+                                }else if(status.equals("lose")){
+                                    //TODO: lose screen
+                                }else if(status.equals("tie")){
+                                    //TODO: tie screen
+                                }
                             }//end of if statements
 
                         }//end of if statement to check if there is input

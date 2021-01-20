@@ -575,9 +575,7 @@ class Server {
                         //town food supply
                         town.sendMessage("<r>");
                         town.sendMessage("Food");
-                        if(game.getFood() > game.getHumanMap().size()){
-                            town.sendMessage("" + game.getHumanMap().size());
-                        }
+                        town.sendMessage("" + game.getFoodChange());
                         
                         //intel gathering
                         if(game.gotIntel()){

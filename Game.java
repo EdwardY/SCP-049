@@ -321,6 +321,11 @@ class Game {
     }
 
     //TODO: implement town win
+
+    public boolean checkTownWin(){
+        
+        return true;
+    }
     
     /**
      * <p>

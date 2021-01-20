@@ -551,7 +551,7 @@ public class Town extends Player {
 
             //TODO: figure out a lot of buildings stats
 
-            
+
             //TODO: place buttons in the right positions
             //All residency buildings
             this.residencyButtons = new HashMap<>();
@@ -570,9 +570,19 @@ public class Town extends Player {
 
 
             //militaryBase Buildings
+            this.militaryBaseButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.militaryBaseButtons.put("Subtract",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.militaryBaseButtons.put("Train", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.militaryBaseButtons.put("Soldier", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.militaryBaseButtons.put("Spy", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.militaryBaseButtons.put("Trained", new DuberTextButton("Trained: " + training + "  $" + training*100, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            //TODO: maybe display what the militaryBase currently contains
 
-
+            
             //All researchLab buildings
+            this.researchLabButtons.put("Unlock weapon", new DuberTextButton("unlock next weapon level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.researchLabButtons.put("Unlock armour", new DuberTextButton("unlock next armour level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.researchLabButtons.put("Progress per turn", new DuberTextButton("unlock next armour level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
 
 
             //All individual building buttons buttons
@@ -616,19 +626,6 @@ public class Town extends Player {
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
 
-
-                g.setColor(Color.BLACK);
-                int emptyLotX = 30; //X-value of the empty lot to be drawn
-                for(int i = 0; i < GRID_SIZE_BUILDING_WIDTH; i ++){
-                    int emptyLotY = 30; //Y-value of the empty lot to be drawn
-                    for(int j = 0; j < GRID_SIZE_BUILDING_LENGTH; j++){
-                        g.fillRect(emptyLotX, emptyLotY, Building.SIZE, Building.SIZE);
-                        emptyLotY += (Building.SIZE + ROAD_SIZE);
-                    }
-                    emptyLotX += (Building.SIZE + ROAD_SIZE);
-                }
-
-
                 //draw humans
                 for(int key: Town.this.getHumanMap().keySet()){
                     Town.this.getHumanMap().get(key).draw(g);
@@ -653,8 +650,6 @@ public class Town extends Player {
                 }
 
                 //draw infobar
-                g.setColor(Color.WHITE);
-                g.fillRect(GRID_SIZE_WIDTH, 0, 500, GRID_SIZE_LENGTH);
 
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
@@ -775,10 +770,9 @@ public class Town extends Player {
                         clickedBuilding = findBuilding(buildingX, buildingY); 
                         if(clickedBuilding != null){
 
-                            System.out.println("upgrade");
-                            generalButtons.get("upgrade").activate();
+                            activateGeneralBuildingButtons();
                             //TODO: remember to deactivate the buttons 
-                            //TODO: helpful reminder to display the upgrade price when activating the upgrade button
+                            //TODO: helpful reminder to display the upgrade price when activating the upgrade 
 
                             if(clickedBuilding instanceof Residency){
 
@@ -813,21 +807,24 @@ public class Town extends Player {
                         }
                     }
                 }else{
-                    //duber buttons on the info bar
-                    for(int i = 0;i < buildingTypesButtons.length;i++){
-                        if(buildingTypesButtons[i].inBounds(mouseX, mouseY)){
-                            type = buildingTypesButtons[i].getText();
-                            buildButton.activate();
+                    
+                    if(clickedBuilding == null){
+                        //duber buttons on the info bar
+                        for(int i = 0;i < buildingTypesButtons.length;i++){
+                            if(buildingTypesButtons[i].inBounds(mouseX, mouseY)){
+                                type = buildingTypesButtons[i].getText();
+                                buildButton.activate();
+                            }
                         }
-                    }
-                    if(buildButton.inBounds(mouseX, mouseY)){
-                        
-                        requestBuilding(type, buildX, buildY);
-                        
-                    }else if(generalButtons.get("upgrade").inBounds(mouseX, mouseY)){
-                        
-                        requestUpgrade(buildX,buildY);
+                        if(buildButton.inBounds(mouseX, mouseY)){
+                            
+                            requestBuilding(type, buildX, buildY);
+                            
+                        }else if(generalButtons.get("upgrade").inBounds(mouseX, mouseY)){
+                            
+                            requestUpgrade(buildX,buildY);
 
+                        }
                     }
 
                     //TODO: check if the buttons are clicked, add if statements for other buildings
@@ -926,7 +923,8 @@ public class Town extends Player {
 
                         residencyButtons.get("Add 1").deactivate();
                         residencyButtons.get("Train/Specialize").deactivate();
-                        residencyButtons.get("Subtract 1").deactivate();
+                        residencyButtons.get("Subtract 1").deactivate();\
+                        deactivateGeneralBuildingButtons();
                     }
 
                 }else if(menu == 3){
@@ -968,11 +966,11 @@ public class Town extends Player {
                         menu = 0;
                         training = 0;
 
-
                         //deactivate current buttons 
                         residencyButtons.get("Add 1").deactivate();
                         residencyButtons.get("Specialize citizens: ").deactivate();
                         residencyButtons.get("Subtract 1").deactivate();
+                        deactivateGeneralBuildingButtons();
                         //TODO: reset the screens
                     }
                     
@@ -982,6 +980,13 @@ public class Town extends Player {
             
             public void requestMilitaryBaseFunction(int menu, int mouseX,  int mouseY){
                 
+                if(menu == 0){
+
+                    deactivateBuildingButtons();
+                    //TODO: have a deactivate building buttons thingy
+
+                }
+
             }
             
             public void requestHospitalFunction(int menu, int mouseX,  int mouseY ){
@@ -1007,6 +1012,15 @@ public class Town extends Player {
 
             public void deactivateBuildingButtons(){
                 //TODO: deactivate building buttons 
+
+            }
+
+            public void activateGeneralBuildingButtons(){
+
+            }
+
+            public void deactivateGeneralBuildingButtons(){
+
 
             }
 

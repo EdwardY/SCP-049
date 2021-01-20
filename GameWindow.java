@@ -82,6 +82,25 @@ public abstract class GameWindow{
          */
         public void paintComponent(Graphics g){
             super.paintComponent(g);
+
+            g.setColor(Color.BLACK);
+
+            //draw the tiles for the building
+            int emptyLotX = 30; //X-value of the empty lot to be drawn
+            for(int i = 0; i < this.GRID_SIZE_BUILDING_WIDTH; i ++){
+                int emptyLotY = 30; //Y-value of the empty lot to be drawn
+                for(int j = 0; j < this.GRID_SIZE_BUILDING_LENGTH; j++){
+                    g.fillRect(emptyLotX, emptyLotY, 128, 128);
+                    emptyLotY += (Building.SIZE + ROAD_SIZE);
+                }
+                emptyLotX += (Building.SIZE + ROAD_SIZE);
+            }
+
+
+             //draw infobar
+             g.setColor(Color.WHITE);
+             g.fillRect(GRID_SIZE_WIDTH, 0, 500, GRID_SIZE_LENGTH);
+
         }
     }
 

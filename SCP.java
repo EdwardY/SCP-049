@@ -442,19 +442,6 @@ public class SCP extends Player{
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
 
-                //TODO: Draws tiles where the buildings are supposed to be, not sure if this is what we want
-                g.setColor(Color.BLACK);
-                int emptyLotX = 30; //X-value of the empty lot to be drawn
-                for(int i = 0; i < this.GRID_SIZE_BUILDING_WIDTH; i ++){
-                    int emptyLotY = 30; //Y-value of the empty lot to be drawn
-                    for(int j = 0; j < this.GRID_SIZE_BUILDING_LENGTH; j++){
-                        g.fillRect(emptyLotX, emptyLotY, 128, 128);
-                        emptyLotY += (Building.SIZE + ROAD_SIZE);
-                    }
-                    emptyLotX += (Building.SIZE + ROAD_SIZE);
-                }
-
-
                 //draw humans
                 for(int i = 0; i < SCP.this.getHumans().size(); i++){
                     SCP.this.getHumans().get(i).draw(g);
@@ -478,9 +465,7 @@ public class SCP extends Player{
                     }
                 }
 
-                //draw infobar
-                g.setColor(Color.WHITE);
-                g.fillRect(GRID_SIZE_WIDTH, 0, 500, GRID_SIZE_LENGTH);
+               
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 

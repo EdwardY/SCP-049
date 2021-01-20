@@ -20,14 +20,12 @@ class Game {
     private static final double SCP_WIN_PERCENT = 0.6;
     /** The {@code ArrayList} containing all {@code Buildings} in the {@code Game} */
     private ArrayList<Building> buildings;
-    /** The {@code NPCs} belonging to the town side */
-    private ArrayList<Human> humans;
+    /** The {@code HashMap} of {@code Humans} so that each {@code Human} only needs an ID */
+    private HashMap<Integer, Human> humanMap;
     /** The {@code NPCs} belonging to the SCP side */
     private ArrayList<SCP0492> scps;
     /** The {@code ArrayList} of ongoing {@code Events} */
     private ArrayList<Event> events;
-    /** The {@code HashMap} of {@code Humans} so that each {@code Human} only needs an ID */
-    private HashMap<Integer, Human> humanMap;
     /** The amount of money the town side has */
     private int money;
     /** The amount of food the town side has */
@@ -56,10 +54,9 @@ class Game {
      */
     public Game(){
         this.buildings = new ArrayList<Building>();
-        this.humans = new ArrayList<Human>();
+        this.humanMap = new HashMap<Integer, Human>();
         this.scps = new ArrayList<SCP0492>();
         this.events = new ArrayList<Event>();
-        this.humanMap = new HashMap<Integer, Human>();
         this.money = 500; //TODO: coordinate money amounts
         this.food = 10;
         this.hume = 50;
@@ -98,7 +95,6 @@ class Game {
                     if(buildingArea.contains(humanArea)){
 
                         this.humanMap.remove(key);
-                        this.humans.remove(currentHuman);
                         this.casualties ++;
                     }
                 }
@@ -119,7 +115,6 @@ class Game {
             Human currentHuman = this.humanMap.get(key);
             if(currentHuman.getHealth() <= 0){
                 this.humanMap.remove(key);
-                this.humans.remove(currentHuman);
                 this.casualties ++;
             }
         }
@@ -272,7 +267,6 @@ class Game {
 
             this.scps.get(i).translate(xMove, yMove);
         }
-        //TODO: move npcs that need to be moved
     }
 
     /**
@@ -284,15 +278,15 @@ class Game {
         for(int i = 0;i < scps.size();i++){
             scpAttack.insertAttacker(scps.get(i));
         }
-        for(int i = 0;i < humans.size();i++){
-            scpAttack.insertTarget(humans.get(i));
+        for(int key: humanMap.keySet()){
+            scpAttack.insertTarget(humanMap.get(key));
         }
         scpAttack.startCombat();
 
         QuadTree soldierAttack = new QuadTree(1080, 1420, 710, 540, 0);
-        for(int i = 0;i < humans.size();i++){
-            if(humans.get(i) instanceof Soldier){
-                soldierAttack.insertAttacker((Soldier)humans.get(i));
+        for(int key: humanMap.keySet()){
+            if(humanMap.get(key) instanceof Soldier){
+                soldierAttack.insertAttacker((Soldier)humanMap.get(key));
             }
         }
         for(int i = 0;i < scps.size();i++){
@@ -306,7 +300,7 @@ class Game {
      * @return true if the winning conditions have been satisfied, false otherwise
      */
     public boolean checkScpWin(){
-        int humanCount = this.getHumans().size();
+        int humanCount = this.getHumanMap().size();
         int scpCount = this.getScps().size();
         int total = humanCount + scpCount;
         if(total == 0){//check for dividing by 0 math errors
@@ -345,7 +339,6 @@ class Game {
                 double sus = Math.random();
                 double success = Math.random();
                 if(sus < spy.getSus()){
-                    this.humans.remove(currentHuman);
                     this.humanMap.remove(key);
                 }else if(success < spy.getSuccessRate()){
                     return true;
@@ -369,14 +362,6 @@ class Game {
      */
     public ArrayList<SCP0492> getScps(){
         return this.scps;
-    }
-
-    /**
-     * Gets the {@code Human} objects 
-     * @return humans, a list of all game {@code Human} objects
-     */
-    public ArrayList<Human> getHumans(){
-        return this.humans;
     }
 
     /**
@@ -489,7 +474,6 @@ class Game {
         if(npc instanceof SCP0492){
             scps.add((SCP0492)npc);
         }else{
-            humans.add((Human)npc);
             humanMap.put(currentId, (Human)npc);
             currentId++;
         }
@@ -570,28 +554,6 @@ class Game {
 
     /**
      * Converts an NPC to another type.
-     * @param npc The NPC being converted.
-     * @param type The type of NPC that the NPC will be converted to.
-     * @param health The health of the NPC.
-     * @param maxHealth The maximum health of the NPC.
-     * @param attackDamage The damage of the NPC (if applicable).
-     * @param priority The priority of the NPC.
-     * @param successRate The success rate of the NPC getting enemy intel (if applicable).
-     * @param sus The chance of the NPC getting caught by the enemy (if applicable).
-     * @param healingAmount The amount of healing the NPC will be able to heal (if applicable).
-     */
-    public void convert(NPC npc, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
-
-        for(int key: this.humanMap.keySet()){
-            Human currentHuman = humanMap.get(key);
-            if(currentHuman.equals(npc)){
-                convert(key, type, maxHealth, attackDamage, priority, successRate, sus, healingAmount);
-            }
-        }
-    }
-
-    /**
-     * Converts an NPC to another type.
      * @param key The key of the NPC being converted.
      * @param type The type of NPC that the NPC will be converted to.
      * @param health The health of the NPC.
@@ -603,7 +565,7 @@ class Game {
      * @param healingAmount The amount of healing the NPC will be able to heal (if applicable).
      */
     public void convert(int key, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
-        Human currentHuman = humanMap.get(key);
+        Human currentHuman = this.humanMap.get(key);
         int currentXPosition = currentHuman.getX();
         int currentYPosition = currentHuman.getY();
         NPC newNpc = null;
@@ -622,14 +584,12 @@ class Game {
         }else if (type.equals("SCP0492")){
             newNpc = new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage);
         }
-        this.humans.remove(currentHuman);
         if(newNpc instanceof SCP0492){
-            scps.add((SCP0492)newNpc);
+            this.humanMap.remove(key);
+            this.scps.add((SCP0492)newNpc);
         }else{
-            this.humans.add((Human)newNpc);
             this.humanMap.replace(key, (Human)newNpc);
         }
-        return;
     }
 
     /**

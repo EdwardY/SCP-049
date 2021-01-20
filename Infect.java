@@ -2,7 +2,7 @@
 import java.awt.Rectangle;
 
 //data structure utilities
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * [Infect.java]
@@ -48,11 +48,11 @@ import java.util.ArrayList;
      */
     @Override
     public void affect(Game game){
-        ArrayList<Human> humans = game.getHumans();
-        for(int i = 0;i < humans.size();i++){
-            Human human = humans.get(i);
+        HashMap<Integer, Human> humans = game.getHumanMap();
+        for(int key: humans.keySet()){
+            Human human = humans.get(key);
             if(this.getAoe().contains(human.getX(), human.getY(), NPC.SIZE, NPC.SIZE)){
-                game.convert(human, "SCP0492", 100, 10, 0, 0.0, 0.0, 0);//temp values added
+                game.convert(key, "SCP0492", 100, 10, 0, 0.0, 0.0, 0);//temp values added
                 // Parameters for convert: NPC npc, String type, int health, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount
             }
         }

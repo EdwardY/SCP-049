@@ -127,6 +127,7 @@ class Server {
             }
         }catch(Exception e){ 
             System.out.println("Error accepting connection");
+            e.printStackTrace();
         }
         try{
           client.close();

@@ -41,6 +41,10 @@ public class Town extends Player {
     private String type;
     /**research progress */
     private double researchProgress = 0;
+    /**unlocked armour level */
+    private int armourLevel;
+    /**unlocked weaponLevel */
+    private int weaponLevel;
     
 
     /**
@@ -520,6 +524,10 @@ public class Town extends Player {
         private String npcType;
         /** the building that is being clicked on */
         Building clickedBuilding;
+        /**Levels button for users to click on */
+        private DuberTextButton[] levels;
+        /**The level that the soldier user will train */
+        private int soldierLevel;
 
         /**
          * Method runs the town version of the game.
@@ -550,8 +558,12 @@ public class Town extends Player {
             this.buildingTypesButtons[5] = new DuberTextButton("Bank", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30));
 
             //TODO: figure out a lot of buildings stats
+            //TODO: add the the actual number e.g. healh  e.g. clickedBuilding.getHealth() in the button
 
-
+            levels = new DuberTextButton[3];
+            for(int i = 0;i < levels.length;i++){
+                levels[i] = new DuberTextButton("" + (i + 1), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + i*80, 900, 60, 30));
+            }
             //TODO: place buttons in the right positions
             //All residency buildings
             this.residencyButtons = new HashMap<>();
@@ -570,6 +582,7 @@ public class Town extends Player {
 
 
             //militaryBase Buildings
+            this.militaryBaseButtons = new HashMap<>();
             this.militaryBaseButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
             this.militaryBaseButtons.put("Subtract",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
             this.militaryBaseButtons.put("Train", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
@@ -580,8 +593,9 @@ public class Town extends Player {
 
             
             //All researchLab buildings
-            this.researchLabButtons.put("Unlock weapon", new DuberTextButton("unlock next weapon level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
-            this.researchLabButtons.put("Unlock armour", new DuberTextButton("unlock next armour level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.researchLabButtons = new HashMap<>();
+            this.researchLabButtons.put("Upgrade weapon", new DuberTextButton("upgrade next weapon level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
+            this.researchLabButtons.put("Upgrade armour", new DuberTextButton("upgrade next armour level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
             this.researchLabButtons.put("Progress per turn", new DuberTextButton("unlock next armour level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
 
 
@@ -591,6 +605,7 @@ public class Town extends Player {
             this.hospitalHeal = new DuberTextButton("heal all occupants in the hospital", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
 
             //initialize general buttons
+            this.generalButtons = new HashMap<>();
             this.generalButtons.put("Level", new DuberTextButton("Level: " + clickedBuilding.getLevel(), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
             this.generalButtons.put("Health", new DuberTextButton("health: " +clickedBuilding.getHealth() + "/" + clickedBuilding.getMaxHealth(), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
             this.generalButtons.put("upgrade", new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30)));
@@ -776,7 +791,7 @@ public class Town extends Player {
 
                             if(clickedBuilding instanceof Residency){
 
-                                requestResidencyFunction(menu, mouseX, mouseY,clickedBuilding);
+                                requestResidencyFunction(menu, mouseX, mouseY);
 
                             }else if(clickedBuilding instanceof MilitaryBase){
                                 
@@ -816,6 +831,12 @@ public class Town extends Player {
                                 buildButton.activate();
                             }
                         }
+
+                        //activate the general btttos such as health and capacti
+                        for(String key: generalButtons.keySet()){
+                            generalButtons.get(key).activate();
+                        }
+
                         if(buildButton.inBounds(mouseX, mouseY)){
                             
                             requestBuilding(type, buildX, buildY);
@@ -831,7 +852,7 @@ public class Town extends Player {
 
                     if(clickedBuilding instanceof Residency){
 
-                        requestResidencyFunction(menu, mouseX, mouseY, clickedBuilding);
+                        requestResidencyFunction(menu, mouseX, mouseY);
                     }
                 }
             }
@@ -855,7 +876,7 @@ public class Town extends Player {
             }
 
             //TODO: ask resource synchronization
-            public void requestResidencyFunction(int menu, int mouseX,  int mouseY, Building currentBuilding){
+            public void requestResidencyFunction(int menu, int mouseX,  int mouseY){
 
                 //TODO: figure out if this is needed
                 deactivateBuildingButtons(); 
@@ -923,7 +944,7 @@ public class Town extends Player {
 
                         residencyButtons.get("Add 1").deactivate();
                         residencyButtons.get("Train/Specialize").deactivate();
-                        residencyButtons.get("Subtract 1").deactivate();\
+                        residencyButtons.get("Subtract 1").deactivate();
                         deactivateGeneralBuildingButtons();
                     }
 
@@ -983,39 +1004,192 @@ public class Town extends Player {
                 if(menu == 0){
 
                     deactivateBuildingButtons();
-                    //TODO: have a deactivate building buttons thingy
 
+                    militaryBaseButtons.get("Spy").activate();
+                    militaryBaseButtons.get("Soldier").activate();
+
+                    this.menu = 1;
+
+                }else if(menu == 1 ){
+
+
+                    if(militaryBaseButtons.get("Spy").inBounds(mouseX, mouseY)){
+                    
+                    
+                        //deactivate previous menu buildings
+                        militaryBaseButtons.get("Spy").deactivate();
+                        militaryBaseButtons.get("Soldier").deactivate();
+
+                        //activate buttons needed
+                        militaryBaseButtons.get("Add 1").activate();
+                        militaryBaseButtons.get("Subtract 1").activate();
+                        militaryBaseButtons.get("Trained").activate();
+                        militaryBaseButtons.get("Train").activate();
+
+                        this.menu = 2;
+                        npcType = "Spy";
+                    
+                    
+                    }else if(militaryBaseButtons.get("Soldier").inBounds(mouseX,mouseY)){
+                        //deactivate previous menu buildings
+                        militaryBaseButtons.get("Spy").deactivate();
+                        militaryBaseButtons.get("Soldier").deactivate();
+
+                        militaryBaseButtons.get("Add 1").activate();
+                        militaryBaseButtons.get("Subtract 1").activate();
+                        militaryBaseButtons.get("Trained").activate();
+                        militaryBaseButtons.get("Train").activate();
+                        for(int i = 0; i < 3; i ++){
+                            levels[i].activate();
+                        }
+
+                        this.menu = 3;
+                        npcType = "Soldier";
+                    }
+                }else if(menu == 2){
+
+                    if(militaryBaseButtons.get("Add 1").inBounds(mouseX, mouseY)){
+
+                        training ++;
+                    }else if(militaryBaseButtons.get("Subtract 1").inBounds(mouseX, mouseY)){
+
+                        training --;
+                    }else if(levels[0].inBounds(mouseX, mouseY)){
+                        soldierLevel = 1;
+                    }else if(levels[1].inBounds(mouseX, mouseY)){
+                        soldierLevel = 2;
+                    }else if(levels[2].inBounds(mouseX, mouseY)){
+                        soldierLevel = 3;
+                    }else if ( militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
+
+                        //send requests to server
+                        sendMessage("<military spy> " + training + " "+ clickedBuilding.getX() + " " + clickedBuilding.getY());
+                        menu = 0;
+
+                        //deactivate buttons
+                        militaryBaseButtons.get("Add 1").deactivate();
+                        militaryBaseButtons.get("Subtract 1").deactivate();
+                        militaryBaseButtons.get("Trained").deactivate();
+                        militaryBaseButtons.get("Train").deactivate();
+                    }
+                }else if (menu == 3){
+
+                    if(militaryBaseButtons.get("Add 1").inBounds(mouseX, mouseY)){
+
+                        training ++;
+                    }else if(militaryBaseButtons.get("Subtract 1").inBounds(mouseX, mouseY)){
+
+                        training --;
+                    }else if(militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
+
+                        //send requests to server
+                        sendMessage("<military soldier> " + soldierLevel + " " + training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
+
+                        //reset values to defaules
+                        menu = 0;
+                        soldierLevel = 1;
+
+                        //deactivate buttons 
+                        militaryBaseButtons.get("Add 1").deactivate();
+                        militaryBaseButtons.get("Subtract 1").deactivate();
+                        militaryBaseButtons.get("Trained").deactivate();
+                        militaryBaseButtons.get("Train").deactivate();
+                        for(int i = 0; i < 3; i ++){
+                            levels[i].deactivate();
+                        }
+                    }
                 }
-
             }
             
             public void requestHospitalFunction(int menu, int mouseX,  int mouseY ){
-                //TODO: implement back button
+                
+                if(menu == 0){
+
+                    deactivateBuildingButtons();
+                    hospitalHeal.activate();
+
+                }else if(menu == 1){
+
+                    if(hospitalHeal.inBounds(mouseX, mouseY)){
+
+                        //request healing of all occupants inside
+                        sendMessage("<hh> " + clickedBuilding.getX() + " " + clickedBuilding.getY());
+                        menu = 0; 
+
+                    }
+
+                }
+
             }
 
 
             public void requestResearchLabFunction(int menu, int mouseX,  int mouseY){
                 
+                if(menu == 0){
+
+                    researchLabButtons.get("Upgrade weapon").activate();
+                    researchLabButtons.get("Upgrade armour").activate();
+
+                    menu = 1;
+
+                }else if(menu == 1){
+
+                    if(researchLabButtons.get("Upgrade weapon").inBounds(mouseX, mouseY)){
+
+                        sendMessage("<research weapon>");
+                        menu = 0;
+
+                    }else if(researchLabButtons.get("Upgrade armour").inBounds(mouseX, mouseY)){
+
+                        sendMessage("<research armour>");
+                        menu = 0;
+                    }
+                }
             }
 
             public void requestFoodBuildingFunctions(int menu, int mouseX,  int mouseY){
                 
-                //TODO: display food nothing really happens
-                //TODO: implement back button
+                deactivateBuildingButtons();
+                foodIncome.activate();
             }
 
             public void requestBankButtonsFunctions(int menu, int mouseX,  int mouseY){
                 
-                //TODO: display money income, nothing else really happens 
-                //TODO: implement back button
+                deactivateBuildingButtons();
+                moneyIncome.activate();
             }
 
             public void deactivateBuildingButtons(){
-                //TODO: deactivate building buttons 
+                
+                if( !(clickedBuilding instanceof Residency)){ //if current building is not residencyy, clear all residency buttons
+                    for(String key: residencyButtons.keySet()){
+                        residencyButtons.get(key).deactivate();
+                    }
+                }
+                if( !(clickedBuilding instanceof Hospital)){
+                    hospitalHeal.deactivate();
+                }
+                if( !(clickedBuilding instanceof MilitaryBase)){
+                    for(String key: militaryBaseButtons.keySet()){
+                        militaryBaseButtons.get(key).deactivate();
+                    }
+                }
+                if( !(clickedBuilding instanceof ResearchLab)){
+                    for(String key: researchLabButtons.keySet()){
+                        researchLabButtons.get(key).deactivate();
+                    }
+                }
+                if( !(clickedBuilding instanceof FoodBuilding)){
+                    foodIncome.deactivate();
+                }
+                if( !(clickedBuilding instanceof Bank)){
+                    moneyIncome.deactivate();
+                }
 
             }
 
             public void activateGeneralBuildingButtons(){
+
 
             }
 

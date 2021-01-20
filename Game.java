@@ -589,7 +589,6 @@ class Game {
         }else{
             this.humanMap.replace(key, (Human)newNpc);
         }
-        return;
     }
 
     /**

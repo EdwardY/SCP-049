@@ -565,7 +565,7 @@ class Game {
      * @param healingAmount The amount of healing the NPC will be able to heal (if applicable).
      */
     public void convert(int key, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
-        Human currentHuman = humanMap.get(key);
+        Human currentHuman = this.humanMap.get(key);
         int currentXPosition = currentHuman.getX();
         int currentYPosition = currentHuman.getY();
         NPC newNpc = null;
@@ -585,7 +585,8 @@ class Game {
             newNpc = new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage);
         }
         if(newNpc instanceof SCP0492){
-            scps.add((SCP0492)newNpc);
+            this.humanMap.remove(key);
+            this.scps.add((SCP0492)newNpc);
         }else{
             this.humanMap.replace(key, (Human)newNpc);
         }

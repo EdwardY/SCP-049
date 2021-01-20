@@ -557,7 +557,7 @@ class Server {
                         }
 
                         //humans
-                        sendTo(allUsers, "" + game.getHumans().size());
+                        sendTo(allUsers, "" + game.getHumanMap().size());
                         for(int key: game.getHumanMap().keySet()){
                             Human curHuman = game.getHumanMap().get(key);
                             town.sendMessage("" + key);
@@ -575,8 +575,8 @@ class Server {
                         //town food supply
                         town.sendMessage("<r>");
                         town.sendMessage("Food");
-                        if(game.getFood() > game.getHumans().size()){
-                            town.sendMessage("" + game.getHumans().size());
+                        if(game.getFood() > game.getHumanMap().size()){
+                            town.sendMessage("" + game.getHumanMap().size());
                         }
                         
                         //intel gathering

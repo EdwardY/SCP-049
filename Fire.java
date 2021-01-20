@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 
 //data structures
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * [Fire.java]
@@ -53,15 +54,15 @@ class Fire extends PhysicalEvent{
     @Override
     public void affect(Game game){
         ArrayList<Building> buildings = game.getBuildings();
-        ArrayList<Human> humans = game.getHumans();
+        HashMap<Integer, Human> humans = game.getHumanMap();
         for(int i = 0;i < buildings.size();i++){
             if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY(), Building.SIZE, Building.SIZE)){
                 buildings.get(i).takeDamage(this.getEffectAmount());
             }
         }
-        for(int i = 0;i < humans.size();i++){
-            if(this.getAoe().contains(humans.get(i).getX(), humans.get(i).getY(), NPC.SIZE, NPC.SIZE)){
-                humans.get(i).takeDamage(this.getEffectAmount());
+        for(int key: humans.keySet()){
+            if(this.getAoe().contains(humans.get(key).getX(), humans.get(key).getY(), NPC.SIZE, NPC.SIZE)){
+                humans.get(key).takeDamage(this.getEffectAmount());
             }
         }
     }

@@ -296,6 +296,15 @@ class Game {
     }
 
     /**
+     * Loops through every citizen and makes them get older
+     */
+    private void ageCitizens(){
+        for(int key: humanMap.keySet()){
+            humanMap.get(key).gotOld();
+        }
+    }
+
+    /**
      * Checks for if the SCP side has satisfied their winning conditions (60% of total population is SCP-049-2s)
      * @return true if the winning conditions have been satisfied, false otherwise
      */
@@ -733,15 +742,13 @@ class Game {
      * Calls on moveNpcs to move the mindless {@code NPCs} Calls handleAttacks to deal with {@code SCP0492s} 
      * attacking {@code Humans} and {@code Soldiers} attacking {@code SCP0492s}. Calls on eatFood to handle the fact 
      * {@code Humans} need to consume objects of nutritious value if they wish to continue metabolising. Calls on 
-     * killDeadStuff to kill off anything that should be dead. 
+     * killDeadStuff to kill off anything that should be dead. ageCitizens loops through each citizen to make them older
      * </p>
      */
     public void doTurn(){
         if(this.turn <= MAX_TURNS){
             this.turn++;
 
-            //TODO: make sure citizens get old? Everyturn run the gotOld method?
-            //end of turn methods
             getResourcesFromBuildings();
             calculateStonks();
             dealWithEvents();
@@ -749,6 +756,7 @@ class Game {
             handleAttacks();
             eatFood();
             killDeadStuff();
+            ageCitizens();
         }
 
     }

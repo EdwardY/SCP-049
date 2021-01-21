@@ -602,7 +602,7 @@ public class Town extends Player {
             //All individual building buttons buttons
             this.foodIncome = new DuberTextButton("Food income per turn: ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
             this.moneyIncome = new DuberTextButton("Money Income per turn: ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
-            this.hospitalHeal = new DuberTextButton("heal all occupants in the hospital", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
+            this.hospitalHeal = new DuberTextButton("A Hospital that heals ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
 
             //initialize general buttons
             this.generalButtons = new HashMap<>();
@@ -853,6 +853,21 @@ public class Town extends Player {
                     if(clickedBuilding instanceof Residency){
 
                         requestResidencyFunction(menu, mouseX, mouseY);
+                    }else if(clickedBuilding instanceof Hospital){
+
+                        requestHospitalFunction(menu, mouseX, mouseY);
+                    }else if(clickedBuilding instanceof MilitaryBase){
+
+                        requestMilitaryBaseFunction(menu, mouseX, mouseY);
+                    }else if(clickedBuilding instanceof ResearchLab){
+
+                        requestResearchLabFunction(menu, mouseX, mouseY);
+                    }else if(clickedBuilding instanceof FoodBuilding){
+
+                        requestFoodBuildingFunctions(menu, mouseX, mouseY);
+                    }else if(clickedBuilding instanceof Bank){
+
+                        requestBankButtonsFunctions(menu, mouseX, mouseY);
                     }
                 }
             }
@@ -1109,23 +1124,10 @@ public class Town extends Player {
             
             public void requestHospitalFunction(int menu, int mouseX,  int mouseY ){
                 
-                if(menu == 0){
 
-                    deactivateBuildingButtons();
-                    hospitalHeal.activate();
-
-                }else if(menu == 1){
-
-                    if(hospitalHeal.inBounds(mouseX, mouseY)){
-
-                        //request healing of all occupants inside
-                        sendMessage("<hh>" );
-                        sendMessage(clickedBuilding.getX() + " " + clickedBuilding.getY());
-                        menu = 0; 
-
-                    }
-
-                }
+                deactivateBuildingButtons();
+                
+                    
 
             }
 

@@ -146,12 +146,23 @@ class Residency extends Building{
     /**
      * @param amount Creating a certain amount of citizens
      */
-    public void createCitizen(int amount){
+    public void createCitizen(Citizen citizen){
 
-        for(int i = 0; i < amount; i ++){
+        residents.add(citizen);
 
-            residents.add(new Citizen(0, 100, this.getX(), this.getY()));
+    }
+
+    /** */
+    public ArrayList<NPC> getAdultPop(){
+        ArrayList<NPC> adults = new ArrayList<>();
+        for(int i = 0; i < residents.size(); i ++){
+
+            if(residents.get(i).getAge() >= 18){
+                adults.add(residents.get(i));
+            }
         }
+
+        return adults;
     }
 
     /**

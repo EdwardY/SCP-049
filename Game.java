@@ -593,6 +593,140 @@ class Game {
     }
 
     /**
+     * Adding a specialized citizen
+     * @param type The type of specialization
+     * @param amount how many to specialize 
+     * @param x The residency the building came from 
+     * @param y the residency coorediante the building came from
+     * @return Whether this was successful
+     */
+    public boolean specializeCitizen(String type, int amount, int x, int y){
+
+        boolean success = false;
+        boolean buildingExist = false;
+        ArrayList<Building> buildingList = this.getBuildings();
+        int availableSpace = 0;
+        //TODO synchronize activities on both sides
+
+        //if adding Researchers
+        if(type.equals("Researcher")){
+
+            for(int i = 0; i < buildingList.size(); i ++){
+                if(buildingList.get(i) instanceof ResearchLab) {
+                    buildingExist = true;
+                }
+            }
+
+            if(buildingExist){
+                success = randomAdd("Researcher", amount, x, y);
+            }
+        //if we are adding Doctors
+        }else if(type.equals("Doctor")){
+            
+            for(int i = 0; i < buildingList.size(); i ++){
+                if(buildingList.get(i) instanceof Hospital) {
+                    buildingExist = true;
+
+                    availableSpace = ((Hospital)buildingList.get(i)).getMaxCapacity() - ((Hospital)buildingList.get(i)).getDoctors().size();
+                }
+            }
+
+            if(availableSpace >= amount){
+
+                randomAdd("Doctor", amount, x, y);
+            }
+        //if we are adding Cadets
+        }else if (type.equals("Cadet")){
+            for(int i = 0; i < buildingList.size(); i ++){
+                if(buildingList.get(i) instanceof MilitaryBase) {
+                    buildingExist = true;
+                }
+            }
+
+            if(buildingExist){
+                success = randomAdd("Cadet", amount, x, y);
+            }
+        }
+        return success;
+    }
+
+    /**
+     * randomly add the npc to one of the building that it bleongs in
+     * @param type The type of npc
+     * @param amount the amount of npc
+     * @param x the coordinate of the building that it came from
+     * @param y The coordiante of the building that it came from
+     * @return Success or not
+     */
+    private boolean randomAdd(String type, int amount, int x, int y){
+        
+        boolean success = false;
+        Building building = findBuilding( x, y);
+        ArrayList<NPC> adults= new ArrayList<>();
+
+
+        //TODO: I can't really use the convert method since I don't have the key to the npc
+        if(building instanceof Residency){
+
+            adults = ((Residency)building).getAdultPop();
+
+            for(int i = 0; i < adults.size(); i ++){
+                //some converting
+                //TODO: SUPER IMPORT FIGURE OUT HOW TO CONVERT
+                //MOVE: THE npc to where they are supposed to be
+            }
+        }
+        return success;
+    }
+
+    /**
+     * add a citizen npc that's being requested by the user
+     * @param x x coordinate of building
+     * @param y y coordinate of building 
+     * @param amount amount of citizens to train
+     * @return True is transaction success false is transaction was not successful
+     */
+    public boolean trainCitizen(int x, int y, int amount){
+        
+        boolean success = false;
+
+        Building building = findBuilding(x, y);
+
+        if(building instanceof Residency){
+
+            if( ((Residency)building).getMaxCap() - ((Residency)building).getCurrentPopulation() >= amount ){
+
+                for(int i = 0; i < 0; i ++){
+                    Citizen add = new Citizen(0, 100, x, y);
+
+                    this.addNpc(add);
+                    ((Residency)building).createCitizen(add);
+                }
+                this.changeMoney(-10*amount); //TODO: synchronize moneyy amount, make sure it's the same
+            }
+        }
+
+        return success;
+
+    }
+
+    /**
+     * Looks for if a building with the coordinates of (x, y) exist
+     * @param x the x coordinate of the building
+     * @param y the y coordinate of the building
+     * @return null if no such building exists, otherwise, the building in the (x, y) position
+     */
+    private Building findBuilding(int x, int y){
+        Building buildingToReturn = null;
+        for(int i = 0;i < this.getBuildings().size();i++){
+            if((this.getBuildings().get(i).getX() == x) && (this.getBuildings().get(i).getY() == y)){
+                buildingToReturn = this.getBuildings().get(i);
+            }
+        }
+        return buildingToReturn;
+    }
+
+    /**
      * <p>
      * Checks for if the current turn count is still valid. If so, increase turn number by one. Calls 
      * getResourcesFromBuildings to collect resources. Calls dealWithEvents to handle the {@code Events}. 
@@ -605,6 +739,8 @@ class Game {
     public void doTurn(){
         if(this.turn <= MAX_TURNS){
             this.turn++;
+
+            //TODO: make sure citizens get old? Everyturn run the gotOld method?
             //end of turn methods
             getResourcesFromBuildings();
             calculateStonks();
@@ -627,4 +763,6 @@ class Game {
         this.humeChange = 0;
         this.casualties = 0;
     }
+
+    
 }

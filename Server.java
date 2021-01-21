@@ -137,6 +137,8 @@ class Server {
         System.exit(-1);
     }
 
+
+
     /**
      * [ClientHandler.java]
      * Accepts clients and handles requests
@@ -227,6 +229,40 @@ class Server {
                             int y = Integer.parseInt(coords.split(" ")[1]);
                             success = upgrade(x, y);
                             reportTransactionStatus(success);
+                        }else if(prefix.equals("<residency train>")){
+                            
+                            boolean success = false;
+                            String info = input.readLine();
+                            int x = Integer.parseInt(info.split(" ")[0]);
+                            int y = Integer.parseInt(info.split(" ")[1]);
+                            int amount = Integer.parseInt(info.split(" ")[2]);
+                            success = game.trainCitizen(x,y,amount);
+                            reportTransactionStatus(success);
+
+                        }else if(prefix.equals("<residency convert>")){
+
+                            boolean success = false;
+                            String type = input.readLine();
+                            String info = input.readLine();
+                            int amount = Integer.parseInt(info.split(" ")[0]);
+                            int x = Integer.parseInt(info.split(" ")[1]);
+                            int y = Integer.parseInt(info.split(" ")[2]);
+                            success = game.specializeCitizen(type, amount, x, y);
+                            reportTransactionStatus(success);
+
+                        }else if(prefix.equals("<military soldier>")){
+
+
+                        }else if(prefix.equals("<military spy>")){
+
+
+                        }else if(prefix.equals("<hh>")){
+
+                        }else if(prefix.equals("<research armour>")){
+
+
+                        }else if(prefix.equals("<research weapon>")){
+                            
                         }
                     }
                 }catch(IOException e){
@@ -252,6 +288,8 @@ class Server {
             this.output.println(msg);
             this.output.flush();
         }
+
+
 
         /**
          * Sends a message to the client about whether or not a certain task was sucessful
@@ -598,4 +636,6 @@ class Server {
             }
         }
     }
+
+    
 }

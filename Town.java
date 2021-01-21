@@ -933,7 +933,8 @@ public class Town extends Player {
                         training --;
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
-                        sendMessage("<residency train>" + " " + clickedBuilding.getX() + " " + clickedBuilding.getY() + " " + training); 
+                        sendMessage("<residency train>"); 
+                        sendMessage(clickedBuilding.getX() + " " + clickedBuilding.getY() + " " + training);                   
                         //Update this class as well
                         System.out.println("Your buttons have made it this far congrats");
 
@@ -978,7 +979,10 @@ public class Town extends Player {
                         training --;
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
-                        sendMessage("<residency convert> " + npcType + " " + training); //TODO: make the requesting different requesting than menu 2
+                        sendMessage("<residency convert>"); 
+                        sendMessage(npcType);
+                        sendMessage(training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
+                        //TODO: make the requesting different requesting than menu 2
                         //TODO update current class's objects when converting? 
 
                         System.out.println("Your buttons have made it this far congrats");
@@ -1063,7 +1067,8 @@ public class Town extends Player {
                     }else if ( militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
 
                         //send requests to server
-                        sendMessage("<military spy> " + training + " "+ clickedBuilding.getX() + " " + clickedBuilding.getY());
+                        sendMessage("<military spy>" );
+                        sendMessage(training + " "+ clickedBuilding.getX() + " " + clickedBuilding.getY());
                         menu = 0;
 
                         //deactivate buttons
@@ -1083,7 +1088,8 @@ public class Town extends Player {
                     }else if(militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
 
                         //send requests to server
-                        sendMessage("<military soldier> " + soldierLevel + " " + training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
+                        sendMessage("<military soldier>");
+                        sendMessage(soldierLevel + " " + training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
 
                         //reset values to defaules
                         menu = 0;
@@ -1113,7 +1119,8 @@ public class Town extends Player {
                     if(hospitalHeal.inBounds(mouseX, mouseY)){
 
                         //request healing of all occupants inside
-                        sendMessage("<hh> " + clickedBuilding.getX() + " " + clickedBuilding.getY());
+                        sendMessage("<hh>" );
+                        sendMessage(clickedBuilding.getX() + " " + clickedBuilding.getY());
                         menu = 0; 
 
                     }

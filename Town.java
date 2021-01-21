@@ -480,7 +480,7 @@ public class Town extends Player {
             String report = "DuberCoins: " + duberCoins + "\nTotal population: " + humanNum + "\nBuildings: " + buildingNum + "\n\nAll humans:";
             report += "\n\nCitizens: " + citizenCounter + "\nCadets: " + cadetCounter + "\nDoctors: " + doctorCounter + "\nResearchers: " + researcherCounter;
             report += "\nSoldiers: " + soldierCounter + "\nSpies: " + spyCounter + "\n\nAll Buildings:\n\nBanks: " + bankCounter + "\nFood Buildings: " + foodBuildingCounter;
-            report += "\nHospitals: " + hospitalCounter + "\nMilitary Bases: " + militaryBaseCounter + "\nResearch Labs: " + researchLabCounter  + "Reseidencies: " + residencyCounter;
+            report += "\nHospitals: " + hospitalCounter + "\nMilitary Bases: " + militaryBaseCounter + "\nResearch Labs: " + researchLabCounter  + "Residencies: " + residencyCounter;
 
             //update the report window
             this.getReportBox().setText(report);
@@ -546,7 +546,7 @@ public class Town extends Player {
             gameWindow.addMouseMotionListener(new TownMouseHandler());
 
 
-            //information buttons 
+            //Maybe add a back button (returns to menu one)
 
             // all the buttons
             this.buildingTypesButtons = new DuberTextButton[6];
@@ -786,6 +786,7 @@ public class Town extends Player {
                         if(clickedBuilding != null){
 
                             activateGeneralBuildingButtons();
+                            menu = 0;
                             //TODO: remember to deactivate the buttons 
                             //TODO: helpful reminder to display the upgrade price when activating the upgrade 
 
@@ -994,10 +995,24 @@ public class Town extends Player {
                         training --;
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
+                        String keys = ""
                         sendMessage("<residency convert>"); 
                         sendMessage(npcType);
                         sendMessage(training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
-                        //TODO: make the requesting different requesting than menu 2
+
+                        for(int key: humanMap.keySet()){
+                            if(humanMap.get(key) instanceof Citizen){
+
+                                
+                                if(humanMap.get(key).getX() == clickedBuilding.getX() && humanMap.get(key).getY() == clickedBuilding.getY());{
+                                keys = keys + " " + key;
+
+                                }
+                            }
+                        }
+
+                        sendMessage()
+                        
                         //TODO update current class's objects when converting? 
 
                         System.out.println("Your buttons have made it this far congrats");
@@ -1124,11 +1139,8 @@ public class Town extends Player {
             
             public void requestHospitalFunction(int menu, int mouseX,  int mouseY ){
                 
-
                 deactivateBuildingButtons();
                 
-                    
-
             }
 
 
@@ -1198,7 +1210,7 @@ public class Town extends Player {
             }
 
             public void activateGeneralBuildingButtons(){
-
+                //TODO: a reminder to fill in this method that display general stuff like health and level
 
             }
 

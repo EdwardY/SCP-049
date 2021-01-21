@@ -305,6 +305,42 @@ class Game {
     }
 
     /**
+     * <p>
+     * First loops through the buildings to find all the hospitals. Then loops through all the hospitals to heal 
+     * the people in the hospital. Next loops through all the humans. If the human's health isn't maximized, add 
+     * it to the hospital queue and it will be healed next turn.
+     * </p>
+     */
+    private void dealWithMedicalStuff(){
+        int hospitalIndex = 0;
+        ArrayList<Hospital> hospitals = new ArrayList<Hospital>();
+
+        for(Building building: buildings){
+            if(building instanceof Hospital){
+                hospitals.add((Hospital)building);
+            }
+        }
+
+        for(Hospital hospital: hospitals){
+            hospital.heal();
+        }
+
+        for(int key: humanMap.keySet()){
+            Human human = humanMap.get(key);
+            if(human.getHealth() < human.getMaxHealth()){
+                if(hospitals.size() > hospitalIndex){
+                    Hospital hospital = hospitals.get(hospitalIndex);
+                    if(hospital.getCurrentCapacity() < hospital.getMaxCapacity()){
+                        hospital.addInjured(human);
+                    }else{
+                        hospitalIndex++;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Checks for if the SCP side has satisfied their winning conditions (60% of total population is SCP-049-2s)
      * @return true if the winning conditions have been satisfied, false otherwise
      */
@@ -742,7 +778,9 @@ class Game {
      * Calls on moveNpcs to move the mindless {@code NPCs} Calls handleAttacks to deal with {@code SCP0492s} 
      * attacking {@code Humans} and {@code Soldiers} attacking {@code SCP0492s}. Calls on eatFood to handle the fact 
      * {@code Humans} need to consume objects of nutritious value if they wish to continue metabolising. Calls on 
-     * killDeadStuff to kill off anything that should be dead. ageCitizens loops through each citizen to make them older
+     * killDeadStuff to kill off anything that should be dead. dealWithMedicalStuff deals with healing people 
+     * and sticking more injured patients into the {@code Hospitals}. ageCitizens loops through each citizen 
+     * to make them get older.
      * </p>
      */
     public void doTurn(){
@@ -756,6 +794,7 @@ class Game {
             handleAttacks();
             eatFood();
             killDeadStuff();
+            dealWithMedicalStuff();
             ageCitizens();
         }
 

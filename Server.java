@@ -244,25 +244,64 @@ class Server {
                             boolean success = false;
                             String type = input.readLine();
                             String info = input.readLine();
+                            String keys = input.readLine().substring(1);
                             int amount = Integer.parseInt(info.split(" ")[0]);
                             int x = Integer.parseInt(info.split(" ")[1]);
-                            int y = Integer.parseInt(info.split(" ")[2]);
-                            success = game.specializeCitizen(type, amount, x, y);
+                            int y = Integer.parseInt(info.split(" ")[2]);   
+                            ArrayList<Integer> myKeys = new ArrayList<>();
+
+                            for(int i = 0; i < amount; i ++){
+
+                                myKeys.add(Integer.parseInt(keys.split(" ")[i]));
+                            }
+
+                            success = game.specializeCitizen(type, amount, x, y, myKeys);
                             reportTransactionStatus(success);
 
                         }else if(prefix.equals("<military soldier>")){
 
+                            boolean success = false;
+                            String info = input.readLine();
+                            String keys = input.readLine().substring(1);
+                            int level = Integer.parseInt(info.split(" ")[0]);
+                            int amount = Integer.parseInt(info.split(" ")[1]);
+                            int x = Integer.parseInt(info.split(" ")[2]);
+                            int y = Integer.parseInt(info.split(" ")[3]);
+                            ArrayList<Integer> myKeys = new ArrayList<>();
+
+                            for(int i = 0; i < amount; i ++){
+                                myKeys.add(Integer.parseInt(keys.split(" ")[i]));
+                            }
+
+                            success = game.trainSoldier(amount, level, x, y, myKeys);
+                            reportTransactionStatus(success);
+
 
                         }else if(prefix.equals("<military spy>")){
+                            boolean success = false;
+                            String info = input.readLine();
+                            String keys = input.readLine().substring(1);
+                            int amount = Integer.parseInt(info.split(" ")[0]);
+                            int x = Integer.parseInt(info.split(" ")[1]);
+                            int y = Integer.parseInt(info.split(" ")[2]);
+                            ArrayList<Integer> myKeys = new ArrayList<>();
 
+                            for(int i = 0; i < amount; i ++){
+                                myKeys.add(Integer.parseInt(keys.split(" ")[i]));
+                            }
 
-                        }else if(prefix.equals("<hh>")){
+                            success = game.trainSpy(amount, x, y, myKeys);
+                            reportTransactionStatus(success);
+
 
                         }else if(prefix.equals("<research armour>")){
-
+                            boolean success = false;
+                            success = game.upgradeArmour();
 
                         }else if(prefix.equals("<research weapon>")){
-                            
+                            boolean success = false;
+                            success = game.upgradeWeapon();
+
                         }
                     }
                 }catch(IOException e){

@@ -48,6 +48,10 @@ class Game {
     private int humeChange;
     /**casualties of humans */
     private int casualties; //TODO: send moneyChange - casualties from the server
+    /**armour level unlocked */
+    private int armourUnlocked = 1;
+    /**weapon level unlocked */
+    private int weaponUnlocked = 1;
 
     /**
      * Constructor for the {@code Game} class, assigns preset values
@@ -220,7 +224,6 @@ class Game {
                 }
             }
         }
-        //TODO: manage food
     }
 
     /**
@@ -638,7 +641,7 @@ class Game {
      * @param y the residency coorediante the building came from
      * @return Whether this was successful
      */
-    public boolean specializeCitizen(String type, int amount, int x, int y){
+    public boolean specializeCitizen(String type, int amount, int x, int y, ArrayList<Integer> myKeys){
 
         boolean success = false;
         boolean buildingExist = false;
@@ -656,7 +659,7 @@ class Game {
             }
 
             if(buildingExist){
-                success = randomAdd("Researcher", amount, x, y);
+                success = randomAdd("Researcher", amount, x, y, myKeys);
             }
         //if we are adding Doctors
         }else if(type.equals("Doctor")){
@@ -671,7 +674,7 @@ class Game {
 
             if(availableSpace >= amount){
 
-                randomAdd("Doctor", amount, x, y);
+                randomAdd("Doctor", amount, x, y, myKeys);
             }
         //if we are adding Cadets
         }else if (type.equals("Cadet")){
@@ -682,7 +685,7 @@ class Game {
             }
 
             if(buildingExist){
-                success = randomAdd("Cadet", amount, x, y);
+                success = randomAdd("Cadet", amount, x, y, myKeys);
             }
         }
         return success;
@@ -696,22 +699,20 @@ class Game {
      * @param y The coordiante of the building that it came from
      * @return Success or not
      */
-    private boolean randomAdd(String type, int amount, int x, int y){
+    private boolean randomAdd(String type, int amount, int x, int y,  ArrayList<Integer> myKeys){
         
         boolean success = false;
         Building building = findBuilding( x, y);
-        ArrayList<NPC> adults= new ArrayList<>();
+        ArrayList<NPC> adults = new ArrayList<>();
 
-
-        //TODO: I can't really use the convert method since I don't have the key to the npc
         if(building instanceof Residency){
 
-            adults = ((Residency)building).getAdultPop();
 
-            for(int i = 0; i < adults.size(); i ++){
-                //some converting
-                //TODO: SUPER IMPORT FIGURE OUT HOW TO CONVERT
-                //MOVE: THE npc to where they are supposed to be
+            for(int i = 0; i < amount; i ++){
+                
+                convert(myKeys.get(i), type, 100, 10, 1, 1, 1, 100);
+                //TODO: figure out the numbers
+                //TODO: remmeber to move these npcs
             }
         }
         return success;
@@ -740,6 +741,7 @@ class Game {
                     this.addNpc(add);
                     ((Residency)building).createCitizen(add);
                 }
+                success = true;
                 this.changeMoney(-10*amount); //TODO: synchronize moneyy amount, make sure it's the same
             }
         }
@@ -748,6 +750,46 @@ class Game {
 
     }
 
+    /**
+     * Train a cadet to soldier
+     * @param amount Amount of soldiers to train
+     * @param level the level to train them to 
+     * @param x coordiante of the Base
+     * @param y coordiante of the base
+     * @param myKeys list of keys of cadets
+     * @return The success
+     */
+    public boolean trainSoldier(int amount, int level, int x, int y, ArrayList<Integer> myKeys){
+        boolean success = false;
+        if(weaponUnlocked >= level && armourUnlocked >= level){
+            for(int i = 0; i < amount; i ++){
+                convert(myKeys.get(i), "Solider",level*100, level*10, 1, 1, 1, 100); //Level with attack damage 
+                
+            }
+            success = true;
+        }
+        return success;
+    }
+
+    /**
+     * Train a cadet toa spy
+     * @param amount Amount of spies to train 
+     * @param x 
+     * @param y
+     * @param myKeys
+     * @return
+     */
+    public boolean trainSpy(int amount, int x, int y, ArrayList<Integer> myKeys){
+        boolean success = false; 
+
+        for(int i = 0; i < amount; i ++){
+            convert(myKeys.get(i),"Spy", 100, 0, 1,1,1, 100);
+
+        }
+        success = true;
+
+        return success;
+    }
     /**
      * Looks for if a building with the coordinates of (x, y) exist
      * @param x the x coordinate of the building
@@ -762,6 +804,26 @@ class Game {
             }
         }
         return buildingToReturn;
+    }
+
+    /**
+     * Unlock a new armour level
+     */
+    public boolean upgradeArmour(){
+        boolean success = false;
+        armourUnlocked ++;
+
+        return success;
+    }
+
+    /**
+     * Unlock a new weapon level
+     */
+    public boolean upgradeWeapon(){
+        boolean success = false;
+        armourUnlocked ++;
+
+        return success;
     }
 
     /**

@@ -54,6 +54,15 @@ public abstract class Human extends NPC{
         this.priority = priority;    
     }//end of constructor
 
+
+    public void starve(){
+        if(this.hunger <= 0){
+            this.takeDamage(10);
+        }
+    }
+
+
+
     /**
      * Increases the age of the Human.
      */

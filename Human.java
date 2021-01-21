@@ -55,14 +55,6 @@ public abstract class Human extends NPC{
     }//end of constructor
 
 
-    public void starve(){
-        if(this.hunger <= 0){
-            this.takeDamage(10);
-        }
-    }
-
-
-
     /**
      * Increases the age of the Human.
      */
@@ -82,6 +74,11 @@ public abstract class Human extends NPC{
         }else if (this.hunger <0 ){
             this.hunger = 0;            
         }//end of if statements
+
+        //check if the human is starving to death
+        if(this.hunger <= 0){
+            this.takeDamage(10);
+        }
     }//end of method
 
 

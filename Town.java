@@ -995,7 +995,7 @@ public class Town extends Player {
                         training --;
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
-                        String keys = ""
+                        String keys = "";
                         sendMessage("<residency convert>"); 
                         sendMessage(npcType);
                         sendMessage(training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
@@ -1011,7 +1011,7 @@ public class Town extends Player {
                             }
                         }
 
-                        sendMessage()
+                        sendMessage(keys);
                         
                         //TODO update current class's objects when converting? 
 

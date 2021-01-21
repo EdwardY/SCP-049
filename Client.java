@@ -315,7 +315,7 @@ public class Client {
                                 }
                             }else if(prefix.equals("<ge>")){ //if server says game is finished
                                 Client.this.getPlayer().endGame(input.readLine());
-                                this.running = false;
+                                Client.this.running = false;
                             }//end of if statements
 
                         }//end of if statement to check if there is input

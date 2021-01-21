@@ -513,9 +513,9 @@ public class Town extends Player {
         /** General display buttons that all buildings need */
         private HashMap<String, DuberTextButton> generalButtons;
         /**food income button */
-        DuberTextButton foodIncome;
+        private DuberTextButton foodIncome;
         /**Money income button */
-        DuberTextButton moneyIncome;
+        private DuberTextButton moneyIncome;
         /** Using the test button object also as text displays*/
         private DuberTextButton[] displays;
         /**a variable for storing how many humans are being trained */
@@ -523,11 +523,22 @@ public class Town extends Player {
         /**Keeping track of what type if being trained */
         private String npcType;
         /** the building that is being clicked on */
-        Building clickedBuilding;
+        private Building clickedBuilding;
         /**Levels button for users to click on */
         private DuberTextButton[] levels;
         /**The level that the soldier user will train */
         private int soldierLevel;
+        /**Health of a building */
+        private int buildingHealth = 0;
+        /**level of the bhuilding */
+        private int buildingLevel = 0;
+        /**foodIncome */
+        private int food = 0;
+        /**moneyIncome */
+        private int money = 0;
+        /**buildingMaxHealth */
+        private int buildingMaxHealth = 0;
+
 
         /**
          * Method runs the town version of the game.
@@ -600,14 +611,14 @@ public class Town extends Player {
 
 
             //All individual building buttons buttons
-            this.foodIncome = new DuberTextButton("Food income per turn: ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
-            this.moneyIncome = new DuberTextButton("Money Income per turn: ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
-            this.hospitalHeal = new DuberTextButton("A Hospital that heals ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
+            this.foodIncome = new DuberTextButton("Food income per turn: " + food, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
+            this.moneyIncome = new DuberTextButton("Money Income per turn: " + money, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
+            this.hospitalHeal = new DuberTextButton("A Hospital", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30));
 
             //initialize general buttons
             this.generalButtons = new HashMap<>();
-            this.generalButtons.put("Level", new DuberTextButton("Level: " + clickedBuilding.getLevel(), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
-            this.generalButtons.put("Health", new DuberTextButton("health: " +clickedBuilding.getHealth() + "/" + clickedBuilding.getMaxHealth(), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
+            this.generalButtons.put("Level", new DuberTextButton("Level: " + buildingLevel, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
+            this.generalButtons.put("Health", new DuberTextButton("health: " + buildingHealth + "/" + buildingMaxHealth, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
             this.generalButtons.put("upgrade", new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30)));
             this.buildButton = new DuberTextButton("Build", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
             //TODO: initialize the buttons for specific buildings
@@ -783,6 +794,18 @@ public class Town extends Player {
                     
                     if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
                         clickedBuilding = findBuilding(buildingX, buildingY); 
+
+                        if(clickedBuilding instanceof FoodBuilding){
+                            food = ((FoodBuilding)clickedBuilding).getLevel() * 500 + 1000;
+                        }else if(clickedBuilding instanceof Bank){
+                            money = ((Bank)clickedBuilding).getLevel() * 500 + 1000;
+                        }
+
+                        //Setting the levels
+                        buildingHealth = clickedBuilding.getHealth();
+                        buildingMaxHealth = clickedBuilding.getMaxHealth();
+                        buildingLevel = clickedBuilding.getLevel();
+
                         if(clickedBuilding != null){
 
                             activateGeneralBuildingButtons();
@@ -999,6 +1022,7 @@ public class Town extends Player {
                         sendMessage("<residency convert>"); 
                         sendMessage(npcType);
                         sendMessage(training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
+                        //TODO: Make sure to deduct costs and stuff
 
                         for(int key: humanMap.keySet()){
                             if(humanMap.get(key) instanceof Citizen){

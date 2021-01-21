@@ -312,7 +312,6 @@ class Game {
      * </p>
      */
     private void dealWithMedicalStuff(){
-        int hospitalIndex = 0;
         ArrayList<Hospital> hospitals = new ArrayList<Hospital>();
 
         for(Building building: buildings){
@@ -328,14 +327,8 @@ class Game {
         for(int key: humanMap.keySet()){
             Human human = humanMap.get(key);
             if(human.getHealth() < human.getMaxHealth()){
-                if(hospitals.size() > hospitalIndex){
-                    Hospital hospital = hospitals.get(hospitalIndex);
-                    if(hospital.getCurrentCapacity() < hospital.getMaxCapacity()){
-                        hospital.addInjured(human);
-                    }else{
-                        hospitalIndex++;
-                    }
-                }
+                Hospital hospital = hospitals.get((int)Math.round(Math.random() * hospitals.size())); //adds human to a random hospital
+                hospital.addInjured(human);
             }
         }
     }

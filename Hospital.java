@@ -168,14 +168,6 @@ class Hospital extends Building{
     }
 
     /**
-     * the current capacity of injured people
-     * @return the number of injured people
-     */
-    public int  getCurrentCapacity(){
-        return injured.size();
-    }
-
-    /**
      * Upgrade the bulding's level and its stats
      */
     public void upgrade(){

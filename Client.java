@@ -344,7 +344,7 @@ public class Client {
                                             ((Town)player).convert(keys[i], "Soldier",level*100, level*10, 1, 1, 1, 100); 
 
                                         }
-                                        ((Town)player).changeMoney(-100*amount);
+                                        ((Town)player).changeMoney(-100*amount*level);
 
 
                                     }else if(requests[0].equals("<military spy>")){
@@ -375,9 +375,6 @@ public class Client {
                                     }else if(requests[0].equals("<research armour>")){
 
                                         ((Town)player).researchArmour();
-                                    }else if(requests[0].equals("<sur>")){
-
-                                        //TODO: surrender here
                                     }
 
                                 }

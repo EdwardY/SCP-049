@@ -42,10 +42,12 @@ public class Town extends Player {
     /**research progress */
     private double researchProgress = 0;
     /**unlocked armour level */
-    private int armourLevel;
+    private int armourLevel = 1;
     /**unlocked weaponLevel */
-    private int weaponLevel;
-    
+    private int weaponLevel = 1;
+    /**the id of humans to put in a humanMap */
+    private int currentId = 0; //TODO: coordinate this with the server might be
+    //TODO: display this when constructing 
 
     /**
      * Constructor for the town side player's class
@@ -62,6 +64,15 @@ public class Town extends Player {
         humanMap = new HashMap<Integer, Human>();
     }
 
+    /**
+     * Checks what kind of NPC ({@code SCP0492} or {@code Human}) is being added then adds to the appropriate list
+     * @param npc the {@code NPC} to be added
+     */
+    public void addNpc(NPC npc){
+        humanMap.put(currentId, (Human)npc);
+        currentId++;
+    
+    }
 
     /**
      * Starts the town version of the game.
@@ -92,6 +103,36 @@ public class Town extends Player {
      */
     public void displayIntel(int hume){
         new IntelWindow().displayIntel(hume);
+    }
+
+    /**upgrade weapon leavel */
+    public void researchWeapon(){
+        this.weaponLevel ++;
+        changeMoney(-400);
+    }
+
+    /**upgrades armour level */
+    public void researchArmour(){
+        this.armourLevel ++;
+        changeMoney(-400);
+    }
+
+    /**
+     * 
+     * @return The armour level unlocked 
+     */
+    public int getArmourLevel(){
+
+        return this.armourLevel;
+    }   
+
+    /**
+     * 
+     * @return The weapon level unlocked
+     */
+    public int getWeaponLevel(){
+
+        return this.weaponLevel;
     }
 
     /**
@@ -141,6 +182,93 @@ public class Town extends Player {
 
     }
 
+    /**
+     * Converts an NPC to another type.
+     * @param key The key of the NPC being converted.
+     * @param type The type of NPC that the NPC will be converted to.
+     * @param health The health of the NPC.
+     * @param maxHealth The maximum health of the NPC.
+     * @param attackDamage The damage of the NPC (if applicable).
+     * @param priority The priority of the NPC.
+     * @param successRate The success rate of the NPC getting enemy intel (if applicable).
+     * @param sus The chance of the NPC getting caught by the enemy (if applicable).
+     * @param healingAmount The amount of healing the NPC will be able to heal (if applicable).
+     */
+    public void convert(int key, String type, int maxHealth, int attackDamage, int priority, double successRate, double sus, int healingAmount){
+        Human currentHuman = this.humanMap.get(key);
+        int currentXPosition = currentHuman.getX();
+        int currentYPosition = currentHuman.getY();
+        NPC newNpc = null;
+        if(type.equals("Citizen")){
+            newNpc = new Citizen(currentXPosition,currentYPosition);
+        }else if(type.equals("Cadet")){
+            newNpc = new Cadet(currentXPosition, currentYPosition);
+        }else if(type.equals("Doctor")){
+            newNpc = new Doctor(currentXPosition, currentYPosition, healingAmount);
+        }else if(type.equals("Researcher")){
+            newNpc = new Researcher(currentXPosition, currentYPosition);
+        }else if(type.equals("Soldier")){
+            newNpc = new Soldier(maxHealth, currentXPosition, currentYPosition, attackDamage);
+        }else if(type.equals("Spy")){
+            newNpc = new Spy(currentXPosition, currentYPosition, successRate, sus);
+        }else if (type.equals("SCP0492")){
+            newNpc = new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage);
+        }
+        
+        this.humanMap.replace(key, (Human)newNpc);
+        
+    }
+
+    /**
+     * Relocates the {@code Human} to the proper {@code Building} based on the occupation they now have. 
+     * Duberville offers good teleportation services so all {@code Humans} can live in their workplace 
+     * as soon as they get hired.
+     * @param human the {@code Human} to relocate
+     */
+    public void locateHumanInProperSpot(Human human){
+
+        ArrayList<Building> buildings = this.getBuildings();
+        boolean added = false;
+        if(human instanceof Doctor){
+            //move to hospital
+            for(int i  = 0;i < buildings.size();i++){
+                if(buildings.get(i) instanceof Hospital){
+                    Hospital hospital = (Hospital)buildings.get(i);
+                    if((!added) && (hospital.doctors.size() < hospital.getMaxCapacity())){
+                        hospital.addDoctors((Doctor)human);
+                        human.setX(hospital.getX());
+                        human.setY(hospital.getY());
+                        added = true;
+                    }
+                }
+            }
+        }else if(human instanceof Researcher){
+            //move to research lab
+            for(int i = 0;i < buildings.size();i++){
+                if(buildings.get(i) instanceof ResearchLab){
+                    ResearchLab researchLab = (ResearchLab)buildings.get(i);
+                    if(!added){
+                        researchLab.researchers.add((Researcher)human);
+                        human.setX(researchLab.getX());
+                        human.setY(researchLab.getY());
+                        added = true;
+                    }
+                }
+            }
+        }else if(human instanceof Cadet){
+            //move to military
+            for(int i = 0;i < buildings.size();i++){
+                if(buildings.get(i) instanceof MilitaryBase){
+                    MilitaryBase militaryBase = (MilitaryBase)buildings.get(i);
+                    if(!added){
+                        human.setX(militaryBase.getX());
+                        human.setY(militaryBase.getY());
+                        added = true;
+                    }
+                }
+            }
+        }
+    }
     
     /** 
      * buildingBuilding
@@ -337,7 +465,7 @@ public class Town extends Player {
 
     //TODO: I should have 5 more request to deal with in client
 
-    public void requestTrainSolider(int amount, int x, int y, int soldierLevel){
+    public void requestTrainSoldier(int amount, int x, int y, int soldierLevel){
         String keys = "";
         //send requests to server
         sendMessage("<military soldier>");
@@ -450,7 +578,7 @@ public class Town extends Player {
      * @param y the y coordinate of the building
      * @return null if no such building exists, otherwise, the building in the (x, y) position
      */
-    private Building findBuilding(int x, int y){
+    public Building findBuilding(int x, int y){
         Building buildingToReturn = null;
         for(int i = 0;i < this.getBuildings().size();i++){
             if((this.getBuildings().get(i).getX() == x) && (this.getBuildings().get(i).getY() == y)){

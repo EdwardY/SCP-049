@@ -282,6 +282,7 @@ public class Client {
                             }else if(prefix.equals("<st>")){ //transaction is successful
                                 System.out.println("something something congrats purchase successful");
                                 String[] requests = lastRequest.split(" ");
+                                //Actually implement the last request 
                                 if(requests.length > 1){
                                     if(requests[0].equals("<b>")){
                                         ((Town)player).buildBuilding(requests[1], Integer.parseInt(requests[2]), Integer.parseInt(requests[2]));
@@ -293,8 +294,92 @@ public class Client {
                                         }
                                     }else if(requests[0].equals("<u>")){
                                         ((Town)player).upgradeBuilding(Integer.parseInt(requests[1]), Integer.parseInt(requests[2]));
+
+                                    }else if(requests[0].equals("<residency train>")){ // adding new citizens
+                                        int x = Integer.parseInt(requests[1]);
+                                        int y = Integer.parseInt(requests[2]);
+                                        int amount = Integer.parseInt(requests[3]);
+                                        Residency addTo = (Residency)((Town)player).findBuilding(x,y);
+                                        Citizen newCitizen;
+                                        for(int i = 0; i < amount; i ++){   
+                                            newCitizen = new Citizen(0, 100, x, y);
+                                            addTo.createCitizen(newCitizen);
+                                            ((Town)player).addNpc(newCitizen);
+
+                                        }
+                                        ((Town)player).changeMoney(-100*amount);
+                                        
+
+                                    }else if(requests[0].equals("<residency convert>")){
+                                        
+                                        String newType = requests[1];
+                                        int x = Integer.parseInt(requests[2]);
+                                        int y = Integer.parseInt(requests[3]);
+                                        int amount = Integer.parseInt(requests[4]);
+                                        int[] keys = new int[amount];
+                                        for(int i = 5; i < requests.length - 5;i ++ ){
+                                            keys[i] = Integer.parseInt(requests[i]);
+
+                                        }
+
+                                        for(int i = 0; i < amount; i ++){
+                                            ((Town)player).convert(keys[i], newType, 100, 10, 1, 1, 1, 100);
+                                            ((Town)player).locateHumanInProperSpot(((Town)player).getHumanMap().get(keys[i]));
+                                        }
+                                        ((Town)player).changeMoney(-100*amount);
+
+
+                                    }else if(requests[0].equals("<military soldier>")){
+                                        int level = Integer.parseInt(requests[1]);
+                                        int x = Integer.parseInt(requests[2]);
+                                        int y = Integer.parseInt(requests[3]);
+                                        int amount = Integer.parseInt(requests[4]);
+                                        int[] keys = new int[amount];
+                                        for(int i = 5; i < requests.length - 5;i ++ ){
+                                            keys[i] = Integer.parseInt(requests[i]);
+
+                                        }
+
+                                        for(int i = 0; i < amount; i++){
+                                            ((Town)player).convert(keys[i], "Soldier",level*100, level*10, 1, 1, 1, 100); 
+
+                                        }
+                                        ((Town)player).changeMoney(-100*amount);
+
+
+                                    }else if(requests[0].equals("<military spy>")){
+
+                                        int x = Integer.parseInt(requests[1]);
+                                        int y = Integer.parseInt(requests[2]);
+                                        int amount = Integer.parseInt(requests[3]);
+                                        int[] keys = new int[amount];
+                                        for(int i = 4; i < requests.length - 4;i ++ ){
+                                            keys[i] = Integer.parseInt(requests[i]);
+
+                                        }
+
+                                        for(int i = 0; i < amount; i++){
+                                            ((Town)player).convert( keys[i],"Spy", 100, 0, 1,1,1, 100);
+
+                                        }
+                                        ((Town)player).changeMoney(-100*amount*level);
+
                                     }
+
+                                
+                                }else{//this might be one of the research upgrade requests
+                                    if(requests[0].equals("<research weapon>")){
+
+                                        ((Town)player).researchWeapon();
+                                        
+                                    }else if(requests[0].equals("<research armour>")){
+
+                                        ((Town)player).researchArmour();
+                                    }
+
                                 }
+
+
                             }else if(prefix.equals("<r>")){ //change in resources
                                 String resourceType = input.readLine();
                                 int resourceChange = Integer.parseInt(input.readLine());

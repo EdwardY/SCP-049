@@ -131,6 +131,7 @@ class Game {
         }
     }
 
+    
     /**
      * <p>
      * Sets the amount of moneyPerTurn to zero temporarily to recount how much money the {@code Banks} earned this turn. Sets the 
@@ -717,6 +718,8 @@ class Game {
                 locateHumanInProperSpot(this.humanMap.get(myKeys.get(i)));
                 //TODO: remmeber to move these npcs
             }
+
+            changeMoney(-100*amount);
         }
         return success;
     }
@@ -815,10 +818,12 @@ class Game {
         boolean success = false;
         if(weaponUnlocked >= level && armourUnlocked >= level){
             for(int i = 0; i < amount; i ++){
-                convert(myKeys.get(i), "Solider",level*100, level*10, 1, 1, 1, 100); //Level with attack damage 
+                convert(myKeys.get(i), "Soldier",level*100, level*10, 1, 1, 1, 100); //Level with attack damage 
                 
             }
             success = true;
+
+            changeMoney(-100*amount*level);
         }
         return success;
     }
@@ -838,6 +843,8 @@ class Game {
             convert(myKeys.get(i),"Spy", 100, 0, 1,1,1, 100);
 
         }
+
+        changeMoney(-100*amount);
         success = true;
 
         return success;
@@ -864,7 +871,7 @@ class Game {
     public boolean upgradeArmour(){
         boolean success = false;
         armourUnlocked ++;
-
+        changeMoney(-400);
         return success;
     }
 
@@ -874,6 +881,7 @@ class Game {
     public boolean upgradeWeapon(){
         boolean success = false;
         armourUnlocked ++;
+        changeMoney(-400);
 
         return success;
     }

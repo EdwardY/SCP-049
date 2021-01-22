@@ -184,5 +184,13 @@ class Residency extends Building{
         return residents.size(); 
     }
 
+
+    /**
+     * Gets the residents in this building
+     * @return The list of residents
+     */
+    public ArrayList<Human> getResidents(){
+        return this.residents;
+    }
 }
 

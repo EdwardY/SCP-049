@@ -86,7 +86,35 @@ class Game {
      */
     private void removeDeadPeopleFromBuildings(){
         for(int i = 0; i < this.buildings.size(); i++){
-            
+            if(this.buildings.get(i) instanceof Hospital){
+                for(Doctor currentDoctor: ((Hospital)this.buildings.get(i)).getDoctors()){
+                    if(currentDoctor.getHealth() <= 0){
+                        ((Hospital)this.buildings.get(i)).getDoctors().remove(currentDoctor);
+                    }
+                }
+
+                //TODO: help idk how to remove things from queues
+
+            }else if(this.buildings.get(i) instanceof MilitaryBase){
+                for(Human currentSoldier: ((MilitaryBase)this.buildings.get(i)).getSoldiers()){
+                    if(currentSoldier.getHealth() <= 0){
+                        ((MilitaryBase)this.buildings.get(i)).getSoldiers().remove(currentSoldier);
+                    }
+                }
+            }else if (this.buildings.get(i) instanceof ResearchLab){
+                for(Researcher currentResearcher: ((ResearchLab)this.buildings.get(i)).getResearchers()){
+                    if(currentResearcher.getHealth() <= 0){
+                        ((ResearchLab)this.buildings.get(i)).getResearchers().remove(currentResearcher);
+                    }
+                }
+            }else if (this.buildings.get(i) instanceof Residency){
+                for(Human currentResident: ((Residency)this.buildings.get(i)).getResidents()){
+                    if(currentResident.getHealth() <= 0){
+                        ((Residency)this.buildings.get(i)).getResidents().remove(currentResident);
+                    }
+                }
+
+            }
         }
 
     }

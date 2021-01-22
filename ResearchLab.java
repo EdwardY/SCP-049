@@ -162,4 +162,14 @@ public class ResearchLab extends Military{
         return this.armourLevel;
     }
     
+    /**
+     * Gets the researchers in the research lab
+     * @return The list of researchers
+     */
+    public ArrayList<Researcher> getResearchers(){
+        return this.researchers;
+    } 
+
+
+
 }

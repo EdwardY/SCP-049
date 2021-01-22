@@ -132,4 +132,11 @@ class MilitaryBase extends Military{
         this.setMaxHealth(this.getMaxHealth() - 500);
     }
 
+    /**
+     * Gets the list of soldier in the military base
+     * @return The list of soldiers
+     */
+    public ArrayList<Human> getSoldiers(){
+        return this.soldiers;
+    }
 }

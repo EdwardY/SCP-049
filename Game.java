@@ -691,6 +691,8 @@ class Game {
         return success;
     }
 
+    //TODOO: win condition for town side, research lab cure stuff also modify
+
     /**
      * randomly add the npc to one of the building that it bleongs in
      * @param type The type of npc
@@ -834,7 +836,7 @@ class Game {
 
         for(int i = 0; i < amount; i ++){
             convert(myKeys.get(i),"Spy", 100, 0, 1,1,1, 100);
-            
+
         }
         success = true;
 

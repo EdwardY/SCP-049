@@ -335,23 +335,109 @@ public class Town extends Player {
         this.gameWindow.generalButtons.get("upgrade").deactivate();
     }
 
-    public void requestTrainSolider(){
+    //TODO: I should have 5 more request to deal with in client
 
+    public void requestTrainSolider(int amount, int x, int y, int soldierLevel){
+        String keys = "";
+        //send requests to server
+        sendMessage("<military soldier>");
+        sendMessage(soldierLevel + " " + amount + " " + x + " " + y);
+
+        for(int key: humanMap.keySet()){
+            if(humanMap.get(key) instanceof Cadet){
+                if(humanMap.get(key).getX() == x && humanMap.get(key).getY() == y);{
+                keys = keys + " " + key;
+
+                }
+            }
+        }
+
+        sendMessage(keys);
+
+        this.getPlayerClient().setLastRequest(("<military soldier>" + " " + soldierLevel + " " + amount + " " + x + " " + y + keys));
     }
 
-    public void requestTrainSpy(){
+    /**
+     * Request to train amount of spies from the citizens from coordinate x,y
+     * @param amount Amount of spies to train
+     * @param x Coordinate of the residency building
+     * @param y coordiante of the residency building 
+     */
+    public void requestTrainSpy(int amount, int x, int y){
+        String keys = "";
+        //send requests to server
+        sendMessage("<military spy>" );
+        sendMessage(amount + " "+ x + " " + y);
+        
+        //sending the keys along for the npcs to be converted
+        for(int key: humanMap.keySet()){
+            if(humanMap.get(key) instanceof Cadet){
+                if(humanMap.get(key).getX() == x && humanMap.get(key).getY() == y);{
+                keys = keys + " " + key;
 
+                }
+            }
+        }
+        sendMessage(keys);
+
+        this.getPlayerClient().setLastRequest("<military spy>" + " " + amount + " "+ x + " " + y + keys);
     }
 
-    public void requestTrainCitizen(){
+    /**
+     * Request to train certain amount of citizens at coordinates of the residency of x, y
+     * @param y  The coordinate of the residency
+     * @param x  The x coordinate of the residency
+     * @param amount The amount of Citizens to train 
+     */
+    public void requestTrainCitizen(int amount, int x, int y){
+        sendMessage("<residency train>"); 
+        sendMessage(x + " " + y + " " + amount);                   
+        //Update this class as well
+        System.out.println("Your buttons have made it this far congrats");
+        String keys = "";
+        for(int key: humanMap.keySet()){
+            if(humanMap.get(key) instanceof Citizen){
+                if(humanMap.get(key).getX() == x && humanMap.get(key).getY() == y);{
+                keys = keys + " " + key;
 
+                }
+            }
+        }
+        sendMessage(keys);
+
+        this.getPlayerClient().setLastRequest("<residency train>"+  " " + x + " " + y + " " + amount);
     }
 
-    public void requestSpecializeCitizen(){
+    /**
+     * Change Citizens into doctors cadets or researchers
+     * @param amount amount of citizens specialized
+     * @param x The coordinate of the residency they currently reside in
+     * @param y The coordinate of the residency they currently reside in
+     * @param type The type to specialize to, Doctor, Cadet or reseracher
+     */
+    public void requestSpecializeCitizen(int amount, int x, int y , String type){
+        String keys = "";
+        sendMessage("<residency convert>"); 
+        sendMessage(type);
+        sendMessage(amount + " " + x + " " + y);
+        //TODO: Make sure to deduct costs and stuff
 
+        for(int key: humanMap.keySet()){
+            if(humanMap.get(key) instanceof Citizen){
+                if(humanMap.get(key).getX() == x && humanMap.get(key).getY() == y);{
+                keys = keys + " " + key;
+
+                }
+            }
+        }
+
+        sendMessage(keys);
+
+        this.getPlayerClient().setLastRequest("<residency convert>" + " " + type + " " + amount + " " + x + " " + y + keys );
     }
 
-    public void requestSurrender(){
+
+    public void requestSurrender(){ 
 
 
     }
@@ -998,21 +1084,8 @@ public class Town extends Player {
                         training --;
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
-                        sendMessage("<residency train>"); 
-                        sendMessage(clickedBuilding.getX() + " " + clickedBuilding.getY() + " " + training);                   
-                        //Update this class as well
-                        System.out.println("Your buttons have made it this far congrats");
-                        String keys = "";
-                        for(int key: humanMap.keySet()){
-                            if(humanMap.get(key) instanceof Citizen){
-                                if(humanMap.get(key).getX() == clickedBuilding.getX() && humanMap.get(key).getY() == clickedBuilding.getY());{
-                                keys = keys + " " + key;
-
-                                }
-                            }
-                        }
-
-
+                        requestTrainCitizen(training, clickedBuilding.getX(), clickedBuilding.getY());
+                        
                         //return to default screens
                         menu = 0;
                         training = 0;
@@ -1053,24 +1126,9 @@ public class Town extends Player {
                         training --;
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
-                        String keys = "";
-                        sendMessage("<residency convert>"); 
-                        sendMessage(npcType);
-                        sendMessage(training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
-                        //TODO: Make sure to deduct costs and stuff
 
-                        for(int key: humanMap.keySet()){
-                            if(humanMap.get(key) instanceof Citizen){
-                                if(humanMap.get(key).getX() == clickedBuilding.getX() && humanMap.get(key).getY() == clickedBuilding.getY());{
-                                keys = keys + " " + key;
-
-                                }
-                            }
-                        }
-
-                        sendMessage(keys);
+                        requestSpecializeCitizen(training, clickedBuilding.getX(), clickedBuilding.getY(), npcType);
                         
-                        //TODO update current class's objects when converting? 
 
                         System.out.println("Your buttons have made it this far congrats");
 
@@ -1159,25 +1217,10 @@ public class Town extends Player {
                     }else if ( militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
 
 
-                        requestTrainSpy(training, clickedBuilding.getX(), clickedBuilding.getY();
-                        String keys = "";
-                        //send requests to server
-                        sendMessage("<military spy>" );
-                        sendMessage(training + " "+ clickedBuilding.getX() + " " + clickedBuilding.getY());
-                        
-                        //sending the keys along for the npcs to be converted
-                        for(int key: humanMap.keySet()){
-                            if(humanMap.get(key) instanceof Cadet){
-                                if(humanMap.get(key).getX() == clickedBuilding.getX() && humanMap.get(key).getY() == clickedBuilding.getY());{
-                                keys = keys + " " + key;
-
-                                }
-                            }
-                        }
-
-                        sendMessage(keys);
+                        requestTrainSpy(training, clickedBuilding.getX(), clickedBuilding.getY());
                         
                         menu = 0;
+                        training = 0;
 
                         //deactivate buttons
                         militaryBaseButtons.get("Add 1").deactivate();
@@ -1195,25 +1238,13 @@ public class Town extends Player {
                         training --;
                     }else if(militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
 
-                        String keys = "";
-                        //send requests to server
-                        sendMessage("<military soldier>");
-                        sendMessage(soldierLevel + " " + training + " " + clickedBuilding.getX() + " " + clickedBuilding.getY());
 
-                        for(int key: humanMap.keySet()){
-                            if(humanMap.get(key) instanceof Cadet){
-                                if(humanMap.get(key).getX() == clickedBuilding.getX() && humanMap.get(key).getY() == clickedBuilding.getY());{
-                                keys = keys + " " + key;
-
-                                }
-                            }
-                        }
-
-                        sendMessage(keys);
+                        requestTrainSoldier(training, clickedBuilding.getX(), clickedBuilding.getY(), soldierLevel);
 
                         //reset values to defaules
                         menu = 0;
                         soldierLevel = 1;
+                        training  = 0;
 
                         //deactivate buttons 
                         militaryBaseButtons.get("Add 1").deactivate();

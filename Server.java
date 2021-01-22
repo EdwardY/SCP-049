@@ -303,8 +303,15 @@ class Server {
                             success = game.upgradeWeapon();
 
                         }else if(prefix.equals("<sur>")){
-                            boolean success = false;
-                            //TODO; surrender method for server here
+                            town.sendMessage("<ge>");
+                            scp.sendMessage("<ge>");
+                            if(this == scp){
+                                town.sendMessage("win");
+                                this.sendMessage("lose");
+                            }else if(this == town){
+                                scp.sendMessage("win");
+                                this.sendMessage("lose");
+                            }
 
                         }
                     }

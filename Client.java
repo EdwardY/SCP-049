@@ -375,6 +375,9 @@ public class Client {
                                     }else if(requests[0].equals("<research armour>")){
 
                                         ((Town)player).researchArmour();
+                                    }else if(requests[0].equals("<sur>")){
+
+                                        //TODO: surrender here
                                     }
 
                                 }

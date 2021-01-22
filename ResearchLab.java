@@ -46,13 +46,15 @@ public class ResearchLab extends Military{
     }
 
     //Class methods
-    public void developCure(){
+    //TODO: some fixer upper needs to be done here
+    public double developCure(){
 
+        setSuccessRate(researchers.size() * 5);
         double randomInt = Math.random() * 100;
 
         if (randomInt < successRate){
 
-            progress = progress + 10;
+            return 25;
         }
         
         //TODO: figure out the developCure mechanic

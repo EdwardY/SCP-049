@@ -302,6 +302,10 @@ class Server {
                             boolean success = false;
                             success = game.upgradeWeapon();
 
+                        }else if(prefix.equals("<sur>")){
+                            boolean success = false;
+                            //TODO; surrender method for server here
+
                         }
                     }
                 }catch(IOException e){

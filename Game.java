@@ -52,6 +52,8 @@ class Game {
     private int armourUnlocked = 1;
     /**weapon level unlocked */
     private int weaponUnlocked = 1;
+    /**The research progress for a cure */
+    private double researchProgress = 0;
 
     /**
      * Constructor for the {@code Game} class, assigns preset values
@@ -359,8 +361,19 @@ class Game {
     //TODO: implement town win
 
     public boolean checkTownWin(){
-        
-        return true;
+        boolean win = false; 
+
+        if(researchProgress >= 100){
+
+            win = true;
+        }
+
+        if(turn >= 10 ){ //TODO: make sure this is the win condition that we want
+
+            win = true;
+        }
+
+        return win;
     }
     
     /**
@@ -884,6 +897,21 @@ class Game {
         changeMoney(-400);
 
         return success;
+    }
+
+    /**
+     * Conducts research for a cure in the research lab, has a chance to increases the progress for a cure
+     * When a cure is found town side win 
+     */
+    public void doResearch(){
+
+        for(int i = 0; i < buildings.size(); i ++){
+
+            if(buildings.get(i) instanceof ResearchLab){
+
+                researchProgress += ((ResearchLab)buildings.get(i)).developCure(); //TODO: balance research lab numbers
+            }
+        }
     }
 
     /**

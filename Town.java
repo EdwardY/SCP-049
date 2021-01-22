@@ -47,7 +47,7 @@ public class Town extends Player {
     private int weaponLevel = 1;
     /**the id of humans to put in a humanMap */
     private int currentId = 0; //TODO: coordinate this with the server might be
-    //TODO: display this when constructing 
+    //TODO: create more buttons (pain) and display some useful information
 
     /**
      * Constructor for the town side player's class
@@ -364,7 +364,7 @@ public class Town extends Player {
      * @return The price of the building
      */
     public int getPrice(String type, int level){
-        //TODO: Building Prices/calculations here.
+        //TODO: BPretty sure this method is not used
         return 0;
     }
 
@@ -486,6 +486,15 @@ public class Town extends Player {
     }
 
     /**
+     * request to surrender
+     */
+    public void requestSurrender(){
+        sendMessage("<sur>");
+        this.getPlayerClient().setLastRequest("<sur>");
+
+    }
+
+    /**
      * Request to train amount of spies from the citizens from coordinate x,y
      * @param amount Amount of spies to train
      * @param x Coordinate of the residency building
@@ -562,12 +571,6 @@ public class Town extends Player {
         sendMessage(keys);
 
         this.getPlayerClient().setLastRequest("<residency convert>" + " " + type + " " + amount + " " + x + " " + y + keys );
-    }
-
-
-    public void requestSurrender(){ 
-
-
     }
 
     //end of setters
@@ -814,6 +817,7 @@ public class Town extends Player {
             for(int i = 0;i < levels.length;i++){
                 levels[i] = new DuberTextButton("" + (i + 1), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + i*80, 900, 60, 30));
             }
+
             //TODO: place buttons in the right positions
             //All residency buildings
             this.residencyButtons = new HashMap<>();
@@ -825,10 +829,10 @@ public class Town extends Player {
             //this.residencyButtons.put("Move",new DuberTextButton("Move", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Specialize citizens",new DuberTextButton("Specialize citizens: "  + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             //TODO: figure out how to move the npcs after some of them are trained
-            this.residencyButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
-            this.residencyButtons.put("Citizens trained: " + training +  "  $"+ training * 100  ,new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 850, 180, 30)));
-            this.residencyButtons.put("Subtract 1",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
-            this.residencyButtons.put("Train/Specialize", new DuberTextButton("Train/Specialize", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 900, 180, 30)));
+            this.residencyButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
+            this.residencyButtons.put("Citizens trained: " + training +  "  $"+ training * 100  ,new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
+            this.residencyButtons.put("Subtract 1",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 780, 180, 30)));
+            this.residencyButtons.put("Train/Specialize", new DuberTextButton("Train/Specialize", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 820, 180, 30)));
 
 
             //militaryBase Buildings
@@ -839,7 +843,7 @@ public class Town extends Player {
             this.militaryBaseButtons.put("Soldier", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 540, 180, 30)));
             this.militaryBaseButtons.put("Spy", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 580, 180, 30)));
             this.militaryBaseButtons.put("Trained", new DuberTextButton("Trained: " + training + "  $" + training*100, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
-            //TODO: maybe display what the militaryBase currently contains
+            
 
             
             //All researchLab buildings
@@ -859,8 +863,9 @@ public class Town extends Player {
             this.generalButtons.put("Level", new DuberTextButton("Level: " + buildingLevel, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 200, 180, 30)));
             this.generalButtons.put("Health", new DuberTextButton("health: " + buildingHealth + "/" + buildingMaxHealth, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 250, 180, 30)));
             this.generalButtons.put("upgrade", new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30)));
-            
-
+            this.generalButtons.put("back", new DuberTextButton("back", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 100, 960, 180, 30)));
+            this.generalButtons.put("surrender", new DuberTextButton("surrender", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 960, 180, 30))); 
+            this.generalButtons.put("Sure", new DuberTextButton("Are you sure?", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 960, 180, 30))); 
 
             this.buildButton = new DuberTextButton("Build", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
             
@@ -1115,7 +1120,13 @@ public class Town extends Player {
                         }
                     }   
 
-                    if(clickedBuilding instanceof Residency){
+                    if(generalButtons.get("surrender").inBounds(mouseX,mouseY)){
+                        requestSurrender();
+
+                    }else if(generalButtons.get("back").inBounds(mouseX, mouseY)){
+                        menu = 0; 
+
+                    }else if(clickedBuilding instanceof Residency){
 
                         requestResidencyFunction(menu, mouseX, mouseY);
                     }else if(clickedBuilding instanceof Hospital){
@@ -1217,7 +1228,7 @@ public class Town extends Player {
                         //return to default screens
                         menu = 0;
                         training = 0;
-                        //TODO: reset the screens
+
 
                         residencyButtons.get("Add 1").deactivate();
                         residencyButtons.get("Train/Specialize").deactivate();

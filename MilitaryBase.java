@@ -44,7 +44,7 @@ class MilitaryBase extends Military{
      */
     public void trainTroops(int number, String type, int armourLevel, int weaponLevel){
         
-        if(type.equals("Soldier")){
+        if(type.equals("Soldier")){ 
 
         }else if(type.equals("Spy")){
 
@@ -54,6 +54,13 @@ class MilitaryBase extends Military{
 
     }
 
+    /**
+     * Add a Cadet to the soldiers list
+     */
+    public void add(Human Cadet){
+
+        soldiers.add(Cadet);
+    }
 
     
     /** 

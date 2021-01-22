@@ -22,6 +22,5 @@ abstract class Military extends Building{
     Military(int initialPrice, int maxHealth, int health, int x, int y){
         super(initialPrice, maxHealth, health, x, y);
 
-        //TODO: figure out all these thingies
     }
 }

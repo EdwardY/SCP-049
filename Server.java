@@ -533,7 +533,7 @@ class Server {
                     
                     if(building.getUpgradePrice() <= game.getMoney()){
 
-                        building.upgrade(); //TODO: does this use the class abstract method or the upgrade method for each overwritten method???
+                        building.upgrade();
                         success = true;
                         game.changeMoney(building.getUpgradePrice() * -1);
                         game.changeMoneyChange(building.getUpgradePrice() * -1);

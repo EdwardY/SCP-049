@@ -24,13 +24,12 @@ class FoodBuilding extends ProductionFacility{
     * @param health The initial health of the building
     * @param sprite The image of the building
     * @param x the x coordinate of the building on the game map
-    * @param y The y coordinate of teh building on the game map
+    * @param y The y coordinate of the building on the game map
     */
    FoodBuilding(int initialPrice, int maxHealth, int health, int x, int y){
        super(initialPrice, maxHealth, health, x, y);
 
        this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/FoodBuilding.png"));
-       //TODO: that's a lot of things to figure out how the bank will work
    }
 
 

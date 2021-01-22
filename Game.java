@@ -80,6 +80,19 @@ class Game {
         this.buildings.add(new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, 346, 30));
     }
 
+
+    /**
+     * Removes defeated NPC's from the building that they are inside.
+     */
+    private void removeDeadPeopleFromBuildings(){
+        for(int i = 0; i < this.buildings.size(); i++){
+            
+        }
+
+    }
+
+
+
     /**
      * <p>
      * First loops through buildings and checks if it has more than 0 health. If it has 0 or less health, delete all {@code NPCs} 

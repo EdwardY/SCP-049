@@ -143,7 +143,6 @@ public class ResearchLab extends Military{
         this.setLevel(this.getLevel() - 1);
         this.setMaxHealth(this.getMaxHealth() - 500);
 
-        //TODO: what happens when health / capacity goes too low during an downgrade
     }
 
     /**

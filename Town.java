@@ -335,6 +335,27 @@ public class Town extends Player {
         this.gameWindow.generalButtons.get("upgrade").deactivate();
     }
 
+    public void requestTrainSolider(){
+
+    }
+
+    public void requestTrainSpy(){
+
+    }
+
+    public void requestTrainCitizen(){
+
+    }
+
+    public void requestSpecializeCitizen(){
+
+    }
+
+    public void requestSurrender(){
+
+
+    }
+
     //end of setters
 
     /**
@@ -538,8 +559,10 @@ public class Town extends Player {
         private int money = 0;
         /**buildingMaxHealth */
         private int buildingMaxHealth = 0;
-        /**capacity of bilding value to display */
+        /**capacity of building value to display */
         private int capacity = 0;
+        /** The max capacity of a building */
+        private int maxCapacity = 0;
 
         //TODO: set variables above to equal their respective parts
 
@@ -615,13 +638,16 @@ public class Town extends Player {
             //All individual building buttons buttons
             this.foodIncome = new DuberTextButton("Food income per turn: " + food, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 600, 180, 30));
             this.moneyIncome = new DuberTextButton("Money Income per turn: " + money, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 600, 180, 30));
-            this.hospitalCapacity = new DuberTextButton("A Hospital, Capacity:" + capacity, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 600, 180, 30));
+            this.hospitalCapacity = new DuberTextButton("A Hospital, Capacity:" + capacity + " /" + maxCapacity, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 600, 180, 30));
 
             //initialize general buttons
             this.generalButtons = new HashMap<>();
             this.generalButtons.put("Level", new DuberTextButton("Level: " + buildingLevel, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 200, 180, 30)));
             this.generalButtons.put("Health", new DuberTextButton("health: " + buildingHealth + "/" + buildingMaxHealth, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 250, 180, 30)));
             this.generalButtons.put("upgrade", new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30)));
+            
+
+
             this.buildButton = new DuberTextButton("Build", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
             
             
@@ -800,9 +826,12 @@ public class Town extends Player {
                             food = ((FoodBuilding)clickedBuilding).getLevel() * 500 + 1000;
                         }else if(clickedBuilding instanceof Bank){
                             money = ((Bank)clickedBuilding).getLevel() * 500 + 1000;
+                        }else if(clickedBuilding instanceof Hospital){
+                            capacity = ((Hospital)clickedBuilding).getMaxCapacity();
+
                         }
 
-                        //Setting the levels
+                        //Setting the general buttons
                         buildingHealth = clickedBuilding.getHealth();
                         buildingMaxHealth = clickedBuilding.getMaxHealth();
                         buildingLevel = clickedBuilding.getLevel();
@@ -973,6 +1002,16 @@ public class Town extends Player {
                         sendMessage(clickedBuilding.getX() + " " + clickedBuilding.getY() + " " + training);                   
                         //Update this class as well
                         System.out.println("Your buttons have made it this far congrats");
+                        String keys = "";
+                        for(int key: humanMap.keySet()){
+                            if(humanMap.get(key) instanceof Citizen){
+                                if(humanMap.get(key).getX() == clickedBuilding.getX() && humanMap.get(key).getY() == clickedBuilding.getY());{
+                                keys = keys + " " + key;
+
+                                }
+                            }
+                        }
+
 
                         //return to default screens
                         menu = 0;
@@ -1120,6 +1159,7 @@ public class Town extends Player {
                     }else if ( militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
 
 
+                        requestTrainSpy(training, clickedBuilding.getX(), clickedBuilding.getY();
                         String keys = "";
                         //send requests to server
                         sendMessage("<military spy>" );

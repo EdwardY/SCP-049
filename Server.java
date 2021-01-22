@@ -232,7 +232,7 @@ class Server {
                         }else if(prefix.equals("<residency train>")){
                             
                             boolean success = false;
-                            String info = input.readLine();
+                            String info = input.readLine().substring(1);
                             int x = Integer.parseInt(info.split(" ")[0]);
                             int y = Integer.parseInt(info.split(" ")[1]);
                             int amount = Integer.parseInt(info.split(" ")[2]);

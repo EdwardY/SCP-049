@@ -165,6 +165,22 @@ public abstract class NPC implements Moveable, Drawable, DestroyableAndRepairabl
         this.maxHealth = newMaxHealth;
     }
 
+    /**
+     * Sets the horizontal position of the NPC.
+     * @param newX The new horizontal position of the NPC.
+     */
+    public void setX(int newX){
+        this.x = newX;
+    }
+
+    /**
+     * Sets the vertical position of the NPC.
+     * @param newY The new vertical position of the NPC.
+     */
+    public void setY(int newY){
+        this.y = newY;
+    }
+
     //end of setters
 
 }//end of class

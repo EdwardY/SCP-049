@@ -139,28 +139,26 @@ public class QuadTree {
         attackerX = attackerList.get(i).getX();
         attackerY = attackerList.get(i).getY();
 
-        for(int j = 0; j < targetList.size(); j++){//run through each attacker seeing if it will be attacked by an attacker.
+        for(NPC target: targetList){//run through each attacker seeing if it will be attacked by an attacker.
           //get target's position
-          targetX = targetList.get(j).getX();
-          targetY = targetList.get(j).getY();
+          targetX = target.getX();
+          targetY = target.getY();
 
           //calculate the distance between these two NPC's
           distance = (int)Math.sqrt(Math.pow(Math.abs(attackerX - targetX), 2) + Math.pow(Math.abs(attackerY - targetY), 2));
 
           if((this.attackerList.get(i) instanceof SCP0492) && (distance <= SCP0492.RANGE)){ //if the attacker is an SCP0492
-              ((SCP0492)attackerList.get(i)).attack(targetList.get(j)); //attack the target
-              if(this.targetList.get(j).getHealth() <= 0){ //if the target has no more health
-                this.targetList.remove(j); //remove the target from the list of targets since it is now destroyed
+              ((SCP0492)attackerList.get(i)).attack(target); //attack the target
+              if(target.getHealth() <= 0){ //if the target has no more health
+                this.targetList.remove(target); //remove the target from the list of targets since it is now destroyed
               }
 
-              j = targetList.size(); //end inner for loop since the SCP0492 has already attacked
           }else if((this.attackerList.get(i) instanceof Soldier) && (distance <= Soldier.RANGE)){ //if the attacker is a soldier.
-              ((Soldier)attackerList.get(i)).attack(targetList.get(j));  //attack the target
-              if(this.targetList.get(j).getHealth() <=0 ){ //if target has no more health
-                this.targetList.remove(j); //remove the object since the target is now destroyed
+              ((Soldier)attackerList.get(i)).attack(target);  //attack the target
+              if(target.getHealth() <=0 ){ //if target has no more health
+                this.targetList.remove(target); //remove the object since the target is now destroyed
               }
 
-              j = targetList.size(); //end inner for loop since Soldier has already attacked
           }//end of if statement block
         }//end of inner for loop
       }//end of for loop

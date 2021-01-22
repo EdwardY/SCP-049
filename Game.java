@@ -47,7 +47,7 @@ class Game {
     /**The amount of change in hume per Turn */
     private int humeChange;
     /**casualties of humans */
-    private int casualties; //TODO: send moneyChange - casualties from the server
+    private int casualties;
     /**armour level unlocked */
     private int armourUnlocked = 1;
     /**weapon level unlocked */

@@ -112,25 +112,6 @@ class Hospital extends Building{
         //hospital has red background
     }
 
-    
-    /** 
-     * @return String
-     */
-    public String toString(){
-
-        String stringToReturn = "";
-
-        return stringToReturn;
-        //TODO: Figure out how to string format it
-    }
-
-    
-    /** 
-     * @param price
-     */
-    public void build(int price){
-        //TODO: remove or find a function for "build"
-    }
 
     
     /** 

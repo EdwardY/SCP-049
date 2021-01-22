@@ -89,34 +89,7 @@ class Residency extends Building{
     }
 
 
-    /**
-     * 
-     * @param training how many adults to be converted 
-     * @param type The type of Human to be trained to become
-     */
-    public void specialize(int training, String type){
 
-        int trained = 0;
-
-        for(int i = 0; i < residents.size() && trained < training ;i ++){
-            
-            if(residents.get(i).getAge() >= 18){
-
-                if(type.equals("Doctor")){
-
-
-                }else if(type.equals("Cadet")){
-
-
-                }else if(type.equals("Researcher")){
-
-
-                }
-                //TODO:convert humans into stuff
-            }
-
-        }
-    }
 
     /**
      * Upgrade the bulding's level and its stats

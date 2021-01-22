@@ -131,11 +131,13 @@ public class Client {
             public void run(){
 
                 while(running){
-                    
+                    System.out.println("Running...");
                     try{
                         String prefix;
                         if(input.ready()){
                             prefix = input.readLine();
+                            System.out.println(prefix);
+                        //TODO: FOR TESTING PURPOSES
                             if(prefix.equals("<w>")){  //waiting for another player to join
                                 Client.this.startStandby(); //start standby window
                             }else if(prefix.equals("<s>")){  //start game

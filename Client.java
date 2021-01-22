@@ -160,6 +160,7 @@ public class Client {
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
 
                                 player.startTurn();
+                                System.out.println("wth");
 
                             }else if(prefix.equals("<te>")){ //server says to end the current turn
                                 player.endTurn();

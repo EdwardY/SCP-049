@@ -784,7 +784,7 @@ class Game {
 
         for(int i = 0; i < amount; i ++){
             convert(myKeys.get(i),"Spy", 100, 0, 1,1,1, 100);
-
+            
         }
         success = true;
 

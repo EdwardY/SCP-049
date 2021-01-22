@@ -166,10 +166,13 @@ public class Client {
                                 player.endTurn();
                                 String objectInfo;
                                 String [] objectValues;
+
+
+                                SCP0492.level = Integer.parseInt(input.readLine());
+                                //TODO: PROBLEM HERE, RECEIVES THE NUMBER OF SCP'S BEFORE THE LEVEL OF SCPS.
                                 int objectNum = Integer.parseInt(input.readLine());
                                 ArrayList<SCP0492> scpList = new ArrayList<SCP0492>();
 
-                                SCP0492.level = Integer.parseInt(input.readLine());
                                 for(int i = 0; i < objectNum; i ++){
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
@@ -282,6 +285,8 @@ public class Client {
                                 Client.this.setLastRequest(""); //clear the last request
 
                             }else if(prefix.equals("<st>")){ //transaction is successful
+
+                                //TODO: EDWARD NEEDS TO VERIFY THIS BLOCK OF PROTOCOL
                                 System.out.println("something something congrats purchase successful");
                                 String[] requests = lastRequest.split(" ");
                                 //Actually implement the last request 

@@ -46,7 +46,7 @@ public class ResearchLab extends Military{
     }
 
     //Class methods
-    //TODO: some fixer upper needs to be done here
+
     public double developCure(){
 
         setSuccessRate(researchers.size() * 5);
@@ -56,10 +56,9 @@ public class ResearchLab extends Military{
 
             return 25;
         }else{
-            return 0; //TODO: Edward-omaba-senpai your slave has no clue what you intended to do with this so return 0 is just to fix the error
+            return 0; 
         }
         
-        //TODO: figure out the developCure mechanic
     }
 
     public int researchWeapon(){
@@ -143,7 +142,6 @@ public class ResearchLab extends Military{
         this.setLevel(this.getLevel() - 1);
         this.setMaxHealth(this.getMaxHealth() - 500);
 
-        //TODO: what happens when health / capacity goes too low during an downgrade
     }
 
     /**

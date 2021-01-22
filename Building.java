@@ -58,12 +58,6 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
     abstract public void draw(Graphics g);
 
     /**
-     * Converts the building information to string to print out in some form
-     * 
-     */
-    abstract public String toString();
-
-    /**
      * calculates how much money it takes to upgrade the building
      * @return upgrade price
      */

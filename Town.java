@@ -357,17 +357,6 @@ public class Town extends Player {
         }
     }
 
-    /**
-     * Gets the price of a building.
-     * @param type The type of the building
-     * @param level The level of the building
-     * @return The price of the building
-     */
-    public int getPrice(String type, int level){
-        //TODO: BPretty sure this method is not used
-        return 0;
-    }
-
 
     /** 
      * Gets the amount of money the player has.
@@ -463,7 +452,6 @@ public class Town extends Player {
         this.gameWindow.generalButtons.get("upgrade").deactivate();
     }
 
-    //TODO: I should have 5 more request to deal with in client
 
     public void requestTrainSoldier(int amount, int x, int y, int soldierLevel){
         String keys = "";
@@ -557,7 +545,7 @@ public class Town extends Player {
         sendMessage("<residency convert>"); 
         sendMessage(type);
         sendMessage(amount + " " + x + " " + y);
-        //TODO: Make sure to deduct costs and stuff
+
 
         for(int key: humanMap.keySet()){
             if(humanMap.get(key) instanceof Citizen){
@@ -781,7 +769,6 @@ public class Town extends Player {
         /** The max capacity of a building */
         private int maxCapacity = 0;
 
-        //TODO: set variables above to equal their respective parts
 
 
         /**
@@ -818,7 +805,6 @@ public class Town extends Player {
                 levels[i] = new DuberTextButton("" + (i + 1), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + i*80, 900, 60, 30));
             }
 
-            //TODO: place buttons in the right positions
             //All residency buildings
             this.residencyButtons = new HashMap<>();
             this.residencyButtons.put("Train citizens" ,new DuberTextButton("Train citizens", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 540, 180, 30)));
@@ -828,7 +814,6 @@ public class Town extends Player {
             this.residencyButtons.put("Doctor",new DuberTextButton("Doctor", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
             //this.residencyButtons.put("Move",new DuberTextButton("Move", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Specialize citizens",new DuberTextButton("Specialize citizens: "  + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
-            //TODO: figure out how to move the npcs after some of them are trained
             this.residencyButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
             this.residencyButtons.put("Citizens trained: " + training +  "  $"+ training * 100  ,new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Subtract 1",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 780, 180, 30)));
@@ -1166,7 +1151,6 @@ public class Town extends Player {
                 //other things
             }
 
-            //TODO: ask resource synchronization
             public void requestResidencyFunction(int menu, int mouseX,  int mouseY){
 
                 deactivateBuildingButtons(); 
@@ -1505,7 +1489,4 @@ public class Town extends Player {
         }
 
     }//end of inner class
-
-    //TODO implement a back button by subtracting menu by one or switching the currentBuildingType variable
-
 }//end of class

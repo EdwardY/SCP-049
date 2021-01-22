@@ -156,6 +156,12 @@ public class SCP extends Player{
         this.gameWindow.getWindow().dispose();
     }
 
+    public void requestSurrender(){
+        sendMessage("<sur>");
+
+        this.getPlayerClient().setLastRequest("<sur>");
+    }
+
     /**
      * Creates an SCP event that the player chose to use that is not location-based.
      * @param eventType The name of the event that will be created.
@@ -368,6 +374,8 @@ public class SCP extends Player{
         private DuberTextButton startEventButton;
         /** boolean for whether or not the price for the event should be displayed */
         private boolean displayPrice;
+        /**button to request a surrender */
+        private DuberTextButton surrender;
 
         /**
          * Constructor that will run the SCP version of the game.
@@ -405,6 +413,8 @@ public class SCP extends Player{
             }
 
             startEventButton = new DuberTextButton("Start", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
+
+            surrender = new DuberTextButton("surrender", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 960, 180, 30));
 
             //whole game event buttons are active always
             for(int i = 0;i < wholeGameEventButtons.length;i++){
@@ -567,6 +577,12 @@ public class SCP extends Player{
                         aoeEventButtons[i].activate();
                     }
                 }else{
+                    if(surrender.inBounds(mouseX, mouseY)){
+
+                        requestSurrender();
+                    }
+                    
+                    
                     for(int i = 0;i < wholeGameEventButtons.length;i++){
                         if(wholeGameEventButtons[i].inBounds(mouseX, mouseY)){
                             type = wholeGameEventButtons[i].getText();

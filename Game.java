@@ -712,10 +712,60 @@ class Game {
                 
                 convert(myKeys.get(i), type, 100, 10, 1, 1, 1, 100);
                 //TODO: figure out the numbers
+                locateHumanInProperSpot(this.humanMap.get(myKeys.get(i)));
                 //TODO: remmeber to move these npcs
             }
         }
         return success;
+    }
+
+    /**
+     * Relocates the {@code Human} to the proper {@code Building} based on the occupation they now have. 
+     * Duberville offers good teleportation services so all {@code Humans} can live in their workplace 
+     * as soon as they get hired.
+     * @param human the {@code Human} to relocate
+     */
+    private void locateHumanInProperSpot(Human human){
+        boolean added = false;
+        if(human instanceof Doctor){
+            //move to hospital
+            for(int i  = 0;i < buildings.size();i++){
+                if(buildings.get(i) instanceof Hospital){
+                    Hospital hospital = (Hospital)buildings.get(i);
+                    if((!added) && (hospital.doctors.size() < hospital.getMaxCapacity())){
+                        hospital.addDoctors((Doctor)human);
+                        human.setX(hospital.getX());
+                        human.setY(hospital.getY());
+                        added = true;
+                    }
+                }
+            }
+        }else if(human instanceof Researcher){
+            //move to research lab
+            for(int i = 0;i < buildings.size();i++){
+                if(buildings.get(i) instanceof ResearchLab){
+                    ResearchLab researchLab = (ResearchLab)buildings.get(i);
+                    if(!added){
+                        researchLab.researchers.add((Researcher)human);
+                        human.setX(researchLab.getX());
+                        human.setY(researchLab.getY());
+                        added = true;
+                    }
+                }
+            }
+        }else if(human instanceof Cadet){
+            //move to military
+            for(int i = 0;i < buildings.size();i++){
+                if(buildings.get(i) instanceof MilitaryBase){
+                    MilitaryBase militaryBase = (MilitaryBase)buildings.get(i);
+                    if(!added){
+                        human.setX(militaryBase.getX());
+                        human.setY(militaryBase.getY());
+                        added = true;
+                    }
+                }
+            }
+        }
     }
 
     /**

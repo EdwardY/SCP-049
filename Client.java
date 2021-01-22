@@ -277,7 +277,7 @@ public class Client {
     
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
-                                lastRequest = ""; //clear the last request
+                                Client.this.setLastRequest(""); //clear the last request
 
                             }else if(prefix.equals("<st>")){ //transaction is successful
                                 System.out.println("something something congrats purchase successful");

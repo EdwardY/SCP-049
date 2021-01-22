@@ -358,17 +358,10 @@ class Game {
         }
     }
 
-    //TODO: implement town win
-
     public boolean checkTownWin(){
         boolean win = false; 
 
         if(researchProgress >= 100){
-
-            win = true;
-        }
-
-        if(turn >= 10 ){ //TODO: make sure this is the win condition that we want
 
             win = true;
         }
@@ -729,7 +722,6 @@ class Game {
                 convert(myKeys.get(i), type, 100, 10, 1, 1, 1, 100);
                 //TODO: figure out the numbers
                 locateHumanInProperSpot(this.humanMap.get(myKeys.get(i)));
-                //TODO: remmeber to move these npcs
             }
 
             changeMoney(-100*amount);

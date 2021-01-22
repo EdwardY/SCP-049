@@ -278,6 +278,8 @@ class Server {
                                 sendMessage("<r>");
                                 sendMessage("Money");
                                 sendMessage("" + (-(Soldier.BASE_SOLDIER_PRICE*amount*level)));
+                                game.changeMoney(-(Soldier.BASE_SOLDIER_PRICE*amount*level));
+                                game.changeMoneyChange(-(Soldier.BASE_SOLDIER_PRICE*amount*level));
                             }
                             reportTransactionStatus(success);
 
@@ -300,6 +302,8 @@ class Server {
                                 sendMessage("<r>");
                                 sendMessage("Money");
                                 sendMessage("" + (-(Spy.SPY_PRICE*amount)));
+                                game.changeMoney(-(Spy.SPY_PRICE*amount));
+                                game.changeMoneyChange(-(Spy.SPY_PRICE*amount));
                             }
                             reportTransactionStatus(success);
 
@@ -613,25 +617,6 @@ class Server {
                         game.doTurn();
                         sendTo(allUsers, "<te>");
                         System.out.println("turn ended");
-                        //check for if either side has won
-                        if(game.checkScpWin()){
-                            sendTo(allUsers, "<ge>");
-                            scp.sendMessage("win");
-                            town.sendMessage("lose");
-                            running = false;
-                        }else if(game.checkTownWin()){
-                            sendTo(allUsers, "<ge>");
-                            town.sendMessage("win");
-                            scp.sendMessage("lose");
-                            running = false;
-                        }
-
-                        //In case of game ending because max turns reached
-                        if(game.getTurn() > Game.MAX_TURNS){
-                            sendTo(allUsers, "<ge>");
-                            sendTo(allUsers, "tie");
-                            running = false;
-                        }
 
                         //scps
                         sendTo(allUsers, "" + SCP0492.level);
@@ -684,6 +669,26 @@ class Server {
                         if(game.gotIntel()){
                             town.sendMessage("<i>");
                             town.sendMessage("" + game.getHume());
+                        }
+
+                        //check for if either side has won
+                        if(game.checkScpWin()){
+                            sendTo(allUsers, "<ge>");
+                            scp.sendMessage("win");
+                            town.sendMessage("lose");
+                            running = false;
+                        }else if(game.checkTownWin()){
+                            sendTo(allUsers, "<ge>");
+                            town.sendMessage("win");
+                            scp.sendMessage("lose");
+                            running = false;
+                        }
+
+                        //In case of game ending because max turns reached
+                        if(game.getTurn() > Game.MAX_TURNS){
+                            sendTo(allUsers, "<ge>");
+                            sendTo(allUsers, "tie");
+                            running = false;
                         }
 
                         turnGoing = !turnGoing;

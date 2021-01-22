@@ -609,8 +609,12 @@ class Server {
                             scp.sendMessage("win");
                             town.sendMessage("lose");
                             running = false;
+                        }else if(game.checkTownWin()){
+                            sendTo(allUsers, "<ge>");
+                            town.sendMessage("win");
+                            scp.sendMessage("lose");
+                            running = false;
                         }
-                        //TODO: implement town win, then check and send for town win
 
                         //In case of game ending because max turns reached
                         if(game.getTurn() > Game.MAX_TURNS){

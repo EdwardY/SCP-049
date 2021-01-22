@@ -137,10 +137,9 @@ class Residency extends Building{
 
         //downgrade a buildings stats 
         this.setLevel(this.getLevel() - 1);
-        this.setMaxHealth(this.getHealth() - 500);
+        this.setMaxHealth(this.getMaxHealth() - 500);
         this.maxCapacity -= 20;
 
-        //TODO: what happens when health / capacity goes too low during an downgrade
     }
 
     /**

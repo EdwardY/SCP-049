@@ -68,7 +68,6 @@ class FoodBuilding extends ProductionFacility{
    public void takeDamage(int damage){
 
        this.setHealth(this.getHealth() - damage);
-       //TODO: maybe different building have different damage taking mechanics
    }
    
 
@@ -110,9 +109,8 @@ class FoodBuilding extends ProductionFacility{
 
         //downgrade a buildings stats 
         this.setLevel(this.getLevel() - 1);
-        this.setMaxHealth(this.getHealth() - 500);
+        this.setMaxHealth(this.getMaxHealth() - 500);
 
-        //TODO: what happens when health / capacity goes too low during an downgrade
     }
 
 }

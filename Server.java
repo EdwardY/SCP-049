@@ -274,6 +274,11 @@ class Server {
                             }
 
                             success = game.trainSoldier(amount, level, x, y, myKeys);
+                            if(success){
+                                sendMessage("<r>");
+                                sendMessage("Money");
+                                sendMessage("" + (-(Soldier.BASE_SOLDIER_PRICE*amount*level)));
+                            }
                             reportTransactionStatus(success);
 
 
@@ -291,6 +296,11 @@ class Server {
                             }
 
                             success = game.trainSpy(amount, x, y, myKeys);
+                            if(success){
+                                sendMessage("<r>");
+                                sendMessage("Money");
+                                sendMessage("" + (-(Spy.SPY_PRICE*amount)));
+                            }
                             reportTransactionStatus(success);
 
 

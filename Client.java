@@ -344,8 +344,6 @@ public class Client {
                                             ((Town)player).convert(keys[i], "Soldier",level*100, level*10, 1, 1, 1, 100); 
 
                                         }
-                                        ((Town)player).changeMoney(-100*amount*level);
-
 
                                     }else if(requests[0].equals("<military spy>")){
 
@@ -362,8 +360,6 @@ public class Client {
                                             ((Town)player).convert( keys[i],"Spy", 100, 0, 1,1,1, 100);
 
                                         }
-                                        ((Town)player).changeMoney(-100*amount); //TODO: Edward-obama-sama your slaves have no clue what you were thinking because spies don't have level
-
                                     }
 
                                 

@@ -362,7 +362,7 @@ public class Client {
                                             ((Town)player).convert( keys[i],"Spy", 100, 0, 1,1,1, 100);
 
                                         }
-                                        ((Town)player).changeMoney(-100*amount*level);
+                                        ((Town)player).changeMoney(-100*amount); //TODO: Edward-obama-sama your slaves have no clue what you were thinking because spies don't have level
 
                                     }
 

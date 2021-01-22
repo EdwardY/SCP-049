@@ -83,7 +83,7 @@ class Server {
         Socket client = null;
         try{
             serverSock = new ServerSocket(this.port);
-            serverSock.setSoTimeout(100000); //TODO: take off timeout later
+            serverSock.setSoTimeout(100000);
             while(running){
                 client = serverSock.accept();
                 System.out.println("Client");

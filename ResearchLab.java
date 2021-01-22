@@ -55,6 +55,8 @@ public class ResearchLab extends Military{
         if (randomInt < successRate){
 
             return 25;
+        }else{
+            return 0; //TODO: Edward-omaba-senpai your slave has no clue what you intended to do with this so return 0 is just to fix the error
         }
         
         //TODO: figure out the developCure mechanic

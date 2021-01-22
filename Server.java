@@ -612,7 +612,7 @@ class Server {
                         lastTime = curTime;
                         game.doTurn();
                         sendTo(allUsers, "<te>");
-
+                        System.out.println("turn ended");
                         //check for if either side has won
                         if(game.checkScpWin()){
                             sendTo(allUsers, "<ge>");
@@ -694,6 +694,7 @@ class Server {
                         game.resetTurnChanges();
                         lastTime = curTime;
                         sendTo(allUsers, "<ts>");
+                        System.out.println("turn started");
                         turnGoing = !turnGoing;
                     }
                 }

@@ -162,6 +162,7 @@ public class Client {
                                 player.startTurn();
 
                             }else if(prefix.equals("<te>")){ //server says to end the current turn
+                                player.endTurn();
                                 String objectInfo;
                                 String [] objectValues;
                                 int objectNum = Integer.parseInt(input.readLine());

@@ -1083,6 +1083,7 @@ public class Town extends Player {
                             if(buildingTypesButtons[i].inBounds(mouseX, mouseY)){
                                 type = buildingTypesButtons[i].getText();
                                 buildButton.activate();
+                                generalButtons.get("upgrade").deactivate();
                             }
                         }
 
@@ -1096,7 +1097,7 @@ public class Town extends Player {
                             requestBuilding(type, buildX, buildY);
                             
                         }else if(generalButtons.get("upgrade").inBounds(mouseX, mouseY)){
-                            
+                            buildButton.deactivate();
                             requestUpgrade(buildX,buildY);
 
                         }

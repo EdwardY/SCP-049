@@ -545,9 +545,7 @@ public class SCP extends Player{
              */
             @Override
             public void mouseEntered(MouseEvent e){
-                if((this.getMouseX() <= 100) && (this.getMouseX() >= 0) && (this.getMouseY() <= 100) && (this.getMouseY() >= 0)){
-                    //System.out.println("your button works.");
-                }
+
             }
 
 

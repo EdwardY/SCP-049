@@ -410,7 +410,7 @@ public class Client {
 
                         }//end of if statement to check if there is input
                     }catch(IOException e){
-                        System.out.println("Error receiving message from server");
+                        System.out.println("Incorrect input received");
                     }//end of try catch statement
                 }//end of while loop
             }//end of method

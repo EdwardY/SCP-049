@@ -825,8 +825,8 @@ public class Town extends Player {
             this.militaryBaseButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 650, 180, 30)));
             this.militaryBaseButtons.put("Subtract",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 750, 180, 30)));
             this.militaryBaseButtons.put("Train", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
-            this.militaryBaseButtons.put("Soldier", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 540, 180, 30)));
-            this.militaryBaseButtons.put("Spy", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 580, 180, 30)));
+            this.militaryBaseButtons.put("Soldier", new DuberTextButton("Soldier", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 540, 180, 30)));
+            this.militaryBaseButtons.put("Spy", new DuberTextButton("Spy", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 580, 180, 30)));
             this.militaryBaseButtons.put("Trained", new DuberTextButton("Trained: " + training + "  $" + training*100, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
             
 
@@ -945,11 +945,11 @@ public class Town extends Player {
                     residencyButtons.get(key).draw(g);
                 }
 
-                for(String key:residencyButtons.keySet()){
+                for(String key:militaryBaseButtons.keySet()){
                     militaryBaseButtons.get(key).draw(g);
                 }
 
-                for(String key:residencyButtons.keySet()){
+                for(String key:researchLabButtons.keySet()){
                     researchLabButtons.get(key).draw(g);
                 }
 

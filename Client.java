@@ -145,6 +145,8 @@ public class Client {
                                 String side = input.readLine();
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
+
+                                
                                 if(side.equals("s")){ //this player is on the SCP side
                                     Client.this.player = new SCP(username, Client.this, opponent, startingCurrency);
                                     Client.this.player.start();

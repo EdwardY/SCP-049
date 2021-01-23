@@ -27,7 +27,7 @@ public class SCP extends Player{
     /**The amount of hume points (SCP currency) that the player has. */
     private int hume;
     /**The game window that the player will use to play the game. */
-    private SCPGameWindow gameWindow;
+    private SCPGameWindow scpGameWindow;
     /**An ArrayList of enemy humans that the SCP must infect or destroy. */
     private ArrayList<Human> humanList;
 
@@ -63,7 +63,7 @@ public class SCP extends Player{
     }
 
     public void run(){
-        this.gameWindow = new SCPGameWindow();
+        this.scpGameWindow = new SCPGameWindow();
     }
 
     /**
@@ -83,7 +83,7 @@ public class SCP extends Player{
         //save last request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level + " " + x + " " + y);
         System.out.println("saved");
-        gameWindow.reset();
+        scpGameWindow.reset();
         System.out.println("reset");
     }
 
@@ -101,7 +101,7 @@ public class SCP extends Player{
         //save request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level);
         System.out.println("saved");
-        gameWindow.reset();
+        scpGameWindow.reset();
         System.out.println("reset");
     }
 
@@ -138,7 +138,7 @@ public class SCP extends Player{
      */
     public void endGame(String victory){
         new ResultsWindow().getResults(victory, false);
-        this.gameWindow.getWindow().dispose();
+        this.scpGameWindow.getWindow().dispose();
     }
 
     public void requestSurrender(){
@@ -235,7 +235,7 @@ public class SCP extends Player{
      * @return The player's game window.
      */
     public SCPGameWindow getSCPGameWindow(){
-        return this.gameWindow;
+        return this.scpGameWindow;
     }
         /**
      * Gets the amount of hume points that the player has.

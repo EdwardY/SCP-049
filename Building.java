@@ -140,6 +140,14 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
     }   
 
     /**
+     * gets the initial price of the building
+     * @return initialPrice, the initial price of the building
+     */
+    public int getInitialPrice(){
+        return this.initialPrice;
+    }
+
+    /**
      * getImage()
      * @return Returns the image of the current object, in a Image object
      */

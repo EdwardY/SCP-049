@@ -62,6 +62,9 @@ public class SCP extends Player{
         SCP.this.getPlayerClient().sendMessage(message);
     }
 
+    public void run(){
+        System.out.println("I'm right :D");
+    }
 
     /**
      * Requests a location-based event to the server.

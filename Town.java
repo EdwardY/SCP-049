@@ -73,6 +73,10 @@ public class Town extends Player {
         currentId++;
     
     }
+    
+    public void run(){
+        System.out.println("I'm right :D");
+    }
 
     /**
      * Starts the town version of the game.
@@ -944,10 +948,10 @@ public class Town extends Player {
                 for(String key:residencyButtons.keySet()){
                     residencyButtons.get(key).draw(g);
                 }
-
+                /*
                 for(String key:militaryBaseButtons.keySet()){
                     militaryBaseButtons.get(key).draw(g);
-                }
+                }*/
 
                 for(String key:researchLabButtons.keySet()){
                     researchLabButtons.get(key).draw(g);
@@ -956,6 +960,7 @@ public class Town extends Player {
                 for(String key: generalButtons.keySet()){
                     generalButtons.get(key).draw(g);
                 }
+
 
                 
                 

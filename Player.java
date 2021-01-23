@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @version 1.0 on January 5, 2021
  */
 
-abstract class Player {
+abstract class Player implements Runnable{
     /** Username of the player */
     private String username;
     /** client that this player needs to communicate to */
@@ -59,6 +59,10 @@ abstract class Player {
         Thread t = new Thread(this.timer);
         t.start();
     }
+
+
+    public abstract void run();
+
 
     /**
      * Gets the JFrames in the game

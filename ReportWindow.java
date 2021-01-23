@@ -24,16 +24,17 @@ public abstract class ReportWindow{
     public ReportWindow(){
         this.window = new JFrame("End of turn report:");
         this.window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.window.setSize(500, 900);
+        this.window.setSize(500, 600);
         this.window.setBackground(Color.WHITE);
         this.mainPanel = new JPanel();
-        this.mainPanel.setBounds(10, 10, 450, 850);
+        this.mainPanel.setBounds(10, 10, 450, 550);
+        this.mainPanel.setBackground(Color.WHITE);
         this.window.add(mainPanel);
         this.reportBox = new JTextArea();
         this.reportBox.setLineWrap(true);
         this.reportBox.setEditable(false);
-        this.reportBox.setBounds(5, 0, 445, 845);
-        this.window.add(reportBox);
+        this.reportBox.setBounds(5, 0, 445, 545);
+        this.mainPanel.add(reportBox);
         this.window.setVisible(true);
 
     }//end of constructor

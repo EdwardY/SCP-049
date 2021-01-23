@@ -79,13 +79,6 @@ public class Town extends Player {
     }
 
     /**
-     * Starts the town version of the game.
-     */
-    public void start(){
-        this.gameWindow = new TownGameWindow();
-    }
-
-    /**
      * Changes the amount of money that the player has.
      * @param change The amount of money that the player will gain or lose.
      */

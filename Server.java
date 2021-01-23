@@ -491,6 +491,7 @@ class Server {
                 sendMessage("" + (price * -1));
                 game.changeHume(price * -1);
                 game.changeHumeChange(price*-1);
+                success = true;
             }
             return success;
         }
@@ -530,6 +531,7 @@ class Server {
                 sendMessage("" + (price * -1));
                 game.changeHume(price * -1);
                 game.changeHumeChange(price * -1);
+                success = true;
             }
             return success;
         }
@@ -636,8 +638,10 @@ class Server {
 
                         //events
                         sendTo(allUsers, "" + game.getEventsWithoutStonks().size());
+                        System.out.println(game.getEventsWithoutStonks().size());
                         for(int i = 0;i < game.getEventsWithoutStonks().size();i++){
                             Event curEvent = game.getEventsWithoutStonks().get(i);
+                            System.out.println(curEvent.getClass().getSimpleName());
                             if(curEvent instanceof WholeGameEvent){
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft());
                             }else{

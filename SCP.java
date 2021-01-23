@@ -64,6 +64,7 @@ public class SCP extends Player{
 
     public void run(){
         this.scpGameWindow = new SCPGameWindow();
+        System.out.println("scp window");
     }
 
     /**

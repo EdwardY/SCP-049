@@ -414,6 +414,7 @@ public class SCP extends Player{
             startEventButton = new DuberTextButton("Start", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30));
 
             surrender = new DuberTextButton("surrender", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 960, 180, 30));
+            surrender.activate();
 
             //whole game event buttons are active always
             for(int i = 0;i < wholeGameEventButtons.length;i++){
@@ -510,6 +511,7 @@ public class SCP extends Player{
                     levels[i].draw(g);
                 }
                 startEventButton.draw(g);
+                surrender.draw(g);
 
                 if(displayPrice){
                     int price = getPrice(type, Integer.parseInt(level));

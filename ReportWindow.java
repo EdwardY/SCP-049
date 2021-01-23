@@ -29,6 +29,7 @@ public abstract class ReportWindow{
         this.mainPanel = new JPanel();
         this.mainPanel.setBounds(10, 10, 450, 550);
         this.mainPanel.setBackground(Color.WHITE);
+        this.mainPanel.setLayout(null);
         this.window.add(mainPanel);
         this.reportBox = new JTextArea();
         this.reportBox.setLineWrap(true);

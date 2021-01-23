@@ -28,13 +28,15 @@ public class ResultsWindow {
         this.window.setSize(500, 500);
         this.window.setBackground(Color.WHITE);
         this.mainPanel = new JPanel();
+        this.window.setBackground(Color.WHITE);
         this.mainPanel.setBounds(10, 10, 450, 450);
+        this.mainPanel.setLayout(null);
         this.window.add(mainPanel);
         this.resultsBox = new JTextArea();
         this.resultsBox.setLineWrap(true);
         this.resultsBox.setEditable(false);
         this.resultsBox.setBounds(5, 0, 445, 445);
-        this.window.add(resultsBox);
+        this.mainPanel.add(resultsBox);
         this.window.setVisible(true);
     }
 

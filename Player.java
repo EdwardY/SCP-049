@@ -94,10 +94,6 @@ abstract class Player implements Runnable{
         
     }
 
-    /**
-     * Abstract method starts the game.
-     */
-    public abstract void start();
 
     /**
      * Abstract method starts the next turn of the game.

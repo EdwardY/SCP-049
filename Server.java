@@ -118,7 +118,7 @@ class Server {
                 }else if(this.town == null){
                     //assigns town
                     this.town = new ClientHandler(client);
-                    this.townThread = new Thread(this.scp);
+                    this.townThread = new Thread(this.town);
                     this.townThread.start();
                     this.town.sendMessage("<w>");
                     System.out.println("Town");

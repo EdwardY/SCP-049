@@ -63,10 +63,12 @@ public class SCP extends Player{
         SCP.this.getPlayerClient().sendMessage(message);
     }
 
-    public void run(){
+    public void start(){
         this.scpGameWindow = new SCPGameWindow();
+        Thread gameRunner = new Thread(new GameWindowRunner(this.scpGameWindow));
+        gameRunner.start();
         System.out.println("scp window");
-    } //TODO: idk if this is actually useful anymore
+    } 
 
     /**
      * Requests a location-based event to the server.
@@ -415,7 +417,9 @@ public class SCP extends Player{
 
 
             SCP.this.displaySide("SCP");
-            super.start();
+            //super.start();
+            //TODO: Might not actually need this line of code
+
         }// end of window
 
         /**

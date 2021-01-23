@@ -30,17 +30,6 @@ public abstract class GameWindow{
    }
 
 
-
-    /**
-     * Starts the animation of the {@code GameWindow}
-     */
-    public void start(){
-        while(true){
-            this.window.repaint();
-            try  {Thread.sleep(20);} catch(Exception e){}
-        }
-    }
-
     /**
     * Gets the JFrame of the game window.
     * @return The JFrame of the game window.

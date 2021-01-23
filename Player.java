@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @version 1.0 on January 5, 2021
  */
 
-abstract class Player implements Runnable{
+abstract class Player{
     /** Username of the player */
     private String username;
     /** client that this player needs to communicate to */
@@ -61,7 +61,7 @@ abstract class Player implements Runnable{
     }
 
 
-    public abstract void run();
+    public abstract void start();
 
 
     /**

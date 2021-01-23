@@ -150,20 +150,20 @@ public class Client {
                                 
                                 if(side.equals("s")){ //this player is on the SCP side
                                     Client.this.player = new SCP(username, Client.this, opponent, startingCurrency);
-                                    //Client.this.player.start();
 
                                     System.out.println("SCP is NOT the problem");
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
                                     Client.this.player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
-                                    //Client.this.player.start();
 
                                     System.out.println("Town is NOT the problem");
                                 }
 
+                                Client.this.player.start();
+                                /*
                                 Thread gameThread = new Thread(Client.this.player);
                                 gameThread.start();
-                                
+                                */
                                 System.out.println("You made it this far...");
 
                                 if(Client.this.getStandbyWindow() != null){ //if standby window is open

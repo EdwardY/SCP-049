@@ -28,7 +28,7 @@ import javax.swing.BorderFactory;
 
 public class Town extends Player {
     /**The game window that the player will use to play the game. */
-    private TownGameWindow gameWindow;
+    private TownGameWindow townGameWindow;
     /**An integer for storing the money the player has */
     private int money;
     /**an integer for storing the food that the player has */
@@ -74,8 +74,10 @@ public class Town extends Player {
     
     }
 
-    public void run(){
-        this.gameWindow = new TownGameWindow();
+    public void start(){
+        this.townGameWindow = new TownGameWindow();
+        Thread gameRunner = new Thread(new GameWindowRunner(this.townGameWindow));
+        gameRunner.start();
     }
 
     /**
@@ -169,13 +171,13 @@ public class Town extends Player {
      */
     public void endGame(String victory){
         new ResultsWindow().getResults(victory, true);
-        this.gameWindow.getWindow().dispose();
+        this.townGameWindow.getWindow().dispose();
     }
 
 
     public TownGameWindow getTownGameWindow(){
 
-        return this.gameWindow;
+        return this.townGameWindow;
 
     }
 
@@ -426,9 +428,9 @@ public class Town extends Player {
         this.getPlayerClient().setLastRequest("<b> " + type + " " + x + " " + y);
 
         //deactivate the buttons
-        this.gameWindow.buildButton.deactivate();
-        for(int i = 0;i < this.gameWindow.buildingTypesButtons.length;i++){
-            this.gameWindow.buildingTypesButtons[i].deactivate();
+        this.townGameWindow.buildButton.deactivate();
+        for(int i = 0;i < this.townGameWindow.buildingTypesButtons.length;i++){
+            this.townGameWindow.buildingTypesButtons[i].deactivate();
         }
     }
 
@@ -446,7 +448,7 @@ public class Town extends Player {
         this.getPlayerClient().setLastRequest("<u>> " + x + " " + y);
 
         //deactivate the buttons
-        this.gameWindow.generalButtons.get("upgrade").deactivate();
+        this.townGameWindow.generalButtons.get("upgrade").deactivate();
     }
 
 
@@ -856,8 +858,8 @@ public class Town extends Player {
             gameWindow.setVisible(true);
 
             Town.this.displaySide("Town");
-            super.start();
-
+            //super.start();
+            //TODO: Might not actually need this line of code
              }//end of method
 
         /**

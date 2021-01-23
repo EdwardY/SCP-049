@@ -48,6 +48,7 @@ public class SCP extends Player{
      */
     public SCP(String username, Client playerClient, String opponent, int hume){
         super(username, playerClient, opponent);
+        //this.scpGameWindow = new SCPGameWindow();
         this.hume = hume;
         this.humanList = new ArrayList<Human>();
         this.eventX = -1;
@@ -65,7 +66,7 @@ public class SCP extends Player{
     public void run(){
         this.scpGameWindow = new SCPGameWindow();
         System.out.println("scp window");
-    }
+    } //TODO: idk if this is actually useful anymore
 
     /**
      * Requests a location-based event to the server.
@@ -331,7 +332,7 @@ public class SCP extends Player{
 
             String report = "Hume points: " + hume + "\nTotal SCP-049-2: " + scpNum + "\nTotal events: " + eventNum + "\n\nAll events:";
             report += "\n\nEarthquakes: " + earthquakeCounter + "\nFires: " + fireCounter + "\nInfections: " + infectCounter + "\nMutations: " + mutateCounter + "\nRiots: " + riotCounter;
-            report += "\nThunderstorms: " + thunderstormCounter + "\nTornadoes: " + tornadoCounter + "Warped Realities: " + warpRealityCounter; 
+            report += "\nThunderstorms: " + thunderstormCounter + "\nTornadoes: " + tornadoCounter + "\nWarped Realities: " + warpRealityCounter; 
 
             //update the report window
             this.getReportBox().setText(report);

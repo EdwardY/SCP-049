@@ -1031,21 +1031,22 @@ public class Town extends Player {
                     if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
                         clickedBuilding = findBuilding(buildingX, buildingY); 
 
-                        if(clickedBuilding instanceof FoodBuilding){
-                            food = ((FoodBuilding)clickedBuilding).getLevel() * 500 + 1000;
-                        }else if(clickedBuilding instanceof Bank){
-                            money = ((Bank)clickedBuilding).getLevel() * 500 + 1000;
-                        }else if(clickedBuilding instanceof Hospital){
-                            capacity = ((Hospital)clickedBuilding).getMaxCapacity();
-
-                        }
-
-                        //Setting the general buttons
-                        buildingHealth = clickedBuilding.getHealth();
-                        buildingMaxHealth = clickedBuilding.getMaxHealth();
-                        buildingLevel = clickedBuilding.getLevel();
 
                         if(clickedBuilding != null){
+
+                            if(clickedBuilding instanceof FoodBuilding){
+                                food = ((FoodBuilding)clickedBuilding).getLevel() * 500 + 1000;
+                            }else if(clickedBuilding instanceof Bank){
+                                money = ((Bank)clickedBuilding).getLevel() * 500 + 1000;
+                            }else if(clickedBuilding instanceof Hospital){
+                                capacity = ((Hospital)clickedBuilding).getMaxCapacity();
+    
+                            }
+    
+                            //Setting the general buttons
+                            buildingHealth = clickedBuilding.getHealth();
+                            buildingMaxHealth = clickedBuilding.getMaxHealth();
+                            buildingLevel = clickedBuilding.getLevel();
 
                             activateGeneralBuildingButtons();
                             menu = 0;

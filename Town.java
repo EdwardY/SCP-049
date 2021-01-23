@@ -1382,7 +1382,6 @@ public class Town extends Player {
              * Hospital may display current capacity etc removes buttons that aren't supposed to bc there
              *  */
             public void requestHospitalFunction(int menu, int mouseX,  int mouseY ){
-                
                 deactivateBuildingButtons();
             }
 
@@ -1464,6 +1463,10 @@ public class Town extends Player {
                     moneyIncome.deactivate();
                 }
 
+                for(int i = 0; i < buildingTypesButtons.length; i++){
+                    buildingTypesButtons[i].deactivate();
+
+                }
             }
 
             /**

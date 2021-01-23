@@ -58,15 +58,23 @@ class Server {
      * Sends a message to both users to start the game
      */
     private void startGame(){
+        try{
+            Thread.sleep(500); 
+        }catch(Exception e){
+            System.out.println(e);
+        }
+
         this.gameThread = new Thread(new GameHandler());
         this.town.sendMessage("<s>");
         this.town.sendMessage("t");
         this.town.sendMessage(this.scp.getUsername());
+        System.out.println("SCP: " + this.scp.getUsername());
         this.town.sendMessage("" + game.getMoney());
         this.town.sendMessage("" + game.getFood());
         this.scp.sendMessage("<s>");
         this.scp.sendMessage("s");
         this.scp.sendMessage(this.town.getUsername());
+        System.out.println("TOWN: " + this.town.getUsername());
         this.scp.sendMessage("" + game.getHume());
         this.gameThread.start();
     }

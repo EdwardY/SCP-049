@@ -334,7 +334,7 @@ class Server {
                                 scp.sendMessage("win");
                                 this.sendMessage("lose");
                             }
-
+                            running = false;
                         }
                     }
                 }catch(IOException e){

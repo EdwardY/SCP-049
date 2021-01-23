@@ -941,10 +941,10 @@ public class Town extends Player {
                 for(String key:residencyButtons.keySet()){
                     residencyButtons.get(key).draw(g);
                 }
-                /*
+                
                 for(String key:militaryBaseButtons.keySet()){
                     militaryBaseButtons.get(key).draw(g);
-                }*/
+                }
 
                 for(String key:researchLabButtons.keySet()){
                     researchLabButtons.get(key).draw(g);
@@ -992,9 +992,7 @@ public class Town extends Player {
              * @param MouseEvent The action performed by the mouse.
              */
             public void mouseEntered(MouseEvent e){
-                if((this.getMouseX() <= 100) && (this.getMouseX() >= 0) && (this.getMouseY() <= 100) && (this.getMouseY() >= 0)){
-                    System.out.println("your button works.");
-                }
+
             }
 
 

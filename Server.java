@@ -641,7 +641,7 @@ class Server {
                         sendTo(allUsers, "" + game.getBuildings().size());
                         for(int i = 0;i < game.getBuildings().size();i++){
                             Building curBuilding = game.getBuildings().get(i);
-                            String send = curBuilding.getClass().getSimpleName() + " " + curBuilding + " " + curBuilding.getMaxHealth() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY();
+                            String send = curBuilding.getClass().getSimpleName() + " " + curBuilding.getInitialPrice() + " " + curBuilding.getMaxHealth() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY();
                             if(curBuilding instanceof Residency){
                                 send = send +  " " + ((Residency)curBuilding).getMaxCap();
                                 System.out.println(send);

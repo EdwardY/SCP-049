@@ -83,11 +83,15 @@ public class SCP extends Player{
         //save last request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level + " " + x + " " + y);
         System.out.println("saved");
-        reset();
+        gameWindow.reset();
         System.out.println("reset");
     }
 
-
+    /**
+     * Requests a whole game event to the server
+     * @param type the type of event
+     * @param level the level of the event
+     */
     private void requestEvent(String type, String level){
         //request
         sendMessage("<e>");
@@ -97,28 +101,10 @@ public class SCP extends Player{
         //save request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level);
         System.out.println("saved");
-        reset();
+        gameWindow.reset();
         System.out.println("reset");
     }
 
-
-    private void reset(){
-        //deactivate buttons
-        for(int i = 0;i < this.gameWindow.aoeEventButtons.length;i++){
-            this.gameWindow.aoeEventButtons[i].deactivate();
-        }
-        for(int i = 0;i < this.gameWindow.levels.length;i++){
-            this.gameWindow.levels[i].deactivate();
-        }
-        this.gameWindow.startEventButton.deactivate();
-
-        //reset x and y
-        eventX = -1;
-        eventY = -1;
-
-        //reset displaying price
-        this.gameWindow.displayPrice = false;
-    }
 
 
 
@@ -429,6 +415,27 @@ public class SCP extends Player{
             SCP.this.displaySide("SCP");
             super.start();
         }// end of window
+
+        /**
+         * Deactivates buttons and resets everything to how it was before
+         */
+        public void reset(){
+            //deactivate buttons
+            for(int i = 0;i < this.aoeEventButtons.length;i++){
+                aoeEventButtons[i].deactivate();
+            }
+            for(int i = 0;i < levels.length;i++){
+                levels[i].deactivate();
+            }
+            startEventButton.deactivate();
+    
+            //reset x and y
+            eventX = -1;
+            eventY = -1;
+    
+            //reset displaying price
+            displayPrice = false;
+        }
 
         /**
          * [ScpGridPanel.java]

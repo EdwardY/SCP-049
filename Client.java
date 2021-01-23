@@ -131,7 +131,7 @@ public class Client {
             public void run(){
 
                 while(running){
-                    System.out.println("Running...");
+                    //System.out.println("Running...");
                     try{
                         String prefix;
                         if(input.ready()){
@@ -146,13 +146,14 @@ public class Client {
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
                                 if(side.equals("s")){ //this player is on the SCP side
-                                    player = new SCP(username, Client.this, opponent, startingCurrency);
-                                    player.start();
+                                    Client.this.player = new SCP(username, Client.this, opponent, startingCurrency);
+                                    Client.this.player.start();
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
-                                    player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
-                                    player.start();
+                                    Client.this.player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
+                                    Client.this.player.start();
                                 }
+                                System.out.println("You made it this far...");
 
                                 if(Client.this.getStandbyWindow() != null){ //if standby window is open
                                     Client.this.getStandbyWindow().close();  //close the standby window

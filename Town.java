@@ -73,9 +73,9 @@ public class Town extends Player {
         currentId++;
     
     }
-    
+
     public void run(){
-        System.out.println("I'm right :D");
+        this.gameWindow = new TownGameWindow();
     }
 
     /**

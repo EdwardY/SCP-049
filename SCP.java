@@ -79,11 +79,12 @@ public class SCP extends Player{
         sendMessage(type);
         sendMessage(level);
         sendMessage(x + " " + y);
-
+        System.out.println("functional");
         //save last request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level + " " + x + " " + y);
-
+        System.out.println("saved");
         reset();
+        System.out.println("reset");
     }
 
 
@@ -92,11 +93,12 @@ public class SCP extends Player{
         sendMessage("<e>");
         sendMessage(type);
         sendMessage(level);
-
+        System.out.println("functional");
         //save request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level);
-
+        System.out.println("saved");
         reset();
+        System.out.println("reset");
     }
 
 

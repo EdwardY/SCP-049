@@ -63,7 +63,7 @@ public class SCP extends Player{
     }
 
     public void run(){
-        System.out.println("I'm right :D");
+        this.gameWindow = new SCPGameWindow();
     }
 
     /**

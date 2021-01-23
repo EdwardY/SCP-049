@@ -228,6 +228,7 @@ public class Client {
                                     objectInfo = input.readLine();
                                     objectValues = objectInfo.split(" ");
                                     String buildingType = objectValues[0];
+                                    
                                     if(buildingType.equals("Bank")){
                                         buildingList.add(new Bank(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5])   ));
                                     }else if(buildingType.equals("FoodBuilding")){

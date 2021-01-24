@@ -520,19 +520,6 @@ public class Town extends Player {
     public void requestTrainCitizen(int amount, int x, int y){
         super.sendMessage("<residency train>"); 
         super.sendMessage(x + " " + y + " " + amount);                   
-        //Update this class as well
-        System.out.println("Your buttons have made it this far congrats");
-        String keys = "";
-        for(int key: humanMap.keySet()){
-            if(humanMap.get(key) instanceof Citizen){
-                if(humanMap.get(key).getX() == x && humanMap.get(key).getY() == y);{
-                keys = keys + " " + key;
-
-                }
-            }
-        }
-        super.sendMessage(keys);
-
         this.getPlayerClient().setLastRequest("<residency train>"+  " " + x + " " + y + " " + amount);
     }
 
@@ -1138,7 +1125,7 @@ public class Town extends Player {
                             requestBuilding(type, buildX, buildY);
                             
                         }
-                    }else{ //building it not null click on side bar 
+                    }else{ //building is not null click on side bar 
 
 
                         //activate the general btttos such as health and capactiy

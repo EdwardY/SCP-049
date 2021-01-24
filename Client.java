@@ -309,7 +309,8 @@ public class Client {
                             }else if(prefix.equals("<st>")){ //transaction is successful
 
                                 //TODO: EDWARD NEEDS TO VERIFY THIS BLOCK OF PROTOCOL
-                                System.out.println("something something congrats purchase successful");
+
+                                System.out.println(lastRequest);
                                 String[] requests = lastRequest.split(" ");
                                 //Actually implement the last request 
                                 if(requests.length > 1){
@@ -325,6 +326,9 @@ public class Client {
                                         ((Town)player).upgradeBuilding(Integer.parseInt(requests[1]), Integer.parseInt(requests[2]));
 
                                     }else if(requests[0].equals("<residency train>")){ // adding new citizens
+                                        
+                                        //System.out.println
+                                        
                                         int x = Integer.parseInt(requests[1]);
                                         int y = Integer.parseInt(requests[2]);
                                         int amount = Integer.parseInt(requests[3]);
@@ -336,7 +340,7 @@ public class Client {
                                             ((Town)player).addNpc(newCitizen);
 
                                         }
-                                        ((Town)player).changeMoney(-100*amount);
+                                        ((Town)player).changeMoney(-50*amount);
                                         
 
                                     }else if(requests[0].equals("<residency convert>")){
@@ -355,7 +359,8 @@ public class Client {
                                             ((Town)player).convert(keys[i], newType, 100, 10, 1, 1, 1, 100);
                                             ((Town)player).locateHumanInProperSpot(((Town)player).getHumanMap().get(keys[i]));
                                         }
-                                        ((Town)player).changeMoney(-100*amount);
+
+                                        ((Town)player).changeMoney(-50*amount);
 
 
                                     }else if(requests[0].equals("<military soldier>")){

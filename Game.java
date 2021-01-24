@@ -584,6 +584,8 @@ class Game {
      * @param npc the {@code NPC} to be added
      */
     public void addNpc(NPC npc){
+
+ 
         if(npc instanceof SCP0492){
             scps.add((SCP0492)npc);
         }else{
@@ -856,19 +858,23 @@ class Game {
 
         Building building = findBuilding(x, y);
 
-        if(building instanceof Residency){
+        System.out.println(((Residency)building).getMaxCap() + " is max cap");
+        System.out.println(((Residency)building).getCurrentPopulation() + " is current population");
+        System.out.println("This is the amounnt of citizens to be trained: " + amount); 
 
-            if( ((Residency)building).getMaxCap() - ((Residency)building).getCurrentPopulation() >= amount ){
+        if( ((Residency)building).getMaxCap() - ((Residency)building).getCurrentPopulation() >= amount ){
 
-                for(int i = 0; i < 0; i ++){
-                    Citizen add = new Citizen(0, 100, x, y);
+            for(int i = 0; i < amount; i ++){
+                Citizen add = new Citizen(0, 100, x, y);
+                //TODO: they are all considered adults as of right now
 
-                    this.addNpc(add);
-                    ((Residency)building).createCitizen(add);
-                }
-                success = true;
-                this.changeMoney(-10*amount); //TODO: synchronize moneyy amount, make sure it's the same
+                addNpc(add);
+                ((Residency)building).createCitizen(add);
             }
+            System.out.println("Surely they've been added now right?");
+
+            success = true;
+            this.changeMoney(-50*amount); //TODO: synchronize moneyy amount, make sure it's the same
         }
 
         return success;

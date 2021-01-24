@@ -815,7 +815,7 @@ public class Town extends Player {
             //this.residencyButtons.put("Move",new DuberTextButton("Move", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Specialize citizens: ",new DuberTextButton("Specialize citizens: "  + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
-            this.residencyButtons.put("Citizens trained: ",new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
+            this.residencyButtons.put("Trained",new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Subtract 1",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 780, 180, 30)));
             this.residencyButtons.put("Train/Specialize", new DuberTextButton("Train/Specialize", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 820, 180, 30)));
 
@@ -845,8 +845,7 @@ public class Town extends Player {
 
             //initialize general buttons
             this.generalButtons = new HashMap<>();
-            this.generalButtons.put("Level", new DuberTextButton("Level: " + buildingLevel, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 200, 180, 30)));
-            this.generalButtons.put("Health", new DuberTextButton("health: " + buildingHealth + "/" + buildingMaxHealth, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 250, 180, 30)));
+            
             this.generalButtons.put("upgrade", new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30)));
             this.generalButtons.put("back", new DuberTextButton("back", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 100, 960, 180, 30)));
             this.generalButtons.put("surrender", new DuberTextButton("surrender", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 960, 180, 30))); 
@@ -912,6 +911,8 @@ public class Town extends Player {
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
 
+                g.drawString("Building Health:" + buildingHealth + "/" + buildingMaxHealth, GameWindow.GridPanel.GRID_SIZE_WIDTH, 250);
+                g.drawString("Level: " + buildingLevel,GameWindow.GridPanel.GRID_SIZE_WIDTH, 200 );
                 g.drawString("Time left: " + Town.this.getTimer().getTime(), 10 + GRID_SIZE_WIDTH, 20);
                 g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
                 g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
@@ -1076,8 +1077,10 @@ public class Town extends Player {
                             
                         }else{
                             
+                            //General resets for when a user clicks on an empty lot
                             generalButtons.get("upgrade").deactivate();
                             deactivateBuildingButtons();
+                            resetLevelHealth();
 
 
                             System.out.println("Your building is null");
@@ -1198,7 +1201,7 @@ public class Town extends Player {
 
                         //activate next needed buttons
                         residencyButtons.get("Add 1").activate();
-                        residencyButtons.get("Citizens trained: ").activate();
+                        residencyButtons.get("Trained").activate();
                         residencyButtons.get("Subtract 1").activate();
                         residencyButtons.get("Train/Specialize").activate();
                         
@@ -1296,10 +1299,10 @@ public class Town extends Player {
             }
             
             /**
-             * Menus for the when the Use clicks on the 
-             * @param menu
-             * @param mouseX
-             * @param mouseY
+             * Menus for the when the Use clicks on the military base
+             * @param menu The menu portion of what the user is controlling
+             * @param mouseX THe x coordinate of the mouse click
+             * @param mouseY The y coordinate of the omuse click
              */
             public void requestMilitaryBaseFunction(int menu, int mouseX,  int mouseY){
                 
@@ -1512,9 +1515,14 @@ public class Town extends Player {
                 }
             }
 
-            public void deactivateGeneralBuildingButtons(){
+            /**
+             * Reset the display variables when 
+             */
+            public void resetLevelHealth(){
+                buildingHealth = 0;
+                buildingMaxHealth = 0;
+                buildingLevel = 0;
 
-                //TODO: remove this method as it it probably not needed 
             }
 
         }

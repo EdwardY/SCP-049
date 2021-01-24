@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 //data structures
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 
 /**
@@ -223,7 +224,9 @@ class Game {
      * </p>
      */
     private void dealWithEvents(){
-        for(Event currentEvent:this.events){
+        Iterator<Event> eIterator = this.events.iterator();
+        while(eIterator.hasNext()){
+            Event currentEvent = eIterator.next();
             currentEvent.affect(this);
             currentEvent.decreaseTimeLeft();
             if(currentEvent instanceof Tornado){
@@ -970,6 +973,7 @@ class Game {
             handleAttacks();
             eatFood();
             killDeadStuff();
+            removeDeadPeopleFromBuildings();
             dealWithMedicalStuff();
             ageCitizens();
         }

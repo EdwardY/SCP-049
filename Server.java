@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 
 //data structures needed
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * [Server.java]
@@ -549,10 +550,9 @@ class Server {
         private boolean upgrade(int x, int y){
 
             boolean success = false;
-            ArrayList<Building> buildings = game.getBuildings();
-
-            //loop trough to find and upgrade the building
-            for(Building building:buildings){
+            Iterator<Building> bIterator = game.getBuildings().iterator();
+            while(bIterator.hasNext()){
+                Building building = bIterator.next();
                 if((building.getX() == x) && (building.getY() == y)){
                     
                     if(building.getUpgradePrice() <= game.getMoney()){
@@ -625,34 +625,39 @@ class Server {
                     if(curTime - lastTime >= ONE_MINUTE){
                         lastTime = curTime;
                         game.doTurn();
+
                         sendTo(allUsers, "<te>");
                         System.out.println("turn ended");
 
                         //scps
                         sendTo(allUsers, "" + SCP0492.level);
                         sendTo(allUsers, "" + game.getScps().size());
-                        for(int i = 0;i < game.getScps().size();i++){
-                            SCP0492 curScp = game.getScps().get(i);
+                        Iterator<SCP0492> scpIterator = game.getScps().iterator(); 
+                        while(scpIterator.hasNext()){
+                            SCP0492 curScp = scpIterator.next();
                             sendTo(allUsers, curScp.getHealth() + " " + curScp.getMaxHealth() + " " + curScp.getX() + " " + curScp.getY() + " " + curScp.getAttackDamage());
+                            
                         }
 
                         //events
                         sendTo(allUsers, "" + game.getEventsWithoutStonks().size());
+                        Iterator<Event> eIterator = game.getEventsWithoutStonks().iterator();
                         System.out.println(game.getEventsWithoutStonks().size());
-                        for(int i = 0;i < game.getEventsWithoutStonks().size();i++){
-                            Event curEvent = game.getEventsWithoutStonks().get(i);
+                        while(eIterator.hasNext()){
+                            Event curEvent = eIterator.next();
                             System.out.println(curEvent.getClass().getSimpleName());
                             if(curEvent instanceof WholeGameEvent){
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft());
                             }else{
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()));
-                            }
+                            }                            
                         }
 
                         //buildings
                         sendTo(allUsers, "" + game.getBuildings().size());
-                        for(int i = 0;i < game.getBuildings().size();i++){
-                            Building curBuilding = game.getBuildings().get(i);
+                        Iterator<Building> bIterator = game.getBuildings().iterator();
+                        while(bIterator.hasNext()){
+                            Building curBuilding = bIterator.next();
                             String send = curBuilding.getClass().getSimpleName() + " " + curBuilding.getInitialPrice() + " " + curBuilding.getMaxHealth() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY();
                             if(curBuilding instanceof Residency){
                                 send = send +  " " + ((Residency)curBuilding).getMaxCap();
@@ -661,12 +666,14 @@ class Server {
                                 send = send + " " + ((Hospital)curBuilding).getMaxCapacity();
                             }
                             System.out.println(send);
-                            sendTo(allUsers, send);
+                            sendTo(allUsers, send);                            
                         }
 
                         //humans
                         sendTo(allUsers, "" + game.getHumanMap().size());
-                        for(int key: game.getHumanMap().keySet()){
+                        Iterator<Integer> humanKeyIterator = game.getHumanMap().keySet().iterator();
+                        while(humanKeyIterator.hasNext()){
+                            int key = humanKeyIterator.next();
                             Human curHuman = game.getHumanMap().get(key);
                             town.sendMessage("" + key);
                             String humanInfo = curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getX() + " " + curHuman.getY();

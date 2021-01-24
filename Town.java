@@ -46,9 +46,8 @@ public class Town extends Player {
     /**unlocked weaponLevel */
     private int weaponLevel = 1;
     /**the id of humans to put in a humanMap */
-    private int currentId = 0; //TODO: coordinate this with the server might be
-    //TODO: create more buttons (pain) and display some useful information
-
+    private int currentId = 0; 
+    
     /**
      * Constructor for the town side player's class
      * @param username The username of the player
@@ -602,12 +601,13 @@ public class Town extends Player {
             this.window.setBackground(Color.WHITE);
             this.mainPanel = new JPanel();
             this.mainPanel.setBounds(10, 10, 450, 450);
+            this.mainPanel.setBackground(Color.WHITE);
             this.window.add(mainPanel);
             this.intelBox = new JTextArea();
             this.intelBox.setLineWrap(true);
             this.intelBox.setEditable(false);
             this.intelBox.setBounds(5, 0, 445, 445);
-            this.window.add(intelBox);
+            this.mainPanel.add(intelBox);
             this.window.setVisible(true);
         }
     
@@ -767,7 +767,10 @@ public class Town extends Player {
         private int capacity = 0;
         /** The max capacity of a building */
         private int maxCapacity = 0;
-
+        /**The residency check for Trained */
+        private boolean residencyTrained = false;
+        /**The residency check for specialized */
+        private boolean residencySpecialized = false;
 
 
         /**
@@ -813,9 +816,7 @@ public class Town extends Player {
             this.residencyButtons.put("Cadet",new DuberTextButton("Cadet", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 660, 180, 30)));
             this.residencyButtons.put("Doctor",new DuberTextButton("Doctor", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
             //this.residencyButtons.put("Move",new DuberTextButton("Move", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
-            this.residencyButtons.put("Specialize citizens: ",new DuberTextButton("Specialize citizens: "  + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
-            this.residencyButtons.put("Trained",new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Subtract 1",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 780, 180, 30)));
             this.residencyButtons.put("Train/Specialize", new DuberTextButton("Train/Specialize", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 820, 180, 30)));
 
@@ -907,6 +908,14 @@ public class Town extends Player {
                 }
 
                 //draw infobar
+
+                if(residencyTrained){
+                    g.drawString("Trained: " + training,GameWindow.GridPanel.GRID_SIZE_WIDTH, 740);
+                }
+                if(residencySpecialized){
+                    g.drawString("Specialized: " + training, GameWindow.GridPanel.GRID_SIZE_WIDTH, 740);
+                }
+
 
                 g.setFont(new Font("Courier", Font.BOLD, 18));
                 g.setColor(Color.BLACK);
@@ -1015,12 +1024,14 @@ public class Town extends Player {
                 int mouseY = e.getY();
                 int buildingX;
                 int buildingY;
+
+
                 if((mouseX <= GridPanel.GRID_SIZE_WIDTH) && (mouseY <= GridPanel.GRID_SIZE_LENGTH)){
                     //inside the grid area, clamps the values down to the x and y of the top left corner of where the building would be
                     buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE) + GameWindow.GridPanel.ROAD_SIZE;
                     buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE) + GameWindow.GridPanel.ROAD_SIZE;
 
-                    buildX = buildingX;
+                    buildX = buildingX; //Coords that are more dynamic and can be used in other methods
                     buildY = buildingY;
 
                     if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
@@ -1080,7 +1091,7 @@ public class Town extends Player {
                             //General resets for when a user clicks on an empty lot
                             generalButtons.get("upgrade").deactivate();
                             deactivateBuildingButtons();
-                            resetLevelHealth();
+                            resetToMain();
 
 
                             System.out.println("Your building is null");
@@ -1177,6 +1188,7 @@ public class Town extends Player {
             public void requestResidencyFunction(int menu, int mouseX,  int mouseY){
 
                 deactivateBuildingButtons(); 
+                deactivateCurrentButtons();
 
                 //Activate menu buttons
                 if(menu == 0){
@@ -1201,7 +1213,7 @@ public class Town extends Player {
 
                         //activate next needed buttons
                         residencyButtons.get("Add 1").activate();
-                        residencyButtons.get("Trained").activate();
+                        residencyTrained = true;
                         residencyButtons.get("Subtract 1").activate();
                         residencyButtons.get("Train/Specialize").activate();
                         
@@ -1241,10 +1253,10 @@ public class Town extends Player {
                         menu = 0;
                         training = 0;
 
-
                         residencyButtons.get("Add 1").deactivate();
                         residencyButtons.get("Train/Specialize").deactivate();
                         residencyButtons.get("Subtract 1").deactivate();
+                        residencyTrained = false;
                     }
 
                 }else if(menu == 3){
@@ -1259,7 +1271,7 @@ public class Town extends Player {
 
                     //deactivate unneeded buttons needed buttons
                     residencyButtons.get("Add 1").activate();
-                    residencyButtons.get("Specialize citizens: ").activate();
+                    residencySpecialized = true;
                     residencyButtons.get("Subtract 1").activate();
 
                     menu = 4;
@@ -1275,11 +1287,10 @@ public class Town extends Player {
                     }else if(residencyButtons.get("Subtract 1").inBounds(mouseX, mouseY) && training > 0){//subtract a training
 
                         training --;
+
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
-
                         requestSpecializeCitizen(training, clickedBuilding.getX(), clickedBuilding.getY(), npcType);
-                        
 
                         System.out.println("Your buttons have made it this far congrats");
 
@@ -1289,7 +1300,7 @@ public class Town extends Player {
 
                         //deactivate current buttons 
                         residencyButtons.get("Add 1").deactivate();
-                        residencyButtons.get("Specialize citizens: ").deactivate();
+                        residencySpecialized = false;
                         residencyButtons.get("Subtract 1").deactivate();
 
                         
@@ -1309,6 +1320,8 @@ public class Town extends Player {
                 if(menu == 0){
 
                     deactivateBuildingButtons();
+                    deactivateCurrentButtons();
+
 
                     militaryBaseButtons.get("Spy").activate();
                     militaryBaseButtons.get("Soldier").activate();
@@ -1333,7 +1346,7 @@ public class Town extends Player {
 
                         this.menu = 2;
                         npcType = "Spy";
-                    
+                        
                     
                     }else if(militaryBaseButtons.get("Soldier").inBounds(mouseX,mouseY)){
                         //deactivate previous menu buildings
@@ -1367,7 +1380,6 @@ public class Town extends Player {
                         soldierLevel = 3;
                     }else if ( militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
 
-
                         requestTrainSpy(training, clickedBuilding.getX(), clickedBuilding.getY());
                         
                         menu = 0;
@@ -1388,7 +1400,6 @@ public class Town extends Player {
 
                         training --;
                     }else if(militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){
-
 
                         requestTrainSoldier(training, clickedBuilding.getX(), clickedBuilding.getY(), soldierLevel);
 
@@ -1414,6 +1425,7 @@ public class Town extends Player {
              *  */
             public void requestHospitalFunction(int menu, int mouseX,  int mouseY ){
                 deactivateBuildingButtons();
+                deactivateCurrentButtons();
                 hospitalCapacity.activate();
             }
 
@@ -1425,9 +1437,11 @@ public class Town extends Player {
              */
             public void requestResearchLabFunction(int menu, int mouseX,  int mouseY){
                 
+                deactivateCurrentButtons();
+                deactivateBuildingButtons();
+
                 if(menu == 0){
 
-                    deactivateBuildingButtons();
                     researchLabButtons.get("Upgrade weapon").activate();
                     researchLabButtons.get("Upgrade armour").activate();
 
@@ -1454,6 +1468,7 @@ public class Town extends Player {
             public void requestFoodBuildingFunction(int menu, int mouseX,  int mouseY){
                 
                 deactivateBuildingButtons();
+                deactivateCurrentButtons();
                 foodIncome.activate();
             }   
 
@@ -1463,6 +1478,7 @@ public class Town extends Player {
             public void requestBankFunction(int menu, int mouseX,  int mouseY){
                 
                 deactivateBuildingButtons();
+                deactivateCurrentButtons();
                 moneyIncome.activate();
             }
 
@@ -1518,15 +1534,46 @@ public class Town extends Player {
             /**
              * Reset the display variables when 
              */
-            public void resetLevelHealth(){
+            public void resetToMain(){
                 buildingHealth = 0;
                 buildingMaxHealth = 0;
                 buildingLevel = 0;
+                residencyTrained = false;
+                residencySpecialized = false; 
+                //menu = 0; 
+                //TODO: finalized what needs to be reset for the final screen
 
             }
 
+            /**
+             * used when user clicks on the same bulding as previously selected, menu displays return to normal and need to deactivate pprevious buttons
+             */
+            public void deactivateCurrentButtons(){
+                if((clickedBuilding instanceof Residency)){ //if current building is not residencyy, clear all residency buttons
+                    for(String key: residencyButtons.keySet()){
+                        residencyButtons.get(key).deactivate();
+                    }
+                }
+                if((clickedBuilding instanceof Hospital)){
+                    hospitalCapacity.deactivate();
+                }
+                if((clickedBuilding instanceof MilitaryBase)){
+                    for(String key: militaryBaseButtons.keySet()){
+                        militaryBaseButtons.get(key).deactivate();
+                    }
+                }
+                if((clickedBuilding instanceof ResearchLab)){
+                    for(String key: researchLabButtons.keySet()){
+                        researchLabButtons.get(key).deactivate();
+                    }
+                }
+                if((clickedBuilding instanceof FoodBuilding)){
+                    foodIncome.deactivate();
+                }
+                if((clickedBuilding instanceof Bank)){
+                    moneyIncome.deactivate();
+                }
+            }
         }
-        
-
     }//end of inner class
 }//end of class

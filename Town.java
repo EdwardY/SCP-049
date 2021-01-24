@@ -162,6 +162,7 @@ public class Town extends Player {
      */
     public void startTurn(){
         this.getTimer().resetTime(60);
+        this.increaseTurnCounter();
     }
 
     /**
@@ -938,6 +939,7 @@ public class Town extends Player {
                 g.drawString("Building Health:" + buildingHealth + "/" + buildingMaxHealth, GameWindow.GridPanel.GRID_SIZE_WIDTH, 250);
                 g.drawString("Level: " + buildingLevel,GameWindow.GridPanel.GRID_SIZE_WIDTH, 200 );
                 g.drawString("Time left: " + Town.this.getTimer().getTime(), 10 + GRID_SIZE_WIDTH, 20);
+                g.drawString("Turn number: " + Town.this.getTurnCounter(), 10 + GRID_SIZE_WIDTH, 40);
                 g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
                 g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
                 g.drawString("DuberCoin: " + Town.this.getMoney(), 10 + GRID_SIZE_WIDTH, 325);

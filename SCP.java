@@ -134,6 +134,7 @@ public class SCP extends Player{
      */
     public void startTurn(){
         this.getTimer().resetTime(60);
+        this.increaseTurnCounter();
     }
 
     /**
@@ -494,6 +495,7 @@ public class SCP extends Player{
                 g.setColor(Color.BLACK);
 
                 g.drawString("Time left: " + SCP.this.getTimer().getTime(), 10 + GRID_SIZE_WIDTH, 20);
+                g.drawString("Turn number: " + SCP.this.getTurnCounter(), 10 + GRID_SIZE_WIDTH, 40);
 
 
                 g.drawString("Username: " + SCP.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);

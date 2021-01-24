@@ -33,6 +33,8 @@ abstract class Player{
     private ArrayList<SCP0492> scps;
     /**The turn timer for the game. */
     private TurnTimer timer;
+    /**The turn counter for the game. */
+    private int turnCounter;
   
     /**
      * Constructor for the {@code Player} class
@@ -54,13 +56,27 @@ abstract class Player{
         this.buildings.add(new FoodBuilding(FoodBuilding.INITIAL_PRICE, FoodBuilding.INITIAL_HEALTH, FoodBuilding.INITIAL_HEALTH, 188, 30));
         this.buildings.add(new Bank(Bank.INITIAL_PRICE, Bank.INITIAL_HEALTH, Bank.INITIAL_HEALTH, 346, 30));
 
+
+        this.turnCounter = 0;
+
         //create and start the turn-timer.
         this.timer = new TurnTimer(60);
         Thread t = new Thread(this.timer);
         t.start();
     }
 
+    /**
+     * Starts the game that game window that the player uses.
+     */
     public abstract void start();
+
+    /**
+     * Increases the value of the game's turn counter.
+     */
+    public void increaseTurnCounter(){
+        this.turnCounter ++;
+    }
+
 
     /**
      * Gets the JFrames in the game
@@ -166,6 +182,17 @@ abstract class Player{
     public ArrayList<Event> getEvents(){
         return this.events;
     }
+
+    /**
+     * Gets the turn counter of the game.
+     * @return the turn counter.
+     */
+    public int getTurnCounter(){
+        return this.turnCounter;
+    }
+
+
+
     //end of getters
 
 

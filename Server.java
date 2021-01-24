@@ -645,7 +645,7 @@ class Server {
                             if(curEvent instanceof WholeGameEvent){
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft());
                             }else{
-                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()) + " " + (int)(((AoeEvent)curEvent).getAoe().getWidth())  + " " + (int)(((AoeEvent)curEvent).getAoe().getHeight()));
+                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()));
                             }
                         }
 

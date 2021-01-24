@@ -645,7 +645,7 @@ class Server {
                             if(curEvent instanceof WholeGameEvent){
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft());
                             }else{
-                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()) + " " + (int)(((AoeEvent)curEvent).getAoe().getWidth())  + " " + (int)(((AoeEvent)curEvent).getAoe().getHeight()));
+                                sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()));
                             }
                         }
 
@@ -680,10 +680,11 @@ class Server {
                             sendTo(allUsers, humanInfo);
                         }
 
-                        //town food supply
-                        town.sendMessage("<r>");
-                        town.sendMessage("Food");
-                        town.sendMessage("" + game.getFoodChange());
+                        //town supplies
+                        town.sendMessage("" + game.getMoney());
+                        town.sendMessage("" + game.getFood());
+                        //scp supplies
+                        scp.sendMessage("" + game.getHume());
                         
                         //intel gathering
                         if(game.gotIntel()){

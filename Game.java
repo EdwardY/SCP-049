@@ -865,8 +865,9 @@ class Game {
         if( ((Residency)building).getMaxCap() - ((Residency)building).getCurrentPopulation() >= amount ){
 
             for(int i = 0; i < amount; i ++){
-                Citizen add = new Citizen(0, 100, x, y);
+                Citizen add = new Citizen(28, 100, x, y);
                 //TODO: they are all considered adults as of right now
+                //TODO: they do not need to be trained right now, make sure to hange that when not game balancing
 
                 addNpc(add);
                 ((Residency)building).createCitizen(add);

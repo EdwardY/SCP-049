@@ -536,7 +536,6 @@ public class Town extends Player {
         super.sendMessage(type);
         super.sendMessage(amount + " " + x + " " + y);
 
-
         for(int key: humanMap.keySet()){
             if(humanMap.get(key) instanceof Citizen){
                 if(humanMap.get(key).getX() == x && humanMap.get(key).getY() == y);{

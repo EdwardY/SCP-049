@@ -241,7 +241,7 @@ class Server {
                         }else if(prefix.equals("<residency train>")){
                             
                             boolean success = false;
-                            String info = input.readLine().substring(1);
+                            String info = input.readLine();
                             int x = Integer.parseInt(info.split(" ")[0]);
                             int y = Integer.parseInt(info.split(" ")[1]);
                             int amount = Integer.parseInt(info.split(" ")[2]);
@@ -253,7 +253,7 @@ class Server {
                             boolean success = false;
                             String type = input.readLine();
                             String info = input.readLine();
-                            String keys = input.readLine().substring(1);
+                            String keys = input.readLine();
                             int amount = Integer.parseInt(info.split(" ")[0]);
                             int x = Integer.parseInt(info.split(" ")[1]);
                             int y = Integer.parseInt(info.split(" ")[2]);   
@@ -271,7 +271,7 @@ class Server {
 
                             boolean success = false;
                             String info = input.readLine();
-                            String keys = input.readLine().substring(1);
+                            String keys = input.readLine();
                             int level = Integer.parseInt(info.split(" ")[0]);
                             int amount = Integer.parseInt(info.split(" ")[1]);
                             int x = Integer.parseInt(info.split(" ")[2]);
@@ -296,7 +296,7 @@ class Server {
                         }else if(prefix.equals("<military spy>")){
                             boolean success = false;
                             String info = input.readLine();
-                            String keys = input.readLine().substring(1);
+                            String keys = input.readLine();
                             int amount = Integer.parseInt(info.split(" ")[0]);
                             int x = Integer.parseInt(info.split(" ")[1]);
                             int y = Integer.parseInt(info.split(" ")[2]);

@@ -145,8 +145,12 @@ public class Town extends Player {
         this.setBuildings((ArrayList<Building>)buildings);
         this.setEvents((ArrayList<Event>)events);
         this.setSCPs((ArrayList<SCP0492>)scps);
-    }
 
+        System.out.println(humans.size());
+        System.out.println(buildings.size());
+        System.out.println(events.size());
+        System.out.println(scps.size());
+    }
 
     /**
      * Starts the current turn in the game.
@@ -732,8 +736,6 @@ public class Town extends Player {
         private HashMap<String, DuberTextButton> residencyButtons;
         /** Buttons relating to military base */
         private HashMap<String, DuberTextButton> militaryBaseButtons;
-        /** Buttons relating to hospital */
-        private DuberTextButton hospitalCapacity;
         /** Buttons relating to the research lab */
         private HashMap<String, DuberTextButton> researchLabButtons;
         /** General display buttons that all buildings need */
@@ -774,6 +776,8 @@ public class Town extends Player {
         private boolean foodDisplay = false;
         /**keeping track of bank display */
         private boolean moneyDisplay = false; 
+        /**Keeping track if bildingClicked is a hospital and displays hospital features */
+        private boolean hospitalDisplay = false; 
 
         /**
          * Method runs the town version of the game.
@@ -807,7 +811,7 @@ public class Town extends Player {
             
             levels = new DuberTextButton[3];
             for(int i = 0;i < levels.length;i++){
-                levels[i] = new DuberTextButton("" + (i + 1), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 200 +i*80, 900, 60, 30));
+                levels[i] = new DuberTextButton("" + (i + 1), new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH +i*80, 540, 60, 30));
             }
 
             //All residency buildings
@@ -830,20 +834,16 @@ public class Town extends Player {
             this.militaryBaseButtons.put("Train", new DuberTextButton("Train", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 800, 180, 30)));
             this.militaryBaseButtons.put("Soldier", new DuberTextButton("Soldier", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 540, 180, 30)));
             this.militaryBaseButtons.put("Spy", new DuberTextButton("Spy", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 580, 180, 30)));
-            this.militaryBaseButtons.put("Trained", new DuberTextButton("Trained: " + training + "  $" + training*100, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
+            this.militaryBaseButtons.put("Trained", new DuberTextButton("Trained: " + training + "  $" + training*100, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 300, 30)));
             
 
             
             //All researchLab buildings
             this.researchLabButtons = new HashMap<>();
-            this.researchLabButtons.put("Upgrade weapon", new DuberTextButton("upgrade next weapon level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 550, 180, 30)));
-            this.researchLabButtons.put("Upgrade armour", new DuberTextButton("upgrade next armour level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 600, 180, 30)));
-            this.researchLabButtons.put("Progress per turn", new DuberTextButton("unlock next armour level", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30))); //TODO: do this button's function
+            this.researchLabButtons.put("Upgrade soldier", new DuberTextButton("Upgrade Soldier to next level (Max3)", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 550, 300, 30)));
+        
+            this.researchLabButtons.put("Progress", new DuberTextButton("Research progress per turn: ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 300, 30))); //TODO: do this button's function
 
-
-            //All individual building buttons buttons
-            
-            this.hospitalCapacity = new DuberTextButton("A Hospital, Capacity:" + capacity + " /" + maxCapacity, new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 600, 180, 30));
 
             //initialize general buttons
             this.generalButtons = new HashMap<>();
@@ -927,13 +927,15 @@ public class Town extends Player {
                     g.drawString("Total Cost to train: " + training * 50 + " Dubercoins", 1420, 910);
 
                 }
-
                 if(foodDisplay){
                     g.drawString("Food income per turn: " + food, 1420, 600);
                 }
                 if(moneyDisplay){
 
                     g.drawString("Money Income per turn: " + money, 1420, 600);
+                }
+                if(hospitalDisplay){
+                    g.drawString("Capacity of doctors in this hospital: " + ((Hospital)clickedBuilding).getDoctors().size() + "/" + ((Hospital)clickedBuilding).getMaxCapacity(), 1420, 600);
                 }
 
                 g.drawString("Building Health:" + buildingHealth + "/" + buildingMaxHealth, GameWindow.GridPanel.GRID_SIZE_WIDTH, 250);
@@ -943,6 +945,7 @@ public class Town extends Player {
                 g.drawString("Username: " + Town.this.getUsername(), 10 + GRID_SIZE_WIDTH, 125);
                 g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
                 g.drawString("DuberCoin: " + Town.this.getMoney(), 10 + GRID_SIZE_WIDTH, 325);
+                g.drawString("Food: "+ Town.this.getFood(), 10 + 1420, 365);
                 g.drawString("Humans: " + Town.this.getHumanMap().size(), 10 + GRID_SIZE_WIDTH, 425);
                 g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10 + GRID_SIZE_WIDTH, 450);
                 if(clickedBuilding != null){
@@ -965,7 +968,6 @@ public class Town extends Player {
                     buildingTypesButtons[i].draw(g);
                 }
                 buildButton.draw(g);
-                hospitalCapacity.draw(g);
               
                 for(String key:residencyButtons.keySet()){
                     residencyButtons.get(key).draw(g);
@@ -1068,7 +1070,7 @@ public class Town extends Player {
                                 money = ((Bank)clickedBuilding).getLevel() * 500 + 1000;
                             }else if(clickedBuilding instanceof Hospital){
                                 capacity = ((Hospital)clickedBuilding).getMaxCapacity();
-    
+
                             }
     
                             //Setting the general buttons
@@ -1089,8 +1091,7 @@ public class Town extends Player {
                                 requestMilitaryBaseFunction(menu, mouseX, mouseY);
 
                             }else if(clickedBuilding instanceof Hospital){
-
-                                hospitalCapacity.activate();
+                                requestHospitalFunction(menu, mouseX,mouseY);
 
                             }else if(clickedBuilding instanceof ResearchLab){
 
@@ -1484,7 +1485,7 @@ public class Town extends Player {
              *  */
             public void requestHospitalFunction(int menu, int mouseX,  int mouseY ){
                 deactivateBuildingButtons();
-                hospitalCapacity.activate();
+                hospitalDisplay = true; 
             }
 
             /**
@@ -1499,22 +1500,16 @@ public class Town extends Player {
 
                 if(menu == 0){
 
-                    researchLabButtons.get("Upgrade weapon").activate();
-                    researchLabButtons.get("Upgrade armour").activate();
-
+                    researchLabButtons.get("Upgrade soldier").activate();
                     menu = 1;
 
                 }else if(menu == 1){
 
-                    if(researchLabButtons.get("Upgrade weapon").inBounds(mouseX, mouseY)){
+                    if(researchLabButtons.get("Upgrade soldier").inBounds(mouseX, mouseY)){
 
-                        sendMessage("<research weapon>");
+                        sendMessage("<research soldier>");
                         menu = 0;
-
-                    }else if(researchLabButtons.get("Upgrade armour").inBounds(mouseX, mouseY)){
-
-                        sendMessage("<research armour>");
-                        menu = 0;
+                        //TODO: change this protocol, server and everything else
                     }
                 }
             }
@@ -1548,7 +1543,7 @@ public class Town extends Player {
                     }
                 }
                 if( !(clickedBuilding instanceof Hospital)){
-                    hospitalCapacity.deactivate();
+                    hospitalDisplay = false;
                 }
                 if( !(clickedBuilding instanceof MilitaryBase)){
                     for(String key: militaryBaseButtons.keySet()){
@@ -1599,9 +1594,7 @@ public class Town extends Player {
                 militaryTrained = false;
                 foodDisplay = false;
                 moneyDisplay = false; 
-                //menu = 0; 
-                //TODO: finalized what needs to be reset for the final screen
-
+                hospitalDisplay = false; 
             }
 
             /**
@@ -1613,8 +1606,7 @@ public class Town extends Player {
                     residencyButtons.get(key).deactivate();
                 }
         
-                hospitalCapacity.deactivate();
-            
+                
                 for(String key: militaryBaseButtons.keySet()){
                     militaryBaseButtons.get(key).deactivate();
                 }
@@ -1628,7 +1620,6 @@ public class Town extends Player {
                 }
 
                 buildButton.deactivate();
-
             }
         }
     }//end of inner class

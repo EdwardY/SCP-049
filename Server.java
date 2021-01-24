@@ -680,10 +680,11 @@ class Server {
                             sendTo(allUsers, humanInfo);
                         }
 
-                        //town food supply
-                        town.sendMessage("<r>");
-                        town.sendMessage("Food");
-                        town.sendMessage("" + game.getFoodChange());
+                        //town supplies
+                        town.sendMessage("" + game.getMoney());
+                        town.sendMessage("" + game.getFood());
+                        //scp supplies
+                        scp.sendMessage("" + game.getHume());
                         
                         //intel gathering
                         if(game.gotIntel()){

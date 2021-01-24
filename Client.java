@@ -269,7 +269,10 @@ public class Client {
                                         }
                                         ((SCP)Client.this.getPlayer()).updateGameObjects(humansList, buildingList, eventList, scpList); //call method to update the game objects
 
+
                                     }
+
+                                    ((SCP)Client.this.getPlayer()).setHume(Integer.parseInt(input.readLine()));
                                 }else if (Client.this.getPlayer() instanceof Town){                                
                                     HashMap<Integer, Human> humanMap = new HashMap<>();
                                     for(int i = 0; i < objectNum; i++){
@@ -293,6 +296,9 @@ public class Client {
                                         ((Town)Client.this.getPlayer()).updateGameObjects(humanMap, buildingList, eventList, scpList); //call method to update the game objects
 
                                     }
+
+                                    ((Town)Client.this.getPlayer()).setMoney(Integer.parseInt(input.readLine()));
+                                    ((Town)Client.this.getPlayer()).setFood(Integer.parseInt(input.readLine()));
                                 }
     
 

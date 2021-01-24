@@ -782,9 +782,10 @@ public class Town extends Player {
             gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             gridPanel.setBackground(Color.gray);
 
+            gridPanel.addMouseListener(new TownMouseHandler());
+            gridPanel.addMouseMotionListener(new TownMouseHandler());
+            
             gameWindow.add(gridPanel);
-            gameWindow.addMouseListener(new TownMouseHandler());
-            gameWindow.addMouseMotionListener(new TownMouseHandler());
 
 
             //Maybe add a back button (returns to menu one)

@@ -379,9 +379,10 @@ public class SCP extends Player{
             gridPanel.setBorder(BorderFactory.createLineBorder(Color.black));
             gridPanel.setBackground(Color.gray);
 
+            gridPanel.addMouseListener(new SCPMouseHandler());
+            gridPanel.addMouseMotionListener(new SCPMouseHandler());
+            
             gameWindow.add(gridPanel);
-            gameWindow.addMouseListener(new SCPMouseHandler());
-            gameWindow.addMouseMotionListener(new SCPMouseHandler());
 
             //all buttons
             aoeEventButtons = new DuberTextButton[5];
@@ -582,6 +583,7 @@ public class SCP extends Player{
             public void mouseClicked(MouseEvent e){
                 int mouseX = e.getX();
                 int mouseY = e.getY();
+                System.out.println("Mouse pos: " + mouseX + ", " + mouseY);
                 if((mouseX <= GridPanel.GRID_SIZE_WIDTH) && (mouseY <= GridPanel.GRID_SIZE_LENGTH)){
                     eventX = mouseX;
                     eventY = mouseY;

@@ -88,33 +88,42 @@ class Game {
     private void removeDeadPeopleFromBuildings(){
         for(int i = 0; i < this.buildings.size(); i++){
             if(this.buildings.get(i) instanceof Hospital){
-                for(Doctor currentDoctor: ((Hospital)this.buildings.get(i)).getDoctors()){
+                Iterator<Doctor> dIterator = ((Hospital)this.buildings.get(i)).getDoctors().iterator();
+                while(dIterator.hasNext()){
+                    Doctor currentDoctor = dIterator.next();
                     if(currentDoctor.getHealth() <= 0){
-                        ((Hospital)this.buildings.get(i)).getDoctors().remove(currentDoctor);
+                        dIterator.remove();
                     }
                 }
 
                 //TODO: help idk how to remove things from queues
 
             }else if(this.buildings.get(i) instanceof MilitaryBase){
-                for(Human currentSoldier: ((MilitaryBase)this.buildings.get(i)).getSoldiers()){
+                Iterator<Human> sIterator = ((MilitaryBase)this.buildings.get(i)).getSoldiers().iterator();
+                while(sIterator.hasNext()){
+                    Human currentSoldier = sIterator.next();
                     if(currentSoldier.getHealth() <= 0){
-                        ((MilitaryBase)this.buildings.get(i)).getSoldiers().remove(currentSoldier);
-                    }
-                }
-            }else if (this.buildings.get(i) instanceof ResearchLab){
-                for(Researcher currentResearcher: ((ResearchLab)this.buildings.get(i)).getResearchers()){
-                    if(currentResearcher.getHealth() <= 0){
-                        ((ResearchLab)this.buildings.get(i)).getResearchers().remove(currentResearcher);
-                    }
-                }
-            }else if (this.buildings.get(i) instanceof Residency){
-                for(Human currentResident: ((Residency)this.buildings.get(i)).getResidents()){
-                    if(currentResident.getHealth() <= 0){
-                        ((Residency)this.buildings.get(i)).getResidents().remove(currentResident);
+                        sIterator.remove();
                     }
                 }
 
+            }else if (this.buildings.get(i) instanceof ResearchLab){
+                Iterator<Researcher> rIterator = ((ResearchLab)this.buildings.get(i)).getResearchers().iterator();
+                while(rIterator.hasNext()){
+                    Researcher currentResearcher = rIterator.next();
+                    if(currentResearcher.getHealth() <= 0){
+                        rIterator.remove();
+                    }
+                }
+            }else if (this.buildings.get(i) instanceof Residency){
+                Iterator<Human> cIterator = ((Residency)this.buildings.get(i)).getResidents().iterator();
+                while(cIterator.hasNext()){
+                    Human currentResident = cIterator.next();
+                    if(currentResident.getHealth() <= 0){
+                        cIterator.remove();
+                    }
+
+                }
             }
         }
 
@@ -132,45 +141,55 @@ class Game {
     private void killDeadStuff(){
 
         //loop through each building's area
-        for(Building currentBuilding: this.buildings){
+        Iterator<Building> bIterator = this.buildings.iterator();
+        while(bIterator.hasNext()){
+            Building currentBuilding = bIterator.next();
             if(currentBuilding.getHealth() <= 0){
                 Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), Building.SIZE, Building.SIZE);
 
                 //remove humans in the area
-                for(int key:this.humanMap.keySet()){
+                Iterator<Integer> humanKeyIterator = this.humanMap.keySet().iterator();//TOOD: this might be an issue
+                while(humanKeyIterator.hasNext()){
+                    int key = humanKeyIterator.next();
                     Human currentHuman = this.humanMap.get(key);
                     Rectangle humanArea = new Rectangle(currentHuman.getX(), currentHuman.getY(), NPC.SIZE, NPC.SIZE);
                     if(buildingArea.contains(humanArea)){
 
-                        this.humanMap.remove(key);
+                        humanKeyIterator.remove();
                         this.casualties ++;
                     }
                 }
 
                 //remove spc in the area
-                for(SCP0492 currentScp: this.scps){
+                Iterator<SCP0492> scpIterator = this.scps.iterator();
+                while(scpIterator.hasNext()){
+                    SCP0492 currentScp = scpIterator.next();
                     Rectangle scpArea = new Rectangle(currentScp.getX(), currentScp.getY(), NPC.SIZE, NPC.SIZE);
                     if(buildingArea.contains(scpArea)){
-                        this.scps.remove(currentScp);
+                        scpIterator.remove();
                     }
                 }
-                this.buildings.remove(currentBuilding);
+                bIterator.remove();
             }
         }
 
         //remove all humans with health less than 0
-        for(int key: this.humanMap.keySet()){
+        Iterator<Integer> humanKeyIterator = this.humanMap.keySet().iterator(); //TODO: this may be an issue
+        while(humanKeyIterator.hasNext()){
+            int key = humanKeyIterator.next();
             Human currentHuman = this.humanMap.get(key);
             if(currentHuman.getHealth() <= 0){
-                this.humanMap.remove(key);
+                humanKeyIterator.remove();
                 this.casualties ++;
             }
         }
 
         //remove all scps with health less than 0
-        for(SCP0492 currentScp: this.scps){
+        Iterator<SCP0492> scpIterator = this.scps.iterator();
+        while(scpIterator.hasNext()){
+            SCP0492 currentScp = scpIterator.next();
             if(currentScp.getHealth() <= 0){
-                scps.remove(currentScp);
+                scpIterator.remove();
             }
         }
     }
@@ -236,10 +255,10 @@ class Game {
                 int distY = (int)Math.round(Math.random()*Building.SIZE);
                 ((Tornado)currentEvent).translate(dx*distX, dy*distY);
             }else if((currentEvent instanceof Thunderstorm) && (((Thunderstorm)currentEvent).getStrikesLeft() <= 0)){
-                this.events.remove(currentEvent);
+                eIterator.remove();
             }
             if(currentEvent.getTimeLeft() <= 0){
-                this.events.remove(currentEvent);
+                eIterator.remove();
             }
         }
     }
@@ -424,14 +443,16 @@ class Game {
      * @return true if successful, false if not
      */
     public boolean gotIntel(){
-        for(int key: this.humanMap.keySet()){
+        Iterator<Integer> humanKeyIterator = this.humanMap.keySet().iterator();
+        while(humanKeyIterator.hasNext()){
+            int key = humanKeyIterator.next();
             Human currentHuman = this.humanMap.get(key);
             if(currentHuman instanceof Spy){
                 Spy spy = (Spy)currentHuman;
                 double sus = Math.random();
                 double success = Math.random();
                 if(sus < spy.getSus()){
-                    this.humanMap.remove(key);
+                    humanKeyIterator.remove();//TOOD: may be problematic
                 }else if(success < spy.getSuccessRate()){
                     return true;
                 }
@@ -677,7 +698,7 @@ class Game {
             newNpc = new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage);
         }
         if(newNpc instanceof SCP0492){
-            this.humanMap.remove(key);
+            this.humanMap.remove(key); //TODO: might have thread conflicts, will deal with if run into (maybe)
             this.scps.add((SCP0492)newNpc);
         }else{
             this.humanMap.replace(key, (Human)newNpc);

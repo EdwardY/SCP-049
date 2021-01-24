@@ -307,7 +307,7 @@ public class Client {
                                 //Actually implement the last request 
                                 if(requests.length > 1){
                                     if(requests[0].equals("<b>")){
-                                        ((Town)player).buildBuilding(requests[1], Integer.parseInt(requests[2]), Integer.parseInt(requests[2]));
+                                        ((Town)player).buildBuilding(requests[1], Integer.parseInt(requests[2]), Integer.parseInt(requests[3]));
                                     }else if(requests[0].equals("<e>")){
                                         if(requests.length == 3){
                                             ((SCP)player).startEvent(requests[1], Integer.parseInt(requests[2]));

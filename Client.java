@@ -267,13 +267,13 @@ public class Client {
                                         }else if(humanType.equals("Spy")){
                                             humansList.add(new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
                                         }
-                                        ((SCP)Client.this.getPlayer()).updateGameObjects(humansList, buildingList, eventList, scpList); //call method to update the game objects
 
 
                                     }
+                                    ((SCP)Client.this.getPlayer()).updateGameObjects(humansList, buildingList, eventList, scpList); //call method to update the game objects
 
                                     ((SCP)Client.this.getPlayer()).setHume(Integer.parseInt(input.readLine()));
-                                }else if (Client.this.getPlayer() instanceof Town){                                
+                                }else if (Client.this.getPlayer() instanceof Town){  
                                     HashMap<Integer, Human> humanMap = new HashMap<>();
                                     for(int i = 0; i < objectNum; i++){
                                         int key = Integer.parseInt(input.readLine());
@@ -293,9 +293,10 @@ public class Client {
                                         }else if(humanType.equals("Spy")){
                                             humanMap.put(key, new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
                                         }
-                                        ((Town)Client.this.getPlayer()).updateGameObjects(humanMap, buildingList, eventList, scpList); //call method to update the game objects
 
                                     }
+                                    ((Town)Client.this.getPlayer()).updateGameObjects(humanMap, buildingList, eventList, scpList); //call method to update the game objects
+
 
                                     ((Town)Client.this.getPlayer()).setMoney(Integer.parseInt(input.readLine()));
                                     ((Town)Client.this.getPlayer()).setFood(Integer.parseInt(input.readLine()));

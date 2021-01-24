@@ -141,10 +141,10 @@ public class Town extends Player {
      * @param scps The new list of SCP0492s.
      */
     public void updateGameObjects(HashMap<Integer, Human> humans, ArrayList<Building> buildings, ArrayList<Event> events, ArrayList<SCP0492> scps){
-        this.setHumanMap((HashMap<Integer, Human>)humans.clone());
-        this.setBuildings((ArrayList<Building>)buildings.clone());
-        this.setEvents((ArrayList<Event>)events.clone());
-        this.setSCPs((ArrayList<SCP0492>)scps.clone());
+        this.setHumanMap((HashMap<Integer, Human>)humans);
+        this.setBuildings((ArrayList<Building>)buildings);
+        this.setEvents((ArrayList<Event>)events);
+        this.setSCPs((ArrayList<SCP0492>)scps);
     }
 
 

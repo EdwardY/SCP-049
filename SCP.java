@@ -195,10 +195,10 @@ public class SCP extends Player{
      * @param scps The new list of SCP0492s.
      */
     public void updateGameObjects(ArrayList<Human> humans, ArrayList<Building> buildings, ArrayList<Event> events, ArrayList<SCP0492> scps){
-        this.setHumans((ArrayList<Human>)humans.clone());
-        this.setBuildings((ArrayList<Building>)buildings.clone());
-        this.setEvents((ArrayList<Event>)events.clone());
-        this.setSCPs((ArrayList<SCP0492>)scps.clone());
+        this.setHumans((ArrayList<Human>)humans);
+        this.setBuildings((ArrayList<Building>)buildings);
+        this.setEvents((ArrayList<Event>)events);
+        this.setSCPs((ArrayList<SCP0492>)scps);
     }
 
 

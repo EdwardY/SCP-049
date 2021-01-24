@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.lang.Math;
 
 /**
@@ -134,12 +135,16 @@ public class QuadTree {
       int attackerY;
       int distance;
 
-      for(int i = 0; i < attackerList.size(); i ++){ //run through each attacker seeing if they can attack a target
+      Iterator<NPC> aIterator = attackerList.iterator();
+      while(aIterator.hasNext()){ //run through each attacker seeing if they can attack a target
+        NPC attacker = aIterator.next();
         //get attacker's position
-        attackerX = attackerList.get(i).getX();
-        attackerY = attackerList.get(i).getY();
+        attackerX = attacker.getX();
+        attackerY = attacker.getY();
 
-        for(NPC target: targetList){//run through each attacker seeing if it will be attacked by an attacker.
+        Iterator<NPC> tIterator = targetList.iterator();
+        while(tIterator.hasNext()){//run through each attacker seeing if it will be attacked by an attacker.
+          NPC target = tIterator.next();
           //get target's position
           targetX = target.getX();
           targetY = target.getY();
@@ -147,16 +152,16 @@ public class QuadTree {
           //calculate the distance between these two NPC's
           distance = (int)Math.sqrt(Math.pow(Math.abs(attackerX - targetX), 2) + Math.pow(Math.abs(attackerY - targetY), 2));
 
-          if((this.attackerList.get(i) instanceof SCP0492) && (distance <= SCP0492.RANGE)){ //if the attacker is an SCP0492
-              ((SCP0492)attackerList.get(i)).attack(target); //attack the target
+          if((attacker instanceof SCP0492) && (distance <= SCP0492.RANGE)){ //if the attacker is an SCP0492
+              ((SCP0492)attacker).attack(target); //attack the target
               if(target.getHealth() <= 0){ //if the target has no more health
-                this.targetList.remove(target); //remove the target from the list of targets since it is now destroyed
+                tIterator.remove(); //remove the target from the list of targets since it is now destroyed
               }
 
-          }else if((this.attackerList.get(i) instanceof Soldier) && (distance <= Soldier.RANGE)){ //if the attacker is a soldier.
-              ((Soldier)attackerList.get(i)).attack(target);  //attack the target
+          }else if((attacker instanceof Soldier) && (distance <= Soldier.RANGE)){ //if the attacker is a soldier.
+              ((Soldier)attacker).attack(target);  //attack the target
               if(target.getHealth() <=0 ){ //if target has no more health
-                this.targetList.remove(target); //remove the object since the target is now destroyed
+                tIterator.remove(); //remove the object since the target is now destroyed
               }
 
           }//end of if statement block

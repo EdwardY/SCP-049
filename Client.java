@@ -433,6 +433,7 @@ public class Client {
              * @param message The message being sent to the server.
              */
             public void sendMessage(String message){
+                System.out.println(message);
                 output.println(message);
                 output.flush();
             }//end of method

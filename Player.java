@@ -33,7 +33,7 @@ abstract class Player{
     private ArrayList<SCP0492> scps;
     /**The turn timer for the game. */
     private TurnTimer timer;
-
+  
     /**
      * Constructor for the {@code Player} class
      * @param username the username of the {@code Player}
@@ -60,9 +60,7 @@ abstract class Player{
         t.start();
     }
 
-
     public abstract void start();
-
 
     /**
      * Gets the JFrames in the game
@@ -89,9 +87,7 @@ abstract class Player{
 
         welcomeMessage += " Good luck, and may the best player win...";
 
-
         new WelcomeWindow(welcomeMessage).run();
-        
     }
 
 
@@ -206,6 +202,7 @@ abstract class Player{
     public void sendMessage(String message){
 
         playerClient.sendMessage(message);
+        System.out.println(message);
     }
 
 

@@ -442,7 +442,7 @@ public class Town extends Player {
     public void requestUpgrade(int x, int y){
         //send message
         super.sendMessage("<u>");
-        sendMessage(x + " " + y);
+        super.sendMessage(x + " " + y);
 
         //set last request
         this.getPlayerClient().setLastRequest("<u>> " + x + " " + y);
@@ -455,8 +455,8 @@ public class Town extends Player {
     public void requestTrainSoldier(int amount, int x, int y, int soldierLevel){
         String keys = "";
         //send requests to server
-        sendMessage("<military soldier>");
-        sendMessage(soldierLevel + " " + amount + " " + x + " " + y);
+        super.sendMessage("<military soldier>");
+        super.sendMessage(soldierLevel + " " + amount + " " + x + " " + y);
 
         for(int key: humanMap.keySet()){
             if(humanMap.get(key) instanceof Cadet){
@@ -467,7 +467,7 @@ public class Town extends Player {
             }
         }
 
-        sendMessage(keys);
+        super.sendMessage(keys);
 
         this.getPlayerClient().setLastRequest(("<military soldier>" + " " + soldierLevel + " " + amount + " " + x + " " + y + keys));
     }
@@ -476,7 +476,7 @@ public class Town extends Player {
      * request to surrender
      */
     public void requestSurrender(){
-        sendMessage("<sur>");
+        super.sendMessage("<sur>");
         this.getPlayerClient().setLastRequest("<sur>");
 
     }
@@ -490,8 +490,8 @@ public class Town extends Player {
     public void requestTrainSpy(int amount, int x, int y){
         String keys = "";
         //send requests to server
-        sendMessage("<military spy>" );
-        sendMessage(amount + " "+ x + " " + y);
+        super.sendMessage("<military spy>" );
+        super.sendMessage(amount + " "+ x + " " + y);
         
         //sending the keys along for the npcs to be converted
         for(int key: humanMap.keySet()){
@@ -502,7 +502,7 @@ public class Town extends Player {
                 }
             }
         }
-        sendMessage(keys);
+        super.sendMessage(keys);
 
         this.getPlayerClient().setLastRequest("<military spy>" + " " + amount + " "+ x + " " + y + keys);
     }
@@ -514,8 +514,8 @@ public class Town extends Player {
      * @param amount The amount of Citizens to train 
      */
     public void requestTrainCitizen(int amount, int x, int y){
-        sendMessage("<residency train>"); 
-        sendMessage(x + " " + y + " " + amount);                   
+        super.sendMessage("<residency train>"); 
+        super.sendMessage(x + " " + y + " " + amount);                   
         //Update this class as well
         System.out.println("Your buttons have made it this far congrats");
         String keys = "";
@@ -527,7 +527,7 @@ public class Town extends Player {
                 }
             }
         }
-        sendMessage(keys);
+        super.sendMessage(keys);
 
         this.getPlayerClient().setLastRequest("<residency train>"+  " " + x + " " + y + " " + amount);
     }
@@ -541,9 +541,9 @@ public class Town extends Player {
      */
     public void requestSpecializeCitizen(int amount, int x, int y , String type){
         String keys = "";
-        sendMessage("<residency convert>"); 
-        sendMessage(type);
-        sendMessage(amount + " " + x + " " + y);
+        super.sendMessage("<residency convert>"); 
+        super.sendMessage(type);
+        super.sendMessage(amount + " " + x + " " + y);
 
 
         for(int key: humanMap.keySet()){
@@ -555,7 +555,7 @@ public class Town extends Player {
             }
         }
 
-        sendMessage(keys);
+        super.sendMessage(keys);
 
         this.getPlayerClient().setLastRequest("<residency convert>" + " " + type + " " + amount + " " + x + " " + y + keys );
     }
@@ -814,7 +814,7 @@ public class Town extends Player {
             //this.residencyButtons.put("Move",new DuberTextButton("Move", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Specialize citizens: ",new DuberTextButton("Specialize citizens: "  + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Add 1",new DuberTextButton("Add 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 180, 30)));
-            this.residencyButtons.put("Citizens trained: " + training +  "  $"+ training * 100  ,new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
+            this.residencyButtons.put("Citizens trained: ",new DuberTextButton("Citizens trained: " + training +  "  $"+ training * 100  , new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 740, 180, 30)));
             this.residencyButtons.put("Subtract 1",new DuberTextButton("Subtract 1", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 780, 180, 30)));
             this.residencyButtons.put("Train/Specialize", new DuberTextButton("Train/Specialize", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 820, 180, 30)));
 
@@ -955,11 +955,6 @@ public class Town extends Player {
                 for(String key: generalButtons.keySet()){
                     generalButtons.get(key).draw(g);
                 }
-
-
-                
-                
-
             }
         }
 
@@ -1023,7 +1018,6 @@ public class Town extends Player {
                     buildingX = (int)(mouseX/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE) + GameWindow.GridPanel.ROAD_SIZE;
                     buildingY = (int)(mouseY/(Building.SIZE + GameWindow.GridPanel.ROAD_SIZE)) * (Building.SIZE + GameWindow.GridPanel.ROAD_SIZE) + GameWindow.GridPanel.ROAD_SIZE;
 
-                    
                     if((mouseX - buildingX <= Building.SIZE) && (mouseY - buildingY <= Building.SIZE)){ //make sure not clicking a road
                         clickedBuilding = findBuilding(buildingX, buildingY); 
 
@@ -1080,6 +1074,7 @@ public class Town extends Player {
                             
                             generalButtons.get("upgrade").deactivate();
                             deactivateBuildingButtons();
+
 
                             System.out.println("Your building is null");
                             //activate any button that has to do with building things

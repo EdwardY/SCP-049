@@ -959,7 +959,7 @@ class Game {
      * to make them get older.
      * </p>
      */
-    public void doTurn(){
+    public synchronized void doTurn(){
         if(this.turn <= MAX_TURNS){
             this.turn++;
 

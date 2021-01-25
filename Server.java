@@ -21,7 +21,7 @@ import java.util.Iterator;
 
 class Server {
     /** A boolean for if the server is still running or not */
-    private boolean running;
+    private static boolean running;
     /** The {@code ServerSocket} for where all the networking will be run */
     private ServerSocket serverSock;
     /** The port to connect to */
@@ -48,7 +48,7 @@ class Server {
      * @param port the port to use
      */
     public Server(int port){
-        running = true;
+        Server.running = true;
         this.port = port;
         this.game = new Game();
         this.scp = null;
@@ -93,47 +93,51 @@ class Server {
         try{
             serverSock = new ServerSocket(this.port);
             serverSock.setSoTimeout(0);
-            while(running){
-                client = serverSock.accept();
-                System.out.println("Client");
-                
-                //both scp and town null, meaning first player to connect
-                if((this.scp == null) && (this.town == null)){
-                    //assign at random
-                    double rand = Math.random();    
-                    if(rand > 0.5){
+            while(Server.running){
+                if((this.scp == null) || (this.town == null)){
+                    client = serverSock.accept();
+                    System.out.println("Client");
+                    
+                    //both scp and town null, meaning first player to connect
+                    if((this.scp == null) && (this.town == null)){
+                        //assign at random
+                        double rand = Math.random();    
+                        if(rand > 0.5){
+                            this.scp = new ClientHandler(client);
+                            this.scpThread = new Thread(this.scp);
+                            this.scpThread.start();
+                            this.scp.sendMessage("<w>");
+                            System.out.println("SCP");
+                        }else{
+                            this.town = new ClientHandler(client);
+                            this.townThread = new Thread(this.town);
+                            this.townThread.start();
+                            this.town.sendMessage("<w>");
+                            System.out.println("Town");
+                        }
+                    //if scp is not taken
+                    }else if(this.scp == null){
+                        //assigns scp
                         this.scp = new ClientHandler(client);
                         this.scpThread = new Thread(this.scp);
                         this.scpThread.start();
                         this.scp.sendMessage("<w>");
                         System.out.println("SCP");
-                    }else{
+                        startGame();
+                    //if town is not taken
+                    }else if(this.town == null){
+                        //assigns town
                         this.town = new ClientHandler(client);
                         this.townThread = new Thread(this.town);
                         this.townThread.start();
                         this.town.sendMessage("<w>");
                         System.out.println("Town");
+                        startGame();
                     }
-                //if scp is not taken
-                }else if(this.scp == null){
-                    //assigns scp
-                    this.scp = new ClientHandler(client);
-                    this.scpThread = new Thread(this.scp);
-                    this.scpThread.start();
-                    this.scp.sendMessage("<w>");
-                    System.out.println("SCP");
-                    startGame();
-                //if town is not taken
-                }else if(this.town == null){
-                    //assigns town
-                    this.town = new ClientHandler(client);
-                    this.townThread = new Thread(this.town);
-                    this.townThread.start();
-                    this.town.sendMessage("<w>");
-                    System.out.println("Town");
-                    startGame();
                 }
+                System.out.println(Server.running);
             }
+            System.out.println("Game finished");
         }catch(Exception e){ 
             System.out.println("Error accepting connection");
             e.printStackTrace();
@@ -195,7 +199,7 @@ class Server {
          */
         public void run(){
 
-            while(running){
+            while(Server.running){
                 String prefix = "";
                 try{
                     if(input.ready()){
@@ -337,7 +341,7 @@ class Server {
                                 scp.sendMessage("win");
                                 this.sendMessage("lose");
                             }
-                            running = false;
+                            Server.running = false;
                         }
                     }
                 }catch(IOException e){
@@ -624,7 +628,7 @@ class Server {
          */
         public void run(){
 
-            while(running){
+            while(Server.running){
                 curTime = System.currentTimeMillis();
 
                 if(turnGoing){
@@ -712,19 +716,20 @@ class Server {
                             sendTo(allUsers, "<ge>");
                             scp.sendMessage("win");
                             town.sendMessage("lose");
-                            running = false;
+                            Server.running = false;
+                            
                         }else if(game.checkTownWin()){
                             sendTo(allUsers, "<ge>");
                             town.sendMessage("win");
                             scp.sendMessage("lose");
-                            running = false;
+                            Server.running = false;
                         }
 
                         //In case of game ending because max turns reached
                         if(game.getTurn() > Game.MAX_TURNS){
                             sendTo(allUsers, "<ge>");
                             sendTo(allUsers, "tie");
-                            running = false;
+                            Server.running = false;
                         }
 
                         turnGoing = !turnGoing;

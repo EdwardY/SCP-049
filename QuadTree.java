@@ -135,40 +135,38 @@ public class QuadTree {
       int attackerY;
       int distance;
 
-      Iterator<NPC> aIterator = attackerList.iterator();
-      while(aIterator.hasNext()){ //run through each attacker seeing if they can attack a target
-        NPC attacker = aIterator.next();
+      for(int i = 0; i < attackerList.size(); i ++){ //run through each attacker seeing if they can attack a target
         //get attacker's position
-        attackerX = attacker.getX();
-        attackerY = attacker.getY();
+        attackerX = attackerList.get(i).getX();
+        attackerY = attackerList.get(i).getY();
 
-        Iterator<NPC> tIterator = targetList.iterator();
-        while(tIterator.hasNext()){//run through each attacker seeing if it will be attacked by an attacker.
-          NPC target = tIterator.next();
+        for(int j = 0; j < targetList.size(); j++){//run through each attacker seeing if it will be attacked by an attacker.
           //get target's position
-          targetX = target.getX();
-          targetY = target.getY();
+          targetX = targetList.get(j).getX();
+          targetY = targetList.get(j).getY();
 
           //calculate the distance between these two NPC's
           distance = (int)Math.sqrt(Math.pow(Math.abs(attackerX - targetX), 2) + Math.pow(Math.abs(attackerY - targetY), 2));
 
-          if((attacker instanceof SCP0492) && (distance <= SCP0492.RANGE)){ //if the attacker is an SCP0492
-              ((SCP0492)attacker).attack(target); //attack the target
-              if(target.getHealth() <= 0){ //if the target has no more health
-                tIterator.remove(); //remove the target from the list of targets since it is now destroyed
-              }
+          if((this.attackerList.get(i) instanceof SCP0492) && (distance <= SCP0492.RANGE)){ //if the attacker is an SCP0492
+              ((SCP0492)attackerList.get(i)).attack(targetList.get(j)); //attack the target
+              if(this.targetList.get(j).getHealth() <= 0){ //if the target has no more health
+                this.targetList.remove(j); //remove the target from the list of targets since it is now destroyed
+                j = targetList.size(); //end inner for loop since scp has already attacked
 
-          }else if((attacker instanceof Soldier) && (distance <= Soldier.RANGE)){ //if the attacker is a soldier.
-              ((Soldier)attacker).attack(target);  //attack the target
-              if(target.getHealth() <=0 ){ //if target has no more health
-                tIterator.remove(); //remove the object since the target is now destroyed
               }
-
+          }else if((this.attackerList.get(i) instanceof Soldier) && (distance <= Soldier.RANGE)){ //if the attacker is a soldier.
+              ((Soldier)attackerList.get(i)).attack(targetList.get(j));  //attack the target
+              if(this.targetList.get(j).getHealth() <=0 ){ //if target has no more health
+                this.targetList.remove(j); //remove the object since the target is now destroyed
+                j = targetList.size(); //end inner for loop since Soldier has already attacked
+              }
           }//end of if statement block
         }//end of inner for loop
       }//end of for loop
 
 
+      //TODO: Compare + attack things
 
     }else{ //if there are other leaves, call those leaves to start the comparison
       for(int i = 0; i < leaves.length; i ++){

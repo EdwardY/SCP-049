@@ -135,7 +135,6 @@ class Server {
                         startGame();
                     }
                 }
-                System.out.println(Server.running);
             }
             System.out.println("Game finished");
         }catch(Exception e){ 

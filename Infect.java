@@ -2,7 +2,8 @@
 import java.awt.Rectangle;
 
 //data structure utilities
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Iterator;
 
 /**
  * [Infect.java]
@@ -48,8 +49,10 @@ import java.util.HashMap;
      */
     @Override
     public void affect(Game game){
-        HashMap<Integer, Human> humans = game.getHumanMap();
-        for(int key: humans.keySet()){
+        Iterator<Integer> hKeyIterator = game.getHumanMap().keySet().iterator();
+        ConcurrentHashMap<Integer, Human> humans = game.getHumanMap();
+        while(hKeyIterator.hasNext()){
+            int key = hKeyIterator.next();
             Human human = humans.get(key);
             if(this.getAoe().contains(human.getX(), human.getY(), NPC.SIZE, NPC.SIZE)){
                 game.convert(key, "SCP0492", 100, 10, 0, 0.0, 0.0, 0);//temp values added

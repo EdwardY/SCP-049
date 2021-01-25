@@ -3,7 +3,7 @@ import java.awt.Rectangle;
 
 //data structures
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Iterator;
 
 
@@ -21,8 +21,8 @@ class Game {
     private static final double SCP_WIN_PERCENT = 0.6;
     /** The {@code ArrayList} containing all {@code Buildings} in the {@code Game} */
     private ArrayList<Building> buildings;
-    /** The {@code HashMap} of {@code Humans} so that each {@code Human} only needs an ID */
-    private HashMap<Integer, Human> humanMap;
+    /** The {@code ConcurrentHashMap} of {@code Humans} so that each {@code Human} only needs an ID */
+    private ConcurrentHashMap<Integer, Human> humanMap;
     /** The {@code NPCs} belonging to the SCP side */
     private ArrayList<SCP0492> scps;
     /** The {@code ArrayList} of ongoing {@code Events} */
@@ -61,7 +61,7 @@ class Game {
      */
     public Game(){
         this.buildings = new ArrayList<Building>();
-        this.humanMap = new HashMap<Integer, Human>();
+        this.humanMap = new ConcurrentHashMap<Integer, Human>();
         this.scps = new ArrayList<SCP0492>();
         this.events = new ArrayList<Event>();
         this.money = 500; //TODO: coordinate money amounts
@@ -162,7 +162,7 @@ class Game {
                 Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), Building.SIZE, Building.SIZE);
 
                 //remove humans in the area
-                HashMap<Integer, Human> newHumanMap = new HashMap<Integer, Human>();
+                ConcurrentHashMap<Integer, Human> newHumanMap = new ConcurrentHashMap<Integer, Human>();
                 Iterator<Integer> humanKeyIterator = this.humanMap.keySet().iterator();//TOOD: this might be an issue
                 while(humanKeyIterator.hasNext()){
                     int key = humanKeyIterator.next();
@@ -528,7 +528,7 @@ class Game {
      * Gets the {@code Human} objects but in the map
      * @return humanMap, a map of all {@code Human} objects
      */
-    public HashMap<Integer, Human> getHumanMap(){
+    public ConcurrentHashMap<Integer, Human> getHumanMap(){
         return this.humanMap;
     }
     

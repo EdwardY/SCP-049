@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 //utilities (just a datastructure) imports
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * [Earthquake.java]
@@ -52,7 +52,7 @@ class Earthquake extends PhysicalEvent{
     @Override
     public void affect(Game game){
         ArrayList<Building> buildings = game.getBuildings();
-        HashMap<Integer, Human> humans = game.getHumanMap();
+        ConcurrentHashMap<Integer, Human> humans = game.getHumanMap();
         for(int i = 0;i < buildings.size();i++){
             if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY(), Building.SIZE, Building.SIZE)){
                 buildings.get(i).takeDamage(this.getEffectAmount());

@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 //data structures
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * [Tornado.java]
@@ -62,7 +62,7 @@ class Tornado extends PhysicalEvent implements Moveable{
     public void affect(Game game){
         int damage = (int)((this.getTimeLeft()/this.totalTime)*this.getEffectAmount());
         ArrayList<Building> buildings = game.getBuildings();
-        HashMap<Integer, Human> humans = game.getHumanMap();
+        ConcurrentHashMap<Integer, Human> humans = game.getHumanMap();
         for(int i = 0;i < buildings.size();i++){
             if(this.getAoe().contains(buildings.get(i).getX(), buildings.get(i).getY(), Building.SIZE, Building.SIZE)){
                 buildings.get(i).takeDamage(damage);

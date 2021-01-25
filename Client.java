@@ -330,15 +330,7 @@ public class Client {
                                         int x = Integer.parseInt(requests[1]);
                                         int y = Integer.parseInt(requests[2]);
                                         int amount = Integer.parseInt(requests[3]);
-                                        Residency addTo = (Residency)((Town)player).findBuilding(x,y);
-                                        Citizen newCitizen;
-                                        for(int i = 0; i < amount; i ++){   
-                                            newCitizen = new Citizen(0, 100, x, y);
-                                            addTo.createCitizen(newCitizen);
-                                            ((Town)player).addNpc(newCitizen);
-
-                                        }
-                                        ((Town)player).changeMoney(-50*amount);
+                                        ((Town)player).residencyTrain(x,y,amount);
                                         
 
                                     }else if(requests[0].equals("<residency convert>")){
@@ -353,12 +345,8 @@ public class Client {
 
                                         }
 
-                                        for(int i = 0; i < amount; i ++){
-                                            ((Town)player).convert(keys[i], newType, 100, 10, 1, 1, 1, 100);
-                                            ((Town)player).locateHumanInProperSpot(((Town)player).getHumanMap().get(keys[i]));
-                                        }
-
-                                        ((Town)player).changeMoney(-50*amount);
+                                        ((Town)player).residencyConvert(newType, x, y, amount, keys);
+                                        
 
 
                                     }else if(requests[0].equals("<military soldier>")){
@@ -371,11 +359,8 @@ public class Client {
                                             keys[i] = Integer.parseInt(requests[i]);
 
                                         }
-
-                                        for(int i = 0; i < amount; i++){
-                                            ((Town)player).convert(keys[i], "Soldier",level*100, level*10, 1, 1, 1, 100); 
-
-                                        }
+                                        ((Town)player).trainSoldier(level, x, y, amount, keys);
+                                        
 
                                     }else if(requests[0].equals("<military spy>")){
 
@@ -387,11 +372,8 @@ public class Client {
                                             keys[i] = Integer.parseInt(requests[i]);
 
                                         }
-
-                                        for(int i = 0; i < amount; i++){
-                                            ((Town)player).convert( keys[i],"Spy", 100, 0, 1,1,1, 100);
-
-                                        }
+                                        ((Town)player).trainSpy(x,y,amount,keys);
+                                        
                                     }
 
                                 
@@ -409,6 +391,7 @@ public class Client {
 
 
                             }else if(prefix.equals("<r>")){ //change in resources
+                                
                                 String resourceType = input.readLine();
                                 int resourceChange = Integer.parseInt(input.readLine());
                                 if(resourceType.equals("Money")){

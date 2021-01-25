@@ -34,7 +34,7 @@ class Bank extends ProductionFacility{
 
     public int earnResource(){
         
-        int resource = 400 + this.getLevel()*100; 
+        int resource = 500 + this.getLevel()*400; 
 
         return resource;
     }
@@ -87,7 +87,7 @@ class Bank extends ProductionFacility{
      */
     public int getUpgradePrice(){
         
-        return this.getLevel() * 3/2*1000;
+        return this.getLevel() * 3/2*100;
     }
 
     /**

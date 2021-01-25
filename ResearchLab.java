@@ -107,7 +107,7 @@ public class ResearchLab extends Military{
     public int getUpgradePrice(){
         
 
-        return this.getLevel() * 3/2*1000;
+        return this.getLevel() * 3/2*100;
     }
 
 

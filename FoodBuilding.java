@@ -35,7 +35,7 @@ class FoodBuilding extends ProductionFacility{
    /**Earn an amount of food */
    public int earnResource(){
 
-       int resource = 400 + this.getLevel()*100;
+       int resource = 1000 + this.getLevel()*500;
        return resource;
    }
 
@@ -86,7 +86,7 @@ class FoodBuilding extends ProductionFacility{
      * @return the cost that the building takes to upgrade
      */
     public int getUpgradePrice(){
-        return this.getLevel() * 3/2*1000;
+        return this.getLevel() * 3/2*100;
     }
 
     /**

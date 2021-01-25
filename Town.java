@@ -93,6 +93,7 @@ public class Town extends Player {
      */
     public void changeMoney(int change){
         this.money += change;
+        System.out.println("New money amount is:" + money);
     }
 
     /**
@@ -558,6 +559,61 @@ public class Town extends Player {
         this.getPlayerClient().setLastRequest("<residency convert>" + " " + type + " " + amount + " " + x + " " + y + keys );
     }
 
+    /**
+     * Trains citizens
+     * @param x x coordinate of the residency to train at
+     * @param y y coordinate of the residency to train at
+     * @param amount The amount of people to train
+     */
+    public void residencyTrain(int x, int y, int amount){
+        Residency addTo = (Residency)findBuilding(x,y);
+        Citizen newCitizen;
+        for(int i = 0; i < amount; i ++){   
+            newCitizen = new Citizen(0, 100, x, y);
+            addTo.createCitizen(newCitizen);
+            addNpc(newCitizen);
+
+        }
+        changeMoney(-50*amount);
+
+    }
+
+    /**
+     * Specializing citizens into Cadets, Doctors, or researchers
+     * @param newType the type of specialization
+     * @param x The x coordinate of the specialization
+     * @param y the y coordiante of the specialization 
+     * @param amount The amount of specialization
+     * @param keys The key belonging to the soldier
+     */
+    public void residencyConvert(String newType,int x,int y,int amount,int[] keys){
+        for(int i = 0; i < amount; i ++){
+            convert(keys[i], newType, 100, 10, 1, 1, 1, 100);
+            locateHumanInProperSpot(getHumanMap().get(keys[i]));
+        }
+       changeMoney(-50*amount);
+    }
+
+    public void trainSoldier(int level,int  x,int y,int  amount, int[] keys){
+
+        for(int i = 0; i < amount; i++){
+            convert(keys[i], "Soldier",level*100, level*10, 1, 1, 1, 100); 
+
+        }
+
+        changeMoney(-50*amount);
+    }
+
+    public void trainSpy(int x,int y,int amount,int[] keys){
+
+        for(int i = 0; i < amount; i++){
+            convert( keys[i],"Spy", 100, 0, 1,1,1, 100);
+
+        }
+
+        changeMoney(-50*amount);
+    }
+
     //end of setters
 
     /**
@@ -574,6 +630,41 @@ public class Town extends Player {
             }
         }
         return buildingToReturn;
+    }
+
+    /**
+     * 
+     * @return How much money is made per turn by the player
+     */
+    public int getMoneyPerTurn(){
+        ArrayList<Building> myBuildings = getBuildings();
+        int moneyPerTurn = 0;
+        for(int i = 0; i < myBuildings.size() ; i ++){
+            if( myBuildings.get(i) instanceof Bank){
+                moneyPerTurn += ((Bank)myBuildings.get(i)).earnResource();
+            }
+
+        }
+
+        return moneyPerTurn;
+
+    }
+    /**
+     * 
+     * @return How much food is made per turn by the player
+     */
+    public int getFoodPerTurn(){
+        ArrayList<Building> myBuildings = getBuildings();
+        int foodPerTurn = 0;
+        for(int i = 0; i < myBuildings.size() ; i ++){
+            if( myBuildings.get(i) instanceof FoodBuilding){
+                foodPerTurn += ((FoodBuilding)myBuildings.get(i)).earnResource();
+            }
+
+        }
+
+        return foodPerTurn;
+
     }
 
     //start of inner classes
@@ -751,9 +842,9 @@ public class Town extends Player {
         /**level of the bhuilding */
         private int buildingLevel = 0;
         /**foodIncome */
-        private int food = 0;
+        private int foodIncome = 0;
         /**moneyIncome */
-        private int money = 0;
+        private int moneyIncome = 0;
         /**buildingMaxHealth */
         private int buildingMaxHealth = 0;
         /**capacity of building value to display */
@@ -772,6 +863,7 @@ public class Town extends Player {
         private boolean moneyDisplay = false; 
         /**Keeping track if bildingClicked is a hospital and displays hospital features */
         private boolean hospitalDisplay = false; 
+
 
         /**
          * Method runs the town version of the game.
@@ -922,14 +1014,18 @@ public class Town extends Player {
 
                 }
                 if(foodDisplay){
-                    g.drawString("Food income per turn: " + food, 1420, 600);
+                    g.drawString("Food income per turn: " + getMoneyPerTurn(), 1420, 600);
                 }
                 if(moneyDisplay){
 
-                    g.drawString("Money Income per turn: " + money, 1420, 600);
+                    g.drawString("Money Income per turn: " + getFoodPerTurn(), 1420, 600);
                 }
                 if(hospitalDisplay){
                     g.drawString("Capacity of doctors in this hospital: " + ((Hospital)clickedBuilding).getDoctors().size() + "/" + ((Hospital)clickedBuilding).getMaxCapacity(), 1420, 600);
+                }
+                if(generalButtons.get("upgrade").active){
+
+                    g.drawString("Upgrade price: $" + clickedBuilding.getUpgradePrice() , 1720, 930);
                 }
 
                 g.drawString("Building Health:" + buildingHealth + "/" + buildingMaxHealth, GameWindow.GridPanel.GRID_SIZE_WIDTH, 250);
@@ -940,6 +1036,7 @@ public class Town extends Player {
                 g.drawString("Opponent: " + Town.this.getOpponent(), 10 + GRID_SIZE_WIDTH, 150);
                 g.drawString("DuberCoin: " + Town.this.getMoney(), 10 + GRID_SIZE_WIDTH, 325);
                 g.drawString("Food: "+ Town.this.getFood(), 10 + 1420, 365);
+                g.drawString("Food consumption perTurn: " + 10*Town.this.getHumanMap().size(), 1420, 395);
                 g.drawString("Humans: " + Town.this.getHumanMap().size(), 10 + GRID_SIZE_WIDTH, 425);
                 g.drawString("SCP-049-2s: " + Town.this.getSCPs().size(), 10 + GRID_SIZE_WIDTH, 450);
                 if(clickedBuilding != null){
@@ -1059,9 +1156,9 @@ public class Town extends Player {
                             System.out.println("Your building is not null" + clickedBuilding.getClass());
 
                             if(clickedBuilding instanceof FoodBuilding){
-                                food = ((FoodBuilding)clickedBuilding).getLevel() * 500 + 1000;
+                                foodIncome = ((FoodBuilding)clickedBuilding).getLevel() * 400 + 500;
                             }else if(clickedBuilding instanceof Bank){
-                                money = ((Bank)clickedBuilding).getLevel() * 500 + 1000;
+                                moneyIncome = ((Bank)clickedBuilding).getLevel() * 500 + 1000;
                             }else if(clickedBuilding instanceof Hospital){
                                 capacity = ((Hospital)clickedBuilding).getMaxCapacity();
 

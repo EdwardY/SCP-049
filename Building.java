@@ -85,8 +85,8 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
      * Setting the level of the building
      * @param level The level of the building
      */
-    public void setLevel(int level){
-        this.level = level;
+    public void setLevel(int newLevel){
+        this.level = newLevel;
     }
 
     /**

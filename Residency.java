@@ -98,7 +98,8 @@ class Residency extends Building{
 
         //upgrade stats
         this.setLevel(this.getLevel() + 1);
-        this.setMaxHealth(this.getHealth() + 500);
+        this.setMaxHealth(this.getMaxHealth() + 500);
+        this.setHealth(this.getHealth() + 500);
         this.maxCapacity += 20;
 
     }
@@ -111,6 +112,7 @@ class Residency extends Building{
         //downgrade a buildings stats 
         this.setLevel(this.getLevel() - 1);
         this.setMaxHealth(this.getMaxHealth() - 500);
+        this.setHealth(this.getHealth() - 500);
         this.maxCapacity -= 20;
 
     }

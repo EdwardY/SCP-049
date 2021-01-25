@@ -118,7 +118,8 @@ class MilitaryBase extends Military{
 
         //upgrade stats
         this.setLevel(this.getLevel() + 1);
-        this.setMaxHealth(this.getHealth() + 500);
+        this.setMaxHealth(this.getMaxHealth() + 500);
+        this.setHealth(this.getHealth() + 500);
 
     }
 
@@ -130,6 +131,7 @@ class MilitaryBase extends Military{
         //downgrade a buildings stats 
         this.setLevel(this.getLevel() - 1);
         this.setMaxHealth(this.getMaxHealth() - 500);
+        this.setHealth(this.getHealth() - 500);
     }
 
     /**

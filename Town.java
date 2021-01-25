@@ -1014,11 +1014,11 @@ public class Town extends Player {
 
                 }
                 if(foodDisplay){
-                    g.drawString("Food income per turn: " + getMoneyPerTurn(), 1420, 600);
+                    g.drawString("Food income per turn: " + getFoodPerTurn(), 1420, 600);
                 }
                 if(moneyDisplay){
 
-                    g.drawString("Money Income per turn: " + getFoodPerTurn(), 1420, 600);
+                    g.drawString("Money Income per turn: " + getMoneyPerTurn(), 1420, 600);
                 }
                 if(hospitalDisplay){
                     g.drawString("Capacity of doctors in this hospital: " + ((Hospital)clickedBuilding).getDoctors().size() + "/" + ((Hospital)clickedBuilding).getMaxCapacity(), 1420, 600);

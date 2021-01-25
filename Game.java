@@ -194,12 +194,12 @@ class Game {
         }
 
         //remove all humans with health less than 0
-        Iterator<Integer> humanKeyIterator = this.humanMap.keySet().iterator(); //TODO: this may be an issue
+        Iterator<Integer> humanKeyIterator = this.humanMap.keySet().iterator();
         while(humanKeyIterator.hasNext()){
             int key = humanKeyIterator.next();
             Human currentHuman = this.humanMap.get(key);
             if(currentHuman.getHealth() <= 0){
-                humanKeyIterator.remove();
+                this.humanMap.remove(key);
                 this.casualties ++;
             }
         }
@@ -725,7 +725,7 @@ class Game {
             newNpc = new SCP0492(maxHealth, currentXPosition, currentYPosition, attackDamage);
         }
         if(newNpc instanceof SCP0492){
-            this.humanMap.remove(key); //TODO: might have thread conflicts, will deal with if run into (maybe)
+            this.humanMap.remove(key);
             this.scps.add((SCP0492)newNpc);
         }else{
             this.humanMap.replace(key, (Human)newNpc);

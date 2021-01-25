@@ -34,11 +34,11 @@ class Tornado extends PhysicalEvent implements Moveable{
      * The constructor for the {@code Tornado} class when time left is known, gives values based on level
      * @param level the level of the {@code Tornado}
      * @param timeLeft the time left for the {@code Tornado}
-     * @param x the center x position which the {@code Tornado} starts at
-     * @param y the center y position which the {@code Tornado} starts at
+     * @param x the top left x position which the {@code Tornado} starts at
+     * @param y the top left y position which the {@code Tornado} starts at
      */
     public Tornado(int level, int timeLeft, int x, int y){
-        super(timeLeft, level*3, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
+        super(timeLeft, level*3, level, new Rectangle(x, y, (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/tornado.png"));
         this.totalTime = level*2;
     }
 

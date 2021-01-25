@@ -38,11 +38,11 @@ class Thunderstorm extends PhysicalEvent{
      * </p>
      * @param level the level of the {@code Thunderstorm}
      * @param timeLeft the time left for the {@code Thunderstorm}
-     * @param x the middle of the x of where the {@code Thunderstorm} will be
-     * @param y the middle of the y of where the {@code Thunderstorm} will be
+     * @param x the top left x of where the {@code Thunderstorm} will be
+     * @param y the top left y of where the {@code Thunderstorm} will be
      */
     public Thunderstorm(int level, int timeLeft, int x, int y){
-        super(timeLeft, 1, level, new Rectangle(x - level, y - level, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
+        super(timeLeft, 1, level, new Rectangle(x, y, level*2, level*2), Toolkit.getDefaultToolkit().getImage("./assets/lightning.png"));
         this.strikesLeft = level;
         this.xStrikePos = x;
         this.yStrikePos = y;

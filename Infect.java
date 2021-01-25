@@ -19,18 +19,18 @@ import java.util.HashMap;
      * @param y the middle y position of where the {@code Infect} will affect
      */
     public Infect(int level, int x, int y){
-        super(1, -1, level, new Rectangle(x - level, y - level, level*2, level*2));
+        super(1, -1, level, new Rectangle(x - (level * Building.SIZE), y - (level * Building.SIZE), (level * Building.SIZE)*2, (level * Building.SIZE)*2));
     }
 
     /**
      * Constructor for {@code Infect} when the time left is known
      * @param level the level of the {@code Infect}
      * @param timeLeft the time left for the {@code Infect}
-     * @param x the middle x position of where the {@code Infect} will affect
-     * @param y the middle y position of where the {@code Infect} will affect
+     * @param x the top left x position of where the {@code Infect} will affect
+     * @param y the top left y position of where the {@code Infect} will affect
      */
     public Infect(int level, int timeLeft, int x, int y){
-        super(timeLeft, -1, level, new Rectangle(x - level, y - level, level*2, level*2));
+        super(timeLeft, -1, level, new Rectangle(x, y, level*2, level*2));
     }
 
     /**

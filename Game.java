@@ -416,12 +416,13 @@ class Game {
         for(Hospital hospital: hospitals){
             hospital.heal();
         }
-
-        for(int key: humanMap.keySet()){
-            Human human = humanMap.get(key);
-            if(human.getHealth() < human.getMaxHealth()){
-                Hospital hospital = hospitals.get((int)Math.round(Math.random() * hospitals.size())); //adds human to a random hospital
-                hospital.addInjured(human);
+        if(hospitals.size() > 0){
+            for(int key: humanMap.keySet()){
+                Human human = humanMap.get(key);
+                if(human.getHealth() < human.getMaxHealth()){
+                    Hospital hospital = hospitals.get((int)Math.round(Math.random() * hospitals.size())); //adds human to a random hospital
+                    hospital.addInjured(human);
+                }
             }
         }
     }

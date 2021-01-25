@@ -29,11 +29,11 @@ class Earthquake extends PhysicalEvent{
      * The constructor for the {@code Earthquake} class, passes values into the superclass based on level, only lasts 1 turn
      * @param effectAmount the amount the {@code Earthquake} will affect {@code Buildings} (it will affect {@code NPCs} less)
      * @param timeLeft the time left in the {@code Earthquake}
-     * @param x the x center location of the {@code Earthquake}
-     * @param y the y center location of the {@code Earthquake}
+     * @param x the top left x location of the {@code Earthquake}
+     * @param y the top left y location of the {@code Earthquake}
      */
     public Earthquake(int level, int timeLeft, int x, int y){
-        super(timeLeft, level*200, level, new Rectangle(x - (level * Building.SIZE), y - (level * Building.SIZE), (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
+        super(timeLeft, level*200, level, new Rectangle(x, y, (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
     }
 
     /**

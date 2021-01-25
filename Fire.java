@@ -30,12 +30,12 @@ class Fire extends PhysicalEvent{
      * Constructor for the {@code Fire} class, passes parameters into the super constructor based on level
      * @param level the level of the {@code Fire}
      * @param timeLeft the time left for the {@code Fire}
-     * @param x the center x position of the {@code Fire}
-     * @param y the center y position of the {@code Fire}
+     * @param x the top left x position of the {@code Fire}
+     * @param y the top left y position of the {@code Fire}
      */
     public Fire(int level, int timeLeft, int x, int y){
         //TOOD: fire, adjust values later when known
-        super(timeLeft, level*10, level, new Rectangle(x - (level * Building.SIZE), y - (level * Building.SIZE), (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
+        super(timeLeft, level*10, level, new Rectangle(x, y, (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/fire.png"));
     }
     
     /**

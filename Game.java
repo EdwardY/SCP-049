@@ -1029,8 +1029,6 @@ class Game {
             removeDeadPeopleFromBuildings();
             dealWithMedicalStuff();
             ageCitizens();
-            changeHume(15);
-            changeMoney(50);
         }
 
     }

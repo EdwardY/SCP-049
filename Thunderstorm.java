@@ -54,7 +54,7 @@ class Thunderstorm extends PhysicalEvent{
      * @return the final cost
      */
     public static int getCostByLevel(int level){
-        return level*20;
+        return level*15;
     }
 
     /**

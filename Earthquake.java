@@ -33,7 +33,7 @@ class Earthquake extends PhysicalEvent{
      * @param y the top left y location of the {@code Earthquake}
      */
     public Earthquake(int level, int timeLeft, int x, int y){
-        super(timeLeft, level*200, level, new Rectangle(x, y, (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
+        super(timeLeft, level*100, level, new Rectangle(x, y, (level * Building.SIZE)*2, (level * Building.SIZE)*2), Toolkit.getDefaultToolkit().getImage("./assets/earthquake.png"));
     }
 
     /**
@@ -42,7 +42,7 @@ class Earthquake extends PhysicalEvent{
      * @return the final cost
      */
     public static int getCostByLevel(int level){
-        return level*5;
+        return level*6;
     }
 
     /**

@@ -34,7 +34,7 @@ class Bank extends ProductionFacility{
 
     public int earnResource(){
         
-        int resource = 1000 + this.getLevel()*500; 
+        int resource = 400 + this.getLevel()*100; 
 
         return resource;
     }

@@ -32,10 +32,10 @@ class FoodBuilding extends ProductionFacility{
        this.setSprite(Toolkit.getDefaultToolkit().getImage("./assets/FoodBuilding.png"));
    }
 
-
+   /**Earn an amount of food */
    public int earnResource(){
 
-       int resource = 1000 + this.getLevel()*500;
+       int resource = 400 + this.getLevel()*100;
        return resource;
    }
 

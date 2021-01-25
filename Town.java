@@ -61,6 +61,14 @@ public class Town extends Player {
         this.money = money;
         this.food = food; 
         humanMap = new HashMap<Integer, Human>();
+
+        for(int i = 0; i < 100; i ++){
+            Citizen startingCitizen = new Citizen( 18, 100, 504, 504);
+            humanMap.put(currentId,startingCitizen);
+            currentId ++;
+            Residency startingRes = (Residency)findBuilding(504, 504);
+            startingRes.createCitizen(startingCitizen);
+        }
     }
 
     /**
@@ -737,7 +745,7 @@ public class Town extends Player {
         /**Levels button for users to click on */
         private DuberTextButton[] levels;
         /**The level that the soldier user will train */
-        private int soldierLevel;
+        private int soldierLevel = 1;
         /**Health of a building */
         private int buildingHealth = 0;
         /**level of the bhuilding */
@@ -835,7 +843,7 @@ public class Town extends Player {
             this.generalButtons = new HashMap<>();
             
             this.generalButtons.put("upgrade", new DuberTextButton("Upgrade", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 300, 960, 180, 30)));
-            this.generalButtons.put("back", new DuberTextButton("back", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 100, 960, 180, 30)));
+            this.generalButtons.put("back", new DuberTextButton("back", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH + 200, 920, 72, 30)));
             this.generalButtons.put("surrender", new DuberTextButton("surrender", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 960, 180, 30))); 
             //this.generalButtons.put("Sure", new DuberTextButton("Are you sure?", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 960, 180, 30))); 
 
@@ -1142,7 +1150,15 @@ public class Town extends Player {
                         requestSurrender();
 
                     }else if(generalButtons.get("back").inBounds(mouseX, mouseY)){
-                        menu = 0; 
+                        clearAllButtons();
+                        menu = 0;
+                        training = 0;
+                        residencyTrained = false;
+                        residencySpecialized = false; 
+                        militaryTrained = false;
+                        foodDisplay = false;
+                        moneyDisplay = false; 
+                        hospitalDisplay = false; 
 
                     }else if(clickedBuilding instanceof Residency){
 

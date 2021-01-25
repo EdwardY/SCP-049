@@ -151,12 +151,10 @@ public class Client {
                                 if(side.equals("s")){ //this player is on the SCP side
                                     Client.this.player = new SCP(username, Client.this, opponent, startingCurrency);
 
-                                    System.out.println("SCP is NOT the problem");
                                 }else if(side.equals("t")){ //this player is on the town side
                                     int startingFood = Integer.parseInt(input.readLine());
                                     Client.this.player = new Town(username, Client.this, opponent, startingCurrency, startingFood);
 
-                                    System.out.println("Town is NOT the problem");
                                 }
 
                                 Client.this.player.start();
@@ -164,7 +162,7 @@ public class Client {
                                 Thread gameThread = new Thread(Client.this.player);
                                 gameThread.start();
                                 */
-                                System.out.println("You made it this far...");
+
 
                                 if(Client.this.getStandbyWindow() != null){ //if standby window is open
                                     Client.this.getStandbyWindow().close();  //close the standby window
@@ -174,7 +172,7 @@ public class Client {
                             }else if(prefix.equals("<ts>")){ //server says to start the next turn
 
                                 player.startTurn();
-                                System.out.println("wth");
+
 
                             }else if(prefix.equals("<te>")){ //server says to end the current turn
                                 player.endTurn();
@@ -305,6 +303,7 @@ public class Client {
 
                             }else if(prefix.equals("<f>")){ //requested transaction could not be completed
                                 Client.this.setLastRequest(""); //clear the last request
+                                System.out.println(" request failed f");
 
                             }else if(prefix.equals("<st>")){ //transaction is successful
 
@@ -326,8 +325,7 @@ public class Client {
                                         ((Town)player).upgradeBuilding(Integer.parseInt(requests[1]), Integer.parseInt(requests[2]));
 
                                     }else if(requests[0].equals("<residency train>")){ // adding new citizens
-                                        
-                                        //System.out.println
+                                    
                                         
                                         int x = Integer.parseInt(requests[1]);
                                         int y = Integer.parseInt(requests[2]);
@@ -445,7 +443,6 @@ public class Client {
              * @param message The message being sent to the server.
              */
             public void sendMessage(String message){
-                System.out.println(message);
                 output.println(message);
                 output.flush();
             }//end of method

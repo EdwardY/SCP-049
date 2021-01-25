@@ -92,6 +92,14 @@ class Hospital extends Building{
         //TODO: figure out if the same object needs to be removed or just the number of doctors need to be the same
     }
 
+    /**
+     * Sets the doctor arraylist
+     * @param doctors the new arraylist of doctors to set to
+     */
+    public void setDoctors(ArrayList<Doctor> doctors){
+        this.doctors = doctors;
+    }
+
     //Inherited methods
     
     /** 

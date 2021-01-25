@@ -88,13 +88,15 @@ class Game {
     private void removeDeadPeopleFromBuildings(){
         for(int i = 0; i < this.buildings.size(); i++){
             if(this.buildings.get(i) instanceof Hospital){
+                ArrayList<Doctor> newDoctors = new ArrayList<Doctor>();
                 Iterator<Doctor> dIterator = ((Hospital)this.buildings.get(i)).getDoctors().iterator();
                 while(dIterator.hasNext()){
                     Doctor currentDoctor = dIterator.next();
-                    if(currentDoctor.getHealth() <= 0){
-                        dIterator.remove();
+                    if(currentDoctor.getHealth() > 0){
+                        newDoctors.add(currentDoctor);
                     }
                 }
+                ((Hospital)this.buildings.get(i)).setDoctors(newDoctors);
 
                 //TODO: help idk how to remove things from queues
 
@@ -141,6 +143,7 @@ class Game {
     private void killDeadStuff(){
 
         //loop through each building's area
+        ArrayList<Building> newBuildings = new ArrayList<Building>();
         Iterator<Building> bIterator = this.buildings.iterator();
         while(bIterator.hasNext()){
             Building currentBuilding = bIterator.next();
@@ -148,29 +151,35 @@ class Game {
                 Rectangle buildingArea = new Rectangle(currentBuilding.getX(), currentBuilding.getY(), Building.SIZE, Building.SIZE);
 
                 //remove humans in the area
+                HashMap<Integer, Human> newHumanMap = new HashMap<Integer, Human>();
                 Iterator<Integer> humanKeyIterator = this.humanMap.keySet().iterator();//TOOD: this might be an issue
                 while(humanKeyIterator.hasNext()){
                     int key = humanKeyIterator.next();
                     Human currentHuman = this.humanMap.get(key);
                     Rectangle humanArea = new Rectangle(currentHuman.getX(), currentHuman.getY(), NPC.SIZE, NPC.SIZE);
                     if(buildingArea.contains(humanArea)){
-
-                        humanKeyIterator.remove();
                         this.casualties ++;
+                    }else{
+                        newHumanMap.put(key, currentHuman);
                     }
                 }
+                this.humanMap = newHumanMap;
 
                 //remove spc in the area
+                ArrayList<SCP0492> newScps = new ArrayList<SCP0492>();
                 Iterator<SCP0492> scpIterator = this.scps.iterator();
                 while(scpIterator.hasNext()){
                     SCP0492 currentScp = scpIterator.next();
                     Rectangle scpArea = new Rectangle(currentScp.getX(), currentScp.getY(), NPC.SIZE, NPC.SIZE);
-                    if(buildingArea.contains(scpArea)){
-                        scpIterator.remove();
+                    if(!buildingArea.contains(scpArea)){
+                        newScps.add(currentScp);
                     }
                 }
-                bIterator.remove();
+                this.scps = newScps;
+            }else{
+                newBuildings.add(currentBuilding);
             }
+            this.buildings = newBuildings;
         }
 
         //remove all humans with health less than 0
@@ -185,13 +194,15 @@ class Game {
         }
 
         //remove all scps with health less than 0
+        ArrayList<SCP0492> newScps = new ArrayList<SCP0492>();
         Iterator<SCP0492> scpIterator = this.scps.iterator();
         while(scpIterator.hasNext()){
             SCP0492 currentScp = scpIterator.next();
-            if(currentScp.getHealth() <= 0){
-                scpIterator.remove();
+            if(currentScp.getHealth() > 0){
+                newScps.add(currentScp);
             }
         }
+        this.scps = newScps;
     }
 
     
@@ -243,6 +254,7 @@ class Game {
      * </p>
      */
     private void dealWithEvents(){
+        ArrayList<Event> newEventList = new ArrayList<Event>();
         Iterator<Event> eIterator = this.events.iterator();
         while(eIterator.hasNext()){
             Event currentEvent = eIterator.next();
@@ -254,13 +266,14 @@ class Game {
                 int distX = (int)Math.round(Math.random()*Building.SIZE);
                 int distY = (int)Math.round(Math.random()*Building.SIZE);
                 ((Tornado)currentEvent).translate(dx*distX, dy*distY);
-            }else if((currentEvent instanceof Thunderstorm) && (((Thunderstorm)currentEvent).getStrikesLeft() <= 0)){
-                eIterator.remove();
+            }else if((currentEvent instanceof Thunderstorm) && (((Thunderstorm)currentEvent).getStrikesLeft() > 0)){
+                newEventList.add(currentEvent);
             }
-            if(currentEvent.getTimeLeft() <= 0){
-                eIterator.remove();
+            if(currentEvent.getTimeLeft() > 0){
+                newEventList.add(currentEvent);
             }
         }
+        this.events = newEventList;
     }
 
     /**

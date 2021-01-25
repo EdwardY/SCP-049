@@ -173,5 +173,14 @@ public class ResearchLab extends Military{
     } 
 
 
+    /**
+     * Adds the researcher to the lab
+     * @Param researcher the researcher npc
+     */
+    public void add(Researcher researcher){
+        researchers.add(researcher);
+
+    }
+
 
 }

@@ -241,6 +241,7 @@ class Server {
                             int y = Integer.parseInt(coords.split(" ")[1]);
                             success = upgrade(x, y);
                             reportTransactionStatus(success);
+
                         }else if(prefix.equals("<residency train>")){
                             
                             boolean success = false;
@@ -250,6 +251,15 @@ class Server {
                             int amount = Integer.parseInt(info.split(" ")[2]);
                             success = game.trainCitizen(x,y,amount);
                             reportTransactionStatus(success);
+
+                            if(success){
+                                sendMessage("<r>");
+                                sendMessage("Money");
+                                sendMessage("" + (-(50*amount)));
+                                game.changeMoney(-(50*amount));
+                                game.changeMoneyChange(-(50*amount));
+
+                            }
 
                         }else if(prefix.equals("<residency convert>")){
 
@@ -269,6 +279,15 @@ class Server {
 
                             success = game.specializeCitizen(type, amount, x, y, myKeys);
                             reportTransactionStatus(success);
+
+                            if(success){
+                                sendMessage("<r>");
+                                sendMessage("Money");
+                                sendMessage("" + (-(50*amount)));
+                                game.changeMoney(-(50*amount));
+                                game.changeMoneyChange(-(50*amount));
+                            }
+
 
                         }else if(prefix.equals("<military soldier>")){
 
@@ -293,7 +312,7 @@ class Server {
                                 game.changeMoney(-(Soldier.BASE_SOLDIER_PRICE*amount*level));
                                 game.changeMoneyChange(-(Soldier.BASE_SOLDIER_PRICE*amount*level));
                             }
-                            reportTransactionStatus(success);
+                            reportTransactionStatus(success); 
 
 
                         }else if(prefix.equals("<military spy>")){

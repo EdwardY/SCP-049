@@ -131,7 +131,7 @@ public class Client {
             public void run(){
 
                 while(running){
-                    //System.out.println("Running...");
+
                     try{
                         String prefix;
                         if(input.ready()){
@@ -279,17 +279,72 @@ public class Client {
                                         objectValues = objectInfo.split(" ");
                                         String humanType = objectValues[0];
                                         if(humanType.equals("Cadet")){
-                                            humanMap.put(key, new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
+                                            Cadet add =  new Cadet(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]));
+
+                                            
+                                        
+                                            humanMap.put(key,add);
+                                            for(int j = 0; j < buildingList.size(); j ++){
+                                                if(buildingList.get(j).getX() == add.getX() && buildingList.get(j).getY() == add.getY()){
+                                                    
+                                                    ((MilitaryBase)buildingList.get(j)).add(add);
+                                                }
+                                            }
+
                                         }else if(humanType.equals("Citizen")){
-                                            humanMap.put(key, new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
+                                            Citizen add =new Citizen(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]));
+                                            
+                                            humanMap.put(key, add);
+                                            for(int j = 0; j < buildingList.size(); j ++){
+                                                if(buildingList.get(j).getX() == add.getX() && buildingList.get(j).getY() == add.getY()){
+                                                    
+                                                    ((Residency)buildingList.get(j)).createCitizen(add);
+                                                }
+                                            }
+
                                         }else if(humanType.equals("Doctor")){
-                                            humanMap.put(key, new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]) ));
+                                            Doctor add = new Doctor(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]) );
+                                            
+                                            humanMap.put(key, add);
+                                            for(int j = 0; j < buildingList.size(); j ++){
+                                                if(buildingList.get(j).getX() == add.getX() && buildingList.get(j).getY() == add.getY()){
+                                                    
+                                                    ((Hospital)buildingList.get(j)).addDoctors(add);
+                                                }
+                                            }
+
                                         }else if(humanType.equals("Researcher")){
-                                            humanMap.put(key, new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4])));
+                                            Researcher add = new Researcher(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]));
+                                            
+                                            humanMap.put(key, add);
+                                            for(int j = 0; j < buildingList.size(); j ++){
+                                                if(buildingList.get(j).getX() == add.getX() && buildingList.get(j).getY() == add.getY()){
+                                                    
+                                                    ((ResearchLab)buildingList.get(j)).add(add);
+                                                }
+                                            }
+
                                         }else if(humanType.equals("Soldier")){
-                                            humanMap.put(key, new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]) ));
+                                            Soldier add = new Soldier(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Integer.parseInt(objectValues[5]), Integer.parseInt(objectValues[6]) );
+
+                                            humanMap.put(key, add );
+                                            for(int j = 0; j < buildingList.size(); j ++){
+                                                if(buildingList.get(j).getX() == add.getX() && buildingList.get(j).getY() == add.getY()){
+                                                    
+                                                    ((MilitaryBase)buildingList.get(j)).add(add);
+                                                }
+                                            }
+
                                         }else if(humanType.equals("Spy")){
-                                            humanMap.put(key, new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6])));
+                                            Spy add = new Spy(Integer.parseInt(objectValues[1]), Integer.parseInt(objectValues[2]), Integer.parseInt(objectValues[3]), Integer.parseInt(objectValues[4]), Double.parseDouble(objectValues[5]), Double.parseDouble(objectValues[6]));
+
+                                            humanMap.put(key,add );
+                                            for(int j = 0; j < buildingList.size(); j ++){
+                                                if(buildingList.get(j).getX() == add.getX() && buildingList.get(j).getY() == add.getY()){
+                                                    
+                                                    ((MilitaryBase)buildingList.get(j)).add(add);
+                                                }
+                                            }
                                         }
 
                                     }

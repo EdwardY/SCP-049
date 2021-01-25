@@ -816,7 +816,8 @@ class Game {
                 locateHumanInProperSpot(this.humanMap.get(myKeys.get(i)));
             }
 
-            changeMoney(-100*amount);
+            changeMoney(-50*amount);
+            success = true;
         }
         return success;
     }

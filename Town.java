@@ -93,7 +93,7 @@ public class Town extends Player {
      */
     public void changeMoney(int change){
         this.money += change;
-        System.out.println("New money amount is:" + money);
+
     }
 
     /**
@@ -102,6 +102,10 @@ public class Town extends Player {
      */
     public void changeFood(int change){
         this.food += change;
+
+        if(food <= 0){
+            this.food = 0; //incase something breaks
+        }
     }
 
     /**
@@ -575,8 +579,6 @@ public class Town extends Player {
             addNpc(newCitizen);
 
         }
-        changeMoney(-50*amount);
-
     }
 
     /**
@@ -592,9 +594,17 @@ public class Town extends Player {
             convert(keys[i], newType, 100, 10, 1, 1, 1, 100);
             locateHumanInProperSpot(getHumanMap().get(keys[i]));
         }
-       changeMoney(-50*amount);
+       
     }
 
+    /**
+     * Training a soldier
+     * @param level The level of the soldier
+     * @param x The x coordinate of the soldier
+     * @param y the y coordinate of the soldier
+     * @param amount The amount of soldier to traing
+     * @param keys The keys to the soldiers
+     */
     public void trainSoldier(int level,int  x,int y,int  amount, int[] keys){
 
         for(int i = 0; i < amount; i++){
@@ -602,17 +612,22 @@ public class Town extends Player {
 
         }
 
-        changeMoney(-50*amount);
+        
     }
-
+    /**
+     * Training a Spy
+     * @param level The level of the spy
+     * @param x The x coordinate of the spy
+     * @param y the y coordinate of the spy
+     * @param amount The amount of spy to train
+     * @param keys The keys to the spy
+     */
     public void trainSpy(int x,int y,int amount,int[] keys){
 
         for(int i = 0; i < amount; i++){
             convert( keys[i],"Spy", 100, 0, 1,1,1, 100);
 
         }
-
-        changeMoney(-50*amount);
     }
 
     //end of setters
@@ -666,6 +681,20 @@ public class Town extends Player {
 
         return foodPerTurn;
 
+    }
+
+    /**Returns the number of available cadets to specialize */
+    public int getCadets(){
+        
+        int cadetAvailable = 0;
+
+        for(int key: humanMap.keySet()){
+            if(humanMap.get(key) instanceof Cadet){
+
+                cadetAvailable ++;
+            }
+        }   
+        return cadetAvailable;
     }
 
     //start of inner classes
@@ -929,7 +958,7 @@ public class Town extends Player {
             this.researchLabButtons = new HashMap<>();
             this.researchLabButtons.put("Upgrade soldier", new DuberTextButton("Upgrade Soldier to next level (Max3)", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 550, 300, 30)));
         
-            this.researchLabButtons.put("Progress", new DuberTextButton("Research progress per turn: ", new Rectangle(GameWindow.GridPanel.GRID_SIZE_WIDTH, 700, 300, 30))); //TODO: do this button's function
+
 
 
             //initialize general buttons
@@ -1027,6 +1056,18 @@ public class Town extends Player {
                 if(generalButtons.get("upgrade").active){
 
                     g.drawString("Upgrade price: $" + clickedBuilding.getUpgradePrice() , 1720, 930);
+                }
+                if(clickedBuilding != null){
+                    if(clickedBuilding instanceof Residency){
+                        g.drawString( ((Residency)clickedBuilding).getAdults() + "/" + ((Residency)clickedBuilding).getMaxCap(), 1720, 550);
+
+                    }else if(clickedBuilding instanceof MilitaryBase){
+                        g.drawString( "you have " + getCadets() + " cadets", 1720, 550);
+
+                    }else if(clickedBuilding instanceof ResearchLab){
+
+                        g.drawString("A" + ((ResearchLab)clickedBuilding).getResearchers().size()* 5 +" % chance to make 25 progress",1420, 700);
+                    }
                 }
 
                 g.drawString("Building Health:" + buildingHealth + "/" + buildingMaxHealth, GameWindow.GridPanel.GRID_SIZE_WIDTH, 250);
@@ -1128,7 +1169,6 @@ public class Town extends Player {
              */
             public void mouseClicked(MouseEvent e){
 
-                System.out.println(menu);
 
                 int mouseX = e.getX();
                 int mouseY = e.getY();
@@ -1154,8 +1194,6 @@ public class Town extends Player {
 
                         if(clickedBuilding != null){    
 
-                            System.out.println("Your building is not null" + clickedBuilding.getClass());
-
                             if(clickedBuilding instanceof FoodBuilding){
                                 foodIncome = ((FoodBuilding)clickedBuilding).getLevel() * 400 + 500;
                             }else if(clickedBuilding instanceof Bank){
@@ -1170,7 +1208,7 @@ public class Town extends Player {
                             buildingMaxHealth = clickedBuilding.getMaxHealth();
                             buildingLevel = clickedBuilding.getLevel();
 
-                            System.out.println(clickedBuilding.getLevel());
+ 
                             activateGeneralBuildingButtons();
 
                             //TODO: helpful reminder to display the upgrade price when activating the upgrade 
@@ -1207,7 +1245,7 @@ public class Town extends Player {
                             resetToMain();
 
 
-                            System.out.println("Your building is null");
+             
                             //activate any button that has to do with building things
                             for(int i = 0;i < buildingTypesButtons.length;i++){
                                 buildingTypesButtons[i].activate();
@@ -1309,7 +1347,6 @@ public class Town extends Player {
             public void requestResidencyFunction(int menu, int mouseX,  int mouseY){
 
                 deactivateBuildingButtons(); 
-                System.out.println(menu);
 
                 //Activate menu buttons
                 if(menu == 0){
@@ -1320,8 +1357,7 @@ public class Town extends Player {
                     this.menu = 1; 
 
                 }else if(menu == 1){ //after the person clicks on a residency on the grid, Check for clicks to specialize or tain
-                    
-                    System.out.println(residencyButtons.get("Train citizens").inBounds(mouseX, mouseY));
+                
 
                     if(residencyButtons.get("Train citizens").inBounds(mouseX, mouseY)){ //Display buttons from menu 2 (train)
 
@@ -1435,9 +1471,9 @@ public class Town extends Player {
 
                     if(residencyButtons.get("Add 1").inBounds(mouseX, mouseY)){ //add a trainee 
 
-                        //if(training < ((Residency)clickedBuilding).getAdults()){
-                        training ++;
-                        //}
+                        if(training < ((Residency)clickedBuilding).getAdults() && 50*training < getMoney()){
+                            training ++;
+                        }
                         //TODO: Game balancing, quality of life, add back Adult check
 
                     }else if(residencyButtons.get("Subtract 1").inBounds(mouseX, mouseY) && training > 0){//subtract a training
@@ -1521,10 +1557,18 @@ public class Town extends Player {
 
                     if(militaryBaseButtons.get("Add 1").inBounds(mouseX, mouseY)){
 
-                        training ++;
-                    }else if(militaryBaseButtons.get("Subtract").inBounds(mouseX, mouseY)){
+                        //checks if side has enough requirements to train
+                        if(getCadets() >= training && 50*training <=getMoney()){
+                            training ++;
+                        }
+                    
+                    }else if(militaryBaseButtons.get("Subtract").inBounds(mouseX, mouseY) && training > 0){
 
+                       
+                       
                         training --;
+                    
+                    
                     }else if(levels[0].inBounds(mouseX, mouseY)){
                         soldierLevel = 1;
                     }else if(levels[1].inBounds(mouseX, mouseY)){
@@ -1547,9 +1591,11 @@ public class Town extends Player {
                 }else if (menu == 3){
 
                     if(militaryBaseButtons.get("Add 1").inBounds(mouseX, mouseY)){
-
-                        training ++;
-                    }else if(militaryBaseButtons.get("Subtract").inBounds(mouseX, mouseY)){
+                        //checks if side has enough requirements to train
+                        if(getCadets() >  training && 50*training < getMoney()){
+                            training ++;
+                        }
+                    }else if(militaryBaseButtons.get("Subtract").inBounds(mouseX, mouseY) && training > 0){
 
                         training --;
                     }else if(militaryBaseButtons.get("Train").inBounds(mouseX, mouseY)){

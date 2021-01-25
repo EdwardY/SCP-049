@@ -338,6 +338,7 @@ public class Town extends Player {
             if(buildings.get(i).getX() == x && buildings.get(i).getY() == y){
 
                 buildings.get(i).upgrade();
+                changeMoney(buildings.get(i).getUpgradePrice() *-1);
             }
         }
 
@@ -458,7 +459,7 @@ public class Town extends Player {
         super.sendMessage(x + " " + y);
 
         //set last request
-        this.getPlayerClient().setLastRequest("<u>> " + x + " " + y);
+        this.getPlayerClient().setLastRequest("<u> " + x + " " + y);
 
         //deactivate the buttons
         this.townGameWindow.generalButtons.get("upgrade").deactivate();
@@ -1169,6 +1170,7 @@ public class Town extends Player {
                             buildingMaxHealth = clickedBuilding.getMaxHealth();
                             buildingLevel = clickedBuilding.getLevel();
 
+                            System.out.println(clickedBuilding.getLevel());
                             activateGeneralBuildingButtons();
 
                             //TODO: helpful reminder to display the upgrade price when activating the upgrade 
@@ -1319,12 +1321,9 @@ public class Town extends Player {
 
                 }else if(menu == 1){ //after the person clicks on a residency on the grid, Check for clicks to specialize or tain
                     
-                    System.out.println("The if statement is the problem");
                     System.out.println(residencyButtons.get("Train citizens").inBounds(mouseX, mouseY));
 
                     if(residencyButtons.get("Train citizens").inBounds(mouseX, mouseY)){ //Display buttons from menu 2 (train)
-
-                        System.out.println("if statement is not the problem");
 
                         //deactivate previous buttons
                         residencyButtons.get("Train citizens").deactivate();
@@ -1380,7 +1379,6 @@ public class Town extends Player {
 
                 }else if(menu == 3){
 
-                    System.out.println("Yeah this doesn't");
 
                     if(residencyButtons.get("Doctor").inBounds(mouseX, mouseY)){
 
@@ -1396,8 +1394,6 @@ public class Town extends Player {
                         residencySpecialized = true;
                         residencyButtons.get("Subtract 1").activate();
                         residencyButtons.get("Train/Specialize").activate();
-
-                        System.out.println(menu);
 
                     }else if(residencyButtons.get("Researchers").inBounds(mouseX,mouseY)){
                         
@@ -1451,8 +1447,6 @@ public class Town extends Player {
                     }else if(residencyButtons.get("Train/Specialize").inBounds(mouseX, mouseY)){ //user presses train
 
                         requestSpecializeCitizen(training, clickedBuilding.getX(), clickedBuilding.getY(), npcType);
-
-                        System.out.println("Your buttons have made it this far congrats");
 
                         //return to default screens
                         menu = 0;

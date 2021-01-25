@@ -47,7 +47,7 @@ abstract class Building implements Drawable, DestroyableAndRepairable {
         this.health = health;
         this.x = x;
         this.y = y;
-        this.level = 1;
+        this.level = (maxHealth + 400)/500;
 
     }
 

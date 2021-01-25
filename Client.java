@@ -309,7 +309,7 @@ public class Client {
 
                                 //TODO: EDWARD NEEDS TO VERIFY THIS BLOCK OF PROTOCOL
 
-                                System.out.println(lastRequest);
+                                System.out.println("last request" + lastRequest);
                                 String[] requests = lastRequest.split(" ");
                                 //Actually implement the last request 
                                 if(requests.length > 1){

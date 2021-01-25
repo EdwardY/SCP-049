@@ -558,19 +558,20 @@ class Server {
             Iterator<Building> bIterator = game.getBuildings().iterator();
             
             while(bIterator.hasNext()){
-                System.out.println("1 is fine");
+
                 Building building = bIterator.next();
                 if((building.getX() == x) && (building.getY() == y)){
-                    System.out.println("2 is fine");
-                    System.out.println(game.getMoney());
-                    System.out.println(building.getUpgradePrice());
-                    if(building.getUpgradePrice() <= game.getMoney()){
-                        System.out.println("3 is fine");
 
-                        building.upgrade();
-                        success = true;
+                    System.out.println("Amount of money" + game.getMoney());
+                    System.out.println("The upgrade price" + building.getUpgradePrice());
+                    if(building.getUpgradePrice() <= game.getMoney()){
+
                         game.changeMoney(building.getUpgradePrice() * -1);
                         game.changeMoneyChange(building.getUpgradePrice() * -1);
+                        building.upgrade();
+                        System.out.println(building.getLevel());
+                        success = true;
+                        
 
                     }
                 }

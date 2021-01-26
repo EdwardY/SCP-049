@@ -166,8 +166,6 @@ public class QuadTree {
       }//end of for loop
 
 
-      //TODO: Compare + attack things
-
     }else{ //if there are other leaves, call those leaves to start the comparison
       for(int i = 0; i < leaves.length; i ++){
         leaves[i].startCombat();

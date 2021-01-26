@@ -689,9 +689,10 @@ public class Town extends Player {
         int cadetAvailable = 0;
 
         for(int key: humanMap.keySet()){
-            if(humanMap.get(key) instanceof Cadet){
-
-                cadetAvailable ++;
+            if(!(humanMap.get(key) instanceof Spy) && !(humanMap.get(key) instanceof Soldier)){
+                if(humanMap.get(key) instanceof Cadet){
+                    cadetAvailable ++;
+                }
             }
         }   
         return cadetAvailable;
@@ -789,8 +790,6 @@ public class Town extends Player {
             for(int i = 0; i < humans.size(); i ++){
                 if(humans.get(i) instanceof Citizen){
                     citizenCounter ++;
-                }else if (humans.get(i) instanceof Cadet){
-                    cadetCounter++;
                 }else if (humans.get(i) instanceof Doctor){
                     doctorCounter ++;
                 }else if(humans.get(i) instanceof Researcher){
@@ -799,7 +798,10 @@ public class Town extends Player {
                     soldierCounter++;
                 }else if (humans.get(i) instanceof Spy){
                     spyCounter++;
-                }//end of block if statements
+                }else if (humans.get(i) instanceof Cadet){
+                    cadetCounter++;
+                }
+                //end of block if statements
 
             }//end of for loop
 

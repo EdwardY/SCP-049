@@ -926,7 +926,7 @@ class Game {
             }
             success = true;
 
-            changeMoney(-100*amount*level);
+            changeMoney(-50*amount*level);
         }
         return success;
     }
@@ -943,11 +943,11 @@ class Game {
         boolean success = false; 
 
         for(int i = 0; i < amount; i ++){
-            convert(myKeys.get(i),"Spy", 100, 0, 1,1,1, 100);
+            convert(myKeys.get(i),"Spy", 100, 0, 1,5,0.3, 100);
 
         }
 
-        changeMoney(-100*amount);
+        changeMoney(-50*amount);
         success = true;
 
         return success;

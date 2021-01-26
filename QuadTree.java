@@ -153,7 +153,6 @@ public class QuadTree {
               if(this.targetList.get(j).getHealth() <= 0){ //if the target has no more health
                 this.targetList.remove(j); //remove the target from the list of targets since it is now destroyed
                 j = targetList.size(); //end inner for loop since scp has already attacked
-
               }
           }else if((this.attackerList.get(i) instanceof Soldier) && (distance <= Soldier.RANGE)){ //if the attacker is a soldier.
               ((Soldier)attackerList.get(i)).attack(targetList.get(j));  //attack the target
@@ -164,7 +163,6 @@ public class QuadTree {
           }//end of if statement block
         }//end of inner for loop
       }//end of for loop
-
 
     }else{ //if there are other leaves, call those leaves to start the comparison
       for(int i = 0; i < leaves.length; i ++){

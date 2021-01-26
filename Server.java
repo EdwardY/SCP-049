@@ -712,7 +712,7 @@ class Server {
                             if(curHuman instanceof Doctor){
                                 humanInfo += " " + ((Doctor)curHuman).getHealingAmount();
                             }else if(curHuman instanceof Soldier){
-                                humanInfo = curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getMaxHealth() + " " + curHuman.getX() + " " + curHuman.getY() + ((Soldier)curHuman).getAttackDamage();
+                                humanInfo = curHuman.getClass().getSimpleName() + " " + curHuman.getAge() + " " + curHuman.getHealth() + " " + curHuman.getMaxHealth() + " " + curHuman.getX() + " " + curHuman.getY() + " " + ((Soldier)curHuman).getAttackDamage();
                             }else if(curHuman instanceof Spy){
                                 humanInfo += " " + ((Spy)curHuman).getSuccessRate() + " " + ((Spy)curHuman).getSus();
                             }

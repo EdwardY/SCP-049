@@ -91,12 +91,11 @@ abstract class Player{
      */
     public void displaySide(String side){
         String welcomeMessage = "Welcome player " + this.username + "! You will be playing as the " + side + " against " + this.opponent + "! Your objective is to";
-        //TODO: PLaceholder instructions, may be subject to change at the end of the game
         if (side.equals("Town")){
-            welcomeMessage += " develop a cure for SCP's in 10 turns!"; //TODO: remember to balance the turns amount 
+            welcomeMessage += " develop a cure for SCP's in 10 turns!";
         }else if (side.equals("SCP")){
             welcomeMessage += " destroy the town in 10 turns!";
-        }else{ //TODO: This block of the if statement is temporary (for testing)
+        }else{ 
             System.out.println("An error has occured");
         }//end of if statement block
 
@@ -228,8 +227,6 @@ abstract class Player{
     public void sendMessage(String message){
 
         playerClient.sendMessage(message);
-        System.out.println(message);
-        //TODO: get rid of this for the final version 
     }
 
 

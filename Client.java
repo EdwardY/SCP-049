@@ -136,17 +136,12 @@ public class Client {
                         String prefix;
                         if(input.ready()){
                             prefix = input.readLine();
-                            System.out.println(prefix);
-                        //TODO: FOR TESTING PURPOSES
                             if(prefix.equals("<w>")){  //waiting for another player to join
                                 Client.this.startStandby(); //start standby window
                             }else if(prefix.equals("<s>")){  //start game
-                                System.out.println("Game start!"); //TODO: Temp line for game testing, remove later
                                 String side = input.readLine();
                                 String opponent = input.readLine();
                                 int startingCurrency = Integer.parseInt(input.readLine());
-
-                                System.out.println("No variable initialization errors");
                                 
                                 if(side.equals("s")){ //this player is on the SCP side
                                     Client.this.player = new SCP(username, Client.this, opponent, startingCurrency);
@@ -181,7 +176,6 @@ public class Client {
 
 
                                 SCP0492.level = Integer.parseInt(input.readLine());
-                                //TODO: PROBLEM HERE, RECEIVES THE NUMBER OF SCP'S BEFORE THE LEVEL OF SCPS.
                                 int objectNum = Integer.parseInt(input.readLine());
                                 ArrayList<SCP0492> scpList = new ArrayList<SCP0492>();
 
@@ -362,9 +356,6 @@ public class Client {
 
                             }else if(prefix.equals("<st>")){ //transaction is successful
 
-                                //TODO: EDWARD NEEDS TO VERIFY THIS BLOCK OF PROTOCOL
-
-                                System.out.println("last request" + lastRequest);
                                 String[] requests = lastRequest.split(" ");
                                 //Actually implement the last request 
                                 if(requests.length > 1){

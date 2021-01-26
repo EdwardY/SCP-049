@@ -85,14 +85,6 @@ class Hospital extends Building{
     }
 
     /**
-     * Removing doctors in case of SCP attacking and converting
-     * @param numberRemoved number of doctors removed
-     */
-    public void removeDoctor(int numberRemoved){
-        //TODO: figure out if the same object needs to be removed or just the number of doctors need to be the same
-    }
-
-    /**
      * Sets the doctor arraylist
      * @param doctors the new arraylist of doctors to set to
      */

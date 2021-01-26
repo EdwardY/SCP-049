@@ -158,11 +158,6 @@ public class Town extends Player {
         this.setBuildings((ArrayList<Building>)buildings);
         this.setEvents((ArrayList<Event>)events);
         this.setSCPs((ArrayList<SCP0492>)scps);
-
-        System.out.println(humans.size());
-        System.out.println(buildings.size());
-        System.out.println(events.size());
-        System.out.println(scps.size());
     }
 
     /**
@@ -978,8 +973,6 @@ public class Town extends Player {
             gameWindow.setVisible(true);
 
             Town.this.displaySide("Town");
-            //super.start();
-            //TODO: Might not actually need this line of code
              }//end of method
 
         /**
@@ -1037,7 +1030,6 @@ public class Town extends Player {
                 if(residencySpecialized){
                     g.drawString("Citizens Specialized: " + training, GameWindow.GridPanel.GRID_SIZE_WIDTH, 755);
                     g.drawString("Total Cost to specialize: " + training * 50 + " Dubercoins", 1420, 910);
-                    //TODO: Game balancing and synchronize all prices
                 }
 
                 if(militaryTrained){
@@ -1086,7 +1078,6 @@ public class Town extends Player {
                 if(clickedBuilding != null){
                     g.drawString("Current Building: " + clickedBuilding.getClass(), 1420, 520);
                 }
-                //TODO: implement duberCoin check in both requests screen
 
                 g.setColor(Color.RED);
                 g.fillRect( 10 + GRID_SIZE_WIDTH, 475, 460, 25);
@@ -1212,8 +1203,7 @@ public class Town extends Player {
 
  
                             activateGeneralBuildingButtons();
-
-                            //TODO: helpful reminder to display the upgrade price when activating the upgrade 
+ 
 
                             if(clickedBuilding instanceof Residency){
 
@@ -1476,7 +1466,6 @@ public class Town extends Player {
                         if(training < ((Residency)clickedBuilding).getAdults() && 50*training < getMoney()){
                             training ++;
                         }
-                        //TODO: Game balancing, quality of life, add back Adult check
 
                     }else if(residencyButtons.get("Subtract 1").inBounds(mouseX, mouseY) && training > 0){//subtract a training
 
@@ -1650,7 +1639,6 @@ public class Town extends Player {
 
                         sendMessage("<research soldier>");
                         menu = 0;
-                        //TODO: change this protocol, server and everything else
                     }
                 }
             }

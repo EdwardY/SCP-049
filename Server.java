@@ -135,7 +135,7 @@ class Server {
                         startGame();
                     }
                 }
-                System.out.println(Server.running); //TODO: sketchy if statement
+                System.out.println("Server is running");
             }
             System.out.println("Game finished");
         }catch(Exception e){ 
@@ -582,14 +582,11 @@ class Server {
                 Building building = bIterator.next();
                 if((building.getX() == x) && (building.getY() == y)){
 
-                    System.out.println("Amount of money" + game.getMoney());
-                    System.out.println("The upgrade price" + building.getUpgradePrice());
                     if(building.getUpgradePrice() <= game.getMoney()){
 
                         game.changeMoney(building.getUpgradePrice() * -1);
                         game.changeMoneyChange(building.getUpgradePrice() * -1);
                         building.upgrade();
-                        System.out.println(building.getLevel());
                         success = true;
                         
 
@@ -673,14 +670,11 @@ class Server {
                         //events
                         sendTo(allUsers, "" + game.getEventsWithoutStonks().size());
                         Iterator<Event> eIterator = game.getEventsWithoutStonks().iterator();
-                        System.out.println(game.getEventsWithoutStonks().size());
                         while(eIterator.hasNext()){
                             Event curEvent = eIterator.next();
-                            System.out.println(curEvent.getClass().getSimpleName());
                             if(curEvent instanceof WholeGameEvent){
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft());
                             }else{
-                                System.out.println((int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()));
                                 sendTo(allUsers, curEvent.getClass().getSimpleName() + " " + curEvent.getLevel() + " " + curEvent.getTimeLeft() + " " + (int)(((AoeEvent)curEvent).getAoe().getX()) + " " + (int)(((AoeEvent)curEvent).getAoe().getY()));
                             }
                         }
@@ -693,11 +687,9 @@ class Server {
                             String send = curBuilding.getClass().getSimpleName() + " " + curBuilding.getInitialPrice() + " " + curBuilding.getMaxHealth() + " " + curBuilding.getHealth() + " " + curBuilding.getX() + " " + curBuilding.getY();
                             if(curBuilding instanceof Residency){
                                 send = send +  " " + ((Residency)curBuilding).getMaxCap();
-                                System.out.println(send);
                             }else if(curBuilding instanceof Hospital){
                                 send = send + " " + ((Hospital)curBuilding).getMaxCapacity();
                             }
-                            System.out.println(send);
                             sendTo(allUsers, send);                            
                         }
 

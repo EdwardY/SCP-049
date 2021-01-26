@@ -83,12 +83,9 @@ public class SCP extends Player{
         sendMessage(type);
         sendMessage(level);
         sendMessage(x + " " + y);
-        System.out.println("functional");
         //save last request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level + " " + x + " " + y);
-        System.out.println("saved");
         scpGameWindow.reset();
-        System.out.println("reset");
     }
 
     /**
@@ -101,12 +98,9 @@ public class SCP extends Player{
         sendMessage("<e>");
         sendMessage(type);
         sendMessage(level);
-        System.out.println("functional");
         //save request
         this.getPlayerClient().setLastRequest("<e> " + type + " " + level);
-        System.out.println("saved");
         scpGameWindow.reset();
-        System.out.println("reset");
     }
 
 
@@ -419,8 +413,7 @@ public class SCP extends Player{
 
 
             SCP.this.displaySide("SCP");
-            //super.start();
-            //TODO: Might not actually need this line of code
+            
 
         }// end of window
 
@@ -585,7 +578,6 @@ public class SCP extends Player{
             public void mouseClicked(MouseEvent e){
                 int mouseX = e.getX();
                 int mouseY = e.getY();
-                System.out.println("Mouse pos: " + mouseX + ", " + mouseY);
                 if((mouseX <= GridPanel.GRID_SIZE_WIDTH) && (mouseY <= GridPanel.GRID_SIZE_LENGTH)){
                     eventX = mouseX;
                     eventY = mouseY;
